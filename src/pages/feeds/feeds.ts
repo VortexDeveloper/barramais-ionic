@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UserPage } from '../user/user';
 
 /*
   Generated class for the Feeds page.
@@ -13,10 +14,17 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class FeedsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedsPage');
+  }
+
+  openPage(user) {
+    this.navCtrl.push(UserPage, { user: user });
   }
 
 }

@@ -35,4 +35,12 @@
       </ion-col>
     </ion-row>
   </ion-card>
+  <ion-tabs class="tabs-basic">
+    <ion-tab tabTitle="Eventos" [root]="eventsPage"></ion-tab>
+    <ion-tab tabTitle="Feed" [root]="rootPage"></ion-tab>
+    <ion-tab tabTitle="Grupos" [root]="groupsPage"></ion-tab>
+  </ion-tabs>
+  <ion-fab right bottom>
+    <a ion-fab color="danger" (click)="openPage()"><ion-icon name="add"></ion-icon></a>
+  </ion-fab>
 </ion-content>

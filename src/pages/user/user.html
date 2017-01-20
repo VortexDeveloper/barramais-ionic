@@ -5,14 +5,28 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>User</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <div class="container">
+      <h1>Cadastrar Usuário</h1>
+      <form (ngSubmit)="save(user)">
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Senha</ion-label>
+          <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Confirmação de Senha</ion-label>
+          <ion-input type="password" [(ngModel)]="user.password_confirmation" name="password_confirmation"></ion-input>
+        </ion-item>
+        <button ion-button type="submit" block>Cadastrar</button>
+      </form>
+      <hr />
+      <button ion-button (click)="goBack()" block>Voltar</button>
+  </div>
 </ion-content>
