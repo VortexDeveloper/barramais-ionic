@@ -1,39 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button right ion-button menuToggle>
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+    <button right ion-button menuToggle>
+      <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+    </button>
+    <button right ion-button menuToggle>
+      <ion-icon ios="ios-person" md="md-person"></ion-icon>
+    </button>
+    <button right ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <button left ion-button menuToggle>
+      <img src="assets/images/logo.png" alt="Barramais" />
+    </button>
+  </ion-navbar>
+</ion-header>
 <ion-menu [content]="content">
   <ion-content>
     <ion-list>
       <ul>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/INICIO.png" class="icon-itens" />
             Início
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/SOCIAL.png" class="icon-itens" />
             Social
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/SERVICOS.png" class="icon-itens" />
             Serviços
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/CLASSIFICADOS.png" class="icon-itens" />
             Classificados
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/PARCEIROS.png" class="icon-itens" />
             Parceiros
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/BLOG.png" class="icon-itens" />
             Blog
           </button>
@@ -41,36 +60,36 @@
       </ul>
       <ul class="menu-config">
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/CONFIG.png" class="icon-itens" />
             Configuração
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/DENUNCIA.png" class="icon-itens" />
             Denúncias
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/INFORMACOES.png" class="icon-itens" />
             Enviar feedback
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage('Page1')">
+          <button menuClose ion-item (click)="openPage()">
             <img src="assets/images/AJUDA.png" class="icon-itens" />
             Ajuda
           </button>
         </li>
       </ul>
     </ion-list>
-    <button menuClose ion-item (click)="openPage('Page1')">
+    <button menuClose ion-item (click)="openPage()">
       Barra Mais <br>
       Rede Social Náutica<br>
     </button>
-    <button menuClose ion-item (click)="openPage('Page1')">
+    <button menuClose ion-item (click)="openPage()">
       Política de Privacidade
     </button>
   </ion-content>
