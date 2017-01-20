@@ -1,18 +1,79 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+      <ul>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/INICIO.png" class="icon-itens" />
+            Início
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/SOCIAL.png" class="icon-itens" />
+            Social
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/SERVICOS.png" class="icon-itens" />
+            Serviços
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/CLASSIFICADOS.png" class="icon-itens" />
+            Classificados
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/PARCEIROS.png" class="icon-itens" />
+            Parceiros
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/BLOG.png" class="icon-itens" />
+            Blog
+          </button>
+        </li>
+      </ul>
+      <ul class="menu-config">
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/CONFIG.png" class="icon-itens" />
+            Configuração
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/DENUNCIA.png" class="icon-itens" />
+            Denúncias
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/INFORMACOES.png" class="icon-itens" />
+            Enviar feedback
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage('Page1')">
+            <img src="assets/images/AJUDA.png" class="icon-itens" />
+            Ajuda
+          </button>
+        </li>
+      </ul>
     </ion-list>
+    <button menuClose ion-item (click)="openPage('Page1')">
+      Barra Mais <br>
+      Rede Social Náutica<br>
+    </button>
+    <button menuClose ion-item (click)="openPage('Page1')">
+      Política de Privacidade
+    </button>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

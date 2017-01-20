@@ -7,7 +7,8 @@ import { Page2 } from '../pages/page2/page2';
 
 
 @Component({
-  templateUrl: 'app.html'
+  selector: 'app-menu',
+  templateUrl: 'app.html'  
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
