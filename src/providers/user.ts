@@ -14,7 +14,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  private url: string = "http://localhost:3000/users/sign_up";
+  private url: string = "http://localhost:3000/users";
 
   constructor(public http: Http) {
     console.log('Hello User Provider');

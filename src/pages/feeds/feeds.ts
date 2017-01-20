@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserPage } from '../user/user';
+import { User } from '../../providers/user';
 
 /*
   Generated class for the Feeds page.
@@ -10,7 +11,8 @@ import { UserPage } from '../user/user';
 */
 @Component({
   selector: 'page-feeds',
-  templateUrl: 'feeds.html'
+  templateUrl: 'feeds.html',
+  providers: [User]
 })
 export class FeedsPage {
 

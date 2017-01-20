@@ -4,13 +4,16 @@ import { MyApp } from './app.component';
 import { FeedsPage } from '../pages/feeds/feeds';
 import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
+import { UserPage } from '../pages/user/user';
+import { User } from '../providers/user';
 
 @NgModule({
   declarations: [
     MyApp,
     FeedsPage,
     GroupsPage,
-    EventsPage
+    EventsPage,
+    UserPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,8 +23,9 @@ import { EventsPage } from '../pages/events/events';
     MyApp,
     FeedsPage,
     GroupsPage,
-    EventsPage
+    EventsPage,
+    UserPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User]
 })
 export class AppModule {}
