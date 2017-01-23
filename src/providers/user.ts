@@ -16,11 +16,12 @@ export class User {
 
   private url: string = "http://localhost:3000/users";
 
-  constructor(public http: Http) {
-    console.log('Hello User Provider');
-  }
+  constructor(
+    public http: Http
+  ) { }
 
-  // Adiciona um user na API
+
+  // Registration sign_up : (post)users.json
   create(user){
     return this.http.post(this.url + ".json", {'user': user})
       .map(res => res.json())
