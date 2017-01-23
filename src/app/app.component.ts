@@ -15,8 +15,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = FeedsPage;
-  eventsPage: any;
-  groupsPage: any;
 
   pages: Array<{title: string, component: any}>;
 
@@ -29,9 +27,6 @@ export class MyApp {
       { title: 'Eventos', component: EventsPage },
       { title: 'Grupos', component: GroupsPage }
     ];
-
-    this.eventsPage = EventsPage;
-    this.groupsPage = GroupsPage;
 
   }
 
