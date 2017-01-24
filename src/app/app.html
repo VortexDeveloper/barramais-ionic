@@ -1,18 +1,18 @@
 <ion-header>
   <ion-navbar>
-    <button right ion-button menuToggle>
-      <ion-icon ios="ios-search" md="md-search"></ion-icon>
-    </button>
-    <button right ion-button menuToggle>
-      <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-    </button>
-    <button right ion-button menuToggle>
-      <ion-icon ios="ios-person" md="md-person"></ion-icon>
-    </button>
-    <button right ion-button menuToggle>
+    <button class="bar-buttons" right ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <button left ion-button menuToggle>
+    <button class="bar-buttons" right ion-button>
+      <ion-icon ios="ios-person" md="md-person"></ion-icon>
+    </button>
+    <button class="bar-buttons" right ion-button>
+      <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+    </button>
+    <button class="bar-buttons" right ion-button>
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+    <button class="logo bar-buttons" left ion-button (click)="openPage(feed)">
       <img src="assets/images/logo.png" alt="Barramais" />
     </button>
   </ion-navbar>
@@ -22,13 +22,13 @@
     <ion-list>
       <ul>
         <li>
-          <button menuClose ion-item (click)="openPage()">
+          <button menuClose ion-item (click)="openPage(feed)">
             <img src="assets/images/INICIO.png" class="icon-itens" />
             Início
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage()">
+          <button menuClose ion-item (click)="openPage(feed)">
             <img src="assets/images/SOCIAL.png" class="icon-itens" />
             Social
           </button>

@@ -22,7 +22,7 @@ export class User {
 
 
   // Registration sign_up : (post)users.json
-  create(user){
+  create(user, avatar){
     return this.http.post(this.url + ".json", {'user': user})
       .map(res => res.json())
       .subscribe(data => {

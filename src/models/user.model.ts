@@ -4,6 +4,7 @@ export class UserModel {
   updatedAt: Date;
 
   //Account informartion
+  avatar: string;
   email: string;
   password: string;
   password_confirmation: string;

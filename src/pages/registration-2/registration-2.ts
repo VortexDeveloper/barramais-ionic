@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Registration3Page } from '../registration-3/registration-3'
+import { UserModel } from "../../models/user.model";
 
 /*
   Generated class for the Registration2 page.
@@ -13,10 +15,25 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Registration2Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  user: UserModel = new UserModel();
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+    this.user = navParams.data.user ? navParams.data.user : this.user;
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Registration2Page');
+  }
+
+  next(user) {
+    this.navCtrl.push(Registration3Page, { user: user });
+  }
+
+  goBack() {
+    this.navCtrl.pop();
   }
 
 }

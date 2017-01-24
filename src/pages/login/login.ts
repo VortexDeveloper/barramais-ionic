@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../providers/user';
+import { UserModel } from "../../models/user.model";
 
 /*
   Generated class for the Login page.
@@ -14,16 +15,20 @@ import { User } from '../../providers/user';
 })
 export class LoginPage {
 
+  user: UserModel = new UserModel();
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private userProvider: User
-  ) {}
+  ) {
+
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
+  
   save(user) {
     this.userProvider.create(user);
   }
