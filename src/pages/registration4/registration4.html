@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="container">
+    <img src="{{user.avatar}}" style="width: 100%" [hidden]="user.avatar === null">
+    <h3 [hidden]="user.avatar === null">Please Select Image!</h3>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <button ion-button icon-left>
+        <ion-icon name="camera"></ion-icon>Select Image
+      </button>
+      <button ion-button icon-left [disabled]="lastImage === null">
+        <ion-icon name="cloud-upload"></ion-icon>Upload
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
