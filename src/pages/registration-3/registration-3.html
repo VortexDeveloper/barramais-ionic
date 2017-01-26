@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button class="logo bar-buttons" left ion-button (click)="openPage(rootPage)">
+      <img src="assets/images/logo.png" alt="Barramais" />
+    </button>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -37,11 +40,8 @@
         <ion-label>Integrante da Marinha do Brasil</ion-label>
         <ion-toggle [(ngModel)]="user.naval_service" name="naval_service"></ion-toggle>
       </ion-item>
-      <button ion-button type="submit" block>Finalizar cadastro</button>
+      <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
     </form>
     <hr />
   </div>
 </ion-content>
-
-
-naval_service: string;

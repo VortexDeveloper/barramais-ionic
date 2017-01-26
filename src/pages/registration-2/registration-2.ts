@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Registration3Page } from '../registration-3/registration-3'
 import { UserModel } from "../../models/user.model";
+import { HomePage } from "../home/home";
 
 /*
   Generated class for the Registration2 page.
@@ -16,6 +17,7 @@ import { UserModel } from "../../models/user.model";
 export class Registration2Page {
 
   user: UserModel = new UserModel();
+  rootPage = HomePage;
 
   constructor(
     public navCtrl: NavController,
@@ -34,6 +36,10 @@ export class Registration2Page {
 
   goBack() {
     this.navCtrl.pop();
+  }
+
+  openPage(page){
+    this.navCtrl.push(page);
   }
 
 }

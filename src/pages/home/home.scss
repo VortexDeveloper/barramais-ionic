@@ -1,25 +1,60 @@
 page-home {
 
+  ion-header {
+    display: none !important;
+  }
+
   ion-content{
-    background-image: url('/assets/images/home.jpg');
-    background-position: center;
-    background-size: 120%;
+    // background-image: url('/assets/images/home.jpg');
+    // background-position: center;
+    // background-size: 120%;
+
+    background-color: #222 !important;
+  }
+
+  ion-navbar.toolbar {
+    display: none !important;
   }
 
   .logo-home{
     border-radius: 3px;
     background: #123f5f;
-    width: 50px;
-    height: 50px;
-    padding: 10px;
-    margin: 45% auto;
+    width: 75px;
+    height: 75px;
+    padding: 20px;
+    margin: 30% auto;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
-  h2{
+  h3{
     color: #f5f5f5;
     font-weight: bold;
-    text-shadow: 0px 1px 3px rgba(150, 150, 150, 1);
+    text-shadow: 0px 1px 3px #969696;
+    margin: 0 auto !important;
+    text-align: center;
+    top: -80px;
+    position: relative;
+    font-size: 3rem;
+  }
+
+  .buttons-color{
+    background-color: #4267b2;
+    color: #f5f5f5;
+  }
+
+  .links-color{
+    color: #f5f5f5;
+  }
+
+  .content-links{
+    width: 88%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .item-md, .item-ios, .item-wp{
+    background-color: transparent;
+    color: #f5f5f5;
   }
 
 }

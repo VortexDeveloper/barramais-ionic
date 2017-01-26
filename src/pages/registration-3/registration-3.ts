@@ -1,9 +1,9 @@
-worimport { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
-import { ViewController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { HomePage } from "../home/home";
+
 /*
   Generated class for the Registration3 page.
 
@@ -18,15 +18,16 @@ export class Registration3Page {
 
   user: UserModel = new UserModel();
   avatar: string;
+  rootPage = HomePage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private userProvider: User,
-    public viewCtrl: ViewController
+    private userProvider: User
+    //public viewCtrl: ViewController
   ) {
     this.user = navParams.data.user ? navParams.data.user : this.user;
-    viewCtrl.getContent(HomePage);
+  //  viewCtrl.getContent(HomePage);
   }
 
   ionViewDidLoad() {
@@ -39,6 +40,10 @@ export class Registration3Page {
 
   goBack() {
     this.navCtrl.pop();
+  }
+
+  openPage(page){
+    this.navCtrl.push(page);
   }
 
 }
