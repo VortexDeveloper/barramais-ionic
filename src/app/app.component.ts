@@ -5,7 +5,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { FeedsPage } from '../pages/feeds/feeds';
 import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
-import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 
 
@@ -21,17 +20,14 @@ export class MyApp {
   feed: any;
   groups: any;
   events: any;
-  login: any;
   home: any;
 
   constructor(public platform: Platform) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.feed = FeedsPage;
     this.groups = GroupsPage;
     this.events = EventsPage;
-    this.login = LoginPage;
     this.home = HomePage;
 
   }
@@ -46,6 +42,6 @@ export class MyApp {
   }
 
   openPage(page) {
-    this.nav.setRoot(page);
+    this.nav.push(page);
   }
 }

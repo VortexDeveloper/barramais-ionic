@@ -1,13 +1,29 @@
-<ion-header>
-  <ion-navbar>
-  </ion-navbar>
-</ion-header>
 <ion-content padding>
   <div class="container">
     <div class="logo-home">
-        <img src="/assets/images/logo.png" alt="Barra Mais" />
+        <img src="/assets/images/logo300.png" alt="Barra Mais" />
     </div>
-    <h2>BARRA MAIS</h2>
-
+    <form (ngSubmit)="login(user)">
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+      </ion-item>
+    </form>
+    <hr />
+    <button ion-button block icon-left color="light" outline (click)="openPage(feeds)">
+      <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
+      Entrar
+    </button>
+    <button class="buttons-color" ion-button block icon-left color="light" outline (click)="openPage(feeds)">
+      <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+      Entrar com o facebook
+    </button>
+    <div class="content-links">
+      <button ion-button color="light" clear class="links-color" (click)="openPage(registration)">Cadastrar-se</button>
+    </div>
   </div>
 </ion-content>
