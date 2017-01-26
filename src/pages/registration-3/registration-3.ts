@@ -19,7 +19,6 @@ export class Registration3Page {
     public navCtrl: NavController,
     public navParams: NavParams,
     private userProvider: User
-    //public viewCtrl: ViewController
   ) {
     this.user = navParams.data.user ? navParams.data.user : this.user;
   }
@@ -31,13 +30,12 @@ export class Registration3Page {
   save(user) {
     this.userProvider.create(user)
     .subscribe(user_params => {
-      if(user_params.errors) {
-
-      } else {
+      alert(user_params.errors);
         this.user = new UserModel(user_params);
-        this.move_to_photopage(this.user);
-      }
+        alert("Usuário cadastrado com sucesso!");
+        //this.move_to_photopage(this.user);
     }, error => {
+        alert(error.json());
         console.log(JSON.stringify(error.json()));
     });
   }

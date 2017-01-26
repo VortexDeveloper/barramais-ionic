@@ -12,6 +12,8 @@ import { Registration1Page } from '../registration-1/registration-1';
 })
 export class FeedsPage {
 
+  feed = FeedsPage;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -24,8 +26,8 @@ export class FeedsPage {
     console.log('ionViewDidLoad FeedsPage');
   }
 
-  openPage(user) {
-    this.navCtrl.push(UserPage, { user: user });
+  openPage(page) {
+    this.navCtrl.push(page);
   }
 
   cadastrar(){

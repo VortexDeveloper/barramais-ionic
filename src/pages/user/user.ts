@@ -22,7 +22,7 @@ export class UserPage {
     public navParams: NavParams,
     private userProvider: User
   ) {}
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserPage');
   }
