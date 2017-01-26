@@ -9,6 +9,7 @@ import { User } from '../providers/user';
 import { Registration1Page } from '../pages/registration-1/registration-1';
 import { Registration2Page } from '../pages/registration-2/registration-2';
 import { Registration3Page } from '../pages/registration-3/registration-3';
+import { Registration4Page } from '../pages/registration4/registration4';
 import { HomePage } from '../pages/home/home';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { HomePage } from '../pages/home/home';
     Registration1Page,
     Registration2Page,
     Registration3Page,
+    Registration4Page,
     HomePage
   ],
   imports: [
@@ -36,6 +38,7 @@ import { HomePage } from '../pages/home/home';
     Registration1Page,
     Registration2Page,
     Registration3Page,
+    Registration4Page,
     HomePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User]
