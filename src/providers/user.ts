@@ -29,4 +29,11 @@ export class User {
       .map(res => res.json());
   }
 
+  save_avatar(user){
+    let d = new Date;
+    let new_name = user.id + d.getTime();
+
+    return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
+      .map(res => res.json());
+  }
 }

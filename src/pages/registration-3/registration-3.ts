@@ -30,10 +30,8 @@ export class Registration3Page {
   save(user) {
     this.userProvider.create(user)
     .subscribe(user_params => {
-      alert(user_params.errors);
-        this.user = new UserModel(user_params);
-        alert("Usuário cadastrado com sucesso!");
-        //this.move_to_photopage(this.user);
+      this.user = new UserModel(user_params);
+      this.move_to_photopage(this.user);
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));
