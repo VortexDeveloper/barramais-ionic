@@ -94,7 +94,7 @@ export class Registration4Page {
   save_avatar(user) {
     this.userProvider.save_avatar(user)
     .subscribe(user_params => {
-      this.navCtrl.setRoot(FeedsPage);
+      this.navCtrl.setRoot(FeedsPage, {}, {animate: true, direction: 'forward'});
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));

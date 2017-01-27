@@ -14,6 +14,7 @@ export class Registration3Page {
   user: UserModel = new UserModel();
   avatar: string;
   rootPage = HomePage;
+  showNauticalWorkText: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -48,6 +49,14 @@ export class Registration3Page {
 
   move_to_photopage(user: UserModel) {
     this.navCtrl.push(Registration4Page, { user: user });
+  }
+
+  hideNautical(){
+    if (this.showNauticalWorkText){
+      this.showNauticalWorkText = false;
+    } else {
+      this.showNauticalWorkText = true;
+    }
   }
 
 }
