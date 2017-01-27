@@ -10,35 +10,36 @@
     <form (ngSubmit)="save(user)">
       <ion-item>
         <ion-label>Trabalha com náutica</ion-label>
-        <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional"></ion-toggle>
+        <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional" (ionChange)="hideNautical()" ></ion-toggle>
       </ion-item>
-      <ion-item>
-        <ion-label>Descreva seu trabalho:</ion-label>
-        <ion-textarea [(ngModel)]="user.nautical_work" name="nautical_work"></ion-textarea>
+      <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
+        <ion-label floating>Descreva seu trabalho:</ion-label>
+        <ion-textarea [(ngModel)]="user.nautical_profession_description" name="nautical_profession_description"></ion-textarea>
       </ion-item>
-      <ion-item>
-        <ion-list radio-group [(ngModel)]="user.relationship" name="relationship">
-          <ion-item>
-            <ion-label>Casado</ion-label>
-            <ion-radio value="2"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Namorando</ion-label>
-            <ion-radio value="1"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Solteiro</ion-label>
-            <ion-radio value="0"></ion-radio>
-          </ion-item>
-        </ion-list>
-      </ion-item>
+      <ion-list radio-group [(ngModel)]="user.relationship" name="relationship">
+        <ion-list-header>
+          Relacionamento
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Casado</ion-label>
+          <ion-radio value="married"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Namorando</ion-label>
+          <ion-radio value="serious_relationship"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Solteiro</ion-label>
+          <ion-radio value="single"></ion-radio>
+        </ion-item>
+      </ion-list>
       <ion-item>
         <ion-label>Possui embarcação?</ion-label>
         <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Integrante da Marinha do Brasil</ion-label>
-        <ion-toggle [(ngModel)]="user.naval_service" name="naval_service"></ion-toggle>
+        <ion-label floating>Integrante da Marinha do Brasil</ion-label>
+        <ion-input type="text" [(ngModel)]="user.naval_service" name="naval_service"></ion-input>
       </ion-item>
       <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
     </form>

@@ -15,6 +15,7 @@ export class Registration3Page {
   user: UserModel = new UserModel();
   avatar: string;
   rootPage = HomePage;
+  showNauticalWorkText: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -32,9 +33,9 @@ export class Registration3Page {
   save(user) {
     this.userProvider.create(user)
     .subscribe(user_params => {
-        this.user = new UserModel(user_params);
-        this.presentToast("Usuário cadastrado com sucesso!");
-        //this.move_to_photopage(this.user);
+      this.user = new UserModel(user_params);
+      this.presentToast("Usuário cadastrado com sucesso!");
+      this.move_to_photopage(this.user);
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;
@@ -66,6 +67,10 @@ export class Registration3Page {
 
   move_to_photopage(user: UserModel) {
     this.navCtrl.push(Registration4Page, { user: user });
+  }
+
+  hideNautical(){
+    this.showNauticalWorkText = !this.showNauticalWorkText;
   }
 
 }

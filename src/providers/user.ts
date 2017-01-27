@@ -16,7 +16,7 @@ import 'rxjs/add/operator/catch';
 export class User {
 
   private url: string = "http://localhost:3000/users";
-
+  // private url: string = "http://10.0.2.2:3000/users";
   public user: UserModel;
 
   constructor(
@@ -35,4 +35,11 @@ export class User {
   //     .map(res => res.json());
   // }
 
+  save_avatar(user){
+    let d = new Date;
+    let new_name = user.id + d.getTime();
+
+    return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
+      .map(res => res.json());
+  }
 }

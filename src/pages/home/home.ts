@@ -41,7 +41,8 @@ export class HomePage {
   }
 
   openPage(page) {
-    this.navCtrl.push(page);
+    this.navCtrl.setRoot(page);
+    
   }
 
   // login(user) {
