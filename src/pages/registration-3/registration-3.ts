@@ -4,6 +4,7 @@ import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { HomePage } from "../home/home";
 import { Registration4Page } from '../registration4/registration4';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-registration-3',
@@ -18,7 +19,8 @@ export class Registration3Page {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private userProvider: User
+    private userProvider: User,
+    public toastCtrl: ToastController
   ) {
     this.user = navParams.data.user ? navParams.data.user : this.user;
   }
@@ -30,14 +32,28 @@ export class Registration3Page {
   save(user) {
     this.userProvider.create(user)
     .subscribe(user_params => {
-      alert(user_params.errors);
         this.user = new UserModel(user_params);
-        alert("Usuário cadastrado com sucesso!");
+        this.presentToast("Usuário cadastrado com sucesso!");
         //this.move_to_photopage(this.user);
     }, error => {
-        alert(error.json());
-        console.log(JSON.stringify(error.json()));
+        console.log(error.json().errors);
+        var errors = error.json().errors;
+        var errorMessage;
+        for(let campo in errors) {
+           for(let campos of errors[campo]){
+             errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
+           }
+        }
+        this.presentToast(errorMessage);
     });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 
   goBack() {

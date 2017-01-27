@@ -16,6 +16,7 @@ import 'rxjs/add/operator/catch';
 export class User {
 
   private url: string = "http://localhost:3000/users";
+
   public user: UserModel;
 
   constructor(
@@ -28,5 +29,10 @@ export class User {
     return this.http.post(this.url + ".json", {'user': user})
       .map(res => res.json());
   }
+
+  // login(user){
+  //   return this.http.get(this.url + "/sign_in" + ".json", {'user': user})
+  //     .map(res => res.json());
+  // }
 
 }
