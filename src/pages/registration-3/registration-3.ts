@@ -12,7 +12,7 @@ import { ToastController } from 'ionic-angular';
 })
 export class Registration3Page {
 
-  user: UserModel = new UserModel();
+  user: UserModel;
   avatar: string;
   rootPage = HomePage;
   showNauticalWorkText: boolean = false;
@@ -23,19 +23,20 @@ export class Registration3Page {
     private userProvider: User,
     public toastCtrl: ToastController
   ) {
-    this.user = navParams.data.user ? navParams.data.user : this.user;
-  }
+        this.user = new UserModel(JSON.parse(localStorage.getItem("current_user")));
+        console.log(this.user);
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Registration3Page');
   }
 
   save(user) {
-    this.userProvider.create(user)
+    this.userProvider.update(user)
     .subscribe(user_params => {
-      this.user = new UserModel(user_params);
-      this.presentToast("Usuário cadastrado com sucesso!");
-      this.move_to_photopage(this.user);
+        this.user = new UserModel(user_params);
+        this.presentToast("Usuário cadastrado com sucesso!");
+        this.move_to_photopage(this.user);
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;

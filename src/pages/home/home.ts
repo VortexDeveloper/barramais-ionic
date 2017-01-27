@@ -31,7 +31,6 @@ export class HomePage {
     public toastCtrl: ToastController
   ) {
     this.menu.enable(false, 'menu');
-
     this.registration = Registration1Page;
     this.feeds = FeedsPage;
   }
@@ -41,27 +40,22 @@ export class HomePage {
   }
 
   openPage(page) {
-    this.navCtrl.setRoot(page);
-    
+    this.navCtrl.setRoot(page, {}, {animate: true, direction: 'forward'});
   }
 
-  // login(user) {
-  //   this.userProvider.login(user)
-  //   .subscribe(user_params => {
-  //       this.presentToast("Usuário logado com sucesso");
-  //       //this.move_to_photopage(this.user);
-  //   }, error => {
-  //       console.log(error.json().errors);
-  //       var errors = error.json().errors;
-  //       var errorMessage;
-  //       for(let campo in errors) {
-  //          for(let campos of errors[campo]){
-  //            errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
-  //          }
-  //       }
-  //       this.presentToast(errorMessage);
-  //   });
-  // }
+  login(user) {
+    this.userProvider.login(user)
+    .subscribe(user_params => {
+        console.log(user_params);
+        var current_user = JSON.stringify(user_params);
+        localStorage.setItem("current_user", current_user);
+        this.openPage(this.feeds);
+        this.presentToast("Logado com sucesso.");
+    }, error => {
+        console.log(error.json());
+        this.presentToast(error.json().error);
+    });
+  }
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({

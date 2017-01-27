@@ -15,8 +15,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  private url: string = "http://localhost:3000/users";
-  // private url: string = "http://10.0.2.2:3000/users";
+  // private url: string = "http://localhost:3000/users";
+  private url: string = "http://10.0.2.2:3000/users";
   public user: UserModel;
 
   constructor(
@@ -24,16 +24,21 @@ export class User {
   ) { }
 
 
-  // Registration sign_up : (post)users.json
   create(user){
     return this.http.post(this.url + ".json", {'user': user})
       .map(res => res.json());
   }
 
-  // login(user){
-  //   return this.http.get(this.url + "/sign_in" + ".json", {'user': user})
-  //     .map(res => res.json());
-  // }
+  update(user){
+    return this.http.put(this.url + ".json", {'user': user})
+      .map(res => res.json());
+  }
+
+  // Registration sign_up : (post)users.json
+  login(user){
+    return this.http.post(this.url + "/sign_in" + ".json", {'user': user})
+      .map(res => res.json());
+  }
 
   save_avatar(user){
     let d = new Date;

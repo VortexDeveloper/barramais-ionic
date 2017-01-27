@@ -16,26 +16,20 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
-  feed: any;
-  groups: any;
-  events: any;
-  home: any;
+  feed: any = FeedsPage;
+  groups: any = GroupsPage;
+  events: any = EventsPage;
+  home: any = HomePage;
 
   constructor(public platform: Platform) {
+    if (localStorage.getItem("current_user")){
+      this.rootPage = FeedsPage;
+    }
     this.initializeApp();
-
-    this.feed = FeedsPage;
-    this.groups = GroupsPage;
-    this.events = EventsPage;
-    this.home = HomePage;
-
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

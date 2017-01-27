@@ -12,12 +12,11 @@
         <ion-label stacked>Senha</ion-label>
         <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
       </ion-item>
+      <button ion-button block icon-left color="light" outline type="submit">
+        <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
+        Entrar
+      </button>
     </form>
-    <hr />
-    <button ion-button block icon-left color="light" outline (click)="openPage(feeds)">
-      <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
-      Entrar
-    </button>
     <button class="buttons-color" ion-button block icon-left color="light" outline (click)="openPage(feeds)">
       <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
       Entrar com o facebook

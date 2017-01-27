@@ -7,6 +7,7 @@
 </ion-header>
 <ion-content padding>
   <div class="container">
+    <form (ngSubmit)="save(user)">
       <ion-item>
         <ion-label floating>Nome</ion-label>
         <ion-input type="text" [(ngModel)]="user.first_name" name="first_name"></ion-input>
@@ -14,6 +15,10 @@
       <ion-item>
         <ion-label floating>Sobrenome</ion-label>
         <ion-input type="text" [(ngModel)]="user.last_name" name="last_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Data de nascimento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birthday" name="birthday"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label floating>Email</ion-label>
@@ -27,6 +32,7 @@
         <ion-label floating>Confirmação de Senha</ion-label>
         <ion-input type="password" [(ngModel)]="user.password_confirmation" name="password_confirmation"></ion-input>
       </ion-item>
-    <button class="form-buttons" ion-button (click)="next(user)" block>Próximo</button>
+      <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
+    </form>
   </div>
 </ion-content>

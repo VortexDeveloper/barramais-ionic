@@ -3,6 +3,7 @@ import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { User } from '../../providers/user';
 import { Registration1Page } from '../registration-1/registration-1';
+import { Registration3Page } from '../registration-3/registration-3';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Registration1Page } from '../registration-1/registration-1';
 export class FeedsPage {
 
   feed = FeedsPage;
+  registration3 = Registration3Page;
 
   constructor(
     public navCtrl: NavController,
@@ -28,10 +30,6 @@ export class FeedsPage {
 
   openPage(page) {
     this.navCtrl.push(page);
-  }
-
-  cadastrar(){
-    this.navCtrl.push(Registration1Page);
   }
 
 }
