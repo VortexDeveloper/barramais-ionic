@@ -4,6 +4,7 @@ import { Registration1Page } from '../registration-1/registration-1';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { FeedsPage }from '../feeds/feeds';
+import { MainPage }from '../main/main';
 import { ToastController } from 'ionic-angular';
 
 /*
@@ -22,6 +23,7 @@ export class HomePage {
   user: UserModel = new UserModel();
   registration: any;
   feeds: any;
+  main: any;
 
   constructor(
     public navCtrl: NavController,
@@ -33,6 +35,7 @@ export class HomePage {
     this.menu.enable(false, 'menu');
     this.registration = Registration1Page;
     this.feeds = FeedsPage;
+    this.main = MainPage;
   }
 
   ionViewDidLoad() {
@@ -49,7 +52,7 @@ export class HomePage {
         console.log(user_params);
         var current_user = JSON.stringify(user_params);
         localStorage.setItem("current_user", current_user);
-        this.openPage(this.feeds);
+        this.openPage(this.main);
         this.presentToast("Logado com sucesso.");
     }, error => {
         console.log(error.json());

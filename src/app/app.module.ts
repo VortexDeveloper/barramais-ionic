@@ -11,6 +11,8 @@ import { Registration2Page } from '../pages/registration-2/registration-2';
 import { Registration3Page } from '../pages/registration-3/registration-3';
 import { Registration4Page } from '../pages/registration4/registration4';
 import { HomePage } from '../pages/home/home';
+import { MainPage } from '../pages/main/main';
+import { PostModalPage } from '../pages/post-modal/post-modal';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { HomePage } from '../pages/home/home';
     Registration2Page,
     Registration3Page,
     Registration4Page,
-    HomePage
+    HomePage,
+    MainPage,
+    PostModalPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -39,8 +43,13 @@ import { HomePage } from '../pages/home/home';
     Registration2Page,
     Registration3Page,
     Registration4Page,
-    HomePage
+    HomePage,
+    MainPage,
+    PostModalPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    User
+  ]
 })
 export class AppModule {}

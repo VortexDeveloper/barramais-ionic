@@ -13,7 +13,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class GroupsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  groups: string = "my-groups";
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupsPage');

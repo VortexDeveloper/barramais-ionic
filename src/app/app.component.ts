@@ -6,6 +6,7 @@ import { FeedsPage } from '../pages/feeds/feeds';
 import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
 import { HomePage } from '../pages/home/home';
+import { MainPage } from '../pages/main/main';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class MyApp {
 
   constructor(public platform: Platform) {
     if (localStorage.getItem("current_user")){
-      this.rootPage = FeedsPage;
+      this.rootPage = MainPage;
     }
     this.initializeApp();
   }
