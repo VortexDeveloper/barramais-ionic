@@ -34,6 +34,7 @@ export class User {
       .map(res => res.json());
   }
 
+
   // Registration sign_up : (post)users.json
   login(user){
     return this.http.post(this.url + "/sign_in" + ".json", {'user': user})
