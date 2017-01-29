@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
-import { Registration3Page } from '../registration-3/registration-3';
+import { UserPage } from '../user/user';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { FeedsPage } from '../feeds/feeds';
@@ -17,7 +17,7 @@ import { FeedsPage } from '../feeds/feeds';
 })
 export class MainPage {
 
-  registration3 = Registration3Page;
+  user = UserPage;
   feeds: any;
   events: any;
   groups: any;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
-import { Registration1Page } from '../registration-1/registration-1';
+import { RegistrationPage } from '../registration/registration';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { FeedsPage }from '../feeds/feeds';
@@ -33,7 +33,7 @@ export class HomePage {
     public toastCtrl: ToastController
   ) {
     this.menu.enable(false, 'menu');
-    this.registration = Registration1Page;
+    this.registration = RegistrationPage;
     this.feeds = FeedsPage;
     this.main = MainPage;
   }

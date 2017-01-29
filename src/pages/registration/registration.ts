@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Registration2Page } from '../registration-2/registration-2'
 import { UserModel } from "../../models/user.model";
 import { HomePage } from "../home/home";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { FeedsPage } from "../feeds/feeds";
-import { Registration4Page } from '../registration4/registration4';
 /*
   Generated class for the Registration1 page.
 
@@ -14,10 +12,10 @@ import { Registration4Page } from '../registration4/registration4';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-registration-1',
-  templateUrl: 'registration-1.html'
+  selector: 'page-registration',
+  templateUrl: 'registration.html'
 })
-export class Registration1Page {
+export class RegistrationPage {
 
   user: UserModel = new UserModel();
   rootPage = HomePage;
@@ -32,14 +30,13 @@ export class Registration1Page {
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Registration1Page');
+    console.log('ionViewDidLoad RegistrationPage');
   }
 
   save(user) {
     this.userProvider.create(user)
     .subscribe(user_params => {
         this.user = new UserModel(user_params);
-        this.move_to_photopage(this.user);
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;
@@ -51,7 +48,6 @@ export class Registration1Page {
         }
         this.presentToast(errorMessage);
     });
-    this.login(this.user);
     this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
   }
 
@@ -82,10 +78,6 @@ export class Registration1Page {
 
   openPage(page){
     this.navCtrl.push(page);
-  }
-
-  move_to_photopage(user: UserModel) {
-    this.navCtrl.push(Registration4Page, { user: user });
   }
 
 }

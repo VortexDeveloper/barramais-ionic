@@ -6,10 +6,7 @@ import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { User } from '../providers/user';
-import { Registration1Page } from '../pages/registration-1/registration-1';
-import { Registration2Page } from '../pages/registration-2/registration-2';
-import { Registration3Page } from '../pages/registration-3/registration-3';
-import { Registration4Page } from '../pages/registration4/registration4';
+import { RegistrationPage } from '../pages/registration/registration';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
@@ -21,10 +18,7 @@ import { PostModalPage } from '../pages/post-modal/post-modal';
     GroupsPage,
     EventsPage,
     UserPage,
-    Registration1Page,
-    Registration2Page,
-    Registration3Page,
-    Registration4Page,
+    RegistrationPage,
     HomePage,
     MainPage,
     PostModalPage
@@ -39,10 +33,7 @@ import { PostModalPage } from '../pages/post-modal/post-modal';
     GroupsPage,
     EventsPage,
     UserPage,
-    Registration1Page,
-    Registration2Page,
-    Registration3Page,
-    Registration4Page,
+    RegistrationPage,
     HomePage,
     MainPage,
     PostModalPage
