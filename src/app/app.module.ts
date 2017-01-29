@@ -10,6 +10,8 @@ import { RegistrationPage } from '../pages/registration/registration';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
+import { ElasticHeader } from '../components/elastic-header/elastic-header';
+import { ProfilePage } from '../pages/profile/profile'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { PostModalPage } from '../pages/post-modal/post-modal';
     RegistrationPage,
     HomePage,
     MainPage,
-    PostModalPage
+    PostModalPage,
+    ElasticHeader,
+    ProfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,7 +40,8 @@ import { PostModalPage } from '../pages/post-modal/post-modal';
     RegistrationPage,
     HomePage,
     MainPage,
-    PostModalPage
+    PostModalPage,
+    ProfilePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

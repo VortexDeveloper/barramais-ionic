@@ -4,6 +4,7 @@ import { UserPage } from '../user/user';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { FeedsPage } from '../feeds/feeds';
+import { ProfilePage } from '../profile/profile';
 
 /*
   Generated class for the Main page.
@@ -17,10 +18,11 @@ import { FeedsPage } from '../feeds/feeds';
 })
 export class MainPage {
 
-  user = UserPage;
-  feeds: any;
-  events: any;
-  groups: any;
+  user: any = UserPage;
+  feeds: any = FeedsPage;
+  events: any = EventsPage;
+  groups: any = GroupsPage;
+  profilePage: any = ProfilePage;
 
   constructor(
     public navCtrl: NavController,
@@ -28,9 +30,6 @@ export class MainPage {
     public menu: MenuController
   ) {
       this.menu.enable(true, 'menu');
-      this.events = EventsPage;
-      this.groups = GroupsPage;
-      this.feeds = FeedsPage;
     }
 
   ionViewDidLoad() {

@@ -7,6 +7,7 @@ import { NavController, ActionSheetController, NavParams}  from 'ionic-angular';
 import { ViewController,Platform, LoadingController }  from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { FeedsPage } from '../feeds/feeds';
+import { ProfilePage } from '../profile/profile';
 
 declare var cordova: any;
 
@@ -20,6 +21,7 @@ export class UserPage {
   avatar: string;
   rootPage = HomePage;
   showNauticalWorkText: boolean = false;
+  profilePage: any = ProfilePage;
 
   constructor(
     public navCtrl: NavController,

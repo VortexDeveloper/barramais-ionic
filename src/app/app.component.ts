@@ -3,7 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
-
+import { ProfilePage } from '../pages/profile/profile';
+import { UserPage } from '../pages/user/user'
 
 @Component({
   selector: 'app-menu',
@@ -14,6 +15,8 @@ export class MyApp {
 
   rootPage: any = HomePage;
   mainPage: any = MainPage;
+  profilePage: any = ProfilePage;
+  userPage: any = UserPage;
 
   constructor(
     public platform: Platform
