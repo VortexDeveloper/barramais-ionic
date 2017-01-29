@@ -12,6 +12,8 @@ import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile'
+import { FriendsPage } from '../pages/friends/friends'
+import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request'
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ProfilePage } from '../pages/profile/profile'
     MainPage,
     PostModalPage,
     ElasticHeader,
-    ProfilePage
+    ProfilePage,
+    FriendsPage,
+    FriendshipRequestPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -41,7 +45,9 @@ import { ProfilePage } from '../pages/profile/profile'
     HomePage,
     MainPage,
     PostModalPage,
-    ProfilePage
+    ProfilePage,
+    FriendsPage,
+    FriendshipRequestPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

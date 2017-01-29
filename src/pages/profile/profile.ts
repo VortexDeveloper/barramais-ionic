@@ -3,6 +3,9 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
+import { GroupsPage } from '../groups/groups';
+import { EventsPage } from '../events/events';
+import { FriendsPage } from '../friends/friends';
 
 /*
   Generated class for the Profile page.
@@ -19,6 +22,9 @@ export class ProfilePage {
   userPage: any = UserPage;
   profilePage: any = ProfilePage;
   feedsPage: any = FeedsPage;
+  groupsPage: any = GroupsPage;
+  eventsPage: any = EventsPage;
+  friendsPage: any = FriendsPage;
 
   constructor(
     public navCtrl: NavController,

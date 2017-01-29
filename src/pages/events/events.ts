@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ProfilePage } from '../profile/profile';
+import { FeedsPage } from '../feeds/feeds';
 
 /*
   Generated class for the Events page.
@@ -13,12 +15,20 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class EventsPage {
 
+  profilePage: any = ProfilePage;
+  feeds: any = FeedsPage;
   events: string = "my-events";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
+  }
+
+  openPage(page){
+    this.navCtrl.push(page);
   }
 
 }

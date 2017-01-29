@@ -22,6 +22,7 @@ export class UserPage {
   rootPage = HomePage;
   showNauticalWorkText: boolean = false;
   profilePage: any = ProfilePage;
+  feeds: any = FeedsPage;
 
   constructor(
     public navCtrl: NavController,

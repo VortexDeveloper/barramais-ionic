@@ -2,21 +2,24 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
+import { FriendshipRequestPage } from '../friendship-request/friendship-request'
+
 /*
-  Generated class for the Groups page.
+  Generated class for the Friends page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-groups',
-  templateUrl: 'groups.html'
+  selector: 'page-friends',
+  templateUrl: 'friends.html'
 })
-export class GroupsPage {
+export class FriendsPage {
 
-  groups: string = "my-groups";
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
+  friendsPage: any = FriendsPage;
+  friendshipRequestPage: any = FriendshipRequestPage;
 
   constructor(
     public navCtrl: NavController,
@@ -24,10 +27,11 @@ export class GroupsPage {
   ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GroupsPage');
+    console.log('ionViewDidLoad FriendsPage');
   }
 
   openPage(page){
     this.navCtrl.push(page);
   }
+
 }
