@@ -6,7 +6,7 @@ import { HomePage } from "../home/home";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { FeedsPage } from "../feeds/feeds";
-
+import { Registration4Page } from '../registration4/registration4';
 /*
   Generated class for the Registration1 page.
 
@@ -39,6 +39,7 @@ export class Registration1Page {
     this.userProvider.create(user)
     .subscribe(user_params => {
         this.user = new UserModel(user_params);
+        this.move_to_photopage(this.user);
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;
@@ -81,6 +82,10 @@ export class Registration1Page {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  move_to_photopage(user: UserModel) {
+    this.navCtrl.push(Registration4Page, { user: user });
   }
 
 }

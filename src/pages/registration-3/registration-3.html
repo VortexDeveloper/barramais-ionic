@@ -23,6 +23,13 @@
       <ion-item-group>
         <ion-item-divider color="light">Informações de conta</ion-item-divider>
         <ion-item>
+          <img src="{{user.avatar}}" id='user_avatar' style="width: 100%" [hidden]="user.avatar === null">
+          <h3 [hidden]="user.avatar === null">Please Select Image!</h3>
+          <button ion-button icon-left (click)="save_avatar(user)" [disabled]="user.avatar === null">
+            <ion-icon name="cloud-upload"></ion-icon>Salvar Imagem
+          </button>
+        </ion-item>
+        <ion-item>
           <ion-label floating>Nome</ion-label>
           <ion-input type="text" [(ngModel)]="user.first_name" name="first_name"></ion-input>
         </ion-item>
@@ -117,3 +124,15 @@
     </form>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <button ion-button icon-left (click)="presentActionSheet()">
+        <ion-icon name="camera"></ion-icon>Select Image
+      </button>
+      <button ion-button icon-left [disabled]="lastImage === null">
+        <ion-icon name="cloud-upload"></ion-icon>Upload
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

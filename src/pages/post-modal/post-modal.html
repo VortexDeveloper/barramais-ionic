@@ -28,15 +28,9 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-list>
-        <button ion-item>
-          <ion-icon ios="ios-videocam" md="md-videocam" item-left (click)="openVideoGallery()"></ion-icon>
-          Enviar video
-        </button>
-        <button ion-item>
-          <ion-icon ios="ios-camera" md="md-camera" item-left (click)="openPhotoGallery()"></ion-icon>
-          Enviar Foto
-        </button>
-    </ion-list>
+    <button ion-button color="light" clear (click)="openMediaOptions()" icon-left>
+      <ion-icon ios="ios-open" md="md-open"></ion-icon>
+      Selecionar midia
+    </button>
   </ion-toolbar>
 </ion-footer>

@@ -29,42 +29,27 @@ export class PostModalPage {
     this.viewCtrl.dismiss();
   }
 
-  openVideoGallery() {
+  openMediaOptions() {
     let actionSheet = this.actionsheetCtrl.create({
-      title: 'Albums',
+      title: 'Carregar midia',
       cssClass: 'page-post-modal',
       buttons: [
         {
-          text: 'Delete',
-          role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        },
-        {
-          text: 'Share',
-          icon: !this.platform.is('ios') ? 'share' : null,
-          handler: () => {
-            console.log('Share clicked');
-          }
-        },
-        {
-          text: 'Play',
-          icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
+          text: 'Video',
+          icon: !this.platform.is('ios') ? 'videocam' : null,
           handler: () => {
             console.log('Play clicked');
           }
         },
         {
-          text: 'Favorite',
-          icon: !this.platform.is('ios') ? 'heart-outline' : null,
+          text: 'Imagem',
+          icon: !this.platform.is('ios') ? 'camera' : null,
           handler: () => {
             console.log('Favorite clicked');
           }
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel', // will always sort to be on the bottom
           icon: !this.platform.is('ios') ? 'close' : null,
           handler: () => {
