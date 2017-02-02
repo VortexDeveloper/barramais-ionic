@@ -21,7 +21,7 @@ export class MyApp {
   constructor(
     public platform: Platform
   ) {
-    if (localStorage.getItem("current_user")){
+    if (localStorage.getItem("jwt")){
       this.rootPage = this.mainPage;
     }
     this.initializeApp();
