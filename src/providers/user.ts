@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { UserModel } from '../models/user.model'
 
 import 'rxjs/add/operator/map';
@@ -30,14 +30,20 @@ export class User {
   }
 
   update(user){
-    return this.http.put(this.url + ".json", {'user': user})
-      .map(res => res.json());
+    let headers = new Headers;
+    headers.append('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MCwiZXhwIjoxNDg2MDY3OTQzfQ.69yLYHd5I1QiB1xK5dK7DlOwBo4DCs8T6Lf92KBh8r0');
+    return this.http.put(this.url + ".json", {'user': user}, {headers: headers})
+      .map(res => {
+        if(res.status == 204) {
+          return JSON.parse('{"saved": true}');
+        }
+      });
   }
 
 
   // Registration sign_up : (post)users.json
   login(user){
-    return this.http.post(this.url + "/sign_in" + ".json", {'user': user})
+    return this.http.post(this.url + "/sign_in.json", {'user': user})
       .map(res => res.json());
   }
 
