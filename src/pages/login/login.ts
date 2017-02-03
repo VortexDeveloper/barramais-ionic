@@ -43,17 +43,17 @@ export class LoginPage {
   }
 
   login(user) {
-    // this.userProvider.login(user)
-    // .subscribe(user_params => {
-    //     console.log(user_params);
-    //     var current_user = JSON.stringify(user_params);
-    //     localStorage.setItem("current_user", current_user);
-         this.openPage(this.main);
-    //     this.presentToast("Logado com sucesso.");
-    // }, error => {
-    //     console.log(error.json());
-    //     this.presentToast(error.json().error);
-    // });
+    this.userProvider.login(user)
+    .subscribe(token_params => {
+        console.log(token_params);
+        var token = JSON.stringify(token_params);
+        localStorage.setItem("jwt", token);
+        this.openPage(this.main);
+        this.presentToast("Logado com sucesso.");
+    }, error => {
+        console.log(error.json() || 'Server error');
+        this.presentToast(error.json().error);
+    });
   }
 
   presentToast(msg) {

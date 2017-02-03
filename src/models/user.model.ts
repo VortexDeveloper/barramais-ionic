@@ -8,6 +8,7 @@ export class UserModel {
   email: string;
   password: string;
   password_confirmation: string;
+  current_password: string;
   first_name: string;
   last_name: string;
 

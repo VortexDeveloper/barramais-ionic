@@ -44,9 +44,10 @@ export class UserPage {
 
   save(user) {
     this.userProvider.update(user)
-    .subscribe(user_params => {
-        this.user = new UserModel(user_params);
-        this.presentToast("Usuário atualizado com sucesso!");
+    .subscribe(response => {
+        if(response.saved){
+          this.presentToast("Usuário atualizado com sucesso!");
+        }
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;

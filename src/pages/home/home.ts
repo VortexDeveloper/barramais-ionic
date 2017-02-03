@@ -3,6 +3,8 @@ import { NavController, NavParams, MenuController, ModalController } from 'ionic
 import { RegistrationPage } from '../registration/registration';
 import { LoginPage } from '../login/login';
 import { MainPage } from '../main/main';
+import { User } from '../../providers/user';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the Home page.
@@ -10,6 +12,7 @@ import { MainPage } from '../main/main';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -42,5 +45,27 @@ export class HomePage {
     let modal = this.modalCtrl.create(LoginPage);
     modal.present();
   }
+
+  // login(user) {
+  //   this.userProvider.login(user)
+  //   .subscribe(token_params => {
+  //       console.log(token_params);
+  //       var token = JSON.stringify(token_params);
+  //       localStorage.setItem("jwt", token);
+  //       this.openPage(this.main);
+  //       this.presentToast("Logado com sucesso.");
+  //   }, error => {
+  //       console.log(error.json() || 'Server error');
+  //       this.presentToast(error.json().error);
+  //   });
+  // }
+  //
+  // presentToast(msg) {
+  //   let toast = this.toastCtrl.create({
+  //     message: msg,
+  //     duration: 5000
+  //   });
+  //   toast.present();
+  // }
 
 }
