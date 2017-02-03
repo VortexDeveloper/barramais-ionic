@@ -6,12 +6,6 @@ import { ToastController } from 'ionic-angular';
 import { FeedsPage }from '../feeds/feeds';
 import { MainPage }from '../main/main';
 
-/*
-  Generated class for the Login page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -35,7 +29,7 @@ export class LoginPage {
   }
 
   openPage(page) {
-    this.navCtrl.setRoot(page, {}, {animate: true, direction: 'forward'});
+    this.navCtrl.push(page);
   }
 
   dismiss() {

@@ -5,13 +5,7 @@ import { LoginPage } from '../login/login';
 import { MainPage } from '../main/main';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
-
-/*
-  Generated class for the Home page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { UserModel } from "../../models/user.model";
 
 @Component({
   selector: 'page-home',
@@ -22,7 +16,6 @@ export class HomePage {
   registration: any = RegistrationPage;
   login: any = LoginPage;
   mainPage: any = MainPage;
-
 
   constructor(
     public navCtrl: NavController,
@@ -45,6 +38,7 @@ export class HomePage {
     let modal = this.modalCtrl.create(LoginPage);
     modal.present();
   }
+
 
   // login(user) {
   //   this.userProvider.login(user)
