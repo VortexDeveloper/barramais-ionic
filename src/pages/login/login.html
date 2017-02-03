@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list no-lines>
+    <form (ngSubmit)="login(user)">
+      <ion-item>
+        <ion-label color="primary" stacked>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" placeholder="Digite seu email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" placeholder="Digite sua senha" name="password"></ion-input>
+      </ion-item>
+      <button ion-button block icon-left color="light" outline type="submit">
+        <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
+        Entrar
+      </button>
+    </form>
+  </ion-list>
+</ion-content>

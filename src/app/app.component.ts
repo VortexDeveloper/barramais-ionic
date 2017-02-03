@@ -4,7 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
-import { UserPage } from '../pages/user/user'
+import { UserPage } from '../pages/user/user';
 
 @Component({
   selector: 'app-menu',

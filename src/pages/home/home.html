@@ -3,26 +3,19 @@
     <div class="logo-home">
         <img src="/assets/images/logo300.png" alt="Barra Mais" />
     </div>
-    <form (ngSubmit)="login(user)">
-      <ion-item>
-        <ion-label stacked>Email</ion-label>
-        <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
-      </ion-item>
-      <button ion-button block icon-left color="light" outline type="submit">
-        <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
-        Entrar
-      </button>
-    </form>
-    <button class="buttons-color" ion-button block icon-left color="light" outline (click)="openPage(feeds)">
+    <button ion-button class="buttons-color-facebook" block color="light" outline (click)="openPage(mainPage)" icon-left>
       <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-      Entrar com o facebook
+      Entrar com o Facebook
     </button>
-    <div class="content-links">
-      <button ion-button color="light" clear class="links-color" (click)="openPage(registration)">Cadastrar-se</button>
-    </div>
+    <button ion-button class="buttons-color-google" block color="light" outline (click)="openPage(mainPage)" icon-left>
+      <ion-icon ios="logo-google" md="logo-google"></ion-icon>
+      Entrar com o Google
+    </button>
+    <button ion-button color="light" clear class="links-color" (click)="openPage(registration)">
+      Cadastrar-se
+    </button>
+    <button ion-button color="light" clear class="links-color" (click)="openModal(login)">
+      Login
+    </button>
   </div>
 </ion-content>

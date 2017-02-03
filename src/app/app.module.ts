@@ -11,9 +11,10 @@ import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
-import { ProfilePage } from '../pages/profile/profile'
-import { FriendsPage } from '../pages/friends/friends'
-import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request'
+import { ProfilePage } from '../pages/profile/profile';
+import { FriendsPage } from '../pages/friends/friends';
+import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FriendshipRequestPage } from '../pages/friendship-request/friendship-re
     ElasticHeader,
     ProfilePage,
     FriendsPage,
-    FriendshipRequestPage
+    FriendshipRequestPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -47,7 +49,8 @@ import { FriendshipRequestPage } from '../pages/friendship-request/friendship-re
     PostModalPage,
     ProfilePage,
     FriendsPage,
-    FriendshipRequestPage
+    FriendshipRequestPage,
+    LoginPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

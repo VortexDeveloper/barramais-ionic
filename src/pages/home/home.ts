@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
 import { RegistrationPage } from '../registration/registration';
-import { User } from '../../providers/user';
-import { UserModel } from "../../models/user.model";
-import { FeedsPage }from '../feeds/feeds';
-import { MainPage }from '../main/main';
-import { ToastController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
+import { MainPage } from '../main/main';
 
 /*
   Generated class for the Home page.
@@ -19,23 +16,18 @@ import { ToastController } from 'ionic-angular';
 })
 export class HomePage {
 
+  registration: any = RegistrationPage;
+  login: any = LoginPage;
+  mainPage: any = MainPage;
 
-  user: UserModel = new UserModel();
-  registration: any;
-  feeds: any;
-  main: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public menu: MenuController,
-    private userProvider: User,
-    public toastCtrl: ToastController
+    public modalCtrl: ModalController
   ) {
     this.menu.enable(false, 'menu');
-    this.registration = RegistrationPage;
-    this.feeds = FeedsPage;
-    this.main = MainPage;
   }
 
   ionViewDidLoad() {
@@ -46,26 +38,9 @@ export class HomePage {
     this.navCtrl.setRoot(page, {}, {animate: true, direction: 'forward'});
   }
 
-  login(user) {
-    this.userProvider.login(user)
-    .subscribe(user_params => {
-        console.log(user_params);
-        var current_user = JSON.stringify(user_params);
-        localStorage.setItem("current_user", current_user);
-        this.openPage(this.main);
-        this.presentToast("Logado com sucesso.");
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error.json().error);
-    });
-  }
-
-  presentToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 5000
-    });
-    toast.present();
+  openModal() {
+    let modal = this.modalCtrl.create(LoginPage);
+    modal.present();
   }
 
 }

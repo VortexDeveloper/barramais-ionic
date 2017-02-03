@@ -11,7 +11,7 @@ import { NavController, NavParams, ViewController, ActionSheetController, Platfo
   selector: 'page-post-modal',
   templateUrl: 'post-modal.html'
 })
-export class PostModalPage {
+export class PostModalPage { 
 
   constructor(
     public platform: Platform,

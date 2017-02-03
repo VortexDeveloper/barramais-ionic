@@ -40,5 +40,4 @@ export class MainPage {
     this.navCtrl.push(page);
   }
 
-
 }
