@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { UserModel } from '../models/user.model'
+import { UserModel } from '../models/user.model';
+import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -20,7 +21,8 @@ export class User {
   public user: UserModel;
 
   constructor(
-    public http: Http
+    public http: Http,
+    public authHttp: AuthHttp
   ) { }
 
 
@@ -30,9 +32,7 @@ export class User {
   }
 
   update(user){
-    let headers = new Headers;
-    headers.append('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MCwiZXhwIjoxNDg2MDY3OTQzfQ.69yLYHd5I1QiB1xK5dK7DlOwBo4DCs8T6Lf92KBh8r0');
-    return this.http.put(this.url + ".json", {'user': user}, {headers: headers})
+    return this.authHttp.put(this.url + ".json", {'user': user})
       .map(res => {
         if(res.status == 204) {
           return JSON.parse('{"saved": true}');

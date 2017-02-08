@@ -24,6 +24,7 @@ export class MainPage {
   groups: any = GroupsPage;
   profilePage: any = ProfilePage;
 
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

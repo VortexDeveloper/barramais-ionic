@@ -15,6 +15,16 @@ import { ProfilePage } from '../pages/profile/profile';
 import { FriendsPage } from '../pages/friends/friends';
 import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request';
 import { LoginPage } from '../pages/login/login';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Http } from '@angular/http';
+
+export function getAuthHttp(http) {
+  return new AuthHttp(new AuthConfig({
+    noJwtError: true,
+    globalHeaders: [{'Accept': 'application/json', 'Content-Type': 'application/json'}],
+    tokenGetter: (() => localStorage.getItem('jwt')),
+  }), http);
+}
 
 @NgModule({
   declarations: [
@@ -54,7 +64,8 @@ import { LoginPage } from '../pages/login/login';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    User
+    User,
+    {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
-import { UserModel } from "../../models/user.model";
+import { UserModel } from "../models/user.model";
 
 @Component({
   selector: 'app-menu',
@@ -19,16 +19,11 @@ export class MyApp {
   profilePage: any = ProfilePage;
   userPage: any = UserPage;
 
-  current_user: UserModel = new UserModel();
-  token: any;
-
   constructor(
     public platform: Platform
   ) {
 
       if (localStorage.getItem("jwt")){
-        this.current_user = "";
-        this.token = localStorage.getItem("jwt");
         this.rootPage = this.mainPage;
       }
 
