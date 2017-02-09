@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
-import { ProfilePage } from "../profile/profile"
+import { ProfilePage } from "../profile/profile";
+import { CocoButtonComponent } from '../components/coco-button/coco-button';
 
 
 @Component({

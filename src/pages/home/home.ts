@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   openPage(page) {
-    this.navCtrl.setRoot(page, {}, {animate: true, direction: 'forward'});
+    this.navCtrl.push(page);
   }
 
 }
