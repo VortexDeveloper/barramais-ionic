@@ -6,6 +6,8 @@ import { FeedsPage } from '../feeds/feeds';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { FriendsPage } from '../friends/friends';
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 
 /*
   Generated class for the Profile page.
@@ -19,6 +21,9 @@ import { FriendsPage } from '../friends/friends';
 })
 export class ProfilePage {
 
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  user: UserModel;
   userPage: any = UserPage;
   profilePage: any = ProfilePage;
   feedsPage: any = FeedsPage;
@@ -30,7 +35,9 @@ export class ProfilePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController
-  ) {}
+  ) {
+    this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');

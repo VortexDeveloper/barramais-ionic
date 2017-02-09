@@ -39,8 +39,8 @@ export class LoginPage {
   login(user) {
     this.userProvider.login(user)
     .subscribe(token_params => {
-        console.log(token_params.token);
         localStorage.setItem("jwt", token_params.token);
+        localStorage.setItem("user", token_params.user);
         this.openPage(this.main);
         this.presentToast("Logado com sucesso.");
     }, error => {

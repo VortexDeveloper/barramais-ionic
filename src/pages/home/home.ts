@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { RegistrationPage } from '../registration/registration';
 import { LoginPage } from '../login/login';
 import { MainPage } from '../main/main';
-import { User } from '../../providers/user';
-import { ToastController } from 'ionic-angular';
-import { UserModel } from "../../models/user.model";
 
 @Component({
   selector: 'page-home',
@@ -20,8 +17,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public menu: MenuController,
-    public modalCtrl: ModalController
+    public menu: MenuController
   ) {
     this.menu.enable(false, 'menu');
   }
@@ -33,33 +29,5 @@ export class HomePage {
   openPage(page) {
     this.navCtrl.setRoot(page, {}, {animate: true, direction: 'forward'});
   }
-
-  openModal() {
-    let modal = this.modalCtrl.create(LoginPage);
-    modal.present();
-  }
-
-
-  // login(user) {
-  //   this.userProvider.login(user)
-  //   .subscribe(token_params => {
-  //       console.log(token_params);
-  //       var token = JSON.stringify(token_params);
-  //       localStorage.setItem("jwt", token);
-  //       this.openPage(this.main);
-  //       this.presentToast("Logado com sucesso.");
-  //   }, error => {
-  //       console.log(error.json() || 'Server error');
-  //       this.presentToast(error.json().error);
-  //   });
-  // }
-  //
-  // presentToast(msg) {
-  //   let toast = this.toastCtrl.create({
-  //     message: msg,
-  //     duration: 5000
-  //   });
-  //   toast.present();
-  // }
 
 }

@@ -5,7 +5,6 @@ import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
-import { UserModel } from "../models/user.model";
 
 @Component({
   selector: 'app-menu',

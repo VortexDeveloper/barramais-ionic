@@ -21,7 +21,10 @@ export class GroupsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
-  ) {}
+  )
+  {
+      
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupsPage');

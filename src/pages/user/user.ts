@@ -8,6 +8,7 @@ import { ViewController,Platform, LoadingController }  from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { FeedsPage } from '../feeds/feeds';
 import { ProfilePage } from '../profile/profile';
+import { JwtHelper } from 'angular2-jwt';
 
 declare var cordova: any;
 
@@ -16,6 +17,10 @@ declare var cordova: any;
   templateUrl: 'user.html'
 })
 export class UserPage {
+
+  jwtHelper: JwtHelper = new JwtHelper();
+  token: any = localStorage.getItem('jwt');
+  user_token: any = localStorage.getItem('user');
 
   user: UserModel;
   avatar: string;
@@ -34,8 +39,7 @@ export class UserPage {
     public platform: Platform,
     public loadingCtrl: LoadingController
   ) {
-        this.user = new UserModel(JSON.parse(localStorage.getItem("current_user")));
-        console.log(this.user);
+        this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     }
 
   ionViewDidLoad() {
@@ -45,9 +49,8 @@ export class UserPage {
   save(user) {
     this.userProvider.update(user)
     .subscribe(response => {
-        if(response.saved){
-          this.presentToast("Usuário atualizado com sucesso!");
-        }
+        localStorage.setItem("user", response.user);
+        this.presentToast("Usuário atualizado com sucesso!");
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;

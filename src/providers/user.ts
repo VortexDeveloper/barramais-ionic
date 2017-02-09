@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { UserModel } from '../models/user.model';
 import { AuthHttp } from 'angular2-jwt';
 
@@ -32,14 +32,9 @@ export class User {
   }
 
   update(user){
-    return this.authHttp.put(this.url + ".json", {'user': user})
-      .map(res => {
-        if(res.status == 204) {
-          return JSON.parse('{"saved": true}');
-        }
-      });
+      return this.authHttp.put(this.url + ".json", {'user': user})
+        .map(res => res.json());
   }
-
 
   // Registration sign_up : (post)users.json
   login(user){
