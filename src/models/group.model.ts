@@ -4,7 +4,7 @@ export class GroupModel {
   updatedAt: Date;
 
   //Group informartion
-  user_id: integer;
+  user_id: number;
   name: string;
   about: string;
 

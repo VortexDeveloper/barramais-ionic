@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserModel } from "../../models/user.model";
-import { HomePage } from "../home/home";
+import { MainPage } from "../main/main";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { FeedsPage } from "../feeds/feeds";
@@ -18,7 +18,7 @@ import { FeedsPage } from "../feeds/feeds";
 export class RegistrationPage {
 
   user: UserModel = new UserModel();
-  rootPage = HomePage;
+  rootPage = MainPage;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +37,8 @@ export class RegistrationPage {
     this.userProvider.create(user)
     .subscribe(user_params => {
         this.user = new UserModel(user_params);
+        this.openPage(this.rootPage);
+        this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;
@@ -47,20 +49,6 @@ export class RegistrationPage {
            }
         }
         this.presentToast(errorMessage);
-    });
-    this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
-  }
-
-  login(user) {
-    this.userProvider.login(user)
-    .subscribe(user_params => {
-        console.log(user_params);
-        var current_user = JSON.stringify(user_params);
-        localStorage.setItem("current_user", current_user);
-        this.navCtrl.setRoot(FeedsPage, {}, {animate: true, direction: 'forward'});
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error.json().error);
     });
   }
 
