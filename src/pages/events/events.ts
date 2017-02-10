@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
+import { BmHeaderComponent } from '../components/bm-header/bm-header';
 
 /*
   Generated class for the Events page.

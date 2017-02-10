@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
-import { ProfilePage } from "../profile/profile";
-import { CocoButtonComponent } from '../components/coco-button/coco-button';
+import { BmHeaderComponent } from '../components/bm-header/bm-header';
 
 
 @Component({
@@ -11,7 +10,6 @@ import { CocoButtonComponent } from '../components/coco-button/coco-button';
 })
 export class FeedsPage {
 
-  profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
 
   constructor(

@@ -18,6 +18,7 @@ import { LoginPage } from '../pages/login/login';
 import { CocoButtonComponent } from '../components/coco-button/coco-button';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
+import { BmHeaderComponent } from '../components/bm-header/bm-header';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -43,7 +44,8 @@ export function getAuthHttp(http) {
     FriendsPage,
     FriendshipRequestPage,
     LoginPage,
-    CocoButtonComponent
+    CocoButtonComponent,
+    BmHeaderComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -63,7 +65,8 @@ export function getAuthHttp(http) {
     FriendsPage,
     FriendshipRequestPage,
     LoginPage,
-    CocoButtonComponent
+    CocoButtonComponent,
+    BmHeaderComponent
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

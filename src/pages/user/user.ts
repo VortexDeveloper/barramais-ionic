@@ -9,6 +9,7 @@ import { Camera } from 'ionic-native';
 import { FeedsPage } from '../feeds/feeds';
 import { ProfilePage } from '../profile/profile';
 import { JwtHelper } from 'angular2-jwt';
+import { BmHeaderComponent } from '../components/bm-header/bm-header';
 
 declare var cordova: any;
 

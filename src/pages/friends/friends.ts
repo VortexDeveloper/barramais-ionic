@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
 import { FriendshipRequestPage } from '../friendship-request/friendship-request'
+import { BmHeaderComponent } from '../components/bm-header/bm-header';
 
 /*
   Generated class for the Friends page.

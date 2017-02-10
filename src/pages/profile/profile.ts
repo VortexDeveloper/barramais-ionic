@@ -11,6 +11,7 @@ import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
+import { BmHeaderComponent } from '../components/bm-header/bm-header';
 
 /*
   Generated class for the Profile page.
