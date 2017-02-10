@@ -32,10 +32,6 @@ export class LoginPage {
     this.navCtrl.push(page);
   }
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
-
   login(user) {
     this.userProvider.login(user)
     .subscribe(token_params => {

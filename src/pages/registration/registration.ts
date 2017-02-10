@@ -37,8 +37,8 @@ export class RegistrationPage {
     this.userProvider.create(user)
     .subscribe(user_params => {
         this.user = new UserModel(user_params);
-        this.openPage(this.rootPage);
-        this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
+        console.log(user);
+        this.login(user);
     }, error => {
         console.log(error.json().errors);
         var errors = error.json().errors;
@@ -66,6 +66,19 @@ export class RegistrationPage {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  login(user) {
+    this.userProvider.login(user)
+    .subscribe(token_params => {
+        localStorage.setItem("jwt", token_params.token);
+        localStorage.setItem("user", token_params.user);
+        this.openPage(MainPage);
+        this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
+    }, error => {
+        console.log(error.json() || 'Server error');
+        this.presentToast(error.json().error);
+    });
   }
 
 }

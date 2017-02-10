@@ -43,7 +43,7 @@ export class UserModel {
     this.relationship = params.relationship || 0;
     this.has_embarcation = params.has_embarcation || false;
     this.nautical_professional = params.nautical_professional || false;
-    this.nautical_profession_description = params.nautical_work || "";
+    this.nautical_profession_description = params.nautical_profession_description || "";
     this.naval_service = params.naval_service || "";
   }
 }

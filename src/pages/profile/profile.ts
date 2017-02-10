@@ -6,8 +6,11 @@ import { FeedsPage } from '../feeds/feeds';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { FriendsPage } from '../friends/friends';
+import { HomePage } from '../home/home';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { User } from '../../providers/user';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the Profile page.
@@ -34,7 +37,9 @@ export class ProfilePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public modalCtrl: ModalController
+    private userProvider: User,
+    public modalCtrl: ModalController,
+    public toastCtrl: ToastController
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
   }
