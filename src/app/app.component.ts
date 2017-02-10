@@ -6,6 +6,7 @@ import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: 'app.html'

@@ -15,6 +15,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { FriendsPage } from '../pages/friends/friends';
 import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request';
 import { LoginPage } from '../pages/login/login';
+import { CocoButtonComponent } from '../components/coco-button/coco-button';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 
@@ -41,7 +42,8 @@ export function getAuthHttp(http) {
     ProfilePage,
     FriendsPage,
     FriendshipRequestPage,
-    LoginPage
+    LoginPage,
+    CocoButtonComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -60,7 +62,8 @@ export function getAuthHttp(http) {
     ProfilePage,
     FriendsPage,
     FriendshipRequestPage,
-    LoginPage
+    LoginPage,
+    CocoButtonComponent
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
