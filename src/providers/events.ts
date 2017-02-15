@@ -26,7 +26,9 @@ export class EventProvider {
   }
 
   create(event, address){
-    return this.http.post(this.url + ".json", {'event': event, 'address': address})
+    let d = new Date;
+    let new_name = event.id + d.getTime();
+    return this.http.post(this.url + ".json", {'event': event, 'address': address, 'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
       .map(res => res.json());
   }
 
@@ -42,13 +44,6 @@ export class EventProvider {
 
   getCities(state){
     return this.http.get(this.cities_url + "/" + state + ".json")
-      .map(res => res.json());
-  }
-
-  save_cover_photo(event){
-    let d = new Date;
-    let new_name = event.id + d.getTime();
-    return this.http.put(this.url + "/" + event.id + "/" + "save_cover_photo.json", {'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
       .map(res => res.json());
   }
 

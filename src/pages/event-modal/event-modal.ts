@@ -9,7 +9,7 @@ import { UserModel } from "../../models/user.model";
 import { Camera } from 'ionic-native';
 import { EventsPage } from "../events/events";
 
-/* 
+/*
   Generated class for the PostModal page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -145,16 +145,6 @@ export class EventModalPage {
 
   is_android() {
     this.platform.is('android')
-  }
-
-  save_cover_photo(user) {
-    this.eventProvider.save_cover_photo(event)
-    .subscribe(event_params => {
-      this.navCtrl.setRoot(EventsPage, {}, {animate: true, direction: 'forward'});
-    }, error => {
-        alert(error.json());
-        console.log(JSON.stringify(error.json()));
-    });
   }
 
 }
