@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
-
+import { EventModalPage } from "../event-modal/event-modal";
+import { EventProvider } from '../../providers/events';
 /*
   Generated class for the Events page.
 
@@ -18,18 +19,39 @@ export class EventsPage {
 
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
-  events: string = "my-events";
+  events: any = "my-events";
+  eventsIndex: any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams) {}
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public eventProvider: EventProvider)
+    {
+      this.index();
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
   }
 
+  index(){
+    this.eventProvider.index()
+    .subscribe(response =>{
+        console.log(response.events);
+        this.eventsIndex = response.events;
+    }, error =>{
+      console.log("Erro ao exibir Eventos");
+    });
+  }
+
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  openModal() {
+    let modal = this.modalCtrl.create(EventModalPage);
+    modal.present();
   }
 
 }

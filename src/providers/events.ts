@@ -9,10 +9,47 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class Events {
+export class EventProvider {
+
+  private url: string = "http://localhost:3000/events";
+  private country_url: string = "http://localhost:3000/events/country_for_select";
+  private states_url: string = "http://localhost:3000/events/states_for_select";
+  private cities_url: string = "http://localhost:3000/events/cities_for_select";
 
   constructor(public http: Http) {
-    console.log('Hello Events Provider');
+
+  }
+
+  index(){
+    return this.http.get(this.url + ".json")
+    .map(res => res.json());
+  }
+
+  create(event, address){
+    return this.http.post(this.url + ".json", {'event': event, 'address': address})
+      .map(res => res.json());
+  }
+
+  getCountry(){
+    return this.http.get(this.country_url + ".json")
+      .map(res => res.json());
+  }
+
+  getStates(country){
+    return this.http.get(this.states_url + "/" + country + ".json")
+      .map(res => res.json());
+  }
+
+  getCities(state){
+    return this.http.get(this.cities_url + "/" + state + ".json")
+      .map(res => res.json());
+  }
+
+  save_cover_photo(event){
+    let d = new Date;
+    let new_name = event.id + d.getTime();
+    return this.http.put(this.url + "/" + event.id + "/" + "save_cover_photo.json", {'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
+      .map(res => res.json());
   }
 
 }

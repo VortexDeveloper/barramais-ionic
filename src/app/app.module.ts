@@ -6,10 +6,12 @@ import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { User } from '../providers/user';
+import { EventProvider } from '../providers/events';
 import { RegistrationPage } from '../pages/registration/registration';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
+import { EventModalPage } from '../pages/event-modal/event-modal';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile';
 import { FriendsPage } from '../pages/friends/friends';
@@ -39,6 +41,7 @@ export function getAuthHttp(http) {
     HomePage,
     MainPage,
     PostModalPage,
+    EventModalPage,
     ElasticHeader,
     ProfilePage,
     FriendsPage,
@@ -61,6 +64,7 @@ export function getAuthHttp(http) {
     HomePage,
     MainPage,
     PostModalPage,
+    EventModalPage,
     ProfilePage,
     FriendsPage,
     FriendshipRequestPage,
@@ -71,6 +75,7 @@ export function getAuthHttp(http) {
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     User,
+    EventProvider,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
