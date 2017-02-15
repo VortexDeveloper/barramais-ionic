@@ -11,10 +11,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EventProvider {
 
-  private url: string = "http://localhost:3000/events";
-  private country_url: string = "http://localhost:3000/events/country_for_select";
-  private states_url: string = "http://localhost:3000/events/states_for_select";
-  private cities_url: string = "http://localhost:3000/events/cities_for_select";
+  private url: string = "http://barramais.herokuapp.com/events";
+  private country_url: string = "http://barramais.herokuapp.com/events/country_for_select";
+  private states_url: string = "http://barramais.herokuapp.com/events/states_for_select";
+  private cities_url: string = "http://barramais.herokuapp.com/events/cities_for_select";
 
   constructor(public http: Http) {
 

@@ -9,7 +9,7 @@ import { UserModel } from "../../models/user.model";
 import { Camera } from 'ionic-native';
 import { EventsPage } from "../events/events";
 
-/*
+/* 
   Generated class for the PostModal page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
