@@ -19,91 +19,17 @@
 <ion-content padding>
   <div [ngSwitch]="events">
     <ion-list *ngSwitchCase="'my-events'">
-      <ion-card>
+      <ion-card *ngFor="let event of eventsIndex">
         <ion-item>
           <ion-avatar item-left>
-            <h2 class="h2-events-avatar">20</h2>
-            <h3 class="h3-events-avatar">FEV</h3>
+            <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
+            <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
           </ion-avatar>
-          <h2>Event Name</h2>
-          <p>November 5, 1955</p>
+          <h2>{{event.name}}</h2>
+          <p>{{event.created_at | date:'MMMM d, y'}}</p>
         </ion-item>
         <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-        </ion-card-content>
-        <img src="assets/images/post.jpg"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-avatar item-left>
-            <h2 class="h2-events-avatar">20</h2>
-            <h3 class="h3-events-avatar">FEV</h3>
-          </ion-avatar>
-          <h2>Event Name</h2>
-          <p>November 5, 1955</p>
-        </ion-item>
-        <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-        </ion-card-content>
-        <img src="assets/images/post.jpg"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-avatar item-left>
-            <h2 class="h2-events-avatar">20</h2>
-            <h3 class="h3-events-avatar">FEV</h3>
-          </ion-avatar>
-          <h2>Event Name</h2>
-          <p>November 5, 1955</p>
-        </ion-item>
-        <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+          <p>{{event.about}}</p>
         </ion-card-content>
         <img src="assets/images/post.jpg"/>
         <ion-row>
@@ -130,7 +56,6 @@
         </ion-row>
       </ion-card>
     </ion-list>
-
     <ion-list *ngSwitchCase="'present-events'">
       <ion-card>
         <ion-item>
@@ -168,44 +93,7 @@
           </ion-col>
         </ion-row>
       </ion-card>
-      <ion-card>
-        <ion-item>
-          <ion-avatar item-left>
-            <h2 class="h2-events-avatar">20</h2>
-            <h3 class="h3-events-avatar">FEV</h3>
-          </ion-avatar>
-          <h2>Event Name</h2>
-          <p>November 5, 1955</p>
-        </ion-item>
-        <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-        </ion-card-content>
-        <img src="assets/images/post.jpg"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
     </ion-list>
-
     <ion-list *ngSwitchCase="'pending-invitations'">
       <ion-card>
         <ion-item>
@@ -246,6 +134,6 @@
     </ion-list>
   </div>
   <ion-fab right bottom>
-    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="danger" (click)="openModal()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>
