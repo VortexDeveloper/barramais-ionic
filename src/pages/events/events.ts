@@ -3,8 +3,9 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
-import { EventModalPage } from "../event-modal/event-modal";
+import { EventModalPage } from "../events/event-modal";
 import { EventProvider } from '../../providers/events';
+import { EventPagePage } from '../events/event-page';
 /*
   Generated class for the Events page.
 
@@ -21,6 +22,7 @@ export class EventsPage {
   feeds: any = FeedsPage;
   events: any = "my-events";
   eventsIndex: any;
+  eventPage: any = EventPagePage;
 
   constructor(
     public navCtrl: NavController,
@@ -45,8 +47,8 @@ export class EventsPage {
     });
   }
 
-  openPage(page){
-    this.navCtrl.push(page);
+  openPage(page, event){
+    this.navCtrl.push(page, {event: event});
   }
 
   openModal() {

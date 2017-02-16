@@ -11,7 +11,8 @@ import { RegistrationPage } from '../pages/registration/registration';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
-import { EventModalPage } from '../pages/event-modal/event-modal';
+import { EventModalPage } from '../pages/events/event-modal';
+import { EventPagePage } from '../pages/events/event-page';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile';
 import { FriendsPage } from '../pages/friends/friends';
@@ -42,6 +43,7 @@ export function getAuthHttp(http) {
     MainPage,
     PostModalPage,
     EventModalPage,
+    EventPagePage,
     ElasticHeader,
     ProfilePage,
     FriendsPage,
@@ -65,6 +67,7 @@ export function getAuthHttp(http) {
     MainPage,
     PostModalPage,
     EventModalPage,
+    EventPagePage,
     ProfilePage,
     FriendsPage,
     FriendshipRequestPage,

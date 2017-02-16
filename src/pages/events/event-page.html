@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-navbar>
+    <bm-header></bm-header>
+  </ion-navbar>
+</ion-header>
+<ion-content elastic-header>
+  <div class="background-image">
+    <img src="/assets/images/post.jpg" alt="Perfil Header" />
+  </div>
+  <div class="main-content">
+    <ion-item>
+      <p>
+        {{event.about}}
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="/assets/images/batman.png">
+      </ion-thumbnail>
+      <h2>{{event.name}}</h2>
+    </ion-item>
+    <ion-card>
+      <a ion-item (click)="openModal()">
+        <ion-avatar item-left>
+          <img src="assets/images/logo.png"/>
+        </ion-avatar>
+        <p>
+          O que você está pensando...
+        </p>
+      </a>
+    </ion-card>
+    <ion-row>
+      <ion-col width-33>
+        <button ion-button outline color="light" (click)="openPage(friendsPage)">
+          97
+          <br>
+          Participantes
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/images/logo.png"/>
+        </ion-avatar>
+        <h2>Marty McFly</h2>
+        <p>November 5, 1955</p>
+      </ion-item>
+      <ion-card-content>
+        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      </ion-card-content>
+      <img src="assets/images/post.jpg"/>
+      <ion-row>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/images/logo.png"/>
+        </ion-avatar>
+        <h2>Marty McFly</h2>
+        <p>November 5, 1955</p>
+      </ion-item>
+      <ion-card-content>
+        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      </ion-card-content>
+      <img src="assets/images/post.jpg"/>
+      <ion-row>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>
