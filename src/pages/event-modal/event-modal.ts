@@ -50,6 +50,7 @@ export class EventModalPage {
 
   create(event, address){
     event.user_id = this.user.id;
+    this.presentToast(event.cover_photo);
     this.eventProvider.create(event, address)
     .subscribe(event_params => {
         this.dismiss();

@@ -15,6 +15,11 @@
 <ion-content>
   <ion-list no-lines>
       <ion-item>
+        <ion-thumbnail item-left>
+          <img src="{{event.cover_photo}}" id='event_cover_photo' [hidden]="event.cover_photo === null">
+        </ion-thumbnail>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Nome do Evento</ion-label>
         <ion-input type="text" [(ngModel)]="event.name" name="name"></ion-input>
       </ion-item>
