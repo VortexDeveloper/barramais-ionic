@@ -11,10 +11,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EventProvider {
 
-  private url: string = "http://10.0.2.2:3000/events";
-  private country_url: string = "http://10.0.2.2:3000/events/country_for_select";
-  private states_url: string = "http://10.0.2.2:3000/events/states_for_select";
-  private cities_url: string = "http://10.0.2.2:3000/events/cities_for_select";
+  // private url: string = "http://10.0.2.2:3000/events";
+  // private country_url: string = "http://10.0.2.2:3000/events/country_for_select";
+  // private states_url: string = "http://10.0.2.2:3000/events/states_for_select";
+  // private cities_url: string = "http://10.0.2.2:3000/events/cities_for_select";
+  // private invitation_url: string = "http://10.0.2.2:3000/events/invitation";
+
+  private url: string = "https://barramais.herokuapp.com/events";
+  private country_url: string = "https://barramais.herokuapp.com/events/country_for_select";
+  private states_url: string = "https://barramais.herokuapp.com/events/states_for_select";
+  private cities_url: string = "https://barramais.herokuapp.com/events/cities_for_select";
+  private invitation_url: string = "https://barramais.herokuapp.com/events/invitation";
 
   constructor(public http: Http) {
 
@@ -22,7 +29,7 @@ export class EventProvider {
 
   index(){
     return this.http.get(this.url + ".json")
-    .map(res => res.json());
+      .map(res => res.json());
   }
 
   create(event, address){
@@ -44,6 +51,11 @@ export class EventProvider {
 
   getCities(state){
     return this.http.get(this.cities_url + "/" + state + ".json")
+      .map(res => res.json());
+  }
+
+  invitation(event, user_id){
+    return this.http.put(this.invitation_url + "/" + event.id + ".json", {'user': user_id})
       .map(res => res.json());
   }
 

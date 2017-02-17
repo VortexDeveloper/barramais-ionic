@@ -2,7 +2,7 @@
   <ion-navbar>
     <bm-header></bm-header>
   </ion-navbar>
-</ion-header> 
+</ion-header>
 <ion-content padding>
   <div class="container">
     <form (ngSubmit)="save(user)">
@@ -71,7 +71,7 @@
         <ion-item-divider color="light">Outras informações</ion-item-divider>
         <ion-item>
           <ion-label>Trabalha com náutica</ion-label>
-          <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional" (ionChange)="hideNautical()" ></ion-toggle>
+          <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional"></ion-toggle> 
         </ion-item>
         <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
           <ion-label floating>Descreva seu trabalho:</ion-label>

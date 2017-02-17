@@ -9,32 +9,28 @@
   </div>
   <div class="main-content">
     <ion-item>
+      <h2>{{event.name}}</h2>
+    </ion-item>
+    <ion-item>
       <p>
         {{event.about}}
       </p>
     </ion-item>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src="/assets/images/batman.png">
-      </ion-thumbnail>
-      <h2>{{event.name}}</h2>
-    </ion-item>
     <ion-card>
-      <a ion-item (click)="openModal()">
+      <a ion-item (click)="openModal(postModal)">
         <ion-avatar item-left>
           <img src="assets/images/logo.png"/>
         </ion-avatar>
         <p>
-          O que você está pensando...
+          Digite alguma coisa...
         </p>
       </a>
     </ion-card>
     <ion-row>
       <ion-col width-33>
-        <button ion-button outline color="light" (click)="openPage(friendsPage)">
-          97
-          <br>
-          Participantes
+        <button ion-button outline color="light" (click)="openModal(eventGuests)" icon-left>
+          <ion-icon name="mail"></ion-icon>
+          Convidar
         </button>
       </ion-col>
     </ion-row>

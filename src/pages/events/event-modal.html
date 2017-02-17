@@ -40,12 +40,16 @@
         <ion-input type="text" [(ngModel)]="address.complement" name="complement"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Estado</ion-label>
-        <ion-input type="text" [(ngModel)]="address.state_id" name="state_id"></ion-input>
+        <ion-label>Selecione o Estado</ion-label>
+        <ion-select [(ngModel)]="address.state_id" (ionChange)="getCities()">
+          <ion-option *ngFor="let state of states" [value]="state.id" >{{state.name}}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating>Cidade</ion-label>
-        <ion-input type="text" [(ngModel)]="address.city_id" name="city_id"></ion-input>
+        <ion-label>Selecione a cidade</ion-label>
+        <ion-select [(ngModel)]="address.city_id">
+          <ion-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label floating>Bairro</ion-label>

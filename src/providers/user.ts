@@ -16,9 +16,11 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  private url: string = "http://10.0.2.2:3000/users";
-  // private url: string = "http://localhost:3000/users";
-//  private url: string = "https://barramais.herokuapp.com/users";
+  // private url: string = "http://10.0.2.2:3000/users";
+  // private friends_url: string = "http://10.0.2.2:3000/users/friends";
+
+  private url: string = "https://barramais.herokuapp.com/users";
+  private friends_url: string = "https://barramais.herokuapp.com/users/friends";
 
   public user: UserModel;
 
@@ -44,6 +46,10 @@ export class User {
       .map(res => res.json());
   }
 
+  userFriends(){
+    return this.http.get(this.friends_url + ".json")
+      .map(res => res.json());
+  }
 
   save_avatar(user){
     let d = new Date;
