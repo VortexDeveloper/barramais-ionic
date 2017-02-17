@@ -47,8 +47,8 @@ export class EventsPage {
     });
   }
 
-  openPage(page, event){
-    this.navCtrl.push(page, {event: event});
+  openPage(event){
+    this.navCtrl.push(EventPagePage, {event: event});
   }
 
   openModal() {

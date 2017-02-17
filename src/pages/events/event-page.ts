@@ -3,11 +3,13 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
-import { GroupsPage } from '../groups/groups';
+import { GroupsPage } from '../groups/groups'; 
 import { EventsPage } from '../events/events';
+import { EventGuestsPage } from "../events/event-guests";
 import { FriendsPage } from '../friends/friends';
 import { HomePage } from '../home/home';
 import { UserModel } from "../../models/user.model";
+import { EventModel } from "../../models/event.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
@@ -34,15 +36,19 @@ export class EventPagePage {
   groupsPage: any = GroupsPage;
   eventsPage: any = EventsPage;
   friendsPage: any = FriendsPage;
+  event: EventModel = new EventModel();
+  postModal: any = PostModalPage;
+  eventGuests: any = EventGuestsPage;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
+    params: NavParams,
     private userProvider: User,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.event = params.data.event ? params.data.event : this.event;
     }
 
   ionViewDidLoad() {
@@ -53,8 +59,8 @@ export class EventPagePage {
     this.navCtrl.push(page);
   }
 
-  openModal() {
-    let modal = this.modalCtrl.create(PostModalPage);
+  openModal(page) {
+    let modal = this.modalCtrl.create(page, {event: this.event});
     modal.present();
   }
 

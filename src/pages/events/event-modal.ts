@@ -26,6 +26,8 @@ export class EventModalPage {
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   user: UserModel;
+  cities: any;
+  states: any;
 
   constructor(
     public platform: Platform,
@@ -37,7 +39,7 @@ export class EventModalPage {
     public toastCtrl: ToastController
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-    console.log(this.user);
+    this.getStates('1');
   }
 
   ionViewDidLoad() {
@@ -82,16 +84,16 @@ export class EventModalPage {
   getStates(country) {
     this.eventProvider.getStates(country)
     .subscribe(response => {
-      console.log(response);
+      this.states = response.states;
     }, error => {
         console.log(error.json());
     });
   }
 
-  getCities(state) {
-    this.eventProvider.getCities(state)
+  getCities() {
+    this.eventProvider.getCities(this.address.state_id)
     .subscribe(response => {
-      console.log(response);
+      this.cities = response.cities;
     }, error => {
         console.log(error.json());
     });

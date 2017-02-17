@@ -12,6 +12,7 @@ import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
 import { EventModalPage } from '../pages/events/event-modal';
+import { EventGuestsPage } from '../pages/events/event-guests';
 import { EventPagePage } from '../pages/events/event-page';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile';
@@ -43,6 +44,7 @@ export function getAuthHttp(http) {
     MainPage,
     PostModalPage,
     EventModalPage,
+    EventGuestsPage,
     EventPagePage,
     ElasticHeader,
     ProfilePage,
@@ -67,6 +69,7 @@ export function getAuthHttp(http) {
     MainPage,
     PostModalPage,
     EventModalPage,
+    EventGuestsPage,
     EventPagePage,
     ProfilePage,
     FriendsPage,

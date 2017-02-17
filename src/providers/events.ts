@@ -15,6 +15,8 @@ export class EventProvider {
   private country_url: string = "http://localhost:3000/events/country_for_select";
   private states_url: string = "http://localhost:3000/events/states_for_select";
   private cities_url: string = "http://localhost:3000/events/cities_for_select";
+  private invitation_url: string = "http://localhost:3000/events/invitation";
+
 
   constructor(public http: Http) {
 
@@ -22,7 +24,7 @@ export class EventProvider {
 
   index(){
     return this.http.get(this.url + ".json")
-    .map(res => res.json());
+      .map(res => res.json());
   }
 
   create(event, address){
@@ -44,6 +46,11 @@ export class EventProvider {
 
   getCities(state){
     return this.http.get(this.cities_url + "/" + state + ".json")
+      .map(res => res.json());
+  }
+
+  invitation(event, user_id){
+    return this.http.put(this.invitation_url + "/" + event.id + ".json", {'user': user_id})
       .map(res => res.json());
   }
 
