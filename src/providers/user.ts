@@ -16,7 +16,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  private url: string = "http://localhost:3000/users";
+  private url: string = "http://10.0.2.2:3000/users";
+  // private url: string = "http://localhost:3000/users";
 //  private url: string = "https://barramais.herokuapp.com/users";
 
   public user: UserModel;
