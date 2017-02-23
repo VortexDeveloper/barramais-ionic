@@ -12,17 +12,20 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EventProvider {
 
-  private url: string = "http://localhost:3000/events";
-  private country_url: string = "http://localhost:3000/events/country_for_select";
-  private states_url: string = "http://localhost:3000/events/states_for_select/";
-  private cities_url: string = "http://localhost:3000/events/cities_for_select/";
-  private invitation_url: string = "http://localhost:3000/events/invitation/";
-  private all_guests_url: string = "http://localhost:3000/events/all_guests/";
-  private confirmed_guests_url: string = "http://localhost:3000/events/confirmed_guests/";
-  private pending_guests_url: string = "http://localhost:3000/events/pending_guests/";
-  private refused_guests_url: string = "http://localhost:3000/events/refused_guests/";
+  // private host: string = "http://localhost:3000/"
+  private host: string = "https://barramais.herokuapp.com/"
+  // private host: string = "http://10.0.2.2:3000/"
 
 
+  private url: string = "events";
+  private country_url: string = this.host + "events/country_for_select";
+  private states_url: string = this.host + "events/states_for_select/";
+  private cities_url: string = this.host + "events/cities_for_select/";
+  private invitation_url: string = this.host + "events/invitation/";
+  private all_guests_url: string = this.host + "events/all_guests/";
+  private confirmed_guests_url: string = this.host + "events/confirmed_guests/";
+  private pending_guests_url: string = this.host + "events/pending_guests/";
+  private refused_guests_url: string = this.host + "events/refused_guests/";
 
   constructor(
     public http: Http,
@@ -33,8 +36,13 @@ export class EventProvider {
 
   create(event, address){
     let d = new Date;
+<<<<<<< HEAD
     let new_name = event.id + d.getTime();
     return this.authHttp.post(this.url + ".json", {'event': event, 'address': address, 'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
+=======
+    let new_name = "1" + d.getTime();
+    return this.http.post(this.url + ".json", {'event': event, 'address': address, 'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
+>>>>>>> 1ae2b6845e1ff2f3758596edaf3aba721f80718c
       .map(res => res.json());
   }
 

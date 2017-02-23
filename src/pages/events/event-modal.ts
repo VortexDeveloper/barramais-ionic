@@ -52,7 +52,6 @@ export class EventModalPage {
 
   create(event, address){
     event.user_id = this.user.id;
-    this.presentToast(event.cover_photo);
     this.eventProvider.create(event, address)
     .subscribe(event_params => {
         this.event = new EventModel(event_params);
@@ -61,7 +60,7 @@ export class EventModalPage {
         console.log(event);
     }, error => {
         console.log(error.json());
-        this.presentToast(error.json());
+        this.presentToast(error);
     });
   }
 

@@ -16,12 +16,16 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  private url: string = "http://localhost:3000/users";
-  private friends_url: string = "http://localhost:3000/users/friends";
-  private my_events_url: string = "http://localhost:3000/users/my_events/";
-  private confirmed_events_url: string = "http://localhost:3000/users/confirmed_events/";
-  private pending_events_url: string = "http://localhost:3000/users/pending_events/";
-//  private url: string = "https://barramais.herokuapp.com/users";
+  // private host: string = "http://localhost:3000/"
+  private host: string = "https://barramais.herokuapp.com/"
+  // private host: string = "http://10.0.2.2:3000/"
+
+  private url: string = this.host + "users";
+  private friends_url: string = this.host + "users/friends";
+  private my_events_url: string = this.host + "users/my_events/";
+  private confirmed_events_url: string = this.host + "users/confirmed_events/";
+  private pending_events_url: string = this.host + "users/pending_events/";
+
 
   public user: UserModel;
 
