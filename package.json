@@ -39,5 +39,15 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "barramais-ionic: An Ionic project"
+  "description": "barramais-ionic: An Ionic project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VortexDeveloper/barramais-ionic.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VortexDeveloper/barramais-ionic/issues"
+  }
 }
