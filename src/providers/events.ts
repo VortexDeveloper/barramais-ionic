@@ -17,7 +17,7 @@ export class EventProvider {
   // private host: string = "http://10.0.2.2:3000/"
 
 
-  private url: string = "events";
+  private url: string = this.host + "events";
   private country_url: string = this.host + "events/country_for_select";
   private states_url: string = this.host + "events/states_for_select/";
   private cities_url: string = this.host + "events/cities_for_select/";
