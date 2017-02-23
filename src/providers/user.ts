@@ -18,6 +18,9 @@ export class User {
 
   private url: string = "http://localhost:3000/users";
   private friends_url: string = "http://localhost:3000/users/friends";
+  private my_events_url: string = "http://localhost:3000/users/my_events/";
+  private confirmed_events_url: string = "http://localhost:3000/users/confirmed_events/";
+  private pending_events_url: string = "http://localhost:3000/users/pending_events/";
 //  private url: string = "https://barramais.herokuapp.com/users";
 
   public user: UserModel;
@@ -44,8 +47,23 @@ export class User {
       .map(res => res.json());
   }
 
-  userFriends(){
-    return this.http.get(this.friends_url + ".json")
+  friends(){
+    return this.authHttp.get(this.friends_url + ".json")
+      .map(res => res.json());
+  }
+
+  myEvents(current_user){
+    return this.authHttp.get(this.my_events_url + current_user.id + ".json")
+      .map(res => res.json());
+  }
+
+  confirmedEvents(current_user){
+    return this.authHttp.get(this.confirmed_events_url + current_user.id + ".json")
+      .map(res => res.json());
+  }
+
+  pendingEvents(current_user){
+    return this.authHttp.get(this.pending_events_url + current_user.id + ".json")
       .map(res => res.json());
   }
 
