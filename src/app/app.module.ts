@@ -23,6 +23,7 @@ import { CocoButtonComponent } from '../components/coco-button/coco-button';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { AdvertiserPage } from '../pages/advertiser/advertiser';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -52,7 +53,8 @@ export function getAuthHttp(http) {
     FriendshipRequestPage,
     LoginPage,
     CocoButtonComponent,
-    BmHeaderComponent
+    BmHeaderComponent,
+    AdvertiserPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -76,7 +78,8 @@ export function getAuthHttp(http) {
     FriendshipRequestPage,
     LoginPage,
     CocoButtonComponent,
-    BmHeaderComponent
+    BmHeaderComponent,
+    AdvertiserPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
