@@ -21,7 +21,7 @@ import { JwtHelper } from 'angular2-jwt';
   templateUrl: 'events.html'
 })
 export class EventsPage {
-
+  host: string = "http://localhost:3000";
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
   events: any = "my-events";

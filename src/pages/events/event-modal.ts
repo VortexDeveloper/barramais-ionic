@@ -131,7 +131,9 @@ export class EventModalPage {
       saveToPhotoAlbum: false,
       correctOrientation: true,
       allowEdit: true,
-      destinationType: Camera.DestinationType.DATA_URL
+      destinationType: Camera.DestinationType.DATA_URL,
+      targetWidth: 360,
+		  targetHeight: 232
     };
 
     Camera.getPicture(options).then(image => {

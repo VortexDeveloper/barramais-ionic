@@ -9,6 +9,7 @@ export class EventModel {
   event_date: Date;
   about: string;
   cover_photo: string;
+  cover_photo_url: string;
 
   constructor(public params?:any) {
     params = params || {}
@@ -20,5 +21,6 @@ export class EventModel {
     this.event_date = params.event_date || null;
     this.name = params.name || null;
     this.cover_photo = params.cover_photo || null;
+    this.cover_photo_url = params.cover_photo_url || null;
   }
 }

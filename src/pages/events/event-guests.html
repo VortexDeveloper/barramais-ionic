@@ -17,9 +17,12 @@
       <ion-thumbnail item-left>
         <img src="assets/images/batman.png">
       </ion-thumbnail>
-      <h2>{{guest.first_name}}</h2>
-      <p>{{guest.birth_date}}</p>
-      <button ion-button clear item-right (click)="invitation(guest)" [hidden]="isGuest(guest) == false">Convidar</button>
+      <ion-label>
+        <h2>{{guest.first_name}}</h2>
+      </ion-label>
+      <ion-checkbox color="dark" item-right></ion-checkbox>
     </ion-item>
   </ion-list>
+  <button ion-button clear item-right (click)="invitation()" [hidden]="isGuest() == false">Convidar</button>
+
 </ion-content>
