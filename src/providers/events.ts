@@ -36,13 +36,8 @@ export class EventProvider {
 
   create(event, address){
     let d = new Date;
-<<<<<<< HEAD
     let new_name = event.id + d.getTime();
     return this.authHttp.post(this.url + ".json", {'event': event, 'address': address, 'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
-=======
-    let new_name = "1" + d.getTime();
-    return this.http.post(this.url + ".json", {'event': event, 'address': address, 'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
->>>>>>> 1ae2b6845e1ff2f3758596edaf3aba721f80718c
       .map(res => res.json());
   }
 
