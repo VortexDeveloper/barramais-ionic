@@ -1,8 +1,11 @@
 import { Advertiser } from '../../providers/advertiser';
 import { AdvertiserModel } from "../../models/advertiser.model";
+import { PhoneModel } from "../../models/phone.model";
 import { ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AddressModel } from "../../models/address.model";
+
 
 /*
   Generated class for the Advertiser page.
@@ -16,6 +19,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AdvertiserPage {
   advertiser: AdvertiserModel;
+  address: AddressModel = new AddressModel();
+  phone: PhoneModel = new PhoneModel();
+  cities: any;
+  states: any;
+
 
   constructor(
     public navCtrl: NavController,
@@ -24,27 +32,21 @@ export class AdvertiserPage {
     public toastCtrl: ToastController
   ) {
       this.advertiser = new AdvertiserModel();
+      this.getStates('1');
+
     }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdvertiserPage');
   }
 
-  save(advertiser){
-    this.advertiserProvider.create(advertiser)
+  save(advertiser, address){
+    this.advertiserProvider.create(advertiser, address, this.phone)
     .subscribe(response => {
-        localStorage.setItem("advertiser", response.advertiser);
         this.presentToast("Anunciante criado com sucesso!");
     }, error => {
-        console.log(error.json().errors);
-        var errors = error.json().errors;
-        var errorMessage;
-        for(let campo in errors){
-          for(let campos of errors[campo]){
-            errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
-          }
-        }
-        this.presentToast(errorMessage);
+        console.log(error.json());
+        this.presentToast(error.json());
     });
   }
 
@@ -54,6 +56,33 @@ export class AdvertiserPage {
       duration: 5000
     });
     toast.present();
+  }
+
+  getCountry() {
+    this.advertiserProvider.getCountry()
+    .subscribe(response => {
+      console.log(response);
+    }, error => {
+        console.log(error.json());
+    });
+  }
+
+  getStates(country) {
+    this.advertiserProvider.getStates(country)
+    .subscribe(response => {
+      this.states = response.states;
+    }, error => {
+        console.log(error.json());
+    });
+  }
+
+  getCities() {
+    this.advertiserProvider.getCities(this.address.state_id)
+    .subscribe(response => {
+      this.cities = response.cities;
+    }, error => {
+        console.log(error.json());
+    });
   }
 
 }

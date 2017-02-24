@@ -13,9 +13,13 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Advertiser {
-  private host: string = "https://barramais.herokuapp.com/";
+  private host: string = "http://localhost:3000/"
+  // private host: string = "https://barramais.herokuapp.com/";
 
   private url: string = this.host + "advertisers";
+  private country_url: string = this.host + "advertisers/country_for_select";
+  private states_url: string = this.host + "advertisers/states_for_select/";
+  private cities_url: string = this.host + "advertisers/cities_for_select/";
 
   public advertiser: AdvertiserModel;
 
@@ -24,8 +28,23 @@ export class Advertiser {
     public authHttp: AuthHttp
   ) { }
 
-  create(advertiser){
-    return this.http.post(this.url + ".json", {'advertiser': advertiser})
+  create(advertiser, address, phone){
+    return this.http.post(this.url + ".json", {'advertiser': advertiser, 'address': address, 'phone': phone})
+      .map(res => res.json());
+  }
+
+  getCountry(){
+    return this.authHttp.get(this.country_url + ".json")
+      .map(res => res.json());
+  }
+
+  getStates(country){
+    return this.authHttp.get(this.states_url + country + ".json")
+      .map(res => res.json());
+  }
+
+  getCities(state){
+    return this.authHttp.get(this.cities_url + state + ".json")
       .map(res => res.json());
   }
 

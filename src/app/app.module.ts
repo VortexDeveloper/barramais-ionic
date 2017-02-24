@@ -24,6 +24,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
+import { Advertiser } from '../providers/advertiser';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -85,6 +86,7 @@ export function getAuthHttp(http) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     User,
     EventProvider,
+    Advertiser,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
