@@ -38,14 +38,24 @@ export class EventsPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public eventProvider: EventProvider,
-    public userProvider: User)
+    public userProvider: User,
+    public loadingCtrl: LoadingController)
     {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.loadEvents(this.current_user);
+      this.presentLoading();
     }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando Eventos...",
+      duration: 2000
+    });
+    loader.present();
   }
 
   loadEvents(current_user){
