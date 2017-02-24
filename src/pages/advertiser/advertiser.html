@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <title></title>
+    <bm-header></bm-header>
   </ion-navbar>
 
 </ion-header>
@@ -15,27 +15,30 @@
 
 <ion-content padding>
   <div class="container">
-    <form>
-      <ion-item>
-        <ion-label floating>Nome</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Website</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Facebook</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Instagram</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+    <form (ngSubmit)="save(advertiser)">
+      <ion-item-group>
+        <ion-item-divider color="light">Informações de conta</ion-item-divider>
+        <ion-item>
+          <ion-label floating>Nome</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Website</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Facebook</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Instagram</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-item-group>
 
       <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
     </form>
