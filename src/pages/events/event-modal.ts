@@ -54,7 +54,8 @@ export class EventModalPage {
     event.user_id = this.user.id;
     this.eventProvider.create(event, address)
     .subscribe(event_params => {
-        this.dismiss();
+        this.event = new EventModel(event_params);
+        this.viewCtrl.dismiss(this.event);
         this.presentToast('Evento criado com sucesso!');
         console.log(event);
     }, error => {

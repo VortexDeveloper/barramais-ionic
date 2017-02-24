@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
+import { AdvertiserPage } from '../pages/advertiser/advertiser';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class MyApp {
   mainPage: any = MainPage;
   profilePage: any = ProfilePage;
   userPage: any = UserPage;
+  advertiserPage: any = AdvertiserPage;
 
   constructor(
     public platform: Platform

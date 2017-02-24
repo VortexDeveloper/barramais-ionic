@@ -16,11 +16,16 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  // private url: string = "http://10.0.2.2:3000/users";
-  // private friends_url: string = "http://10.0.2.2:3000/users/friends";
+  // private host: string = "https://barramais.herokuapp.com/"
+  // private host: string = "http://10.0.2.2:3000/"
+  private host: string = "http://localhost:3000/"
 
-  private url: string = "https://barramais.herokuapp.com/users";
-  private friends_url: string = "https://barramais.herokuapp.com/users/friends";
+  private url: string = this.host + "users";
+  private friends_url: string = this.host + "users/friends";
+  private my_events_url: string = this.host + "users/my_events/";
+  private confirmed_events_url: string = this.host + "users/confirmed_events/";
+  private pending_events_url: string = this.host + "users/pending_events/";
+
 
   public user: UserModel;
 
@@ -46,8 +51,23 @@ export class User {
       .map(res => res.json());
   }
 
-  userFriends(){
-    return this.http.get(this.friends_url + ".json")
+  friends(){
+    return this.authHttp.get(this.friends_url + ".json")
+      .map(res => res.json());
+  }
+
+  myEvents(current_user){
+    return this.authHttp.get(this.my_events_url + current_user.id + ".json")
+      .map(res => res.json());
+  }
+
+  confirmedEvents(current_user){
+    return this.authHttp.get(this.confirmed_events_url + current_user.id + ".json")
+      .map(res => res.json());
+  }
+
+  pendingEvents(current_user){
+    return this.authHttp.get(this.pending_events_url + current_user.id + ".json")
       .map(res => res.json());
   }
 

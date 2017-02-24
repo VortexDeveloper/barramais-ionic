@@ -22,11 +22,11 @@ import { EventsPage } from "../events/events";
 })
 export class EventGuestsPage {
 
+  guests: any;
   event: EventModel = new EventModel();
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
-  friends: any;
 
   constructor(
     public platform: Platform,
@@ -39,8 +39,9 @@ export class EventGuestsPage {
     public toastCtrl: ToastController
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.event = params.data.event ? params.data.event : this.event;
-      this.userFriends();
+      this.event = params.data.event;
+      this.guests = params.data.guests;
+      console.log(params.data.guests);
     }
 
   ionViewDidLoad() {
@@ -51,22 +52,14 @@ export class EventGuestsPage {
     this.viewCtrl.dismiss();
   }
 
-  userFriends(){
-    this.userProvider.userFriends()
-    .subscribe(response => {
-      console.log(response.users);
-      this.friends = response.users;
-    }, error => {
-      console.log(error.json());
-    });
-  }
-
   invitation(user){
     this.eventProvider.invitation(this.event, user.id)
     .subscribe(response => {
-        console.log(response.event_users);
+        console.log(response.guests);
+        this.presentToast("Usuário convidado com sucesso!");
     }, error => {
-        console.log(error.json());
+        console.log(error.json().error);
+        this.presentToast(error.json().error);
     });
   }
 
@@ -77,5 +70,15 @@ export class EventGuestsPage {
     });
     toast.present();
   }
+
+  isGuest(user){
+    if (this.guests.indexOf(user) == false){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
 
 }

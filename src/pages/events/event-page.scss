@@ -1,5 +1,25 @@
 page-event-page {
 
+  .ion-avatar-event{
+    background: #faa35f;
+    border-radius: 5%;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    padding: 5px 15px;
+  }
+
+  .h2-events-avatar{
+    font-size: 3.3rem;
+    color: #f5f5f5;
+  }
+
+  .h3-events-avatar{
+    font-size: 2rem;
+    color: #f5f5f5;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
     .background-image {
         background-size: cover;
         background-position: center;
@@ -92,5 +112,9 @@ page-event-page {
 
       .tabs-ios .tab-button[aria-selected=true] {
         color: #fff;
+      }
+
+      ion-col{
+        text-align: center;
       }
 }

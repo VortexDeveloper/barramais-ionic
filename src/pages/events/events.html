@@ -7,19 +7,32 @@
       <ion-segment-button value="my-events">
         Próprios
       </ion-segment-button>
-      <ion-segment-button value="present-events">
+      <ion-segment-button value="confirmed-events">
         Confirmados
       </ion-segment-button>
-      <ion-segment-button value="pending-invitations">
+      <ion-segment-button value="pending-events">
         Pendentes
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)" [pullMin]=90>
+   <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+   </ion-refresher-content>
+  </ion-refresher>
   <div [ngSwitch]="events">
     <ion-list *ngSwitchCase="'my-events'">
-      <ion-card *ngFor="let event of eventsIndex">
+      <ion-card *ngFor="let event of my_events">
+        <ion-buttons end>
+          <button ion-button icon-only clear (click)="openPage(event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-buttons>
         <ion-item>
           <ion-avatar item-left>
             <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
@@ -39,7 +52,7 @@
             </button>
           </ion-col>
           <ion-col width-10>
-            <button ion-button icon-left clear small (click)="openPage(event)">
+            <button ion-button icon-left clear small>
               <ion-icon ios="ios-text" md="md-text"></ion-icon>
             </button>
           </ion-col>
@@ -56,18 +69,23 @@
         </ion-row>
       </ion-card>
     </ion-list>
-    <ion-list *ngSwitchCase="'present-events'">
-      <ion-card>
+    <ion-list *ngSwitchCase="'confirmed-events'">
+      <ion-card *ngFor="let event of confirmed_events">
+        <ion-buttons end>
+          <button ion-button icon-only clear (click)="openPage(event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-buttons>
         <ion-item>
           <ion-avatar item-left>
-            <h2 class="h2-events-avatar">20</h2>
-            <h3 class="h3-events-avatar">FEV</h3>
+            <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
+            <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
           </ion-avatar>
-          <h2>Event Name</h2>
-          <p>November 5, 1955</p>
+          <h2>{{event.name}}</h2>
+          <p>{{event.created_at | date:'MMMM d, y'}}</p>
         </ion-item>
         <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+          <p>{{event.about}}</p>
         </ion-card-content>
         <img src="assets/images/post.jpg"/>
         <ion-row>
@@ -94,18 +112,23 @@
         </ion-row>
       </ion-card>
     </ion-list>
-    <ion-list *ngSwitchCase="'pending-invitations'">
-      <ion-card>
+    <ion-list *ngSwitchCase="'pending-events'">
+      <ion-card *ngFor="let event of pending_events">
+        <ion-buttons end>
+          <button ion-button icon-only clear (click)="openPage(event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-buttons>
         <ion-item>
           <ion-avatar item-left>
-            <h2 class="h2-events-avatar">20</h2>
-            <h3 class="h3-events-avatar">FEV</h3>
+            <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
+            <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
           </ion-avatar>
-          <h2>Event Name</h2>
-          <p>November 5, 1955</p>
+          <h2>{{event.name}}</h2>
+          <p>{{event.created_at | date:'MMMM d, y'}}</p>
         </ion-item>
         <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+          <p>{{event.about}}</p>
         </ion-card-content>
         <img src="assets/images/post.jpg"/>
         <ion-row>
