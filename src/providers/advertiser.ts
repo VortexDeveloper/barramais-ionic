@@ -28,8 +28,8 @@ export class Advertiser {
     public authHttp: AuthHttp
   ) { }
 
-  create(advertiser, address, phone){
-    return this.http.post(this.url + ".json", {'advertiser': advertiser, 'address': address, 'phone': phone})
+  create(advertiser, address, landline, cell_phone){
+    return this.http.post(this.url + ".json", {'advertiser': advertiser, 'address': address, 'landline': landline, 'cell_phone': cell_phone})
       .map(res => res.json());
   }
 

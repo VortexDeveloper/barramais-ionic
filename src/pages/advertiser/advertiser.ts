@@ -1,6 +1,7 @@
 import { Advertiser } from '../../providers/advertiser';
 import { AdvertiserModel } from "../../models/advertiser.model";
-import { PhoneModel } from "../../models/phone.model";
+import { LandlineModel } from "../../models/landline.model";
+import { CellPhoneModel } from "../../models/cell_phone.model";
 import { ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -20,7 +21,8 @@ import { AddressModel } from "../../models/address.model";
 export class AdvertiserPage {
   advertiser: AdvertiserModel;
   address: AddressModel = new AddressModel();
-  phone: PhoneModel = new PhoneModel();
+  landline: LandlineModel = new LandlineModel();
+  cell_phone: CellPhoneModel = new CellPhoneModel();
   cities: any;
   states: any;
 
@@ -41,7 +43,7 @@ export class AdvertiserPage {
   }
 
   save(advertiser, address){
-    this.advertiserProvider.create(advertiser, address, this.phone)
+    this.advertiserProvider.create(advertiser, address, this.landline, this.cell_phone)
     .subscribe(response => {
         this.presentToast("Anunciante criado com sucesso!");
     }, error => {

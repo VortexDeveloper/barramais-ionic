@@ -73,6 +73,14 @@
           <ion-label floating>Email</ion-label>
           <ion-input type="text" [(ngModel)]="advertiser.email" name="advertiser_email"></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-label floating>Telefone</ion-label>
+          <ion-input type="text" [(ngModel)]="landline.number" name="landline_number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Celular</ion-label>
+          <ion-input type="text" [(ngModel)]="cell_phone.number" name="cell_phone_number"></ion-input>
+        </ion-item>
       </ion-item-group>
 
       <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
