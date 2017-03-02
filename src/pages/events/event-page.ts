@@ -29,6 +29,7 @@ import { EventProvider } from '../../providers/events';
 })
 export class EventPagePage {
 
+  host: any = "http://localhost:3000";
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   user: UserModel;
