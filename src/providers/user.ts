@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { UserModel } from '../models/user.model';
+
 import { AuthHttp } from 'angular2-jwt';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -26,13 +27,12 @@ export class User {
   private confirmed_events_url: string = this.host + "users/confirmed_events/";
   private pending_events_url: string = this.host + "users/pending_events/";
 
-
-  public user: UserModel;
-
   constructor(
     public http: Http,
     public authHttp: AuthHttp
-  ) { }
+  ) {
+
+   }
 
 
   create(user){

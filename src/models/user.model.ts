@@ -1,3 +1,5 @@
+import { AdvertiserModel } from "./advertiser.model";
+
 export class UserModel {
   id: number;
   createdAt: Date;
@@ -25,6 +27,7 @@ export class UserModel {
   has_embarcation: number;
   nautical_profession_description: string;
   naval_service: string;
+  advertiser: AdvertiserModel;
 
   constructor(public params?:any) {
     params = params || {}
@@ -45,5 +48,6 @@ export class UserModel {
     this.nautical_professional = params.nautical_professional || false;
     this.nautical_profession_description = params.nautical_profession_description || "";
     this.naval_service = params.naval_service || "";
+    this.advertiser = params.advertiser || null;
   }
 }

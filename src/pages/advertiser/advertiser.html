@@ -19,10 +19,6 @@
       <ion-item-group>
         <ion-item-divider color="light">Informações do anunciante</ion-item-divider>
         <ion-item>
-          <ion-label floating>Nome</ion-label>
-          <ion-input type="text" [(ngModel)]="advertiser.name" name="advertiser_name"></ion-input>
-        </ion-item>
-        <ion-item>
           <ion-label floating>Tipo de documento</ion-label>
           <ion-select [(ngModel)]="advertiser.document_type" name="advertiser_document_type">
             <ion-option value="cpf" selected="true">CPF</ion-option>
@@ -75,11 +71,11 @@
         </ion-item>
         <ion-item>
           <ion-label floating>Telefone</ion-label>
-          <ion-input type="text" [(ngModel)]="landline.number" name="landline_number"></ion-input>
+          <ion-input type="text" [(ngModel)]="advertiser.landline" name="advertiser_landline"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Celular</ion-label>
-          <ion-input type="text" [(ngModel)]="cell_phone.number" name="cell_phone_number"></ion-input>
+          <ion-input type="text" [(ngModel)]="advertiser.cell_phone" name="advertiser_cell_phone"></ion-input>
         </ion-item>
       </ion-item-group>
 

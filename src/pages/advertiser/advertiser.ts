@@ -1,11 +1,12 @@
 import { Advertiser } from '../../providers/advertiser';
 import { AdvertiserModel } from "../../models/advertiser.model";
-import { LandlineModel } from "../../models/landline.model";
-import { CellPhoneModel } from "../../models/cell_phone.model";
+import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AddressModel } from "../../models/address.model";
+import { JwtHelper } from 'angular2-jwt';
+import { UserModel } from "../../models/user.model";
 
 
 /*
@@ -21,18 +22,26 @@ import { AddressModel } from "../../models/address.model";
 export class AdvertiserPage {
   advertiser: AdvertiserModel;
   address: AddressModel = new AddressModel();
-  landline: LandlineModel = new LandlineModel();
-  cell_phone: CellPhoneModel = new CellPhoneModel();
   cities: any;
   states: any;
-
+  current_user: UserModel;
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private advertiserProvider: Advertiser,
+    private userProvider: User,
     public toastCtrl: ToastController
   ) {
+      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      console.log(this.current_user);
+      if(this.current_user.advertiser == null){
+        alert("Hi");
+      }else{
+        alert("Nops");
+      }
       this.advertiser = new AdvertiserModel();
       this.getStates('1');
 
@@ -43,7 +52,7 @@ export class AdvertiserPage {
   }
 
   save(advertiser, address){
-    this.advertiserProvider.create(advertiser, address, this.landline, this.cell_phone)
+    this.advertiserProvider.create(advertiser, address)
     .subscribe(response => {
         this.presentToast("Anunciante criado com sucesso!");
     }, error => {
