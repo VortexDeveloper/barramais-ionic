@@ -30,12 +30,14 @@ export class AdvertiserPage {
 
   constructor(
     public navCtrl: NavController,
+    params: NavParams,
     public navParams: NavParams,
     private advertiserProvider: Advertiser,
     private userProvider: User,
     public toastCtrl: ToastController
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.advertiser = params.data.advertiser;
       console.log(this.current_user);
       if(this.current_user.advertiser == null){
         alert("Hi");
@@ -95,5 +97,7 @@ export class AdvertiserPage {
         console.log(error.json());
     });
   }
+
+
 
 }

@@ -25,6 +25,8 @@ import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { Advertiser } from '../providers/advertiser';
+import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
+import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -55,7 +57,9 @@ export function getAuthHttp(http) {
     LoginPage,
     CocoButtonComponent,
     BmHeaderComponent,
-    AdvertiserPage
+    AdvertiserPage,
+    AdvertiserAdsPage,
+    AdvertiserAdCreatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -80,7 +84,9 @@ export function getAuthHttp(http) {
     LoginPage,
     CocoButtonComponent,
     BmHeaderComponent,
-    AdvertiserPage
+    AdvertiserPage,
+    AdvertiserAdsPage,
+    AdvertiserAdCreatePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
