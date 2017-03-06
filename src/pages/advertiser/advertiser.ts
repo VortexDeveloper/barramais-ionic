@@ -1,4 +1,5 @@
 import { Advertiser } from '../../providers/advertiser';
+import { AdvertiserAdsPage } from './advertiser-ads';
 import { AdvertiserModel } from "../../models/advertiser.model";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
@@ -20,14 +21,18 @@ import { UserModel } from "../../models/user.model";
   templateUrl: 'advertiser.html'
 })
 export class AdvertiserPage {
+  host: string = "http://localhost:3000";
   advertiser: AdvertiserModel;
   address: AddressModel = new AddressModel();
   cities: any;
   states: any;
+  adPage: any = AdvertiserAdsPage;
   current_user: UserModel;
   user_advertiser: any;
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
+  ads: any;
+  isAdsEmpty: boolean = true;
 
   constructor(
     public navCtrl: NavController,
@@ -39,11 +44,14 @@ export class AdvertiserPage {
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
-      if(this.advertiser == null){
-        alert("Hi");
-      }else{
-        alert("Nops");
+
+      if(this.ads != null){
+        this.isAdsEmpty = false;
       }
+
+      /*if(this.advertiser != null){
+        this.openPage(this.adPage);
+      }*/
 
       this.getStates('1');
 
@@ -72,6 +80,7 @@ export class AdvertiserPage {
       .subscribe(response =>{
         console.log(response.user_advertiser);
         this.advertiser = new AdvertiserModel(response.user_advertiser);
+        this.ads = response.user_advertiser.ads;
       }, error => {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
       });
@@ -112,6 +121,8 @@ export class AdvertiserPage {
     });
   }
 
-
+  openPage(page){
+    this.navCtrl.push(page);
+  }
 
 }
