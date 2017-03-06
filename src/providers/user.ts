@@ -26,6 +26,7 @@ export class User {
   private my_events_url: string = this.host + "users/my_events/";
   private confirmed_events_url: string = this.host + "users/confirmed_events/";
   private pending_events_url: string = this.host + "users/pending_events/";
+  private user_advertiser_url: string = this.host + "users/user_advertiser/";
 
   constructor(
     public http: Http,
@@ -76,6 +77,11 @@ export class User {
     let new_name = user.id + d.getTime();
 
     return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
+      .map(res => res.json());
+  }
+
+  userAdvertiser(current_user){
+    return this.authHttp.get(this.user_advertiser_url + current_user.id + ".json")
       .map(res => res.json());
   }
 }

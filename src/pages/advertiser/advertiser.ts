@@ -25,6 +25,7 @@ export class AdvertiserPage {
   cities: any;
   states: any;
   current_user: UserModel;
+  user_advertiser: any;
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -37,14 +38,13 @@ export class AdvertiserPage {
     public toastCtrl: ToastController
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.advertiser = params.data.advertiser;
-      console.log(this.current_user);
-      if(this.current_user.advertiser == null){
+      this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
+      if(this.advertiser == null){
         alert("Hi");
       }else{
         alert("Nops");
       }
-      this.advertiser = new AdvertiserModel();
+
       this.getStates('1');
 
     }
@@ -61,6 +61,20 @@ export class AdvertiserPage {
         console.log(error.json());
         this.presentToast(error.json());
     });
+  }
+
+  loadAdvertiser(current_user){
+    this.userAdvertiser(current_user);
+  }
+
+  userAdvertiser(current_user){
+    this.userProvider.userAdvertiser(current_user)
+      .subscribe(response =>{
+        console.log(response.user_advertiser);
+        this.advertiser = new AdvertiserModel(response.user_advertiser);
+      }, error => {
+          console.log("Erro ao exibir o cadastro de anunciante" + error.json());
+      });
   }
 
   presentToast(msg){
