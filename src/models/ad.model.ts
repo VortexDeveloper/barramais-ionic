@@ -3,6 +3,8 @@ export class AdModel {
   createdAt: Date;
   updatedAt: Date;
   description: string;
+  photo: string;
+  photo_url: string;
 
   constructor(public params?:any){
     params = params || {}

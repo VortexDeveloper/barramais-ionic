@@ -23,11 +23,22 @@
           <ion-textarea></ion-textarea>
         </ion-item>
 
-        <!-- colocar um campo para uploadar a foto do anúncio -->
-
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="{{ad.photo}}" id='ad_photo' [hidden]="ad.photo === null">
+          </ion-thumbnail>
+        </ion-item>
       </ion-item-group>
 
       <button class="form-buttons" ion-button type="submit" block>Cadastrar anúncio</button>
     </form>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button color="light" clear (click)="presentActionSheet()" icon-left>
+      <ion-icon ios="ios-open" md="md-open"></ion-icon>
+      Selecionar midia
+    </button>
+  </ion-toolbar>
+</ion-footer>
