@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { UserModel } from '../models/user.model';
+
 import { AuthHttp } from 'angular2-jwt';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -27,13 +28,16 @@ export class User {
   private pending_events_url: string = this.host + "users/pending_events/";
   private accept_event_url: string = this.host + "users/accept_event/";
   private refuse_event_url: string = this.host + "users/refuse_event/";
-
   public user: UserModel;
+  private user_advertiser_url: string = this.host + "users/user_advertiser/";
+
 
   constructor(
     public http: Http,
     public authHttp: AuthHttp
-  ) { }
+  ) {
+
+   }
 
 
   create(user){
@@ -89,5 +93,10 @@ export class User {
     return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
       .map(res => res.json());
   }
-  
+
+  userAdvertiser(current_user){
+    return this.authHttp.get(this.user_advertiser_url + current_user.id + ".json")
+      .map(res => res.json());
+  }
+
 }

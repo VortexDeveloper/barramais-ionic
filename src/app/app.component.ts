@@ -6,6 +6,8 @@ import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
+import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
+import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
 
 
 @Component({
@@ -20,6 +22,8 @@ export class MyApp {
   profilePage: any = ProfilePage;
   userPage: any = UserPage;
   advertiserPage: any = AdvertiserPage;
+  advertiserAdsPage: any = AdvertiserAdsPage;
+  advertiserAdCreatePage: any = AdvertiserAdCreatePage;
 
   constructor(
     public platform: Platform

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AdvertiserModel } from "../models/advertiser.model";
+import { AdModel } from "../models/ad.model";
 import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
@@ -20,17 +21,24 @@ export class Advertiser {
   private country_url: string = this.host + "advertisers/country_for_select";
   private states_url: string = this.host + "advertisers/states_for_select/";
   private cities_url: string = this.host + "advertisers/cities_for_select/";
+  private create_ad_url: string = this.host + "advertisers/create_ad";
 
   public advertiser: AdvertiserModel;
+  public ad: AdModel;
 
   constructor(
     public http: Http,
     public authHttp: AuthHttp
   ) { }
 
-  create(advertiser, address, phone){
-    return this.http.post(this.url + ".json", {'advertiser': advertiser, 'address': address, 'phone': phone})
+  create(advertiser, address){
+    return this.authHttp.post(this.url + ".json", {'advertiser': advertiser, 'address': address})
       .map(res => res.json());
+  }
+
+  createAd(ad){
+    return this.authHttp.post(this.create_ad_url + ".json", {'ad': ad})
+      .map(res => res.json())
   }
 
   getCountry(){
