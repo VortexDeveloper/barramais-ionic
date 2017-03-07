@@ -33,6 +33,7 @@ export class AdvertiserPage {
   jwtHelper: JwtHelper = new JwtHelper();
   ads: any;
   isAdsEmpty: boolean = true;
+  isAdvertiser: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -45,16 +46,13 @@ export class AdvertiserPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
 
-      if(this.ads != null){
-        this.isAdsEmpty = false;
+      if(this.advertiser != null){
+        this.isAdvertiser = true;
+      }else{
+        this.presentToast("Você ainda não é um anunciante, efetue seu cadastro.");
       }
 
-      /*if(this.advertiser != null){
-        this.openPage(this.adPage);
-      }*/
-
       this.getStates('1');
-
     }
 
   ionViewDidLoad() {
@@ -71,6 +69,14 @@ export class AdvertiserPage {
     });
   }
 
+  destroy(ad){
+    this.advertiserProvider.destroy(ad)
+    .subscribe(response => {
+      this.presentToast("Anúncio removido com sucesso!");
+    });
+    this.clearRemovedAd(ad);
+  }
+
   loadAdvertiser(current_user){
     this.userAdvertiser(current_user);
   }
@@ -81,9 +87,16 @@ export class AdvertiserPage {
         console.log(response.user_advertiser);
         this.advertiser = new AdvertiserModel(response.user_advertiser);
         this.ads = response.user_advertiser.ads;
+        this.checkAdsList();
       }, error => {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
       });
+  }
+
+  checkAdsList(){
+    if(this.ads.length < 1){
+      this.isAdsEmpty = false;
+    }
   }
 
   presentToast(msg){
@@ -123,6 +136,10 @@ export class AdvertiserPage {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  clearRemovedAd(removedItem){
+      this.ads.splice(this.ads.indexOf(removedItem), 1);
   }
 
 }

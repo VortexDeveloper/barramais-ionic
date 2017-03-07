@@ -22,6 +22,7 @@ export class Advertiser {
   private states_url: string = this.host + "advertisers/states_for_select/";
   private cities_url: string = this.host + "advertisers/cities_for_select/";
   private create_ad_url: string = this.host + "advertisers/create_ad";
+  private destroy_ad: string = this.host + "ads/";
 
   public advertiser: AdvertiserModel;
   public ad: AdModel;
@@ -38,6 +39,11 @@ export class Advertiser {
 
   createAd(ad){
     return this.authHttp.post(this.create_ad_url + ".json", {'ad': ad})
+      .map(res => res.json())
+  }
+
+  destroy(ad){
+    return this.authHttp.delete(this.destroy_ad + ad.id + ".json")
       .map(res => res.json())
   }
 

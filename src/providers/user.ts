@@ -28,7 +28,6 @@ export class User {
   private pending_events_url: string = this.host + "users/pending_events/";
   private accept_event_url: string = this.host + "users/accept_event/";
   private refuse_event_url: string = this.host + "users/refuse_event/";
-  public user: UserModel;
   private user_advertiser_url: string = this.host + "users/user_advertiser/";
 
 
