@@ -25,7 +25,8 @@ export class User {
   private my_events_url: string = this.host + "users/my_events/";
   private confirmed_events_url: string = this.host + "users/confirmed_events/";
   private pending_events_url: string = this.host + "users/pending_events/";
-
+  private accept_event_url: string = this.host + "users/accept_event/";
+  private refuse_event_url: string = this.host + "users/refuse_event/";
 
   public user: UserModel;
 
@@ -71,6 +72,16 @@ export class User {
       .map(res => res.json());
   }
 
+  accept_event(current_user, event){
+    return this.authHttp.put(this.accept_event_url + current_user.id + ".json", {'event': event.id})
+    .map(res => res.json());
+  }
+
+  refuse_event(current_user, event){
+    return this.authHttp.put(this.refuse_event_url + current_user.id + ".json", {'event': event.id})
+    .map(res => res.json());
+  }
+
   save_avatar(user){
     let d = new Date;
     let new_name = user.id + d.getTime();
@@ -78,4 +89,5 @@ export class User {
     return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
       .map(res => res.json());
   }
+  
 }

@@ -27,6 +27,8 @@ export class EventGuestsPage {
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
+  selectedGuests: any[] = [];
+  all_guests: any;
 
   constructor(
     public platform: Platform,
@@ -41,7 +43,6 @@ export class EventGuestsPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.event = params.data.event;
       this.guests = params.data.guests;
-      console.log(params.data.guests);
     }
 
   ionViewDidLoad() {
@@ -52,15 +53,24 @@ export class EventGuestsPage {
     this.viewCtrl.dismiss();
   }
 
-  invitation(user){
-    this.eventProvider.invitation(this.event, user.id)
+  getSelect(isChecked, guest) {
+    if (isChecked === true) {
+      this.selectedGuests.push(guest);
+    } else {
+      this.selectedGuests.splice(this.selectedGuests.indexOf(guest), 1);
+    }
+  }
+
+  invitation(guests){
+    this.eventProvider.invitation(this.event, guests)
     .subscribe(response => {
         console.log(response.guests);
-        this.presentToast("Usuário convidado com sucesso!");
+        this.presentToast("Usuário(s) convidado(s) com sucesso!");
     }, error => {
         console.log(error.json().error);
         this.presentToast(error.json().error);
     });
+    this.clearInvitedGuests();
   }
 
   presentToast(msg) {
@@ -71,14 +81,10 @@ export class EventGuestsPage {
     toast.present();
   }
 
-  isGuest(user){
-    if (this.guests.indexOf(user) == false){
-      return false;
-    } else {
-      return true;
+  clearInvitedGuests(){
+    for (let i = 0; i < this.selectedGuests.length; i++) {
+        this.guests.splice(this.guests.indexOf(this.selectedGuests[i]), 1);
     }
   }
-
-
 
 }

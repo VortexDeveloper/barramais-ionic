@@ -50,6 +50,7 @@ export class EventPagePage {
   refusedGuests: any;
   l_refusedGuests: any;
   showAdminActions: boolean = false;
+  showGuestActions: boolean = false;
   friends: any;
 
   constructor(
@@ -62,8 +63,11 @@ export class EventPagePage {
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.event = params.data.event;
+      console.log("confirmados");
       this.loadGuests(this.event);
+      console.log(this.confirmedGuests);
       this.verifyEventAdmin();
+      this.verifyEventGuest();
     }
 
   ionViewDidLoad() {
@@ -93,6 +97,10 @@ export class EventPagePage {
     }
   }
 
+  verifyEventGuest(){
+    // console.log("length" + this.confirmedGuests.length);
+  }
+
   all_guests(event){
     this.eventProvider.all_guests(event)
       .subscribe(response =>{
@@ -107,7 +115,7 @@ export class EventPagePage {
     this.eventProvider.confirmed_guests(event)
       .subscribe(response =>{
         this.confirmedGuests = response.confirmed_guests;
-        this.l_confirmedGuests = response.confirmed_guests.length
+        this.l_confirmedGuests = response.confirmed_guests.length;
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
@@ -117,7 +125,7 @@ export class EventPagePage {
     this.eventProvider.pending_guests(event)
       .subscribe(response =>{
         this.pendingGuests = response.pending_guests;
-        this.l_pendingGuests = response.pending_guests.length
+        this.l_pendingGuests = response.pending_guests.length;
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
@@ -127,7 +135,7 @@ export class EventPagePage {
     this.eventProvider.refused_guests(event)
       .subscribe(response =>{
         this.refusedGuests = response.refused_guests;
-        this.l_refusedGuests = response.refused_guests.length
+        this.l_refusedGuests = response.refused_guests.length;
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
@@ -136,11 +144,38 @@ export class EventPagePage {
   userFriends(){
     this.userProvider.friends()
     .subscribe(response => {
-      console.log(response.users);
       this.friends = response.users;
     }, error => {
       console.log(error.json());
     });
+  }
+
+  refuse_event(){
+    this.userProvider.refuse_event(this.user, this.event).
+    subscribe(response =>{
+      this.presentToast(response.sucess);
+    }, error =>{
+      this.presentToast(error.json());
+      console.log(error.json());
+    });
+  }
+
+  accept_event(){
+    this.userProvider.accept_event(this.user, this.event).
+    subscribe(response =>{
+      this.presentToast(response.sucess);
+    }, error =>{
+      this.presentToast(error.json());
+      console.log(error.json());
+    });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 
 }

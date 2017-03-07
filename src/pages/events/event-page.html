@@ -34,10 +34,19 @@
         </p>
       </a>
     </ion-card>
-    <ion-row [hidden]="showAdminActions == false">
+    <ion-row [hidden]="!showAdminActions">
+      <ion-col width-33>
+        <button ion-button outline color="light" (click)="accept_event()" icon-left>
+          Vou
+        </button>
+      </ion-col>
+      <ion-col width-33>
+        <button ion-button outline color="light" (click)="refuse_event()" icon-left>
+          Não vou
+        </button>
+      </ion-col>
       <ion-col width-33>
         <button ion-button outline color="light" (click)="openModal(eventGuests, friends)" icon-left>
-          <ion-icon name="mail"></ion-icon>
           Convidar
         </button>
       </ion-col>
@@ -81,22 +90,22 @@
       </ion-card-content>
       <img src="assets/images/post.jpg"/>
       <ion-row>
-        <ion-col width-10>
+        <ion-col width-15>
           <button ion-button icon-left clear small>
             <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
           </button>
         </ion-col>
-        <ion-col width-10>
+        <ion-col width-15>
           <button ion-button icon-left clear small>
             <ion-icon ios="ios-text" md="md-text"></ion-icon>
           </button>
         </ion-col>
-        <ion-col width-10>
+        <ion-col width-15>
           <button ion-button icon-left clear small>
             <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
           </button>
         </ion-col>
-        <ion-col width-10>
+        <ion-col width-15>
           <button ion-button icon-left clear small>
             <ion-icon ios="ios-share" md="md-share"></ion-icon>
           </button>

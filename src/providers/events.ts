@@ -56,8 +56,8 @@ export class EventProvider {
       .map(res => res.json());
   }
 
-  invitation(event, user_id){
-    return this.authHttp.put(this.invitation_url + event.id + ".json", {'user': user_id})
+  invitation(event, guests){
+    return this.authHttp.put(this.invitation_url + event.id + ".json", {'guests': guests})
       .map(res => res.json());
   }
 

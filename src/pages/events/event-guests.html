@@ -20,9 +20,9 @@
       <ion-label>
         <h2>{{guest.first_name}}</h2>
       </ion-label>
-      <ion-checkbox color="dark" item-right></ion-checkbox>
+      <ion-checkbox item-right color="dark" checked="false" [(ngModel)]="guest.invited" (ionChange)="getSelect(guest.invited, guest)"></ion-checkbox>
     </ion-item>
   </ion-list>
-  <button ion-button clear item-right (click)="invitation()" [hidden]="isGuest() == false">Convidar</button>
+  <button ion-button clear item-right (click)="invitation(selectedGuests)">Convidar</button>
 
 </ion-content>
