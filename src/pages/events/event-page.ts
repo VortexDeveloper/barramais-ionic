@@ -29,7 +29,8 @@ import { EventProvider } from '../../providers/events';
 })
 export class EventPagePage {
 
-  host: any = "http://localhost:3000";
+  // host: string = "http://localhost:3000";
+  host: string = "https://barramais.herokuapp.com";
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   user: UserModel;
