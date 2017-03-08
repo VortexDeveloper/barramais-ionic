@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Ads</ion-title>
+    <bm-header></bm-header>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <div class="container">
+    <form>
+      <ion-item-group>
+        <ion-item-divider color="light">Cadastro de anúncio</ion-item-divider>
+        <ion-item>
+          <ion-label floating>Descrição</ion-label>
+          <ion-input type="text" name="ad_description"></ion-input>
+        </ion-item>
+      </ion-item-group>
 
+      <button class="form-buttons" ion-button type="submit" block>Cadastrar anúncio</button>
+    </form>
+  </div>
 </ion-content>

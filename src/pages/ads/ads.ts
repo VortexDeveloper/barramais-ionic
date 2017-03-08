@@ -5,6 +5,7 @@ import { UserModel } from "../../models/user.model";
 import { AdvertiserModel } from "../../models/advertiser.model";
 import { User } from '../../providers/user';
 import { AdModel } from "../../models/ad.model";
+import { Advertiser } from '../../providers/advertiser';
 
 /*
   Generated class for the Ads page.
@@ -53,5 +54,15 @@ export class AdsPage {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
       });
   }
+
+  /*save(ad){
+    this.advertiserProvider.createAd(ad)
+    .subscribe(response => {
+        this.presentToast("Anunciante criado com sucesso!");
+    }, error => {
+        console.log(error.json());
+        this.presentToast(error.json());
+    });
+  }*/
 
 }

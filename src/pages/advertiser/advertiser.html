@@ -79,8 +79,6 @@
         </ion-item>
       </ion-item-group>
 
-
-
       <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
     </form>
   </div>
@@ -91,7 +89,7 @@
       <ion-item-divider [hidden]="isAdsEmpty" color="light">Não há anúncios cadastrados</ion-item-divider>
       <ion-item *ngFor="let ad of ads">
         <ion-thumbnail item-left>
-          <img src="../../assets/images/3.jpg" alt="Sem foto">
+          <img src="{{this.host + ad.photo_url}}" alt="../../assets/images/3.jpg">
         </ion-thumbnail>
         <ion-label class="line-break">
           <h2><strong>{{ad.description}}</strong></h2>
@@ -112,5 +110,3 @@
     </ion-fab>
   </div>
 </ion-content>
-
-<!--"{{this.host + ad.photo_url}}"-->

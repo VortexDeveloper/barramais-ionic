@@ -84,9 +84,15 @@ export class AdvertiserPage {
   userAdvertiser(current_user){
     this.userProvider.userAdvertiser(current_user)
       .subscribe(response =>{
-        console.log(response.user_advertiser);
-        this.advertiser = new AdvertiserModel(response.user_advertiser);
-        this.ads = response.user_advertiser.ads;
+        if(response.user_advertiser){
+          this.advertiser = new AdvertiserModel(response.user_advertiser);
+          this.ads = response.user_advertiser.ads;
+        }else{
+          this.advertiser = new AdvertiserModel();
+          this.ads = [];
+          this.isAdvertiser = false;
+          this.presentToast("Você ainda não é um anunciante, efetue seu cadastro.");
+        }
         this.checkAdsList();
       }, error => {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
