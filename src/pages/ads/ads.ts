@@ -6,6 +6,8 @@ import { AdvertiserModel } from "../../models/advertiser.model";
 import { User } from '../../providers/user';
 import { AdModel } from "../../models/ad.model";
 import { Advertiser } from '../../providers/advertiser';
+import { ToastController } from 'ionic-angular';
+import { AdvertiserPage } from '../advertiser/advertiser';
 
 /*
   Generated class for the Ads page.
@@ -24,15 +26,17 @@ export class AdsPage {
   user_token: any = localStorage.getItem('user');
   advertiser: AdvertiserModel;
   ads: any;
+  advertiserPage: AdvertiserPage;
 
   constructor(
     public navCtrl: NavController,
     private userProvider: User,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public toastCtrl: ToastController,
+    private advertiserProvider: Advertiser
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
-
     this.ad = new AdModel();
   }
 
@@ -55,14 +59,27 @@ export class AdsPage {
       });
   }
 
-  /*save(ad){
-    this.advertiserProvider.createAd(ad)
+  save(ad){
+    this.advertiserProvider.createAd(ad, this.advertiser)
     .subscribe(response => {
-        this.presentToast("Anunciante criado com sucesso!");
+        this.openPage(AdvertiserPage);
+        this.presentToast("Anúncio cadastrado!");
     }, error => {
         console.log(error.json());
         this.presentToast(error.json());
     });
-  }*/
+  }
+
+  presentToast(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
+  }
+
+  openPage(page){
+    this.navCtrl.push(page);
+  }
 
 }

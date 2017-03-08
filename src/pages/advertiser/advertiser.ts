@@ -8,6 +8,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AddressModel } from "../../models/address.model";
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
+import { AdsPage } from '../ads/ads';
 
 
 /*
@@ -34,6 +35,7 @@ export class AdvertiserPage {
   ads: any;
   isAdsEmpty: boolean = true;
   isAdvertiser: boolean = false;
+  adsPage: any = AdsPage;
 
   constructor(
     public navCtrl: NavController,

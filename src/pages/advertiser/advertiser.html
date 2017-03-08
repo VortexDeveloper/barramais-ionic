@@ -89,7 +89,7 @@
       <ion-item-divider [hidden]="isAdsEmpty" color="light">Não há anúncios cadastrados</ion-item-divider>
       <ion-item *ngFor="let ad of ads">
         <ion-thumbnail item-left>
-          <img src="{{this.host + ad.photo_url}}" alt="../../assets/images/3.jpg">
+          <img src="../../assets/images/3.jpg" alt="Sem foto">
         </ion-thumbnail>
         <ion-label class="line-break">
           <h2><strong>{{ad.description}}</strong></h2>
@@ -106,7 +106,9 @@
     </ion-list>
 
     <ion-fab right bottom>
-      <button ion-fab color="danger" (click)="openModal()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab color="danger" (click)="openPage(adsPage)"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
   </div>
 </ion-content>
+
+<!--{{this.host + ad.photo_url}}-->

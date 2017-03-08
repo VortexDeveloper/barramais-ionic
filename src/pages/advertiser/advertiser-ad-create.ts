@@ -33,15 +33,15 @@ export class AdvertiserAdCreatePage {
     console.log('ionViewDidLoad AdvertiserAdCreatePage');
   }
 
-  save(ad){
-    this.advertiserProvider.createAd(ad)
-    .subscribe(response => {
-        this.presentToast("Anúncio criado com sucesso!")
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error.json());
-    });
-  }
+  // save(ad){
+  //   this.advertiserProvider.createAd(ad)
+  //   .subscribe(response => {
+  //       this.presentToast("Anúncio criado com sucesso!")
+  //   }, error => {
+  //       console.log(error.json());
+  //       this.presentToast(error.json());
+  //   });
+  // }
 
   presentToast(msg){
     let toast = this.toastCtrl.create({
