@@ -27,6 +27,7 @@ import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { Advertiser } from '../providers/advertiser';
 import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
 import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
+import { AdsPage } from '../pages/ads/ads';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -59,7 +60,8 @@ export function getAuthHttp(http) {
     BmHeaderComponent,
     AdvertiserPage,
     AdvertiserAdsPage,
-    AdvertiserAdCreatePage
+    AdvertiserAdCreatePage,
+    AdsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -86,7 +88,8 @@ export function getAuthHttp(http) {
     BmHeaderComponent,
     AdvertiserPage,
     AdvertiserAdsPage,
-    AdvertiserAdCreatePage
+    AdvertiserAdCreatePage,
+    AdsPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
