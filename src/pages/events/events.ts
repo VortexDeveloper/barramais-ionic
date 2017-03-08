@@ -77,8 +77,8 @@ export class EventsPage {
   pendingEvents(current_user){
     this.userProvider.pendingEvents(current_user)
       .subscribe(response =>{
-        console.log(response.pending_events);
-        this.pending_events = response.pending_events;
+        console.log(response.my_pending_invitations);
+        this.pending_events = response.my_pending_invitations;
       }, error =>{
         console.log("Erro ao exibir eventos confirmados: " + error.json());
       });
@@ -87,8 +87,8 @@ export class EventsPage {
   confirmedEvents(current_user){
     this.userProvider.confirmedEvents(current_user)
       .subscribe(response =>{
-        console.log(response.confirmed_events);
-        this.confirmed_events = response.confirmed_events;
+        console.log(response.my_confirmed_invitations);
+        this.confirmed_events = response.my_confirmed_invitations;
       }, error =>{
         console.log("Erro ao exibir eventos confirmados: " + error.json());
       });

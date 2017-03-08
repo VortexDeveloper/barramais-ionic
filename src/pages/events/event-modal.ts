@@ -57,7 +57,6 @@ export class EventModalPage {
         this.event = new EventModel(event_params);
         this.viewCtrl.dismiss(this.event);
         this.presentToast('Evento criado com sucesso!');
-        console.log(event);
     }, error => {
         console.log(error.json());
         this.presentToast(error);

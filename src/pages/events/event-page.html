@@ -36,18 +36,20 @@
     </ion-card>
     <ion-row [hidden]="!showAdminActions">
       <ion-col width-33>
-        <button ion-button outline color="light" (click)="accept_event()" icon-left>
-          Vou
+        <button ion-button outline color="light" (click)="openModal(eventGuests, friends)" icon-left>
+          Convidar
         </button>
       </ion-col>
+    </ion-row>
+    <ion-row [hidden]="!showGuestActions">
       <ion-col width-33>
         <button ion-button outline color="light" (click)="refuse_event()" icon-left>
           Não vou
         </button>
       </ion-col>
       <ion-col width-33>
-        <button ion-button outline color="light" (click)="openModal(eventGuests, friends)" icon-left>
-          Convidar
+        <button ion-button outline color="light" (click)="accept_event()" icon-left>
+          Vou
         </button>
       </ion-col>
     </ion-row>

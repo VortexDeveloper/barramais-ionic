@@ -10,6 +10,9 @@ export class EventModel {
   about: string;
   cover_photo: string;
   cover_photo_url: string;
+  address: any;
+  state: any;
+  city: any;
 
   constructor(public params?:any) {
     params = params || {}
@@ -22,5 +25,8 @@ export class EventModel {
     this.name = params.name || null;
     this.cover_photo = params.cover_photo || null;
     this.cover_photo_url = params.cover_photo_url || null;
+    this.address = params.address || "Evento sem endereço cadastrado";
+    this.state = params.state || "Evento sem estado cadastrado";
+    this.city = params.city || "Evento sem cidade cadastrado";
   }
 }
