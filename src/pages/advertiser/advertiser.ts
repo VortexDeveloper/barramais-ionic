@@ -64,6 +64,7 @@ export class AdvertiserPage {
   save(advertiser, address){
     this.advertiserProvider.create(advertiser, address)
     .subscribe(response => {
+        this.openPage(AdvertiserPage);
         this.presentToast("Anunciante criado com sucesso!");
     }, error => {
         console.log(error.json());
@@ -77,6 +78,7 @@ export class AdvertiserPage {
       this.presentToast("Anúncio removido com sucesso!");
     });
     this.clearRemovedAd(ad);
+    this.checkAdsList();
   }
 
   loadAdvertiser(current_user){
