@@ -29,7 +29,9 @@ import { EventProvider } from '../../providers/events';
 })
 export class EventPagePage {
 
-  host: any = "http://localhost:3000";
+  // host: string = "https://barramais.herokuapp.com";
+  host: string = "http://localhost:3000";
+
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   user: UserModel;
@@ -63,11 +65,8 @@ export class EventPagePage {
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.event = params.data.event;
-      console.log("confirmados");
-      this.loadGuests(this.event);
-      console.log(this.confirmedGuests);
       this.verifyEventAdmin();
-      this.verifyEventGuest();
+      this.loadGuests(this.event);
     }
 
   ionViewDidLoad() {
@@ -75,9 +74,9 @@ export class EventPagePage {
   }
 
   loadGuests(event){
-    this.all_guests(event);
-    this.confirmed_guests(event);
     this.pending_guests(event);
+    this.confirmed_guests(event);
+    this.all_guests(event);
     this.refused_guests(event);
     this.userFriends();
   }
@@ -94,18 +93,26 @@ export class EventPagePage {
   verifyEventAdmin(){
     if(this.event.user_id == this.user.id){
       this.showAdminActions = true;
+      this.showGuestActions = false;
     }
   }
 
-  verifyEventGuest(){
-    // console.log("length" + this.confirmedGuests.length);
+  verifyEventGuest(list){
+    var guests_id = [];
+    for(let user of list) guests_id.push(user.id);
+    if(guests_id.indexOf(this.user.id) > -1 ){
+      this.showGuestActions = true;
+      this.verifyEventAdmin();
+      console.log(guests_id.indexOf(this.user.id));
+    }
   }
 
   all_guests(event){
     this.eventProvider.all_guests(event)
       .subscribe(response =>{
         this.allGuests = response.all_guests;
-        this.l_allGuests = response.all_guests.length
+        this.l_allGuests = response.all_guests.length;
+        this.verifyEventGuest(this.allGuests);
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
@@ -164,6 +171,8 @@ export class EventPagePage {
     this.userProvider.accept_event(this.user, this.event).
     subscribe(response =>{
       this.presentToast(response.sucess);
+      this.l_pendingGuests = this.l_pendingGuests - 1;
+      this.l_confirmedGuests = this.l_confirmedGuests + 1;
     }, error =>{
       this.presentToast(error.json());
       console.log(error.json());

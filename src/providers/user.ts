@@ -24,8 +24,8 @@ export class User {
   private url: string = this.host + "users";
   private friends_url: string = this.host + "users/friends";
   private my_events_url: string = this.host + "users/my_events/";
-  private confirmed_events_url: string = this.host + "users/confirmed_events/";
-  private pending_events_url: string = this.host + "users/pending_events/";
+  private confirmed_events_url: string = this.host + "users/my_confirmed_invitations/";
+  private pending_events_url: string = this.host + "users/my_pending_invitations/";
   private accept_event_url: string = this.host + "users/accept_event/";
   private refuse_event_url: string = this.host + "users/refuse_event/";
   private user_advertiser_url: string = this.host + "users/user_advertiser/";

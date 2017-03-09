@@ -29,6 +29,7 @@ export class EventGuestsPage {
   current_user: UserModel;
   selectedGuests: any[] = [];
   all_guests: any;
+  showAdminActions: boolean = false;
 
   constructor(
     public platform: Platform,
@@ -43,10 +44,17 @@ export class EventGuestsPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.event = params.data.event;
       this.guests = params.data.guests;
+      this.verifyEventAdmin();
     }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostModalPage');
+  }
+
+  verifyEventAdmin(){
+    if(this.event.user_id == this.current_user.id){
+      this.showAdminActions = true;
+    }
   }
 
   dismiss() {
