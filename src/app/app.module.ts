@@ -28,6 +28,7 @@ import { Advertiser } from '../providers/advertiser';
 import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
 import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
 import { AdsPage } from '../pages/ads/ads';
+import { Ads } from '../providers/ads';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -96,6 +97,7 @@ export function getAuthHttp(http) {
     User,
     EventProvider,
     Advertiser,
+    Ads,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
