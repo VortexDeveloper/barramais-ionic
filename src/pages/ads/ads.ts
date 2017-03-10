@@ -8,6 +8,8 @@ import { AdModel } from "../../models/ad.model";
 import { Advertiser } from '../../providers/advertiser';
 import { ToastController } from 'ionic-angular';
 import { AdvertiserPage } from '../advertiser/advertiser';
+import { InterestAreaModel } from "../../models/interest_area.model";
+import { Ads } from '../../providers/ads';
 
 /*
   Generated class for the Ads page.
@@ -27,17 +29,21 @@ export class AdsPage {
   advertiser: AdvertiserModel;
   ads: any;
   advertiserPage: AdvertiserPage;
+  interestList: any;
 
   constructor(
     public navCtrl: NavController,
     private userProvider: User,
     public navParams: NavParams,
     public toastCtrl: ToastController,
-    private advertiserProvider: Advertiser
+    private advertiserProvider: Advertiser,
+    private adsProvider: Ads
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
     this.ad = new AdModel();
+
+    this.load_interest_list();
   }
 
   ionViewDidLoad() {
@@ -80,6 +86,15 @@ export class AdsPage {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  load_interest_list(){
+    this.adsProvider.load_interest_list()
+      .subscribe(response =>{
+        this.interestList = response.interest_list;
+      }, error => {
+          console.log("Erro ao exibir as áreas de interesse" + error.json());
+      });
   }
 
 }
