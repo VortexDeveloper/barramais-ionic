@@ -12,9 +12,9 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Ads {
-  //private host: string = "https://barramais.herokuapp.com/"
+  // private host: string = "http://localhost:3000/"
   //private host: string = "http://10.0.2.2:3000/"
-  private host: string = "http://localhost:3000/"
+  private host: string = "https://barramais.herokuapp.com/"
 
   private interest_list_url: string = this.host + "ads/interest_list";
 
