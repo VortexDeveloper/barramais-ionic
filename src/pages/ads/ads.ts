@@ -69,25 +69,41 @@ export class AdsPage {
   }
 
   save(ad){
-    this.advertiserProvider.createAd(ad, this.advertiser)
-    .subscribe(response => {
-        this.openPage(AdvertiserPage);
-        this.presentToast("Anúncio cadastrado!");
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error.json());
-    });
+    if(ad.area == null){
+      this.presentToast("O modelo do anúncio precisa ser escolhido!")
+    }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
+      this.presentToast("O anúncio deve conter ao menos uma área de interesse!")
+    }else if(ad.description == ""){
+      this.presentToast("O campo de descrição do anúncio precisa ser preenchido!")
+    }else{
+      this.advertiserProvider.createAd(ad, this.advertiser)
+      .subscribe(response => {
+          this.openPage(AdvertiserPage);
+          this.presentToast("Anúncio cadastrado com sucesso!");
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error.json());
+      });
+    }
   }
 
   update(ad){
-    this.advertiserProvider.updateAd(ad, this.advertiser)
-      .subscribe(response => {
-        this.openPage(AdvertiserPage);
-        this.presentToast("Anúncio modificado!");
-      }, error => {
-        console.log(error.json());
-        this.presentToast(error.json());
-      });
+    if(ad.area == null){
+      this.presentToast("O modelo do anúncio precisa ser escolhido!")
+    }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
+      this.presentToast("O anúncio deve conter ao menos uma área de interesse!")
+    }else if(ad.description == ""){
+      this.presentToast("O campo de descrição do anúncio precisa ser preenchido!")
+    }else{
+      this.advertiserProvider.updateAd(ad, this.advertiser)
+        .subscribe(response => {
+          this.openPage(AdvertiserPage);
+          this.presentToast("Anúncio modificado com sucesso!");
+        }, error => {
+          console.log(error.json());
+          this.presentToast(error.json());
+        });
+    }
   }
 
   presentToast(msg){
@@ -109,6 +125,22 @@ export class AdsPage {
       }, error => {
           console.log("Erro ao exibir as áreas de interesse" + error.json());
       });
+  }
+
+  validation(ad, creating){
+    if(ad.description == ""){
+
+    }else if(ad.area == null){
+
+    }else if(ad.interest_areas = null){
+
+    }else{
+      if(creating == true){
+        this.save(ad)
+      }else{
+        this.update(ad)
+      }
+    }
   }
 
 }
