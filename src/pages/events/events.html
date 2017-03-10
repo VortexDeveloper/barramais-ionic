@@ -33,126 +33,132 @@
             <ion-icon name="more"></ion-icon>
           </button>
         </ion-buttons>
-        <ion-item>
-          <ion-avatar item-left>
-            <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
-            <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
-          </ion-avatar>
-          <h2>{{event.name}}</h2>
-          <p>{{event.created_at | date:'MMMM d, y'}}</p>
-        </ion-item>
-        <ion-card-content>
-          <p>{{event.about}}</p>
-        </ion-card-content>
-        <img src="{{host + event.cover_photo_url}}"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
+        <a (click)="openPage(event)">
+          <ion-item>
+            <ion-avatar item-left>
+              <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
+              <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
+            </ion-avatar>
+            <h2>{{event.name}}</h2>
+            <p>{{event.created_at | date:'MMMM d, y'}}</p>
+          </ion-item>
+          <ion-card-content>
+            <p>{{event.about}}</p>
+          </ion-card-content>
+          <img src="{{host + event.cover_photo_url}}"/>
+          <ion-row>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-text" md="md-text"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </a>
       </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'confirmed-events'">
-      <ion-card *ngFor="let invitation of confirmed_events">
+      <ion-card *ngFor="let event of confirmed_events">
         <ion-buttons end>
-          <button ion-button icon-only clear (click)="openPage(invitation.event)">
+          <button ion-button icon-only clear (click)="openPage(event)">
             <ion-icon name="more"></ion-icon>
           </button>
         </ion-buttons>
-        <ion-item>
-          <ion-avatar item-left>
-            <h2 class="h2-events-avatar">{{ invitation.event.event_date | date:'dd'}}</h2>
-            <h3 class="h3-events-avatar">{{ invitation.event.event_date | date:'MMM'}}</h3>
-          </ion-avatar>
-          <h2>{{invitation.event.name}}</h2>
-          <p>{{invitation.event.created_at | date:'MMMM d, y'}}</p>
-        </ion-item>
-        <ion-card-content>
-          <p>{{invitation.event.about}}</p>
-        </ion-card-content>
-        <img src="{{host + invitation.event.cover_photo_url}}"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
+        <a (click)="openPage(event)">
+          <ion-item>
+            <ion-avatar item-left>
+              <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
+              <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
+            </ion-avatar>
+            <h2>{{event.name}}</h2>
+            <p>{{event.created_at | date:'MMMM d, y'}}</p>
+          </ion-item>
+          <ion-card-content>
+            <p>{{event.about}}</p>
+          </ion-card-content>
+          <img src="{{host + event.cover_photo_url}}"/>
+          <ion-row>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-text" md="md-text"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </a>
       </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'pending-events'">
-      <ion-card *ngFor="let invitation of pending_events">
+      <ion-card *ngFor="let event of pending_events">
         <ion-buttons end>
-          <button ion-button icon-only clear (click)="openPage(invitation.event)">
+          <button ion-button icon-only clear (click)="openPage(event)">
             <ion-icon name="more"></ion-icon>
           </button>
         </ion-buttons>
-        <ion-item>
-          <ion-avatar item-left>
-            <h2 class="h2-events-avatar">{{ invitation.event.event_date | date:'dd'}}</h2>
-            <h3 class="h3-events-avatar">{{ invitation.event.event_date | date:'MMM'}}</h3>
-          </ion-avatar>
-          <h2>{{invitation.event.name}}</h2>
-          <p>{{invitation.event.created_at | date:'MMMM d, y'}}</p>
-        </ion-item>
-        <ion-card-content>
-          <p>{{invitation.event.about}}</p>
-        </ion-card-content>
-        <img src="{{host + invitation.event.cover_photo_url}}"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
+        <a (click)="openPage(event)">
+          <ion-item>
+            <ion-avatar item-left>
+              <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
+              <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
+            </ion-avatar>
+            <h2>{{event.name}}</h2>
+            <p>{{event.created_at | date:'MMMM d, y'}}</p>
+          </ion-item>
+          <ion-card-content>
+            <p>{{event.about}}</p>
+          </ion-card-content>
+          <img src="{{host + event.cover_photo_url}}"/>
+          <ion-row>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-text" md="md-text"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col width-10>
+              <button ion-button icon-left clear small>
+                <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </a>  
       </ion-card>
     </ion-list>
   </div>

@@ -22,10 +22,10 @@ export class User {
   private host: string = "http://localhost:3000/"
 
   private url: string = this.host + "users";
-  private friends_url: string = this.host + "users/friends";
+  private friends_url: string = this.host + "users/friends/";
   private my_events_url: string = this.host + "users/my_events/";
-  private confirmed_events_url: string = this.host + "users/my_confirmed_invitations/";
-  private pending_events_url: string = this.host + "users/my_pending_invitations/";
+  private confirmed_events_url: string = this.host + "users/confirmed_events/";
+  private pending_events_url: string = this.host + "users/pending_events/";
   private accept_event_url: string = this.host + "users/accept_event/";
   private refuse_event_url: string = this.host + "users/refuse_event/";
   private user_advertiser_url: string = this.host + "users/user_advertiser/";
@@ -37,7 +37,6 @@ export class User {
   ) {
 
    }
-
 
   create(user){
     return this.http.post(this.url + ".json", {'user': user})
@@ -55,8 +54,8 @@ export class User {
       .map(res => res.json());
   }
 
-  friends(){
-    return this.authHttp.get(this.friends_url + ".json")
+  friends(event){
+    return this.authHttp.get(this.friends_url + event + ".json")
       .map(res => res.json());
   }
 

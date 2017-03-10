@@ -36,19 +36,19 @@
     </ion-card>
     <ion-row [hidden]="!showAdminActions">
       <ion-col width-33>
-        <button ion-button outline color="light" (click)="openModal(eventGuests, friends)" icon-left>
+        <button ion-button outline block color="light" (click)="openModal(eventGuests, friends)" icon-left>
           Convidar
         </button>
       </ion-col>
     </ion-row>
     <ion-row [hidden]="!showGuestActions">
-      <ion-col width-33>
-        <button ion-button outline color="light" (click)="refuse_event()" icon-left>
+      <ion-col width-50>
+        <button ng-disabled="buttonStatus" block ion-button outline color="light" (click)="refuse_event()" icon-left>
           Não vou
         </button>
       </ion-col>
-      <ion-col width-33>
-        <button ion-button outline color="light" (click)="accept_event()" icon-left>
+      <ion-col width-50>
+        <button ion-button outline block color="light" (click)="accept_event()" icon-left>
           Vou
         </button>
       </ion-col>

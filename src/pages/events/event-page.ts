@@ -78,11 +78,11 @@ export class EventPagePage {
     this.confirmed_guests(event);
     this.all_guests(event);
     this.refused_guests(event);
-    this.userFriends();
+    this.userFriends(event);
   }
 
-  openPage(page) {
-    this.navCtrl.push(page);
+  openPage(page, event) {
+    this.navCtrl.push(page, {event: event});
   }
 
   openModal(page, guests) {
@@ -103,7 +103,6 @@ export class EventPagePage {
     if(guests_id.indexOf(this.user.id) > -1 ){
       this.showGuestActions = true;
       this.verifyEventAdmin();
-      console.log(guests_id.indexOf(this.user.id));
     }
   }
 
@@ -148,8 +147,8 @@ export class EventPagePage {
       });
   }
 
-  userFriends(){
-    this.userProvider.friends()
+  userFriends(event){
+    this.userProvider.friends(event.id)
     .subscribe(response => {
       this.friends = response.users;
     }, error => {
@@ -160,6 +159,7 @@ export class EventPagePage {
   refuse_event(){
     this.userProvider.refuse_event(this.user, this.event).
     subscribe(response =>{
+      this.openPage(EventPagePage, this.event);
       this.presentToast(response.sucess);
     }, error =>{
       this.presentToast(error.json());
@@ -170,9 +170,8 @@ export class EventPagePage {
   accept_event(){
     this.userProvider.accept_event(this.user, this.event).
     subscribe(response =>{
+      this.openPage(EventPagePage, this.event);
       this.presentToast(response.sucess);
-      this.l_pendingGuests = this.l_pendingGuests - 1;
-      this.l_confirmedGuests = this.l_confirmedGuests + 1;
     }, error =>{
       this.presentToast(error.json());
       console.log(error.json());
