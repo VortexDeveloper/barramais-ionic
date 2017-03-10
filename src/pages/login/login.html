@@ -1,28 +1,31 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Login
-    </ion-title>
-    <ion-buttons start>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list no-lines>
+<ion-content padding>
+  <div class="container">
+    <p>
+      Login
+    </p>
     <form (ngSubmit)="login(user)">
       <ion-item>
-        <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="user.email" placeholder="Digite seu email" name="email"></ion-input>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" stacked>Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="user.password" placeholder="Digite sua senha" name="password"></ion-input>
+        <ion-label floating>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
       </ion-item>
       <button class="form-buttons" ion-button type="submit" block>
-        <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
-        Entrar
+        Continuar
       </button>
     </form>
-  </ion-list>
+    <h2>
+      <b>
+      Esqueceu sua senha?<br><br>
+      Outras dúvidas: suporte@barramais.com.br
+      </b>
+    </h2>
+  </div>
 </ion-content>

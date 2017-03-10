@@ -1,3 +1,58 @@
 page-registration {
 
+  .content-md, .content-ios, .content-wp {
+      color: #000;
+      background-image: url(/assets/images/bg_cadastro.jpg);
+      background-position: center;
+      background-size: cover;
+  }
+
+  .item-md, .item-ios, .item-wp {
+     background-color: transparent;
+     padding-left: 0;
+     color: #f5f5f5;
+  }
+
+  .item-inner {
+      font-size: 1.5rem;
+      color: #f5f5f5 !important;
+      border-bottom: 0.55px solid #c8c7cc !important;
+  }
+
+  .form-buttons {
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      border: solid 1px;
+      margin-top: 20px;
+  }
+
+  .header-md::after {
+      background-image: none;
+      background-color: transparent;
+  }
+
+  .toolbar-background-md, .toolbar-background-ios, .toolbar-background-wp {
+      background: transparent;
+      color: #f5f5f5;
+  }
+
+  .header-ios .toolbar-ios:last-child .toolbar-background-ios {
+      border: none;
+  }
+
+  .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+      color: #f5f5f5;
+  }
+
+  p {
+    color: #ccc;
+    font-size: 0.875em;
+    text-align: center;
+  }
+
+  h2 {
+      color: #ccc;
+      font-size: 1.5em;
+      text-align: center;
+  }
+
 }

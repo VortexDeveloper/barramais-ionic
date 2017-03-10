@@ -9,12 +9,16 @@
       <ion-item-group>
         <ion-item-divider color="light">Informações de conta</ion-item-divider>
         <ion-item>
-          <ion-thumbnail item-left>
-            <img src="{{user.avatar}}" id='user_avatar' [hidden]="user.avatar === null">
-          </ion-thumbnail>
-          <button ion-button icon-left (click)="save_avatar(user)" [disabled]="user.avatar === null">
-            <ion-icon name="cloud-upload"></ion-icon>Salvar Imagem
-          </button>
+          <a (click)="presentActionSheet()" [hidden]="user.avatar === null">
+            <ion-thumbnail item-left>
+              <img src="{{user.avatar}}" id='user_avatar'>
+            </ion-thumbnail>
+          </a>
+          <a (click)="presentActionSheet()" [hidden]="user.avatar !== null">
+            <ion-thumbnail item-left>
+              <img src="/assets/images/DESPACHANTE.png" id='user_avatar'>
+            </ion-thumbnail>
+          </a>
         </ion-item>
         <ion-item>
           <ion-label floating>Nome</ion-label>
@@ -67,17 +71,15 @@
           <ion-label floating>Trabalho e educação</ion-label>
           <ion-textarea [(ngModel)]="user.academic_profile" name="academic_profile"></ion-textarea>
         </ion-item>
-        <br>
-        <ion-item-divider color="light">Outras informações</ion-item-divider>
         <ion-item>
           <ion-label>Trabalha com náutica</ion-label>
-          <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional"></ion-toggle> 
+          <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional"></ion-toggle>
         </ion-item>
         <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
           <ion-label floating>Descreva seu trabalho:</ion-label>
           <ion-textarea [(ngModel)]="user.nautical_profession_description" name="nautical_profession_description"></ion-textarea>
         </ion-item>
-        <ion-list radio-group [(ngModel)]="user.relationship" name="relationship">
+        <ion-list radio-group no-lines [(ngModel)]="user.relationship" name="relationship">
           <ion-list-header>
             Relacionamento
           </ion-list-header>
@@ -99,23 +101,11 @@
           <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation"></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label floating>Integrante da Marinha do Brasil</ion-label>
-          <ion-input type="text" [(ngModel)]="user.naval_service" name="naval_service"></ion-input>
+          <ion-label stacked>Integrante da Marinha do Brasil</ion-label>
+          <ion-input type="text" [(ngModel)]="user.naval_service" placeHolder="Sua Patente" name="naval_service"></ion-input>
         </ion-item>
       </ion-item-group>
       <button class="form-buttons" ion-button type="submit" block>Salvar</button>
     </form>
   </div>
 </ion-content>
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons>
-      <button ion-button icon-left (click)="presentActionSheet()">
-        <ion-icon name="camera"></ion-icon>Selecione uma imagem
-      </button>
-      <button ion-button icon-left [disabled]="lastImage === null">
-        <ion-icon name="cloud-upload"></ion-icon>Upload
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

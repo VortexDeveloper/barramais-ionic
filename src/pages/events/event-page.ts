@@ -87,6 +87,9 @@ export class EventPagePage {
 
   openModal(page, guests) {
     let modal = this.modalCtrl.create(page, {event: this.event, guests: guests});
+    modal.onDidDismiss(event => {
+      this.loadGuests(this.event);
+    });
     modal.present();
   }
 
