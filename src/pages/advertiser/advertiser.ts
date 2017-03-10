@@ -62,14 +62,35 @@ export class AdvertiserPage {
   }
 
   save(advertiser, address){
-    this.advertiserProvider.create(advertiser, address)
-    .subscribe(response => {
-        this.openPage(AdvertiserPage);
-        this.presentToast("Anunciante criado com sucesso!");
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error.json());
-    });
+    console.log(address.state_id);
+    if(advertiser.document_type == 0){
+      this.presentToast("Selecione o tipo de documento do anunciante!");
+    }else if(advertiser.document_number == ""){
+      this.presentToast("Insira o número do documento do anunciante!");
+    }else if(address.state_id == ""){
+      this.presentToast("Selecione um estado!");
+    }else if(address.city_id == ""){
+      this.presentToast("Selecione uma cidade!");
+    }else if(address.street == ""){
+      this.presentToast("Insira o endereço do anunciante!");
+    }else if(address.complement == ""){
+      this.presentToast("Insira o complemento!");
+    }else if(address.neighborhood == ""){
+      this.presentToast("Insira o bairro!");
+    }else if(advertiser.email == ""){
+      this.presentToast("Insira o email do anunciante");
+    }else if(advertiser.cell_phone == ""){
+      this.presentToast("Insira o celular do anunciante");
+    }else{
+      this.advertiserProvider.create(advertiser, address)
+      .subscribe(response => {
+          this.openPage(AdvertiserPage);
+          this.presentToast("Anunciante criado com sucesso!");
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error.json());
+      });
+    }
   }
 
   destroy(ad){
@@ -146,6 +167,10 @@ export class AdvertiserPage {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  openEditPage(page, ad){
+    this.navCtrl.push(page, {'ad': ad});
   }
 
   clearRemovedAd(removedItem){
