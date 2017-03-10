@@ -30,18 +30,21 @@ export class AdsPage {
   ads: any;
   advertiserPage: AdvertiserPage;
   interestList: any;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     private userProvider: User,
     public navParams: NavParams,
+    params: NavParams,
     public toastCtrl: ToastController,
     private advertiserProvider: Advertiser,
     private adsProvider: Ads
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
-    this.ad = new AdModel();
+    this.ad = params.data.ad ? new AdModel(params.data.ad) : new AdModel();
+    this.isEditing = this.ad.id ? true : false;
 
     this.load_interest_list();
   }
@@ -74,6 +77,17 @@ export class AdsPage {
         console.log(error.json());
         this.presentToast(error.json());
     });
+  }
+
+  update(ad){
+    this.advertiserProvider.updateAd(ad, this.advertiser)
+      .subscribe(response => {
+        this.openPage(AdvertiserPage);
+        this.presentToast("Anúncio modificado!");
+      }, error => {
+        console.log(error.json());
+        this.presentToast(error.json());
+      });
   }
 
   presentToast(msg){

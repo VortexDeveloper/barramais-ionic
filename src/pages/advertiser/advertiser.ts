@@ -148,6 +148,10 @@ export class AdvertiserPage {
     this.navCtrl.push(page);
   }
 
+  openEditPage(page, ad){
+    this.navCtrl.push(page, {'ad': ad});
+  }
+
   clearRemovedAd(removedItem){
       this.ads.splice(this.ads.indexOf(removedItem), 1);
   }
