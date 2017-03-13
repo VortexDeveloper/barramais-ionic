@@ -39,8 +39,8 @@ export class AdvertiserPage {
 
   constructor(
     public navCtrl: NavController,
-    params: NavParams,
     public navParams: NavParams,
+    params: NavParams,
     private advertiserProvider: Advertiser,
     private userProvider: User,
     public toastCtrl: ToastController
@@ -62,24 +62,31 @@ export class AdvertiserPage {
   }
 
   save(advertiser, address){
-    console.log(address.state_id);
+    var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
+    var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
+    var documentRule = (advertiser.document_type == "cpf" && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == "cnpj" && advertiser.document_number.match(documentCNPJRule)) ? true : false;
+
+    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+
+    var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
+
     if(advertiser.document_type == 0){
       this.presentToast("Selecione o tipo de documento do anunciante!");
-    }else if(advertiser.document_number == ""){
+    }else if(documentRule == false){
       this.presentToast("Insira o número do documento do anunciante!");
     }else if(address.state_id == ""){
       this.presentToast("Selecione um estado!");
     }else if(address.city_id == ""){
       this.presentToast("Selecione uma cidade!");
-    }else if(address.street == ""){
+    }else if(address.street.length < 3){
       this.presentToast("Insira o endereço do anunciante!");
-    }else if(address.complement == ""){
+    }else if(address.complement.length < 3){
       this.presentToast("Insira o complemento!");
-    }else if(address.neighborhood == ""){
+    }else if(advertiser.neighborhood.length < 3){
       this.presentToast("Insira o bairro!");
-    }else if(advertiser.email == ""){
+    }else if(!advertiser.email.match(emailRule)){
       this.presentToast("Insira o email do anunciante");
-    }else if(advertiser.cell_phone == ""){
+    }else if(!advertiser.cell_phone.match(phoneRule)){
       this.presentToast("Insira o celular do anunciante");
     }else{
       this.advertiserProvider.create(advertiser, address)

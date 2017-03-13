@@ -30,6 +30,7 @@ export class AdsPage {
   ads: any;
   advertiserPage: AdvertiserPage;
   interestList: any;
+  selectedAreas: any[] = []
   isEditing: boolean = false;
 
   constructor(
@@ -69,6 +70,8 @@ export class AdsPage {
   }
 
   save(ad){
+    ad.interest_areas = this.selectedAreas;
+
     if(ad.area == null){
       this.presentToast("O modelo do anúncio precisa ser escolhido!")
     }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
@@ -127,20 +130,13 @@ export class AdsPage {
       });
   }
 
-  validation(ad, creating){
-    if(ad.description == ""){
-
-    }else if(ad.area == null){
-
-    }else if(ad.interest_areas = null){
-
-    }else{
-      if(creating == true){
-        this.save(ad)
-      }else{
-        this.update(ad)
-      }
+  getSelect(isChecked, interestArea) {
+    if (isChecked) {
+      this.selectedAreas.push(interestArea);
+    } else {
+      this.selectedAreas.splice(this.selectedAreas.indexOf(interestArea), 1);
     }
+    console.log(this.selectedAreas);
   }
 
 }

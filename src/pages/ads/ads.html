@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <div class="container">
+  <!--<div class="container">
     <form (ngSubmit)="save(ad)" [hidden]="isEditing">
       <ion-item-group>
         <ion-item-divider color="light">Cadastro de anúncio</ion-item-divider>
@@ -54,7 +54,7 @@
           <ion-select [(ngModel)]="ad.interest_areas" name="interest_area" multiple="true">
             <ion-option *ngFor="let interest_area of interestList; let i = index" [value]="interest_area.id">
               <ion-thumbnail item-left>
-                <!--<img src="assets/images/interest_icon" + {{i}} + ".png">-->
+                <!--<img src="assets/images/interest_icon" + {{i}} + ".png">--
               </ion-thumbnail>
               {{interest_area.name}}
             </ion-option>
@@ -109,7 +109,7 @@
           <ion-select [(ngModel)]="ad.interest_areas" name="interest_area" multiple="true">
             <ion-option *ngFor="let interest_area of interestList; let i = index" [value]="interest_area.id">
               <ion-thumbnail item-left>
-                <!--<img src="assets/images/interest_icon" + {{i}} + ".png">-->
+                <!--<img src="assets/images/interest_icon" + {{i}} + ".png">--
               </ion-thumbnail>
               {{interest_area.name}}
             </ion-option>
@@ -124,5 +124,224 @@
 
       <button class="form-buttons" ion-button type="submit" block>Modificar anúncio</button>
     </form>
-  </div>
+  </div>-->
+<!-- <form (ngSubmit)="save(ad)" [hidden]="isEditing"> -->
+  <ion-slides pager>
+    <ion-slide>
+      <ion-list radio-group [(ngModel)]="ad.area" name="ad_area">
+        <ion-list-header>
+          Modelo do anúncio
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Modelo 1</ion-label>
+          <ion-radio value="blog_medium"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 2</ion-label>
+          <ion-radio value="blog_large"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 3</ion-label>
+          <ion-radio value="home"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 4</ion-label>
+          <ion-radio value="lateral"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 5</ion-label>
+          <ion-radio value="lateral_small"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 6</ion-label>
+          <ion-radio value="timeline_post"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <!--<ion-item>
+        <ion-label>Área de Interesse</ion-label>
+        <ion-select [(ngModel)]="ad.interest_areas" name="interest_area" multiple="true">
+          <ion-option *ngFor="let interest_area of interestList; let i = index" [value]="interest_area.id">
+            <ion-thumbnail item-left>
+              <!--<img src="assets/images/interest_icon" + {{i}} + ".png">--
+            </ion-thumbnail>
+            {{interest_area.name}}
+          </ion-option>
+        </ion-select>
+      </ion-item>-->
+
+      <ion-list>
+        <ion-item *ngFor="let interest_area of interestList">
+          <ion-label>
+            <h2>{{interest_area.name}}</h2>
+          </ion-label>
+          <ion-checkbox item-right [(ngModel)]="interest_area.selected" (ionChange)="getSelect(interest_area.selected, interest_area)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-item>
+        <ion-label floating>Descrição</ion-label>
+        <ion-input type="text" [(ngModel)]="ad.description" name="ad_description"></ion-input>
+      </ion-item>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-list radio-group [(ngModel)]="ad.area" name="ad_area">
+        <ion-list-header>
+          Modelo do anúncio
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Modelo 1</ion-label>
+          <ion-radio value="blog_medium"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 2</ion-label>
+          <ion-radio value="blog_large"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 3</ion-label>
+          <ion-radio value="home"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 4</ion-label>
+          <ion-radio value="lateral"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 5</ion-label>
+          <ion-radio value="lateral_small"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modelo 6</ion-label>
+          <ion-radio value="timeline_post"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <ion-item>
+        <ion-label>Área de Interesse</ion-label>
+        <ion-select [(ngModel)]="ad.interest_areas" name="interest_area" multiple="true">
+          <ion-option *ngFor="let interest_area of interestList; let i = index" [value]="interest_area.id">
+            <ion-thumbnail item-left>
+              <!--<img src="assets/images/interest_icon" + {{i}} + ".png">-->
+            </ion-thumbnail>
+            {{interest_area.name}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Descrição</ion-label>
+        <ion-input type="text" [(ngModel)]="ad.description" name="ad_description"></ion-input>
+      </ion-item>
+      <button class="form-buttons" ion-button type="button" (click)="save(ad)" [hidden]="isEditing" block>Cadastrar anúncio</button>
+    </ion-slide>
+  </ion-slides>
+  <!-- </form> -->
+
+  <form (ngSubmit)="update(ad)" [hidden]="!isEditing">
+    <ion-slides pager>
+      <ion-slide>
+        <ion-list radio-group [(ngModel)]="ad.area" name="ad_area">
+          <ion-list-header>
+            Modelo do anúncio
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Modelo 1</ion-label>
+            <ion-radio value="blog_medium"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 2</ion-label>
+            <ion-radio value="blog_large"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 3</ion-label>
+            <ion-radio value="home"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 4</ion-label>
+            <ion-radio value="lateral"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 5</ion-label>
+            <ion-radio value="lateral_small"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 6</ion-label>
+            <ion-radio value="timeline_post"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-item>
+          <ion-label>Área de Interesse</ion-label>
+          <ion-select [(ngModel)]="ad.interest_areas" name="interest_area" multiple="true">
+            <ion-option *ngFor="let interest_area of interestList; let i = index" [value]="interest_area.id">
+              <ion-thumbnail item-left>
+                <!--<img src="assets/images/interest_icon" + {{i}} + ".png">-->
+              </ion-thumbnail>
+              {{interest_area.name}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-slide>
+      <ion-slide>
+        <ion-item>
+          <ion-label floating>Descrição</ion-label>
+          <ion-input type="text" [(ngModel)]="ad.description" name="ad_description"></ion-input>
+        </ion-item>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-list radio-group [(ngModel)]="ad.area" name="ad_area">
+          <ion-list-header>
+            Modelo do anúncio
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Modelo 1</ion-label>
+            <ion-radio value="blog_medium"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 2</ion-label>
+            <ion-radio value="blog_large"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 3</ion-label>
+            <ion-radio value="home"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 4</ion-label>
+            <ion-radio value="lateral"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 5</ion-label>
+            <ion-radio value="lateral_small"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Modelo 6</ion-label>
+            <ion-radio value="timeline_post"></ion-radio>
+          </ion-item>
+        </ion-list>
+
+        <ion-item>
+          <ion-label>Área de Interesse</ion-label>
+          <ion-select [(ngModel)]="ad.interest_areas" name="interest_area" multiple="true">
+            <ion-option *ngFor="let interest_area of interestList; let i = index" [value]="interest_area.id">
+              <ion-thumbnail item-left>
+                <!--<img src="assets/images/interest_icon" + {{i}} + ".png">-->
+              </ion-thumbnail>
+              {{interest_area.name}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Descrição</ion-label>
+          <ion-input type="text" [(ngModel)]="ad.description" name="ad_description"></ion-input>
+        </ion-item>
+
+        <button class="form-buttons" ion-button type="submit" block>Modificar anúncio</button>
+      </ion-slide>
+    </ion-slides>
+  </form>
 </ion-content>
