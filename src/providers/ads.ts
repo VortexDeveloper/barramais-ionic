@@ -17,6 +17,7 @@ export class Ads {
   //private host: string = "https://barramais.herokuapp.com/"
 
   private interest_list_url: string = this.host + "ads/interest_list";
+  private ad_area_url: string = this.host + "ads/ad_area/";
 
   constructor(public http: Http, public authHttp: AuthHttp) {
     console.log('Hello Ads Provider');
@@ -24,6 +25,11 @@ export class Ads {
 
   load_interest_list(){
     return this.authHttp.get(this.interest_list_url + ".json")
+      .map(res => res.json());
+  }
+
+  adArea(ad){
+    return this.authHttp.get(this.ad_area_url + ad.id + ".json")
       .map(res => res.json());
   }
 

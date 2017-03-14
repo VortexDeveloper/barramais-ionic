@@ -25,6 +25,7 @@ export class Advertiser {
   private create_ad_url: string = this.host + "advertisers/create_ad/";
   private destroy_ad: string = this.host + "ads/";
   private update_ad_url: string = this.host + "ads/"
+  private advertiser_area_url: string = this.host + "advertisers/advertiser_area/";
 
   public advertiser: AdvertiserModel;
   public ad: AdModel;
@@ -66,6 +67,11 @@ export class Advertiser {
 
   getCities(state){
     return this.authHttp.get(this.cities_url + state + ".json")
+      .map(res => res.json());
+  }
+
+  advertiserArea(advertiser){
+    return this.authHttp.get(this.advertiser_area_url + advertiser.id + ".json")
       .map(res => res.json());
   }
 

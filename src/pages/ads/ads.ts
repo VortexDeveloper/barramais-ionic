@@ -10,6 +10,7 @@ import { ToastController } from 'ionic-angular';
 import { AdvertiserPage } from '../advertiser/advertiser';
 import { InterestAreaModel } from "../../models/interest_area.model";
 import { Ads } from '../../providers/ads';
+import { AreaModel } from "../../models/area.model";
 
 /*
   Generated class for the Ads page.
@@ -45,6 +46,7 @@ export class AdsPage {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
     this.ad = params.data.ad ? new AdModel(params.data.ad) : new AdModel();
+    //console.log(this.adArea(this.ad));
     this.isEditing = this.ad.id ? true : false;
 
     this.load_interest_list();
@@ -66,6 +68,15 @@ export class AdsPage {
         this.ads = response.user_advertiser.ads;
       }, error => {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
+      });
+  }
+
+  adArea(ad){
+    this.adsProvider.adArea(ad)
+      .subscribe(response =>{
+        this.ad.area = response.ad_area.id;
+      }, error => {
+        console.log("Erro" + error.json())
       });
   }
 
@@ -91,6 +102,8 @@ export class AdsPage {
   }
 
   update(ad){
+    ad.interest_areas = this.selectedAreas;
+
     if(ad.area == null){
       this.presentToast("O modelo do anúncio precisa ser escolhido!")
     }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
