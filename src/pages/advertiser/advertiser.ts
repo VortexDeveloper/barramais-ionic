@@ -1,5 +1,4 @@
 import { Advertiser } from '../../providers/advertiser';
-import { AdvertiserAdsPage } from './advertiser-ads';
 import { AdvertiserModel } from "../../models/advertiser.model";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
@@ -27,7 +26,6 @@ export class AdvertiserPage {
   address: AddressModel = new AddressModel();
   cities: any;
   states: any;
-  adPage: any = AdvertiserAdsPage;
   current_user: UserModel;
   user_advertiser: any;
   user_token: any = localStorage.getItem('user');

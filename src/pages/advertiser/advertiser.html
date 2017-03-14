@@ -15,8 +15,10 @@
 
 <ion-content padding>
   <div class="container" [hidden]="isAdvertiser">
-    <form (ngSubmit)="save(advertiser, address)">
-      <ion-item-group>
+  <ion-slides pager>
+  <!--<div class="container" [hidden]="isAdvertiser">
+    <form (ngSubmit)="save(advertiser, address)">-->
+    <ion-slide>
         <ion-item-divider color="light">Dados do anunciante</ion-item-divider>
         <ion-item>
           <ion-label floating>Tipo de documento</ion-label>
@@ -53,6 +55,9 @@
           <ion-label floating>Bairro</ion-label>
           <ion-input type="text" [(ngModel)]="address.neighborhood" name="advertiser_address_neighborhood"></ion-input>
         </ion-item>
+      </ion-slide>
+
+        <ion-slide>
         <ion-item>
           <ion-label floating>Website</ion-label>
           <ion-input type="text" [(ngModel)]="advertiser.website" name="advertiser_website"></ion-input>
@@ -77,10 +82,19 @@
           <ion-label floating>Celular</ion-label>
           <ion-input type="text" [(ngModel)]="advertiser.cell_phone" name="advertiser_cell_phone"></ion-input>
         </ion-item>
-      </ion-item-group>
+
+
+    </ion-slide>
+
+    <ion-slide>
+      <h1>Dados de pagamento e confirmação</h1>
 
       <button class="form-advertiser" ion-button type="submit" block>Finalizar cadastro</button>
-    </form>
+    </ion-slide>
+    <!--</form>
+  </div>-->
+
+  </ion-slides>
   </div>
 
   <div class="container" [hidden]="!isAdvertiser">

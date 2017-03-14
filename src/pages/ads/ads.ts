@@ -46,9 +46,9 @@ export class AdsPage {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
     this.ad = params.data.ad ? new AdModel(params.data.ad) : new AdModel();
-    //console.log(this.adArea(this.ad));
     this.isEditing = this.ad.id ? true : false;
 
+    //o bug está na linha abaixo
     this.load_interest_list();
   }
 

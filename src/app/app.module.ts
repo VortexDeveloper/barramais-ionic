@@ -24,8 +24,6 @@ import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { Advertiser } from '../providers/advertiser';
-import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
-import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
 import { AdsPage } from '../pages/ads/ads';
 import { Ads } from '../providers/ads';
 
@@ -58,8 +56,6 @@ export function getAuthHttp(http) {
     LoginPage,
     BmHeaderComponent,
     AdvertiserPage,
-    AdvertiserAdsPage,
-    AdvertiserAdCreatePage,
     AdsPage
   ],
   imports: [
@@ -85,8 +81,6 @@ export function getAuthHttp(http) {
     LoginPage,
     BmHeaderComponent,
     AdvertiserPage,
-    AdvertiserAdsPage,
-    AdvertiserAdCreatePage,
     AdsPage
   ],
   providers: [
