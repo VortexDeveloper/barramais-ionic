@@ -9,6 +9,7 @@ import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
 import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
 import { AdsPage } from '../pages/ads/ads';
+import { ConversationPage } from '../pages/conversation/conversation';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class MyApp {
   advertiserAdsPage: any = AdvertiserAdsPage;
   advertiserAdCreatePage: any = AdvertiserAdCreatePage;
   adsPage: any = AdsPage;
+  conversationPage: any = ConversationPage;
 
   constructor(
     public platform: Platform
