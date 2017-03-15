@@ -26,8 +26,11 @@ export class UserModel {
   relationship: number;
   has_embarcation: number;
   nautical_profession_description: string;
-  naval_service: string;
+  naval_service: number;
+  naval_service_patent: number;
   advertiser: AdvertiserModel;
+  nautical_license: number;
+  has_nautical_license: number;
 
   constructor(public params?:any) {
     params = params || {}
@@ -47,7 +50,10 @@ export class UserModel {
     this.has_embarcation = params.has_embarcation || false;
     this.nautical_professional = params.nautical_professional || false;
     this.nautical_profession_description = params.nautical_profession_description || "";
-    this.naval_service = params.naval_service || "";
+    this.naval_service = params.naval_service || false;
+    this.naval_service_patent = params.naval_service_patent || 0;
     this.advertiser = params.advertiser || null;
+    this.nautical_license = params.nautical_license || 0;
+    this.has_nautical_license = params.has_nautical_license || false;
   }
 }

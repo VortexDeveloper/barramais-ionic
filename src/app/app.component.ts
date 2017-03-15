@@ -9,6 +9,7 @@ import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdvertiserAdsPage } from '../pages/advertiser/advertiser-ads';
 import { AdvertiserAdCreatePage } from '../pages/advertiser/advertiser-ad-create';
 import { AdsPage } from '../pages/ads/ads';
+import { InAppBrowser } from 'ionic-native';
 
 
 @Component({
@@ -26,6 +27,10 @@ export class MyApp {
   advertiserAdsPage: any = AdvertiserAdsPage;
   advertiserAdCreatePage: any = AdvertiserAdCreatePage;
   adsPage: any = AdsPage;
+
+  openSite(){
+    let browser = new InAppBrowser('http://barramais.com.br/blog/', '_system');
+  }
 
   constructor(
     public platform: Platform

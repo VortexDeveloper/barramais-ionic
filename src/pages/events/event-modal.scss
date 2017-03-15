@@ -14,6 +14,10 @@ page-event-modal {
     color: #757575;
   }
 
+  .item-md, .item-ios, .item-wp {
+     padding-left: 0;
+  }
+
   .item-md ion-avatar ion-img, .item-md ion-avatar img {
     width: 40px;
     height: 40px;
@@ -99,6 +103,10 @@ page-event-modal {
 
   .form-buttons{
     background-color: #123f5f !important;
+  }
+
+  .container{
+    padding: 10px;
   }
 
 }

@@ -5,7 +5,7 @@ page-home {
   }
 
   ion-content{
-    background-color: #111 !important;
+    background-color: #123f5f !important;
   }
 
   ion-navbar.toolbar {
@@ -13,8 +13,7 @@ page-home {
   }
 
   .logo-home{
-    width: 200px;
-    height: 200px;
+    width: 100%;
     margin: 13% auto;
   }
 
@@ -64,16 +63,18 @@ page-home {
     text-align: center;
   }
 
-  .container{
-    margin-top: 120px;
+  img {
+    max-width: 100%;
+    position: relative;
   }
 
-  img {
-    max-width: 75%;
-    border: 0;
-    top: -45px;
-    position: relative;
-    left: -20px;
+  .actions{
+    position: absolute;
+    z-index: 999;
+    top: 60%;
+    width: 100%;
+    padding: 10px;
   }
+
 
 }
