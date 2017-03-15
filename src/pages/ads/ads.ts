@@ -48,8 +48,11 @@ export class AdsPage {
     this.ad = params.data.ad ? new AdModel(params.data.ad) : new AdModel();
     this.isEditing = this.ad.id ? true : false;
 
-    //o bug está na linha abaixo
+    //console.log(this.ad.interest_areas);
+    //if(this.ad.interest_areas != null) this.loadSelectedAreas(this.ad);
+
     this.load_interest_list();
+    //console.log(this.interestList);
   }
 
   ionViewDidLoad() {
@@ -63,7 +66,7 @@ export class AdsPage {
   userAdvertiser(current_user){
     this.userProvider.userAdvertiser(current_user)
       .subscribe(response =>{
-        console.log(response.user_advertiser);
+        //console.log(response.user_advertiser);
         this.advertiser = new AdvertiserModel(response.user_advertiser);
         this.ads = response.user_advertiser.ads;
       }, error => {
@@ -138,6 +141,7 @@ export class AdsPage {
     this.adsProvider.load_interest_list()
       .subscribe(response =>{
         this.interestList = response.interest_list;
+        //console.log(this.interestList);
       }, error => {
           console.log("Erro ao exibir as áreas de interesse" + error.json());
       });
@@ -150,6 +154,10 @@ export class AdsPage {
       this.selectedAreas.splice(this.selectedAreas.indexOf(interestArea), 1);
     }
     console.log(this.selectedAreas);
+  }
+
+  loadSelectedAreas(ad){
+    this.selectedAreas = ad.interest_areas;
   }
 
 }

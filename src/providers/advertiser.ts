@@ -41,12 +41,13 @@ export class Advertiser {
   }
 
   createAd(ad, advertiser){
-    return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad})
+    console.log(ad.interest_areas)
+    return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})
       .map(res => res.json())
   }
 
   updateAd(ad, advertiser){
-      return this.authHttp.put(this.update_ad_url + ad.id + ".json", {'ad': ad})
+      return this.authHttp.put(this.update_ad_url + ad.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})
         .map(res => res.json());
   }
 

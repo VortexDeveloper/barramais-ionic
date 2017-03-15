@@ -16,9 +16,7 @@
   <ion-slides pager>
     <ion-slide>
       <ion-list radio-group [(ngModel)]="ad.area" name="ad_area">
-        <ion-list-header>
-          Modelo do anúncio
-        </ion-list-header>
+        <ion-item-divider color="light">Modelo do anúncio</ion-item-divider>
         <ion-item>
           <ion-label>Modelo 1</ion-label>
           <ion-radio value="blog_medium"></ion-radio>
@@ -52,6 +50,7 @@
           <ion-label>
             <h2>{{interest_area.name}}</h2>
           </ion-label>
+
           <ion-checkbox item-right [(ngModel)]="interest_area.selected" (ionChange)="getSelect(interest_area.selected, interest_area)"></ion-checkbox>
         </ion-item>
       </ion-list>
