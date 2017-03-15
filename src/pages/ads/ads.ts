@@ -10,6 +10,7 @@ import { ToastController } from 'ionic-angular';
 import { AdvertiserPage } from '../advertiser/advertiser';
 import { InterestAreaModel } from "../../models/interest_area.model";
 import { Ads } from '../../providers/ads';
+import { AreaModel } from "../../models/area.model";
 
 /*
   Generated class for the Ads page.
@@ -30,6 +31,7 @@ export class AdsPage {
   ads: any;
   advertiserPage: AdvertiserPage;
   interestList: any;
+  selectedAreas: any[] = []
   isEditing: boolean = false;
 
   constructor(
@@ -46,7 +48,11 @@ export class AdsPage {
     this.ad = params.data.ad ? new AdModel(params.data.ad) : new AdModel();
     this.isEditing = this.ad.id ? true : false;
 
+    //console.log(this.ad.interest_areas);
+    //if(this.ad.interest_areas != null) this.loadSelectedAreas(this.ad);
+
     this.load_interest_list();
+    //console.log(this.interestList);
   }
 
   ionViewDidLoad() {
@@ -60,7 +66,7 @@ export class AdsPage {
   userAdvertiser(current_user){
     this.userProvider.userAdvertiser(current_user)
       .subscribe(response =>{
-        console.log(response.user_advertiser);
+        //console.log(response.user_advertiser);
         this.advertiser = new AdvertiserModel(response.user_advertiser);
         this.ads = response.user_advertiser.ads;
       }, error => {
@@ -68,7 +74,18 @@ export class AdsPage {
       });
   }
 
+  adArea(ad){
+    this.adsProvider.adArea(ad)
+      .subscribe(response =>{
+        this.ad.area = response.ad_area.id;
+      }, error => {
+        console.log("Erro" + error.json())
+      });
+  }
+
   save(ad){
+    ad.interest_areas = this.selectedAreas;
+
     if(ad.area == null){
       this.presentToast("O modelo do anúncio precisa ser escolhido!")
     }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
@@ -88,6 +105,8 @@ export class AdsPage {
   }
 
   update(ad){
+    ad.interest_areas = this.selectedAreas;
+
     if(ad.area == null){
       this.presentToast("O modelo do anúncio precisa ser escolhido!")
     }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
@@ -122,25 +141,23 @@ export class AdsPage {
     this.adsProvider.load_interest_list()
       .subscribe(response =>{
         this.interestList = response.interest_list;
+        //console.log(this.interestList);
       }, error => {
           console.log("Erro ao exibir as áreas de interesse" + error.json());
       });
   }
 
-  validation(ad, creating){
-    if(ad.description == ""){
-
-    }else if(ad.area == null){
-
-    }else if(ad.interest_areas = null){
-
-    }else{
-      if(creating == true){
-        this.save(ad)
-      }else{
-        this.update(ad)
-      }
+  getSelect(isChecked, interestArea) {
+    if (isChecked) {
+      this.selectedAreas.push(interestArea);
+    } else {
+      this.selectedAreas.splice(this.selectedAreas.indexOf(interestArea), 1);
     }
+    console.log(this.selectedAreas);
+  }
+
+  loadSelectedAreas(ad){
+    this.selectedAreas = ad.interest_areas;
   }
 
 }

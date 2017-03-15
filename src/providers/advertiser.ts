@@ -14,9 +14,10 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Advertiser {
-  // private host: string = "https://barramais.herokuapp.com/"
-  //private host: string = "http://10.0.2.2:3000/"
+
   private host: string = "http://localhost:3000/"
+  //private host: string = "http://10.0.2.2:3000/"
+  //private host: string = "https://barramais.herokuapp.com/"
 
   private url: string = this.host + "advertisers";
   private country_url: string = this.host + "advertisers/country_for_select";
@@ -25,6 +26,7 @@ export class Advertiser {
   private create_ad_url: string = this.host + "advertisers/create_ad/";
   private destroy_ad: string = this.host + "ads/";
   private update_ad_url: string = this.host + "ads/"
+  private advertiser_area_url: string = this.host + "advertisers/advertiser_area/";
 
   public advertiser: AdvertiserModel;
   public ad: AdModel;
@@ -40,12 +42,13 @@ export class Advertiser {
   }
 
   createAd(ad, advertiser){
-    return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad})
+    console.log(ad.interest_areas)
+    return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})
       .map(res => res.json())
   }
 
   updateAd(ad, advertiser){
-      return this.authHttp.put(this.update_ad_url + ad.id + ".json", {'ad': ad})
+      return this.authHttp.put(this.update_ad_url + ad.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})
         .map(res => res.json());
   }
 
@@ -66,6 +69,11 @@ export class Advertiser {
 
   getCities(state){
     return this.authHttp.get(this.cities_url + state + ".json")
+      .map(res => res.json());
+  }
+
+  advertiserArea(advertiser){
+    return this.authHttp.get(this.advertiser_area_url + advertiser.id + ".json")
       .map(res => res.json());
   }
 
