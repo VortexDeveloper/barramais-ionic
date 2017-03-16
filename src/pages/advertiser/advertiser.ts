@@ -81,7 +81,7 @@ export class AdvertiserPage {
       this.presentToast("Insira o endereço do anunciante!");
     }else if(address.complement.length < 3){
       this.presentToast("Insira o complemento!");
-    }else if(advertiser.neighborhood.length < 3){
+    }else if(address.neighborhood.length < 3){
       this.presentToast("Insira o bairro!");
     }else if(!advertiser.email.match(emailRule)){
       this.presentToast("Insira o email do anunciante");
