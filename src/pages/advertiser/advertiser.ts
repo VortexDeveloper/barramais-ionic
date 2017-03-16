@@ -21,8 +21,8 @@ import { AdsPage } from '../ads/ads';
   templateUrl: 'advertiser.html'
 })
 export class AdvertiserPage {
-  // host: string = "http://localhost:3000";
-  host: string = "https://barramais.herokuapp.com";
+  // host: string = "https://barramais.herokuapp.com";
+  host: string = "http://localhost:3000";
   advertiser: AdvertiserModel;
   address: AddressModel = new AddressModel();
   cities: any;
