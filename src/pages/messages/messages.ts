@@ -60,6 +60,7 @@ export class MessagesPage {
         {"name": "body", "value": this.message.body}
       ]
     };
+
     this.conversationChannel.createMessage(data);
     this.message = {};
   }
