@@ -3,7 +3,7 @@
     <bm-header></bm-header>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
   <div class="container">
     <form (ngSubmit)="save(user)">
       <ion-item-group>
@@ -16,7 +16,7 @@
           </a>
           <a (click)="presentActionSheet()" [hidden]="user.avatar !== null">
             <ion-thumbnail item-left>
-              <img src="../assets/images/DESPACHANTE.png" id='user_avatar'>
+              <img src="assets/images/DESPACHANTE.png" id='user_avatar'>
             </ion-thumbnail>
           </a>
         </ion-item>
@@ -42,6 +42,26 @@
         </ion-item>
         <br>
         <ion-item-divider color="light">Informações pessoais</ion-item-divider>
+        <ion-item>
+          <ion-label floating>Sobre mim</ion-label>
+          <ion-textarea [(ngModel)]="user.about" name="about"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Trabalho e educação</ion-label>
+          <ion-textarea [(ngModel)]="user.academic_profile" name="academic_profile"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>Trabalha com náutica</ion-label>
+          <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional" (ionChange)="hideNautical()"></ion-toggle>
+        </ion-item>
+        <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
+          <ion-label floating>Descreva seu trabalho:</ion-label>
+          <ion-textarea [(ngModel)]="user.nautical_profession_description" name="nautical_profession_description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Data de nascimento</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birthday" name="birthday"></ion-datetime>
+        </ion-item>
         <ion-list radio-group [(ngModel)]="user.sex" name="sex">
           <ion-list-header>
             Sexo
@@ -55,33 +75,9 @@
             <ion-radio value="F"></ion-radio>
           </ion-item>
         </ion-list>
-        <ion-item>
-          <ion-label floating>Data de nascimento</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birthday" name="birthday"></ion-datetime>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Celular</ion-label>
-          <ion-input type="text" [(ngModel)]="user.cellphone" name="cellphone"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Sobre mim</ion-label>
-          <ion-textarea [(ngModel)]="user.about" name="about"></ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Trabalho e educação</ion-label>
-          <ion-textarea [(ngModel)]="user.academic_profile" name="academic_profile"></ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-label>Trabalha com náutica</ion-label>
-          <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional"></ion-toggle>
-        </ion-item>
-        <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
-          <ion-label floating>Descreva seu trabalho:</ion-label>
-          <ion-textarea [(ngModel)]="user.nautical_profession_description" name="nautical_profession_description"></ion-textarea>
-        </ion-item>
         <ion-list radio-group no-lines [(ngModel)]="user.relationship" name="relationship">
           <ion-list-header>
-            Relacionamento
+            Estado Civil
           </ion-list-header>
           <ion-item>
             <ion-label>Casado</ion-label>
@@ -97,13 +93,126 @@
           </ion-item>
         </ion-list>
         <ion-item>
+          <ion-label floating>Celular</ion-label>
+          <ion-input type="text" [(ngModel)]="user.cellphone" name="cellphone"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label>Possui embarcação?</ion-label>
           <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation"></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Integrante da Marinha do Brasil</ion-label>
-          <ion-input type="text" [(ngModel)]="user.naval_service" placeHolder="Sua Patente" name="naval_service"></ion-input>
+          <ion-label>Possui habilitação náutica?</ion-label>
+          <ion-toggle [(ngModel)]="user.has_nautical_license" name="has_nautical_license" (ionChange)="hideNauticalLicenses()"></ion-toggle>
         </ion-item>
+        <ion-list radio-group [(ngModel)]="user.nautical_license" name="nautical_license" id="nautical_license" [hidden]="showNauticalLicenses == false">
+          <ion-list-header>
+            Selecione o tipo de habilitação
+          </ion-list-header>
+          <ion-item>
+            <ion-radio value="motonauta"></ion-radio>
+            <ion-label>Motonauta</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/motonauta.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="arrais_amador"></ion-radio>
+            <ion-label>Arrais amador</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/aa.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="mestre_amador"></ion-radio>
+            <ion-label>Mestre amador</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/ma.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="capitao_amador"></ion-radio>
+            <ion-label>Capitão amador</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/ca.png"/></ion-icon>
+          </ion-item>
+        </ion-list>
+        <ion-item>
+          <ion-label>Integrante da Marinha do Brasil?</ion-label>
+          <ion-toggle [(ngModel)]="user.naval_service" name="naval_service" (ionChange)="hideNavalPatents()"></ion-toggle>
+        </ion-item>
+        <ion-list radio-group [(ngModel)]="user.naval_service_patent" name="naval_service_patent" id="naval_service_patent" [hidden]="showNavalPatents == false">
+          <ion-list-header>
+            Selecione sua patente
+          </ion-list-header>
+          <ion-item>
+            <ion-radio value="marinheiro"></ion-radio>
+            <ion-label>Marinheiro</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/marinheiro.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="cabo"></ion-radio>
+            <ion-label>Cabo</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/cabo.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="terceiro_sargento"></ion-radio>
+            <ion-label>Terceiro Sargento</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/terceiro_sargento.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="segundo_sargento"></ion-radio>
+            <ion-label>Segundo Sargento</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/segundo_sargento.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="primeiro_sargento"></ion-radio>
+            <ion-label>Primeiro Sargento</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/primeiro_sargento.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="suboficial"></ion-radio>
+            <ion-label>Suboficial</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/suboficial.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="segundo_tenente"></ion-radio>
+            <ion-label>Segundo Tenente</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/segundo_tenente.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="primeiro_tenente"></ion-radio>
+            <ion-label>Primeiro Tenente</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/primeiro_tenente.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="capitao_tenente"></ion-radio>
+            <ion-label>Capitao Tenente</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_tenente.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="capitao_corveta"></ion-radio>
+            <ion-label>Capitao de Corveta</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_corveta.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="capitao_fragata"></ion-radio>
+            <ion-label>Capitao de Fragata</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_fragata.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="capitao_mar_guerra"></ion-radio>
+            <ion-label>Capitao de mar e guerra</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_mar_guerra.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="contra_almirante"></ion-radio>
+            <ion-label>Contra Almirante</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/contra_almirante.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="vice_almirante"></ion-radio>
+            <ion-label>Vice Almirante</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/vice_almirante.png"/></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="almirante_esquadra"></ion-radio>
+            <ion-label>Almirante de Esquadra</ion-label>
+            <ion-icon item-left><img class="nautical_license" src="assets/images/almirante_esquadra.png"/></ion-icon>
+          </ion-item>
+        </ion-list>
       </ion-item-group>
       <button class="form-buttons" ion-button type="submit" block>Salvar</button>
     </form>

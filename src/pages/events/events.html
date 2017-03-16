@@ -1,8 +1,6 @@
 <ion-header>
   <ion-navbar>
     <bm-header></bm-header>
-  </ion-navbar>
-  <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="events">
       <ion-segment-button value="my-events">
         Próprios
@@ -14,9 +12,9 @@
         Pendentes
       </ion-segment-button>
     </ion-segment>
-  </ion-toolbar>
+  </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)" [pullMin]=90>
    <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -158,7 +156,7 @@
               </button>
             </ion-col>
           </ion-row>
-        </a>  
+        </a>
       </ion-card>
     </ion-list>
   </div>

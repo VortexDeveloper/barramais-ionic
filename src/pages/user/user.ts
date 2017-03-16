@@ -27,6 +27,8 @@ export class UserPage {
   avatar: string;
   rootPage = HomePage;
   showNauticalWorkText: boolean = false;
+  showNauticalLicenses: boolean = false;
+  showNavalPatents: boolean = false;
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
 
@@ -53,7 +55,6 @@ export class UserPage {
         localStorage.setItem("user", response.user);
         this.presentToast("Usuário atualizado com sucesso!");
     }, error => {
-        console.log(error.json().errors);
         var errors = error.json().errors;
         var errorMessage;
         for(let campo in errors) {
@@ -83,6 +84,14 @@ export class UserPage {
 
   hideNautical(){
     this.showNauticalWorkText = !this.showNauticalWorkText;
+  }
+
+  hideNauticalLicenses(){
+    this.showNauticalLicenses = !this.showNauticalLicenses;
+  }
+
+  hideNavalPatents(){
+    this.showNavalPatents = !this.showNavalPatents;
   }
 
   public presentActionSheet() {
