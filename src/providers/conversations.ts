@@ -16,16 +16,22 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class Conversations {
 
-  private host: string = "http://localhost:3000/";
+  private host: string = "http://localhost:3000/conversations";
   //private host: string = "http://10.0.2.2:3000/"
   //private host: string = "https://barramais.herokuapp.com/"
 
-  private index: string = this.host + "conversations.json";
+  private index_url: string = this.host + ".json";
+  private conversation_messages_url: string = "/messages.json";
 
   constructor(public http: Http, public authHttp: AuthHttp) { }
 
   my_conversations() {
-    return this.authHttp.get(this.index)
+    return this.authHttp.get(this.index_url)
+      .map(res => res.json());
+  }
+
+  conversation_messages(conversation_id) {
+    return this.authHttp.get(this.host + "/" + conversation_id + this.conversation_messages_url)
       .map(res => res.json());
   }
 }

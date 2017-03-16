@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Conversations } from '../../providers/conversations';
+import { MessagesPage } from '../messages/messages';
 
 /*
   Generated class for the Conversation page.
@@ -32,5 +33,9 @@ export class ConversationPage {
       (error) => console.log(error),
       () => console.log("completed")
     );
+  }
+
+  openConversation(conversation) {
+    this.navCtrl.push(MessagesPage, {conversation: conversation});
   }
 }
