@@ -3,6 +3,8 @@ import { ProfilePage } from "../../pages/profile/profile";
 import { NavController, NavParams } from 'ionic-angular';
 import { MainPage } from '../../pages/main/main';
 import { HomePage } from '../../pages/home/home';
+import { ConversationPage } from '../../pages/conversation/conversation';
+
 /*
   Generated class for the CocoButton component.
 
@@ -18,6 +20,7 @@ export class BmHeaderComponent {
   profilePage: any = ProfilePage;
   mainPage: any = MainPage;
   homePage: any = HomePage;
+  conversationPage: any = ConversationPage;
 
   constructor(
     public navCtrl: NavController,

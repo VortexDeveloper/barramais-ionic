@@ -5,7 +5,7 @@
 <ion-content>
   <div class="container">
     <div class="logo">
-      <img src="/assets/images/logo.png" alt="BarraMais" />
+      <img src="assets/images/logo300.png" alt="BarraMais" />
     </div>
     <p>
       CONFIGURAÇÃO DA CONTA B+
@@ -40,7 +40,7 @@
     </form>
     <p>
       Ao inscrever-se, você concorda com nossos<br>
-      <b>Termos de Serviço</b> e <b>Política de Privacidade</b>
+      <b><a (click)="openPage(termsPage)">Termos de Serviço</a></b> e <b><a (click)="openPage(privacyPage)">Política de Privacidade</a></b>
     </p>
   </div>
 </ion-content>

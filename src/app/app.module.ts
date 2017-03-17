@@ -23,6 +23,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
+import { PrivacyPage } from '../pages/privacy/privacy';
+import { TermsPage } from '../pages/terms/terms';
 import { Advertiser } from '../providers/advertiser';
 import { AdsPage } from '../pages/ads/ads';
 import { Ads } from '../providers/ads';
@@ -62,6 +64,8 @@ export function getAuthHttp(http) {
     BmHeaderComponent,
     AdvertiserPage,
     AdsPage,
+    TermsPage,
+    PrivacyPage,
     ConversationPage,
     MessagesPage,
     MidiaKitPage
@@ -90,6 +94,8 @@ export function getAuthHttp(http) {
     BmHeaderComponent,
     AdvertiserPage,
     AdsPage,
+    TermsPage,
+    PrivacyPage,
     ConversationPage,
     MessagesPage,
     MidiaKitPage

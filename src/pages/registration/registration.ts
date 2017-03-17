@@ -5,6 +5,9 @@ import { MainPage } from "../main/main";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { FeedsPage } from "../feeds/feeds";
+import { PrivacyPage } from "../privacy/privacy";
+import { TermsPage } from "../terms/terms";
+
 /*
   Generated class for the Registration1 page.
 
@@ -19,6 +22,8 @@ export class RegistrationPage {
 
   user: UserModel = new UserModel();
   rootPage = MainPage;
+  privacyPage: any = PrivacyPage;
+  termsPage: any = TermsPage;
 
   constructor(
     public navCtrl: NavController,
