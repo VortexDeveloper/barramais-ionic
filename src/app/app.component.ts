@@ -30,7 +30,7 @@ export class MyApp {
   showAnuncios: boolean = false;
   showClassificados: boolean = false;
   termsPage: any = TermsPage;
-  privacyPage: any = PrivacyPage
+  privacyPage: any = PrivacyPage;
   conversationPage: any = ConversationPage;
 
   openLink(link){

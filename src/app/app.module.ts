@@ -64,7 +64,7 @@ export function getAuthHttp(http) {
     AdvertiserPage,
     AdsPage,
     TermsPage,
-    PrivacyPage
+    PrivacyPage,
     ConversationPage,
     MessagesPage
   ],
@@ -93,7 +93,7 @@ export function getAuthHttp(http) {
     AdvertiserPage,
     AdsPage,
     TermsPage,
-    PrivacyPage
+    PrivacyPage,
     ConversationPage,
     MessagesPage
   ],
