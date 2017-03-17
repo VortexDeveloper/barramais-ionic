@@ -32,6 +32,7 @@ import { ConversationPage } from '../pages/conversation/conversation';
 import { Conversations } from '../providers/conversations';
 import { ConversationChannel } from '../providers/conversation-channel';
 import { MessagesPage } from '../pages/messages/messages';
+import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -66,7 +67,8 @@ export function getAuthHttp(http) {
     TermsPage,
     PrivacyPage,
     ConversationPage,
-    MessagesPage
+    MessagesPage,
+    MidiaKitPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -95,7 +97,8 @@ export function getAuthHttp(http) {
     TermsPage,
     PrivacyPage,
     ConversationPage,
-    MessagesPage
+    MessagesPage,
+    MidiaKitPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

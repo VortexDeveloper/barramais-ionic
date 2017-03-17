@@ -7,6 +7,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdsPage } from '../pages/ads/ads';
+import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
 import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { InAppBrowser } from 'ionic-native';
@@ -32,6 +33,7 @@ export class MyApp {
   termsPage: any = TermsPage;
   privacyPage: any = PrivacyPage;
   conversationPage: any = ConversationPage;
+  midiaKitPage: any = MidiaKitPage;
 
 
   openLink(link){
