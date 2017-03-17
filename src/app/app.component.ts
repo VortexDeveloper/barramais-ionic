@@ -7,6 +7,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdsPage } from '../pages/ads/ads';
+import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
 import { InAppBrowser } from 'ionic-native';
 import { ConversationPage } from '../pages/conversation/conversation';
 
@@ -25,6 +26,7 @@ export class MyApp {
   advertiserPage: any = AdvertiserPage;
   adsPage: any = AdsPage;
   conversationPage: any = ConversationPage;
+  midiaKitPage: any = MidiaKitPage;
 
   openSite(){
     let browser = new InAppBrowser('http://barramais.com.br/blog/', '_system');
