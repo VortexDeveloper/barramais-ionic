@@ -12,9 +12,10 @@ page-login {
   }
   .content-md, .content-ios, .content-wp {
       color: #000;
-      background-image: url(../assets/images/bg_cadastro.jpg);
-      background-position: center;
-      background-size: cover;
+      // background-image: url(../assets/images/bg_cadastro.jpg);
+      // background-position: center;
+      // background-size: cover;
+      background: #f7a14b;
   }
 
   .item-md, .item-ios, .item-wp {
@@ -54,13 +55,13 @@ page-login {
   }
 
   p {
-    color: #ccc;
+    color: #f5f5f5;
     font-size: 2em;
     text-align: center;
   }
 
   h2 {
-      color: #ccc;
+      color: #f5f5f5;
       font-size: 0.875em;
       text-align: center;
   }

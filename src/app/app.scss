@@ -1,5 +1,9 @@
 app-menu {
 
+  a {
+    color: #123f5f;
+  }
+
   .bar-buttons {
     padding: 0 !important;
     border-radius: 0 !important;
@@ -43,7 +47,7 @@ app-menu {
   }
 
   .item-inner {
-    font-size: 1.9rem;
+    font-size: 1.2rem;
     color: #123f5f;
   }
 
@@ -59,7 +63,6 @@ app-menu {
   }
 
   .menu-config {
-    border-top: solid 2px #d5d5d5;
     width: 98%;
     margin: 0 auto;
   }
@@ -146,13 +149,46 @@ app-menu {
   ion-segment {
     margin-top: 10px;
   }
-  
+
   .toolbar-ios .segment-ios {
     position: relative;
     padding-top: 0 !important;
     height: auto !important;
     min-height: auto !important;
     margin-top: 4px;
+  }
+
+  .sub-menu-item {
+    transition: all 1s ease-in !important;
+    padding-left: 40px;
+  }
+
+  .item-sub{
+    font-size: 1.3em !important;
+  }
+
+  .avatar{
+    background: #f5f5f5;
+  }
+
+  .last-links{
+    min-height: 1.4em !important;
+  }
+
+  .last-links .label-md{
+    margin: 5px !important;
+  }
+
+  .last-links .label-ios{
+    margin: 5px !important;
+  }
+
+  .last-links .label-wp{
+    margin: 5px !important;
+  }
+
+  .social-media {
+    width: 29px;
   }
 
 }

@@ -23,6 +23,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
+import { PrivacyPage } from '../pages/privacy/privacy';
+import { TermsPage } from '../pages/terms/terms';
 import { Advertiser } from '../providers/advertiser';
 import { AdsPage } from '../pages/ads/ads';
 import { Ads } from '../providers/ads';
@@ -56,7 +58,9 @@ export function getAuthHttp(http) {
     LoginPage,
     BmHeaderComponent,
     AdvertiserPage,
-    AdsPage
+    AdsPage,
+    TermsPage,
+    PrivacyPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -81,7 +85,9 @@ export function getAuthHttp(http) {
     LoginPage,
     BmHeaderComponent,
     AdvertiserPage,
-    AdsPage
+    AdsPage,
+    TermsPage,
+    PrivacyPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

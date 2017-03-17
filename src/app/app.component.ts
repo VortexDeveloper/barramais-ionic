@@ -7,6 +7,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdsPage } from '../pages/ads/ads';
+import { TermsPage } from '../pages/terms/terms';
+import { PrivacyPage } from '../pages/privacy/privacy';
 import { InAppBrowser } from 'ionic-native';
 
 
@@ -23,19 +25,22 @@ export class MyApp {
   userPage: any = UserPage;
   advertiserPage: any = AdvertiserPage;
   adsPage: any = AdsPage;
+  showPaginas: boolean = false;
+  showAnuncios: boolean = false;
+  showClassificados: boolean = false;
+  termsPage: any = TermsPage;
+  privacyPage: any = PrivacyPage
 
-  openSite(){
-    let browser = new InAppBrowser('http://barramais.com.br/blog/', '_system');
+  openLink(link){
+    let browser = new InAppBrowser(link, '_system');
   }
 
   constructor(
     public platform: Platform
   ) {
-
       if (localStorage.getItem("jwt")){
         this.rootPage = this.mainPage;
       }
-
       this.initializeApp();
   }
 
@@ -49,4 +54,22 @@ export class MyApp {
   openPage(page) {
     this.nav.push(page);
   }
+
+  showSubMenuAnuncios() {
+    this.showAnuncios = !this.showAnuncios;
+  }
+
+  showSubMenuPaginas() {
+    this.showPaginas = !this.showPaginas;
+  }
+
+  showSubMenuClassificados() {
+    this.showClassificados = !this.showClassificados;
+  }
+
+  // $('.menu_side_sub').hide();
+  // $('.menu_side_item').click(function () {
+  //     $(this).children('.menu_side_sub').slideToggle('slow');
+  // });
+
 }
