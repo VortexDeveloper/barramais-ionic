@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, ActionSheetController, NavParams } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { AdvertiserModel } from "../../models/advertiser.model";
@@ -11,6 +11,7 @@ import { AdvertiserPage } from '../advertiser/advertiser';
 import { InterestAreaModel } from "../../models/interest_area.model";
 import { Ads } from '../../providers/ads';
 import { AreaModel } from "../../models/area.model";
+import { Camera } from 'ionic-native';
 
 /*
   Generated class for the Ads page.
@@ -23,6 +24,7 @@ import { AreaModel } from "../../models/area.model";
   templateUrl: 'ads.html'
 })
 export class AdsPage {
+  host: string = "http://localhost:3000"
   ad: AdModel;
   current_user: UserModel;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -33,6 +35,8 @@ export class AdsPage {
   interestList: any;
   selectedAreas: any[] = []
   isEditing: boolean = false;
+  chosenAreas: any[] = [];
+  midiaKit: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -40,6 +44,7 @@ export class AdsPage {
     public navParams: NavParams,
     params: NavParams,
     public toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController,
     private advertiserProvider: Advertiser,
     private adsProvider: Ads
   ) {
@@ -49,10 +54,13 @@ export class AdsPage {
     this.isEditing = this.ad.id ? true : false;
 
     //console.log(this.ad.interest_areas);
-    //if(this.ad.interest_areas != null) this.loadSelectedAreas(this.ad);
+    if(this.ad.interest_areas != null) this.loadSelectedAreas(this.ad);
+    // console.log(this.chosenAreas);
 
     this.load_interest_list();
-    //console.log(this.interestList);
+    // console.log(this.interestList);
+
+    // console.log(this.ad);
   }
 
   ionViewDidLoad() {
@@ -142,6 +150,9 @@ export class AdsPage {
       .subscribe(response =>{
         this.interestList = response.interest_list;
         //console.log(this.interestList);
+        // missing = this.interestList - this.selectedAreas;
+        // let missing = this.interestList.filter(item => this.selectedAreas.splice);
+        // console.log(missing);
       }, error => {
           console.log("Erro ao exibir as áreas de interesse" + error.json());
       });
@@ -158,6 +169,99 @@ export class AdsPage {
 
   loadSelectedAreas(ad){
     this.selectedAreas = ad.interest_areas;
+  }
+
+  toggleUserSelectedArea(interestArea){
+    var found = false;
+    for(var i = 0; i < this.selectedAreas.length; i++){
+      if(this.selectedAreas[i].name == interestArea.name){
+        this.selectedAreas.splice(this.selectedAreas.indexOf(this.selectedAreas[i]), 1);
+        found = true;
+      }
+    }
+
+    if(!found){
+      this.selectedAreas.push(interestArea);
+    }
+
+    // var found = this.selectedAreas.indexOf(interestArea.id);
+    //
+    // if(found != -1){
+    //   this.selectedAreas.splice(this.selectedAreas.indexOf(this.selectedAreas[found]), 1);
+    // }else{
+    //   this.selectedAreas.push(interestArea.id);
+    // }
+    //
+    console.log(this.selectedAreas);
+
+    // var found = indexOf(interestArea.id)
+    // if found
+    //  userSelectedAreasId.splice;
+    // else
+    // userSelectedAreasId.push(interestArea.id)
+    //
+  }
+
+  checkSelectedAreas(interestArea){
+    var check = false;
+    for(var i = 0; i < this.selectedAreas.length; i++){
+      if(this.selectedAreas[i].name == interestArea.name){
+        check = true;
+      }
+    }
+
+    return check;
+  }
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Selecione a origem da imagem',
+      buttons: [
+        {
+          text: 'Carregar da Galeria',
+          handler: () => {
+            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Camera',
+          handler: () => {
+            this.takePicture(Camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takePicture(sourceType) {
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      allowEdit: true,
+      destinationType: Camera.DestinationType.DATA_URL
+    };
+
+    Camera.getPicture(options).then(image => {
+      this.ad.photo = "data:image/jpeg;base64," + image;
+    });
+
+    var image_tag = document.getElementsByTagName('img')[0];
+    image_tag.src = this.ad.photo;
+  }
+
+  toggleMidiaKit(){
+    if(this.midiaKit){
+      this.midiaKit = false;
+    }else{
+      this.midiaKit = true;
+    }
   }
 
 }
