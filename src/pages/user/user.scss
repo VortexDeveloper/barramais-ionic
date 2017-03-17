@@ -15,7 +15,7 @@ page-user {
   .item-inner {
       margin-left: 0 !important;
       font-size: 1.5rem;
-      border-bottom: 0.55px solid #c8c7cc !important;
+      // border-bottom: 0.55px solid #c8c7cc !important;
   }
 
   .item-md, .item-ios, .item-wp {
@@ -28,6 +28,19 @@ page-user {
 
   .nautical_license{
     width: 24.5px;
+  }
+
+  .camera-button {
+      background-color: transparent;
+      float: left;
+      bottom: 0;
+      position: relative;
+      font-size: 1em;
+      color: #123f5f;
+  }
+
+  .avatar-user{
+      border: none !important;
   }
 
 }

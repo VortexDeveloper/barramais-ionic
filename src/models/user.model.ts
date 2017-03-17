@@ -20,6 +20,7 @@ export class UserModel {
   cellphone: string;
   about: string;
   academic_profile: string;
+  work: string;
 
   //Nautical Information
   nautical_professional: boolean;
@@ -55,5 +56,6 @@ export class UserModel {
     this.advertiser = params.advertiser || null;
     this.nautical_license = params.nautical_license || 0;
     this.has_nautical_license = params.has_nautical_license || false;
+    this.work = params.work || "";
   }
 }

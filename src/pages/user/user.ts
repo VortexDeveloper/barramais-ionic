@@ -31,6 +31,9 @@ export class UserPage {
   showNavalPatents: boolean = false;
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
+  accountInformations: boolean = false;
+  personalInformations: boolean = false;
+  nauticalInformations: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -92,6 +95,18 @@ export class UserPage {
 
   hideNavalPatents(){
     this.showNavalPatents = !this.showNavalPatents;
+  }
+
+  showNauticalInformations(){
+    this.nauticalInformations = !this.nauticalInformations;
+  }
+
+  showPersonalInformations(){
+    this.personalInformations = !this.personalInformations;
+  }
+
+  showAccountInformations(){
+    this.accountInformations = !this.accountInformations;
   }
 
   public presentActionSheet() {

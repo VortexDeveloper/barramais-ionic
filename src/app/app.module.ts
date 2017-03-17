@@ -23,6 +23,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
+import { PrivacyPage } from '../pages/privacy/privacy';
+import { TermsPage } from '../pages/terms/terms';
 import { Advertiser } from '../providers/advertiser';
 import { AdsPage } from '../pages/ads/ads';
 import { Ads } from '../providers/ads';
@@ -30,6 +32,7 @@ import { ConversationPage } from '../pages/conversation/conversation';
 import { Conversations } from '../providers/conversations';
 import { ConversationChannel } from '../providers/conversation-channel';
 import { MessagesPage } from '../pages/messages/messages';
+import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -61,8 +64,11 @@ export function getAuthHttp(http) {
     BmHeaderComponent,
     AdvertiserPage,
     AdsPage,
+    TermsPage,
+    PrivacyPage,
     ConversationPage,
-    MessagesPage
+    MessagesPage,
+    MidiaKitPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -88,8 +94,11 @@ export function getAuthHttp(http) {
     BmHeaderComponent,
     AdvertiserPage,
     AdsPage,
+    TermsPage,
+    PrivacyPage,
     ConversationPage,
-    MessagesPage
+    MessagesPage,
+    MidiaKitPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
