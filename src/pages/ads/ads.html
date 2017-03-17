@@ -52,7 +52,7 @@
               <!-- <ion-label>
                 <h2>{{interest_area.name}}</h2>
               </ion-label> -->
-              <img class="image-list" src="{{host + interest_area.photo_url}}" alt="Sem foto" item-left>
+              <img class="image-list" src="{{interest_area.photo_url}}" alt="Sem foto" item-left>
               {{interest_area.name}}
               <ion-icon item-right name="boat" *ngIf="checkSelectedAreas(interest_area)"></ion-icon>
               <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedAreas(interest_area)"></ion-icon>
@@ -75,7 +75,7 @@
       <ion-item>
         <a (click)="presentActionSheet()" [hidden]="ad.photo_url == ''">
           <ion-thumbnail item-left>
-            <img src="{{host + ad.photo_url}}" id='ad_photo'>
+            <img src="{{ad.photo_url}}" id='ad_photo'>
           </ion-thumbnail>
         </a>
         <a (click)="presentActionSheet()" [hidden]="ad.photo_url != ''">
@@ -96,7 +96,7 @@
 
       <ion-item>
         <ion-thumbnail item-left>
-          <img src="{{host + ad.photo_url}}" id='ad_photo'>
+          <img src="{{ad.photo_url}}" id='ad_photo'>
         </ion-thumbnail>
       </ion-item>
 
@@ -109,7 +109,7 @@
 
       <ion-list>
         <ion-item *ngFor="let interest_area of selectedAreas">
-          <img class="image-list" src="{{host + interest_area.photo_url}}" alt="Sem foto" item-left>
+          <img class="image-list" src="{{interest_area.photo_url}}" alt="Sem foto" item-left>
           {{interest_area.name}}
         </ion-item>
       </ion-list>

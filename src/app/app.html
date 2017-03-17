@@ -2,7 +2,7 @@
   <ion-content>
     <ion-list>
       <ul class="photo-menu">
-        <li>
+        <li (click)="openPage(profilePage)" menuClose>
           <ion-item no-lines class="avatar">
             <ion-thumbnail item-left>
               <!-- <img src="{{user.avatar}}" id='user_avatar' [hidden]="user.avatar === null"> -->
@@ -51,17 +51,17 @@
             </a>
             <ul class="sub-menu-item" [hidden]="!showAnuncios">
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(advertiserPage)">
                   Meus anúncios
                 </button>
               </li>
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adsPage)">
                   Criar Anúncios
                 </button>
               </li>
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(advertiserPage)">
                   Meu cadastro
                 </button>
               </li>

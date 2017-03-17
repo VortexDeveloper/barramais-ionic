@@ -33,6 +33,7 @@ export class MyApp {
   privacyPage: any = PrivacyPage;
   conversationPage: any = ConversationPage;
 
+
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
   }

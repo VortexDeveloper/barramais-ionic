@@ -24,7 +24,6 @@ import { Camera } from 'ionic-native';
   templateUrl: 'ads.html'
 })
 export class AdsPage {
-  host: string = "http://localhost:3000"
   ad: AdModel;
   current_user: UserModel;
   jwtHelper: JwtHelper = new JwtHelper();
