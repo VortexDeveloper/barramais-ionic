@@ -8,6 +8,7 @@ import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdsPage } from '../pages/ads/ads';
 import { InAppBrowser } from 'ionic-native';
+import { ConversationPage } from '../pages/conversation/conversation';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class MyApp {
   userPage: any = UserPage;
   advertiserPage: any = AdvertiserPage;
   adsPage: any = AdsPage;
+  conversationPage: any = ConversationPage;
 
   openSite(){
     let browser = new InAppBrowser('http://barramais.com.br/blog/', '_system');

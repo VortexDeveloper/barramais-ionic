@@ -1,0 +1,24 @@
+page-messages {
+
+}
+
+.chat-messages-list ion-row {
+  justify-content: start;
+  margin-top: 10px;
+}
+
+.chat-messages-list ion-row ion-col {
+  background-color: #b9d9f0;
+}
+
+.chat-messages-list ion-row.ownMessage {
+  justify-content: end;
+}
+
+.chat-messages-list ion-row.ownMessage ion-col {
+  background-color: #ccc;
+}
+
+div.message-body {
+    padding: 10px 0 0px;
+}
