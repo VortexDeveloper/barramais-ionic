@@ -10,6 +10,7 @@ import { AdsPage } from '../pages/ads/ads';
 import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { InAppBrowser } from 'ionic-native';
+import { ConversationPage } from '../pages/conversation/conversation';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class MyApp {
   showClassificados: boolean = false;
   termsPage: any = TermsPage;
   privacyPage: any = PrivacyPage
+  conversationPage: any = ConversationPage;
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
