@@ -4,6 +4,9 @@ import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
 import { FriendshipRequestPage } from '../friendship-request/friendship-request'
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { Conversations } from '../../providers/conversations';
+import { MessagesPage } from '../messages/messages';
+import { User } from '../../providers/user';
 
 /*
   Generated class for the Friends page.
@@ -21,11 +24,16 @@ export class FriendsPage {
   feeds: any = FeedsPage;
   friendsPage: any = FriendsPage;
   friendshipRequestPage: any = FriendshipRequestPage;
+  friends: Array<any>;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
-  ) {}
+    public navParams: NavParams,
+    public conversationProvider: Conversations,
+    public userProvider: User
+  ) {
+    this.loadFriends();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendsPage');
@@ -35,4 +43,22 @@ export class FriendsPage {
     this.navCtrl.push(page);
   }
 
+  createConversationWith(user) {
+    this.conversationProvider.create(user).subscribe(
+      (conversation) => {
+        this.navCtrl.push(MessagesPage, { conversation: conversation });
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  loadFriends() {
+    this.userProvider.user_friends().subscribe(
+      (friends) => {
+        this.friends = friends;
+        console.log(friends);
+      },
+      (error) => console.log(error)
+    );
+  }
 }
