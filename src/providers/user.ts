@@ -18,11 +18,11 @@ import 'rxjs/add/operator/catch';
 export class User {
 
   //private host: string = "http://10.0.2.2:3000/"
-  private host: string = "https://barramais.herokuapp.com/"
-  // private host: string = "http://localhost:3000/"
+  // private host: string = "https://barramais.herokuapp.com/"
+  private host: string = "http://localhost:3000/"
 
   private url: string = this.host + "users";
-  private friends_url: string = this.host + "users/friends/";
+  private friends_url: string = this.host + "users/event_friends/";
   private my_events_url: string = this.host + "users/my_events/";
   private confirmed_events_url: string = this.host + "users/confirmed_events/";
   private pending_events_url: string = this.host + "users/pending_events/";
