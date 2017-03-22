@@ -12,19 +12,19 @@ import { AdBannersPage } from '../ad-banners/ad-banners';
 import { AdInterestsPage } from '../ad-interests/ad-interests';
 import { AdDescriptionsPage } from '../ad-descriptions/ad-descriptions';
 import { AdPreviewPage } from '../ad-preview/ad-preview';
+import { AdvertiserPaymentPage } from '../advertiser-payment/advertiser-payment';
 
 /*
-  Generated class for the Advertiser page.
+  Generated class for the Advertisers page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-advertiser',
-  templateUrl: 'advertiser.html'
+  selector: 'page-advertisers',
+  templateUrl: 'advertisers.html'
 })
-export class AdvertiserPage {
-  // host: string = "https://barramais.herokuapp.com";
+export class AdvertisersPage {
   host: string = "http://localhost:3000";
   advertiser: AdvertiserModel;
   address: AddressModel = new AddressModel();
@@ -42,6 +42,8 @@ export class AdvertiserPage {
   adInterestsPage: any = AdInterestsPage;
   adDescriptionsPage: any = AdDescriptionsPage;
   adPreviewPage: any = AdPreviewPage;
+  advertiserPaymentPage: any = AdvertiserPaymentPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -50,69 +52,17 @@ export class AdvertiserPage {
     private advertiserProvider: Advertiser,
     private userProvider: User,
     public toastCtrl: ToastController
-  ) {
-      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
-
-      if(this.advertiser != null){
-        this.isAdvertiser = true;
-      }else{
-        this.presentToast("Você ainda não é um anunciante, efetue seu cadastro.");
-      }
-
-      this.getStates('1');
-    }
+   ) {
+    this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.advertiser = new AdvertiserModel(this.loadAdvertiser(this.current_user));
+    // this.loadAdvertiser(this.current_user);
+    this.isEditing = this.advertiser.id ? true : false;
+    this.getStates('1');
+    // console.log(this.advertiser);
+   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AdvertiserPage');
-  }
-
-  save(advertiser, address){
-    var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
-    var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
-    var documentRule = (advertiser.document_type == "cpf" && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == "cnpj" && advertiser.document_number.match(documentCNPJRule)) ? true : false;
-
-    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
-
-    var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
-
-    if(advertiser.document_type == 0){
-      this.presentToast("Selecione o tipo de documento do anunciante!");
-    }else if(documentRule == false){
-      this.presentToast("Insira o número do documento do anunciante!");
-    }else if(address.state_id == ""){
-      this.presentToast("Selecione um estado!");
-    }else if(address.city_id == ""){
-      this.presentToast("Selecione uma cidade!");
-    }else if(address.street.length < 3){
-      this.presentToast("Insira o endereço do anunciante!");
-    }else if(address.complement.length < 3){
-      this.presentToast("Insira o complemento!");
-    }else if(address.neighborhood.length < 3){
-      this.presentToast("Insira o bairro!");
-    }else if(!advertiser.email.match(emailRule)){
-      this.presentToast("Insira o email do anunciante");
-    }else if(!advertiser.cell_phone.match(phoneRule)){
-      this.presentToast("Insira o celular do anunciante");
-    }else{
-      this.advertiserProvider.create(advertiser, address)
-      .subscribe(response => {
-          this.openPage(AdvertiserPage);
-          this.presentToast("Anunciante criado com sucesso!");
-      }, error => {
-          console.log(error.json());
-          this.presentToast(error.json());
-      });
-    }
-  }
-
-  destroy(ad){
-    this.advertiserProvider.destroy(ad)
-    .subscribe(response => {
-      this.presentToast("Anúncio removido com sucesso!");
-    });
-    this.clearRemovedAd(ad);
-    this.checkAdsList();
+    console.log('ionViewDidLoad AdvertisersPage');
   }
 
   loadAdvertiser(current_user){
@@ -125,11 +75,14 @@ export class AdvertiserPage {
         if(response.user_advertiser){
           this.advertiser = new AdvertiserModel(response.user_advertiser);
           this.ads = response.user_advertiser.ads;
+          this.address = response.user_advertiser.address;
+          this.getCities();
         }else{
           this.advertiser = new AdvertiserModel();
           this.ads = [];
           this.isAdvertiser = false;
-          this.presentToast("Você ainda não é um anunciante, efetue seu cadastro.");
+          this.address = new AddressModel();
+          this.advertiser.address = new AddressModel();
         }
         this.checkAdsList();
       }, error => {
@@ -182,12 +135,44 @@ export class AdvertiserPage {
     this.navCtrl.push(page);
   }
 
-  openEditPage(page, ad){
-    this.navCtrl.push(page, {'ad': ad});
+  openNextPage(page, advertiser, address){
+    var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
+    var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
+    var documentRule = (advertiser.document_type == "cpf" && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == "cnpj" && advertiser.document_number.match(documentCNPJRule)) ? true : false;
+
+    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+
+    var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
+
+    if(advertiser.document_type == 0){
+      this.presentToast("Selecione o tipo de documento do anunciante!");
+    }else if(documentRule == false){
+      this.presentToast("Insira o número do documento do anunciante!");
+    }else if(address.state_id == ""){
+      this.presentToast("Selecione um estado!");
+    }else if(address.city_id == ""){
+      this.presentToast("Selecione uma cidade!");
+    }else if(address.street.length < 3){
+      this.presentToast("Insira o endereço do anunciante!");
+    }else if(address.complement.length < 3){
+      this.presentToast("Insira o complemento!");
+    }else if(address.neighborhood.length < 3){
+      this.presentToast("Insira o bairro!");
+    }else if(!advertiser.email.match(emailRule)){
+      this.presentToast("Insira o email do anunciante");
+    }else if(!advertiser.cell_phone.match(phoneRule)){
+      this.presentToast("Insira o celular do anunciante");
+    }else{
+      this.navCtrl.push(page, {'advertiser': advertiser, 'address': address});
+    }
   }
 
   clearRemovedAd(removedItem){
       this.ads.splice(this.ads.indexOf(removedItem), 1);
+  }
+
+  goBack(){
+    this.navCtrl.pop();
   }
 
 }

@@ -11,6 +11,7 @@ export class AdvertiserModel{
   landline: string;
   cell_phone: string;
   user_id: number;
+  address: any;
 
   constructor(public params?:any){
     params = params || {}
@@ -26,5 +27,6 @@ export class AdvertiserModel{
     this.landline = params.landline || "";
     this.cell_phone = params.cell_phone || "";
     this.user_id = params.user_id || null;
+    this.address = params.address || null;
   }
 }

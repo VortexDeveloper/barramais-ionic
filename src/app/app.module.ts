@@ -33,6 +33,14 @@ import { Conversations } from '../providers/conversations';
 import { ConversationChannel } from '../providers/conversation-channel';
 import { MessagesPage } from '../pages/messages/messages';
 import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
+import { AdBannersPage } from '../pages/ad-banners/ad-banners';
+import { AdInterestsPage } from '../pages/ad-interests/ad-interests';
+import { AdDescriptionsPage } from '../pages/ad-descriptions/ad-descriptions';
+import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
+import { AdListPage } from '../pages/ad-list/ad-list';
+import { AdvertisersPage } from '../pages/advertisers/advertisers';
+import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
+
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -68,7 +76,14 @@ export function getAuthHttp(http) {
     PrivacyPage,
     ConversationPage,
     MessagesPage,
-    MidiaKitPage
+    MidiaKitPage,
+    AdBannersPage,
+    AdInterestsPage,
+    AdDescriptionsPage,
+    AdPreviewPage,
+    AdListPage,
+    AdvertisersPage,
+    AdvertiserPaymentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -98,7 +113,14 @@ export function getAuthHttp(http) {
     PrivacyPage,
     ConversationPage,
     MessagesPage,
-    MidiaKitPage
+    MidiaKitPage,
+    AdBannersPage,
+    AdInterestsPage,
+    AdDescriptionsPage,
+    AdPreviewPage,
+    AdListPage,
+    AdvertisersPage,
+    AdvertiserPaymentPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

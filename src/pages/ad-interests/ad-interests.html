@@ -1,0 +1,31 @@
+<!--
+  Generated template for the AdInterests page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <bm-header></bm-header>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-divider color="light">Áreas de interesse</ion-item-divider>
+        <ion-item *ngFor="let interest_area of interestList" (click)="toggleUserSelectedArea(interest_area)">
+          <img class="image-list" src="{{host + interest_area.photo_url}}" alt="Sem foto" item-left>
+          {{interest_area.name}}
+          <ion-icon item-right name="boat" *ngIf="checkSelectedAreas(interest_area)"></ion-icon>
+          <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedAreas(interest_area)"></ion-icon>
+
+        </ion-item>
+  </ion-list>
+
+  <button class="form-buttons" ion-button type="button" (click)="openNextPage(adDescriptionsPage, ad)" block>Próximo</button>
+
+  <button class="form-buttons" ion-button type="button" (click)="goBack()" block>Voltar</button>
+</ion-content>

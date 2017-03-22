@@ -41,6 +41,11 @@ export class Advertiser {
       .map(res => res.json());
   }
 
+  update(advertiser, address){
+    return this.authHttp.post(this.url + ".json", {'advertiser': advertiser, 'address': address})
+      .map(res => res.json());
+  }
+
   createAd(ad, advertiser){
     console.log(ad.interest_areas)
     return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})

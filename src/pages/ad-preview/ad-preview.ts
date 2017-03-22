@@ -13,18 +13,20 @@ import { Ads } from '../../providers/ads';
 import { AreaModel } from "../../models/area.model";
 import { Camera } from 'ionic-native';
 import { MidiaKitPage } from '../midia-kit/midia-kit';
+import { AdListPage } from '../ad-list/ad-list';
 
 /*
-  Generated class for the Ads page.
+  Generated class for the AdPreview page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-ads',
-  templateUrl: 'ads.html'
+  selector: 'page-ad-preview',
+  templateUrl: 'ad-preview.html'
 })
-export class AdsPage {
+export class AdPreviewPage {
+  host: string = "http://localhost:3000"
   ad: AdModel;
   current_user: UserModel;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -38,6 +40,9 @@ export class AdsPage {
   chosenAreas: any[] = [];
   midiaKit: boolean = false;
   midiaKitPage: MidiaKitPage;
+  ad_area: any;
+  ad_photo: any;
+  ad_description: any;
 
   constructor(
     public navCtrl: NavController,
@@ -62,14 +67,57 @@ export class AdsPage {
     // console.log(this.interestList);
 
     // console.log(this.ad);
+
+    // console.log(this.ad_area);
+    // console.log(this.selectedAreas);
+    // console.log(this.ad_photo);
+    // console.log(this.ad_description);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AdsPage');
+    console.log('ionViewDidLoad AdPreviewPage');
   }
 
   loadAdvertiser(current_user){
     this.userAdvertiser(current_user);
+  }
+
+  save(ad){
+    if(ad.area == null){
+      this.presentToast("O modelo do anúncio precisa ser escolhido!")
+    }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
+      this.presentToast("O anúncio deve conter ao menos uma área de interesse!")
+    }else if(ad.description == ""){
+      this.presentToast("O campo de descrição do anúncio precisa ser preenchido!")
+    }else{
+      this.advertiserProvider.createAd(ad, this.advertiser)
+      .subscribe(response => {
+          this.openPage(AdListPage);
+          this.presentToast("Anúncio cadastrado com sucesso!");
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error.json());
+      });
+    }
+  }
+
+  update(ad){
+    if(ad.area == null){
+      this.presentToast("O modelo do anúncio precisa ser escolhido!")
+    }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
+      this.presentToast("O anúncio deve conter ao menos uma área de interesse!")
+    }else if(ad.description == ""){
+      this.presentToast("O campo de descrição do anúncio precisa ser preenchido!")
+    }else{
+      this.advertiserProvider.updateAd(ad, this.advertiser)
+        .subscribe(response => {
+          this.openPage(AdListPage);
+          this.presentToast("Anúncio modificado com sucesso!");
+        }, error => {
+          console.log(error.json());
+          this.presentToast(error.json());
+        });
+    }
   }
 
   userAdvertiser(current_user){
@@ -83,67 +131,12 @@ export class AdsPage {
       });
   }
 
-  adArea(ad){
-    this.adsProvider.adArea(ad)
-      .subscribe(response =>{
-        this.ad.area = response.ad_area.id;
-      }, error => {
-        console.log("Erro" + error.json())
-      });
-  }
-
-  save(ad){
-    ad.interest_areas = this.selectedAreas;
-
-    if(ad.area == null){
-      this.presentToast("O modelo do anúncio precisa ser escolhido!")
-    }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
-      this.presentToast("O anúncio deve conter ao menos uma área de interesse!")
-    }else if(ad.description == ""){
-      this.presentToast("O campo de descrição do anúncio precisa ser preenchido!")
-    }else{
-      this.advertiserProvider.createAd(ad, this.advertiser)
-      .subscribe(response => {
-          this.openPage(AdvertiserPage);
-          this.presentToast("Anúncio cadastrado com sucesso!");
-      }, error => {
-          console.log(error.json());
-          this.presentToast(error.json());
-      });
-    }
-  }
-
-  update(ad){
-    ad.interest_areas = this.selectedAreas;
-
-    if(ad.area == null){
-      this.presentToast("O modelo do anúncio precisa ser escolhido!")
-    }else if(ad.interest_areas == null || ad.interest_areas.length < 1){
-      this.presentToast("O anúncio deve conter ao menos uma área de interesse!")
-    }else if(ad.description == ""){
-      this.presentToast("O campo de descrição do anúncio precisa ser preenchido!")
-    }else{
-      this.advertiserProvider.updateAd(ad, this.advertiser)
-        .subscribe(response => {
-          this.openPage(AdvertiserPage);
-          this.presentToast("Anúncio modificado com sucesso!");
-        }, error => {
-          console.log(error.json());
-          this.presentToast(error.json());
-        });
-    }
-  }
-
   presentToast(msg){
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 5000
     });
     toast.present();
-  }
-
-  openPage(page){
-    this.navCtrl.push(page);
   }
 
   load_interest_list(){
@@ -157,15 +150,6 @@ export class AdsPage {
       }, error => {
           console.log("Erro ao exibir as áreas de interesse" + error.json());
       });
-  }
-
-  getSelect(isChecked, interestArea) {
-    if (isChecked) {
-      this.selectedAreas.push(interestArea);
-    } else {
-      this.selectedAreas.splice(this.selectedAreas.indexOf(interestArea), 1);
-    }
-    console.log(this.selectedAreas);
   }
 
   loadSelectedAreas(ad){
@@ -263,6 +247,14 @@ export class AdsPage {
     }else{
       this.midiaKit = true;
     }
+  }
+
+  openPage(page){
+    this.navCtrl.push(page);
+  }
+
+  goBack(){
+    this.navCtrl.pop();
   }
 
   showMidiaKit(){
