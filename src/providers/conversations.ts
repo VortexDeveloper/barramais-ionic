@@ -20,18 +20,23 @@ export class Conversations {
   //private host: string = "http://10.0.2.2:3000/conversations"
   // private host: string = "https://barramais.herokuapp.com/conversations"
 
-  private index_url: string = this.host + ".json";
+  private conversation_url: string = this.host + ".json";
   private conversation_messages_url: string = "/messages.json";
 
   constructor(public http: Http, public authHttp: AuthHttp) { }
 
   my_conversations() {
-    return this.authHttp.get(this.index_url)
+    return this.authHttp.get(this.conversation_url)
       .map(res => res.json());
   }
 
   conversation_messages(conversation_id) {
     return this.authHttp.get(this.host + "/" + conversation_id + this.conversation_messages_url)
+      .map(res => res.json());
+  }
+
+  create(user) {
+    return this.authHttp.post(this.conversation_url, {user_id: user.id})
       .map(res => res.json());
   }
 }

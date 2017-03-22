@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar secondary>
     <ion-title>{{conversation.opposed.name}}</ion-title>
   </ion-navbar>
 
@@ -33,7 +33,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-grid>
+  <ion-grid class='formgrid'>
     <ion-row>
       <ion-col width-80>
         <ion-textarea placeholder='Escreva aqui..' [(ngModel)]="message.body"></ion-textarea>

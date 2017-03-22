@@ -21,69 +21,14 @@
     </ion-col>
   </ion-row>
   <ion-list>
-    <ion-card>
+    <ion-card *ngFor="let user of friends">
       <ion-item>
         <ion-thumbnail item-left>
           <img src="/assets/images/batman.png">
         </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color="light" item-right>
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color="light" item-right>
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color="light" item-right>
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color="light" item-right>
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color="light" item-right>
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color="light" item-right>
-          <ion-icon name="more"></ion-icon>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <button ion-button color="light" item-right (click)='createConversationWith(user)'>
+          <ion-icon name="chatbubbles"></ion-icon>
         </button>
       </ion-item>
     </ion-card>

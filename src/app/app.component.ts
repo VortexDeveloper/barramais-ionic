@@ -49,6 +49,7 @@ export class MyApp {
   advertisersPage: any = AdvertisersPage;
   advertiserPaymentPage: any = AdvertiserPaymentPage;
 
+
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
   }
