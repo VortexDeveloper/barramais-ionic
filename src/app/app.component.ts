@@ -12,6 +12,13 @@ import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { InAppBrowser } from 'ionic-native';
 import { ConversationPage } from '../pages/conversation/conversation';
+import { AdBannersPage } from '../pages/ad-banners/ad-banners';
+import { AdInterestsPage } from '../pages/ad-interests/ad-interests';
+import { AdDescriptionsPage } from '../pages/ad-descriptions/ad-descriptions';
+import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
+import { AdListPage } from '../pages/ad-list/ad-list';
+import { AdvertisersPage } from '../pages/advertisers/advertisers';
+import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
 
 
 @Component({
@@ -34,6 +41,13 @@ export class MyApp {
   privacyPage: any = PrivacyPage;
   conversationPage: any = ConversationPage;
   midiaKitPage: any = MidiaKitPage;
+  adBannersPage: any = AdBannersPage;
+  adInterestsPage: any = AdInterestsPage;
+  adDescriptionsPage: any = AdDescriptionsPage;
+  adPreviewPage: any = AdPreviewPage;
+  adListPage: any = AdListPage;
+  advertisersPage: any = AdvertisersPage;
+  advertiserPaymentPage: any = AdvertiserPaymentPage;
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');

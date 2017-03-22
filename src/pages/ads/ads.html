@@ -14,6 +14,10 @@
 <ion-content padding>
   <ion-slides pager>
     <ion-slide>
+      <button class="form-buttons" ion-button type="button" (click)="showMidiaKit()" block>Modelos</button>
+
+      <br/>
+
       <ion-list radio-group [(ngModel)]="ad.area" name="ad_area">
         <ion-item-divider color="light">Escolha o modelo do anúncio</ion-item-divider>
         <ion-item>
