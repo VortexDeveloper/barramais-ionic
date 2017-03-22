@@ -6,7 +6,6 @@ page-profile {
     }
 
     .main-content {
-        padding: 20px;
         background-color: transparent;
         position: relative;
         top: -75px;
@@ -91,5 +90,35 @@ page-profile {
 
       .tabs-ios .tab-button[aria-selected=true] {
         color: #fff;
+      }
+
+      ion-col[width-17] {
+        -webkit-flex: 0 0 17%;
+        -ms-flex: 0 0 17%;
+        flex: 0 0 17%;
+        max-width: 17%;
+      }
+
+      .icon-button{
+        float: left;
+        width: 100%;
+        text-align: center;
+        color: #123f5f;
+        font-size: 3em;
+      }
+
+      .icon-word{
+        float: left;
+        width: 100%;
+        text-align: center;
+        color: #8e9093;
+        font-size: 0.875em;
+        margin: -5px 0;
+      }
+
+      .actions-row{
+        padding-bottom: 20px;
+        border-bottom: solid 2px #123f5f;
+        margin-bottom: 15px
       }
 }

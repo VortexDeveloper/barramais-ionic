@@ -34,6 +34,7 @@ export class ProfilePage {
   groupsPage: any = GroupsPage;
   eventsPage: any = EventsPage;
   friendsPage: any = FriendsPage;
+  friendsCount: number;
 
   constructor(
     public navCtrl: NavController,
@@ -42,7 +43,8 @@ export class ProfilePage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController
   ) {
-    this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.loadFriends();
+      this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
   }
 
   ionViewDidLoad() {
@@ -56,6 +58,16 @@ export class ProfilePage {
   openModal() {
     let modal = this.modalCtrl.create(PostModalPage);
     modal.present();
+  }
+
+  loadFriends() {
+    this.userProvider.user_friends().subscribe(
+      (friends) => {
+        this.friendsCount = friends.length;
+        console.log(friends.length);
+      },
+      (error) => console.log(error)
+    );
   }
 
 }
