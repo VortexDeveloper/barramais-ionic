@@ -39,6 +39,10 @@
     </ion-select>
   </ion-item>
   <ion-item>
+    <ion-label floating>Código Postal</ion-label>
+    <ion-input type="text" [(ngModel)]="address.zip_code" name="advertiser_address_zip_code"></ion-input>
+  </ion-item>
+  <ion-item>
     <ion-label floating>Endereço</ion-label>
     <ion-input type="text" [(ngModel)]="address.street" name="advertiser_address_street"></ion-input>
   </ion-item>
@@ -63,10 +67,10 @@
     <ion-label floating>Instagram</ion-label>
     <ion-input type="text" [(ngModel)]="advertiser.instagram" name="advertiser_instagram"></ion-input>
   </ion-item>
-  <ion-item>
+  <!-- <ion-item>
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="advertiser.email" name="advertiser_email"></ion-input>
-  </ion-item>
+  </ion-item> -->
   <ion-item>
     <ion-label floating>Telefone</ion-label>
     <ion-input type="text" [(ngModel)]="advertiser.landline" name="advertiser_landline"></ion-input>

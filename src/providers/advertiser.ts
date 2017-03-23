@@ -42,7 +42,7 @@ export class Advertiser {
   }
 
   update(advertiser, address){
-    return this.authHttp.post(this.url + ".json", {'advertiser': advertiser, 'address': address})
+    return this.authHttp.put(this.url + '/' + advertiser.id + ".json", {'advertiser': advertiser, 'address': address})
       .map(res => res.json());
   }
 

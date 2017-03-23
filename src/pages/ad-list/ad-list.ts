@@ -12,6 +12,7 @@ import { AdBannersPage } from '../ad-banners/ad-banners';
 import { AdInterestsPage } from '../ad-interests/ad-interests';
 import { AdDescriptionsPage } from '../ad-descriptions/ad-descriptions';
 import { AdPreviewPage } from '../ad-preview/ad-preview';
+import { MainPage } from '../main/main';
 
 /*
   Generated class for the AdList page.
@@ -41,6 +42,7 @@ export class AdListPage {
   adInterestsPage: any = AdInterestsPage;
   adDescriptionsPage: any = AdDescriptionsPage;
   adPreviewPage: any = AdPreviewPage;
+  mainPage: any = MainPage;
 
   constructor(
     public navCtrl: NavController,
@@ -112,6 +114,10 @@ export class AdListPage {
 
   openEditPage(page, ad){
     this.navCtrl.push(page, {'ad': ad});
+  }
+
+  goBack(){
+    this.navCtrl.setRoot(this.mainPage);
   }
 
 }

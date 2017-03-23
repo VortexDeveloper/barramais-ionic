@@ -40,7 +40,9 @@ import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
 import { AdListPage } from '../pages/ad-list/ad-list';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
-
+import { Classified } from '../providers/classified';
+import { ClassifiedPage } from '../pages/classified/classified';
+import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -83,7 +85,9 @@ export function getAuthHttp(http) {
     AdPreviewPage,
     AdListPage,
     AdvertisersPage,
-    AdvertiserPaymentPage
+    AdvertiserPaymentPage,
+    ClassifiedPage,
+    ClassifiedVesselTypePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -120,7 +124,9 @@ export function getAuthHttp(http) {
     AdPreviewPage,
     AdListPage,
     AdvertisersPage,
-    AdvertiserPaymentPage
+    AdvertiserPaymentPage,
+    ClassifiedPage,
+    ClassifiedVesselTypePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -130,6 +136,7 @@ export function getAuthHttp(http) {
     Ads,
     Conversations,
     ConversationChannel,
+    Classified,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
