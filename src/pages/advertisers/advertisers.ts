@@ -73,7 +73,7 @@ export class AdvertisersPage {
     this.userProvider.userAdvertiser(current_user)
       .subscribe(response =>{
         if(response.user_advertiser){
-          this.advertiser = new AdvertiserModel(response.user_advertiser);
+          this.advertiser = response.user_advertiser;
           this.ads = response.user_advertiser.ads;
           this.address = response.user_advertiser.address;
           this.getCities();
@@ -158,8 +158,6 @@ export class AdvertisersPage {
       this.presentToast("Insira o complemento!");
     }else if(address.neighborhood.length < 3){
       this.presentToast("Insira o bairro!");
-    }else if(!advertiser.email.match(emailRule)){
-      this.presentToast("Insira o email do anunciante");
     }else if(!advertiser.cell_phone.match(phoneRule)){
       this.presentToast("Insira o celular do anunciante");
     }else{

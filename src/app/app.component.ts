@@ -19,7 +19,8 @@ import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
 import { AdListPage } from '../pages/ad-list/ad-list';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
-
+import { ClassifiedPage } from '../pages/classified/classified';
+import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 
 @Component({
   selector: 'app-menu',
@@ -48,7 +49,8 @@ export class MyApp {
   adListPage: any = AdListPage;
   advertisersPage: any = AdvertisersPage;
   advertiserPaymentPage: any = AdvertiserPaymentPage;
-
+  classifiedPage: any = ClassifiedPage;
+  classifiedVesselTypePage: any = ClassifiedVesselTypePage;
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');

@@ -12,6 +12,7 @@ export class AdvertiserModel{
   cell_phone: string;
   user_id: number;
   address: any;
+  ads: any;
 
   constructor(public params?:any){
     params = params || {}
@@ -28,5 +29,6 @@ export class AdvertiserModel{
     this.cell_phone = params.cell_phone || "";
     this.user_id = params.user_id || null;
     this.address = params.address || null;
+    this.ads = params.ads || null;
   }
 }

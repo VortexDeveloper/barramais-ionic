@@ -107,7 +107,7 @@ export class AdInterestsPage {
       this.selectedAreas.push(interestArea);
     }
 
-    console.log(this.selectedAreas);
+    // console.log(this.selectedAreas);
   }
 
   checkSelectedAreas(interestArea){

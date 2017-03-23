@@ -40,8 +40,10 @@ import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
 import { AdListPage } from '../pages/ad-list/ad-list';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
+import { Classified } from '../providers/classified';
+import { ClassifiedPage } from '../pages/classified/classified';
+import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 import { UsersPage } from '../pages/users/users';
-
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -85,6 +87,8 @@ export function getAuthHttp(http) {
     AdListPage,
     AdvertisersPage,
     AdvertiserPaymentPage,
+    ClassifiedPage,
+    ClassifiedVesselTypePage,
     UsersPage
   ],
   imports: [
@@ -123,6 +127,8 @@ export function getAuthHttp(http) {
     AdListPage,
     AdvertisersPage,
     AdvertiserPaymentPage,
+    ClassifiedPage,
+    ClassifiedVesselTypePage,
     UsersPage
   ],
   providers: [
@@ -133,6 +139,7 @@ export function getAuthHttp(http) {
     Ads,
     Conversations,
     ConversationChannel,
+    Classified,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })

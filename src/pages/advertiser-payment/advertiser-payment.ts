@@ -63,7 +63,7 @@ export class AdvertiserPaymentPage {
     }else{
       this.address = params.data.address;
     }
-    console.log(this.address);
+    // console.log(this.address);
   }
 
   ionViewDidLoad() {
@@ -78,7 +78,7 @@ export class AdvertiserPaymentPage {
     this.userProvider.userAdvertiser(current_user)
       .subscribe(response =>{
         if(response.user_advertiser){
-          this.advertiser = new AdvertiserModel(response.user_advertiser);
+          this.advertiser = response.user_advertiser;
           this.ads = response.user_advertiser.ads;
           this.address = response.user_advertiser.address;
         }else{
@@ -137,6 +137,10 @@ export class AdvertiserPaymentPage {
     this.navCtrl.push(page);
   }
 
+  redirectPage(page){
+    this.navCtrl.setRoot(page);
+  }
+
   openEditPage(page, ad){
     this.navCtrl.push(page, {'ad': ad});
   }
@@ -172,14 +176,12 @@ export class AdvertiserPaymentPage {
       this.presentToast("Insira o complemento!");
     }else if(address.neighborhood.length < 3){
       this.presentToast("Insira o bairro!");
-    }else if(!advertiser.email.match(emailRule)){
-      this.presentToast("Insira o email do anunciante");
     }else if(!advertiser.cell_phone.match(phoneRule)){
       this.presentToast("Insira o celular do anunciante");
     }else{
       this.advertiserProvider.create(advertiser, address)
       .subscribe(response => {
-          this.openPage(this.adListPage);
+          this.redirectPage(this.adListPage);
           this.presentToast("Anunciante criado com sucesso!");
       }, error => {
           console.log(error.json());
@@ -211,14 +213,12 @@ export class AdvertiserPaymentPage {
       this.presentToast("Insira o complemento!");
     }else if(address.neighborhood.length < 3){
       this.presentToast("Insira o bairro!");
-    }else if(!advertiser.email.match(emailRule)){
-      this.presentToast("Insira o email do anunciante");
     }else if(!advertiser.cell_phone.match(phoneRule)){
       this.presentToast("Insira o celular do anunciante");
     }else{
       this.advertiserProvider.update(advertiser, address)
       .subscribe(response => {
-          this.openPage(this.adListPage);
+          this.redirectPage(this.adListPage);
           this.presentToast("Anunciante editado com sucesso!");
       }, error => {
           console.log(error.json());

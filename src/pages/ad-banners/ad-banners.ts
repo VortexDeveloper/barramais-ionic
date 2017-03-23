@@ -42,6 +42,7 @@ export class AdBannersPage {
   midiaKit: boolean = false;
   midiaKitPage: any = MidiaKitPage;
   adInterestsPage: any = AdInterestsPage;
+  isAdvertiser: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -69,8 +70,11 @@ export class AdBannersPage {
   userAdvertiser(current_user){
     this.userProvider.userAdvertiser(current_user)
       .subscribe(response =>{
-        this.advertiser = new AdvertiserModel(response.user_advertiser);
-        this.ads = response.user_advertiser.ads;
+        if(response.user_advertiser){
+          this.advertiser = new AdvertiserModel(response.user_advertiser);
+          this.ads = response.user_advertiser.ads;
+          this.isAdvertiser = true;
+        }
       }, error => {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
       });

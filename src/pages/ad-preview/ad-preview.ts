@@ -92,7 +92,7 @@ export class AdPreviewPage {
     }else{
       this.advertiserProvider.createAd(ad, this.advertiser)
       .subscribe(response => {
-          this.openPage(AdListPage);
+          this.redirectPage(AdListPage);
           this.presentToast("Anúncio cadastrado com sucesso!");
       }, error => {
           console.log(error.json());
@@ -111,7 +111,7 @@ export class AdPreviewPage {
     }else{
       this.advertiserProvider.updateAd(ad, this.advertiser)
         .subscribe(response => {
-          this.openPage(AdListPage);
+          this.redirectPage(AdListPage);
           this.presentToast("Anúncio modificado com sucesso!");
         }, error => {
           console.log(error.json());
@@ -177,7 +177,7 @@ export class AdPreviewPage {
     //   this.selectedAreas.push(interestArea.id);
     // }
     //
-    console.log(this.selectedAreas);
+    // console.log(this.selectedAreas);
 
     // var found = indexOf(interestArea.id)
     // if found
@@ -259,6 +259,10 @@ export class AdPreviewPage {
 
   showMidiaKit(){
     this.openPage(MidiaKitPage);
+  }
+
+  redirectPage(page){
+    this.navCtrl.setRoot(page);
   }
 
 }
