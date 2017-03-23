@@ -2,7 +2,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <button class="bar-buttons" right ion-button (click)="openPage(profilePage)">
+      <button class="bar-buttons" right ion-button (click)="openProfile()">
         <ion-icon ios="ios-person" md="md-person"></ion-icon>
       </button>
       <button class="bar-buttons" right ion-button>
@@ -11,7 +11,7 @@
       <button class="bar-buttons" right ion-button (click)="openPage(conversationPage)">
         <ion-icon name="chatbubbles"></ion-icon>
       </button>
-      <button class="bar-buttons" right ion-button>
+      <button class="bar-buttons" right ion-button (click)="openPage(usersPage)">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
       <button class="logo bar-buttons" left ion-button (click)="openPage(mainPage)">

@@ -90,26 +90,26 @@ app-menu {
     background-color: transparent;
   }
 
-  .item-md ion-avatar ion-img, .item-md ion-avatar img {
-    width: 4.6rem;
-    height: 4.6rem;
-    border-radius: 2.8rem;
-    overflow: hidden;
-  }
-
-  .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
-    width: 36px;
-    height: 36px;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .item-wp ion-avatar ion-img, .item-wp ion-avatar img {
-    overflow: hidden;
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-  }
+  // .item-md ion-avatar ion-img, .item-md ion-avatar img {
+  //   width: 4.6rem;
+  //   height: 4.6rem;
+  //   border-radius: 2.8rem;
+  //   overflow: hidden;
+  // }
+  //
+  // .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
+  //   width: 36px;
+  //   height: 36px;
+  //   border-radius: 5px;
+  //   overflow: hidden;
+  // }
+  //
+  // .item-wp ion-avatar ion-img, .item-wp ion-avatar img {
+  //   overflow: hidden;
+  //   width: 40px;
+  //   height: 40px;
+  //   border-radius: 5px;
+  // }
 
   ion-card img {
     display: block;

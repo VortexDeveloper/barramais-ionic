@@ -43,6 +43,7 @@ import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-pa
 import { Classified } from '../providers/classified';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
+import { UsersPage } from '../pages/users/users';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -87,7 +88,8 @@ export function getAuthHttp(http) {
     AdvertisersPage,
     AdvertiserPaymentPage,
     ClassifiedPage,
-    ClassifiedVesselTypePage
+    ClassifiedVesselTypePage,
+    UsersPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -126,7 +128,8 @@ export function getAuthHttp(http) {
     AdvertisersPage,
     AdvertiserPaymentPage,
     ClassifiedPage,
-    ClassifiedVesselTypePage
+    ClassifiedVesselTypePage,
+    UsersPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

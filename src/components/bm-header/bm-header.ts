@@ -3,7 +3,11 @@ import { ProfilePage } from "../../pages/profile/profile";
 import { NavController, NavParams } from 'ionic-angular';
 import { MainPage } from '../../pages/main/main';
 import { HomePage } from '../../pages/home/home';
+import { UsersPage } from '../../pages/users/users';
 import { ConversationPage } from '../../pages/conversation/conversation';
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
+
 
 /*
   Generated class for the CocoButton component.
@@ -17,16 +21,21 @@ import { ConversationPage } from '../../pages/conversation/conversation';
 })
 export class BmHeaderComponent {
 
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  current_user: UserModel;
+
   profilePage: any = ProfilePage;
   mainPage: any = MainPage;
   homePage: any = HomePage;
   conversationPage: any = ConversationPage;
+  usersPage: any = UsersPage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
-
+      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     }
 
 
@@ -40,6 +49,8 @@ export class BmHeaderComponent {
     this.navCtrl.setRoot(page);
   }
 
-
+  openProfile(){
+    this.navCtrl.setRoot(this.profilePage, {user: this.current_user})
+  }
 
 }

@@ -4,6 +4,8 @@ import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
 import { FriendsPage } from '../friends/friends'
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { ToastController } from 'ionic-angular';
+import { User } from '../../providers/user';
 /*
   Generated class for the FriendshipRequest page.
 
@@ -20,8 +22,16 @@ export class FriendshipRequestPage {
   feeds: any = FeedsPage;
   friendsPage: any = FriendsPage;
   friendshipRequestPage: any = FriendshipRequestPage;
+  pendingFriendships: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public toastCtrl: ToastController,
+    public userProvider: User
+  ) {
+      this.pending_friendships();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendshipRequestPage');
@@ -29,6 +39,47 @@ export class FriendshipRequestPage {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  pending_friendships(){
+    this.userProvider.pending_friendships()
+    .subscribe(
+      (response) => {
+        this.pendingFriendships = response.pending_friendships;
+        console.log(response.pending_friendships);
+      },
+      (error) => {
+        console.log(error.json());
+      }
+    );
+  }
+
+  accept_friendship(user){
+    this.userProvider.accept_friendship(user)
+    .subscribe(
+      (response) => {
+        this.presentToast(response);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  refuse_friendship(user){
+    this.userProvider.refuse_friendship(user)
+    .subscribe(
+      (response) => {
+        this.presentToast(response.status);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 
 }
