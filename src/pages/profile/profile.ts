@@ -12,6 +12,8 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { Conversations } from '../../providers/conversations';
+import { MessagesPage } from '../messages/messages';
 
 /*
   Generated class for the Profile page.
@@ -34,17 +36,25 @@ export class ProfilePage {
   groupsPage: any = GroupsPage;
   eventsPage: any = EventsPage;
   friendsPage: any = FriendsPage;
+  friends: any;
   friendsCount: number;
-
+  profileInformation: boolean = false;
+  visitorActions: boolean = false;
+  current_user: UserModel;
+  isFriend: any;
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
+    params: NavParams,
     private userProvider: User,
+    public conversationProvider: Conversations,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController
   ) {
+      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.user = new UserModel(params.data.user);
+      this.checkUser(this.user, this.current_user);
       this.loadFriends();
-      this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.user.id == this.current_user.id? this.isFriend = null : this.is_friend_of();
   }
 
   ionViewDidLoad() {
@@ -55,16 +65,88 @@ export class ProfilePage {
     this.navCtrl.push(page);
   }
 
+  openFriends(){
+    this.navCtrl.push(this.friendsPage, {friends: this.friends});
+  }
+
   openModal() {
     let modal = this.modalCtrl.create(PostModalPage);
     modal.present();
   }
 
   loadFriends() {
-    this.userProvider.user_friends().subscribe(
+    this.userProvider.user_friends(this.user)
+    .subscribe(
       (friends) => {
+        this.friends = friends;
         this.friendsCount = friends.length;
-        console.log(friends.length);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  showProfileInformation(){
+    this.profileInformation = !this.profileInformation;
+  }
+
+  checkUser(user, current_user){
+    if(user.id != current_user.id){
+      this.visitorActions = true;
+    }
+  }
+
+  createConversationWith(user) {
+    this.conversationProvider.create(user).subscribe(
+      (conversation) => {
+        this.navCtrl.push(MessagesPage, { conversation: conversation });
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
+  }
+
+  accept_friendship(user){
+    this.userProvider.accept_friendship(user)
+    .subscribe(
+      (response) => {
+        this.presentToast(response);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  refuse_friendship(user){
+    this.userProvider.refuse_friendship(user)
+    .subscribe(
+      (response) => {
+        this.presentToast(response.status);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  request_friendship(user){
+    this.userProvider.request_friendship(user)
+    .subscribe(
+      (response) => {
+        this.presentToast(response.status);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  is_friend_of(){
+    this.userProvider.is_friend_of(this.user)
+    .subscribe(
+      (response) => {
+        this.isFriend = response;
       },
       (error) => console.log(error)
     );

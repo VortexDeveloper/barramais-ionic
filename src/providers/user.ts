@@ -29,8 +29,13 @@ export class User {
   private accept_event_url: string = this.host + "users/accept_event/";
   private refuse_event_url: string = this.host + "users/refuse_event/";
   private user_advertiser_url: string = this.host + "users/user_advertiser/";
-  private user_friends_url: string = this.host + "users/user_friends";
-
+  private user_friends_url: string = this.host + "users/user_friends/";
+  private accept_friendship_url: string = this.host + "users/accept_friendship/";
+  private refuse_friendship_url: string = this.host + "users/refuse_friendship/";
+  private request_friendship_url: string = this.host + "users/request_friendship/";
+  private is_friend_of_url: string = this.host + "users/is_friend_of/";
+  private pending_friendships_url: string = this.host + "users/pending_friendships";
+  private unfriend_url: string = this.host + "users/unfriend/";
 
   constructor(
     public http: Http,
@@ -98,8 +103,44 @@ export class User {
       .map(res => res.json());
   }
 
-  user_friends() {
-    return this.authHttp.get(this.user_friends_url + ".json")
+  user_friends(user) {
+    return this.authHttp.get(this.user_friends_url + user.id + ".json" )
       .map(res => res.json());
   }
+
+  accept_friendship(user){
+    return this.authHttp.get(this.accept_friendship_url + user.id + ".json" )
+      .map(res => res.json());
+  }
+
+  refuse_friendship(user){
+    return this.authHttp.get(this.refuse_friendship_url + user.id + ".json" )
+      .map(res => res.json());
+  }
+
+  request_friendship(user){
+    return this.authHttp.get(this.request_friendship_url + user.id + ".json" )
+      .map(res => res.json());
+  }
+
+  is_friend_of(user){
+    return this.authHttp.get(this.is_friend_of_url + user.id + ".json")
+      .map(res => res.json());
+  }
+
+  pending_friendships(){
+    return this.authHttp.get(this.pending_friendships_url + ".json")
+      .map(res => res.json());
+  }
+
+  unfriend(user){
+    return this.authHttp.get(this.unfriend_url + user.id + ".json")
+      .map(res => res.json());
+  }
+
+  user_list(){
+    return this.authHttp.get(this.url + ".json")
+      .map(res => res.json());
+  }
+
 }

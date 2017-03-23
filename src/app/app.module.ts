@@ -40,6 +40,7 @@ import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
 import { AdListPage } from '../pages/ad-list/ad-list';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
+import { UsersPage } from '../pages/users/users';
 
 
 export function getAuthHttp(http) {
@@ -83,7 +84,8 @@ export function getAuthHttp(http) {
     AdPreviewPage,
     AdListPage,
     AdvertisersPage,
-    AdvertiserPaymentPage
+    AdvertiserPaymentPage,
+    UsersPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -120,7 +122,8 @@ export function getAuthHttp(http) {
     AdPreviewPage,
     AdListPage,
     AdvertisersPage,
-    AdvertiserPaymentPage
+    AdvertiserPaymentPage,
+    UsersPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

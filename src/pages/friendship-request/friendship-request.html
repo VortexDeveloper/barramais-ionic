@@ -7,74 +7,35 @@
   <ion-row>
     <ion-col width-50>
       <button ion-button outline color="light" (click)="openPage(friendsPage)">
-        97
+        0
         <br>
         Amigos
       </button>
     </ion-col>
     <ion-col width-50>
       <button ion-button outline color="light" (click)="openPage(friendshipRequestPage)">
-        8
+        09
         <br>
         Pendentes
       </button>
     </ion-col>
   </ion-row>
   <ion-list>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color='light' item-right>aceitar</button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color='light' item-right>aceitar</button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color='light' item-right>aceitar</button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color='light' item-right>aceitar</button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color='light' item-right>aceitar</button>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>Batman</h2>
-        <button ion-button color='light' item-right>aceitar</button>
-      </ion-item>
-    </ion-card>
+    <ion-item *ngFor="let user of pendingFriendships">
+      <ion-avatar item-left>
+        <img src="/assets/images/batman.png">
+      </ion-avatar>
+      <h2>{{user.first_name}} {{user.last_name}}</h2>
+      <p>{{user.created_at}}</p>
+      <button item-right ion-button color="primary" (click)='openProfile(user)'>
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button item-right ion-button color="secondary" (click)='accept_friendship(user)'>
+        <ion-icon name="add-person"></ion-icon>
+      </button>
+      <button item-right ion-button color="danger" (click)='refuse_friendship(user)'>
+        <ion-icon name="arrow-down"></ion-icon>
+      </button>
+    </ion-item>
   </ion-list>
-
 </ion-content>

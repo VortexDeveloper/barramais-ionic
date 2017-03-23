@@ -121,4 +121,18 @@ page-profile {
         border-bottom: solid 2px #123f5f;
         margin-bottom: 15px
       }
+
+      .information-button{
+        margin: 15px;
+        width: calc(100% - 30px);
+      }
+
+      .profile-information p {
+        float: left;
+        margin: 9px;
+      }
+
+      .profile-information ion-icon {
+        float: left;
+      }
 }

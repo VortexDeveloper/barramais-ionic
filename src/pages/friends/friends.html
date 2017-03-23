@@ -7,7 +7,7 @@
   <ion-row>
     <ion-col width-50>
       <button ion-button outline color="light" (click)="openPage(friendsPage)">
-        97
+        {{friends.length}}
         <br>
         Amigos
       </button>
@@ -21,16 +21,18 @@
     </ion-col>
   </ion-row>
   <ion-list>
-    <ion-card *ngFor="let user of friends">
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/assets/images/batman.png">
-        </ion-thumbnail>
-        <h2>{{user.first_name}} {{user.last_name}}</h2>
-        <button ion-button color="light" item-right (click)='createConversationWith(user)'>
-          <ion-icon name="chatbubbles"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-card>
+    <ion-item *ngFor="let user of friends">
+      <ion-avatar item-left>
+        <img src="/assets/images/batman.png">
+      </ion-avatar>
+      <h2>{{user.first_name}} {{user.last_name}}</h2>
+      <p>{{user.created_at}}</p>
+      <button item-right ion-button color="primary" (click)='openProfile(user)'>
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button item-right ion-button color="danger" (click)="unfriend(user)">
+        <ion-icon name="arrow-down"></ion-icon>
+      </button>
+    </ion-item>
   </ion-list>
 </ion-content>

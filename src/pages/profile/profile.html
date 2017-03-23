@@ -25,20 +25,38 @@
           </p>
         </a>
       </ion-card>
-      <ion-row class="actions-row">
-        <ion-col width-50 (click)="openPage(friendsPage)">
-          <ion-icon name="people" class="icon-button"></ion-icon>
-          <p class="icon-word">
-            Amigos
-          </p>
-        </ion-col>
-        <ion-col width-50 (click)="openPage(friendsPage)">
-          <ion-icon name="images" class="icon-button"></ion-icon>
-          <p class="icon-word">
-            Album
-          </p>
-        </ion-col>
-      </ion-row>
+        <ion-row class="actions-row">
+          <ion-col width-25 (click)="openFriends()">
+            <ion-icon name="people" class="icon-button"></ion-icon>
+            <p class="icon-word">
+              Amigos
+            </p>
+          </ion-col>
+          <ion-col width-25 (click)="openPage(friendsPage)">
+            <ion-icon name="images" class="icon-button"></ion-icon>
+            <p class="icon-word">
+              Album
+            </p>
+          </ion-col>
+            <ion-col width-25 (click)='createConversationWith(user)' [hidden]="!visitorActions">
+              <ion-icon name="chatbubbles" class="icon-button"></ion-icon>
+              <p class="icon-word">
+                Chat
+              </p>
+            </ion-col>
+            <ion-col width-25 (click)="request_friendship(user)" *ngIf="visitorActions && !isFriend">
+              <ion-icon name="person-add" class="icon-button"></ion-icon>
+              <p class="icon-word">
+                {{isFriend}}
+              </p>
+            </ion-col>
+            <ion-col width-25 (click)="refuse_friendship(user)" *ngIf="visitorActions && isFriend && isFriend !== null">
+              <ion-icon name="arrow-down" class="icon-button"></ion-icon>
+              <p class="icon-word">
+                {{isFriend}}
+              </p>
+            </ion-col>
+        </ion-row>
       <ion-row>
         <ion-col width-17>
           <img src="assets/images/{{user.naval_service_patent}}.png" alt="" />
@@ -47,23 +65,33 @@
           <img src="assets/images/{{user.nautical_license}}.png" alt="" />
         </ion-col>
       </ion-row>
-      <ion-item-group>
-        <ion-item-divider color="light">Perfil Completo</ion-item-divider>
-        <div>
-          <ion-item>
-            {{user.academic_profile}}
+      <button ion-button block outline color="light" class="information-button" (click)="showProfileInformation()">
+        Perfil Completo
+      </button>
+      <div [hidden]="!profileInformation">
+        <ion-list class="profile-information">
+          <ion-item *ngIf="user.academic_profile!==''">
+            <ion-icon name="school"></ion-icon>
+            <p>{{user.academic_profile}}</p>
           </ion-item>
-          <ion-item>
-            {{user.work}}
+          <ion-item *ngIf="user.work!==''">
+            <ion-icon name="briefcase"></ion-icon>
+            <p>{{user.work}}</p>
           </ion-item>
-          <ion-item>
-            {{user.birthday}}
+          <ion-item *ngIf="user.birthday!==null">
+            <ion-icon name="calendar"></ion-icon>
+            <p>{{user.birthday | date:'MMMM d, y'}}</p>
           </ion-item>
-          <ion-item>
-            {{user.sex}}
+          <ion-item *ngIf="user.sex=='M'">
+            <ion-icon name="male"></ion-icon>
+            <p>Masculino</p>
           </ion-item>
-        </div>
-      </ion-item-group>
+          <ion-item *ngIf="user.sex=='F'">
+            <ion-icon name="female"></ion-icon>
+            <p>Feminino</p>
+          </ion-item>
+        </ion-list>
+      </div>
       <ion-card>
         <ion-item>
           <ion-avatar item-left>

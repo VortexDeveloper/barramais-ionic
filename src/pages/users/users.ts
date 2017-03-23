@@ -8,22 +8,20 @@ import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
 
 /*
-  Generated class for the Friends page.
+  Generated class for the Users page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-friends',
-  templateUrl: 'friends.html'
+  selector: 'page-users',
+  templateUrl: 'users.html'
 })
-export class FriendsPage {
+export class UsersPage {
 
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
-  friendsPage: any = FriendsPage;
-  friendshipRequestPage: any = FriendshipRequestPage;
-  friends: Array<any>;
+  userList: Array<any>;
 
   constructor(
     public navCtrl: NavController,
@@ -31,11 +29,23 @@ export class FriendsPage {
     params: NavParams,
     public userProvider: User
   ) {
-    this.friends = params.data.friends;
+    this.user_list();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FriendsPage');
+    console.log('ionViewDidLoad UsersPage');
+  }
+
+  user_list(){
+    this.userProvider.user_list()
+    .subscribe(
+      (users) => {
+        this.userList = users;
+        console.log(users);
+      }, (error) => {
+        console.log(error.json());
+      }
+    );
   }
 
   openPage(page){
@@ -50,7 +60,6 @@ export class FriendsPage {
     this.userProvider.unfriend(user)
     .subscribe(
       (response) =>{
-        this.friends.splice(this.friends.indexOf(user), 1);
         this.presentToast(response.status);
       },
       (error) => {
@@ -66,5 +75,25 @@ export class FriendsPage {
     });
     toast.present();
   }
+
+  request_friendship(user){
+    this.userProvider.request_friendship(user)
+    .subscribe(
+      (response) => {
+        this.presentToast(response.status);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  // is_friend_of(user){
+  //   this.userProvider.is_friend_of(user)
+  //   .subscribe(
+  //     (response) => {
+  //       this.isFriend = response;
+  //     },
+  //     (error) => console.log(error)
+  //   );
+  // }
 
 }
