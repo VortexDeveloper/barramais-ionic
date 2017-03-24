@@ -5,8 +5,9 @@
         <li (click)="openPage(profilePage)" menuClose>
           <ion-item no-lines class="avatar">
             <ion-thumbnail item-left>
-              <!-- <img src="{{user.avatar}}" id='user_avatar' [hidden]="user.avatar === null"> -->
-              <img src="assets/images/DESPACHANTE.png" id='user_avatar' >
+              <!-- <img src="{{user.avatar_url}}" id='user_avatar' [hidden]="user.avatar_url === null">-->
+              <img src="assets/images/DESPACHANTE.png" id='user_avatar' > 
+              <!-- <img src="{{user.avatar_url}}" id='user_avatar'> -->
             </ion-thumbnail>
           </ion-item>
         </li>
@@ -142,7 +143,7 @@
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage()">
+          <button menuClose ion-item (click)="presentConfirm()">
             <ion-icon name="log-out" class="icon-itens"></ion-icon>
             Sair
           </button>

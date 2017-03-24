@@ -35,6 +35,8 @@ export class ClassifiedVesselTypePage {
         this.classified.email = this.current_user.email;
         this.classified.cell_phone = this.current_user.cellphone;
       }
+
+      console.log(this.classified);
   }
 
   ionViewDidLoad() {

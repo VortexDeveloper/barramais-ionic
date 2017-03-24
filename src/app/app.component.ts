@@ -21,6 +21,9 @@ import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
+import { AlertController } from 'ionic-angular';
+import { UserModel } from "../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 
 @Component({
   selector: 'app-menu',
@@ -51,18 +54,27 @@ export class MyApp {
   advertiserPaymentPage: any = AdvertiserPaymentPage;
   classifiedPage: any = ClassifiedPage;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
+  // user: UserModel;
+  // jwtHelper: JwtHelper = new JwtHelper();
+  // user_token: any;
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
   }
 
   constructor(
-    public platform: Platform
+    public platform: Platform,
+    private alertCtrl: AlertController
   ) {
       if (localStorage.getItem("jwt")){
         this.rootPage = this.mainPage;
       }
       this.initializeApp();
+      // console.log(localStorage.getItem('user'));
+      // if(localStorage.getItem('user') != null){
+      //   this.user_token = localStorage.getItem('user');
+      //   this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      // }
   }
 
   initializeApp() {
@@ -88,6 +100,28 @@ export class MyApp {
     this.showClassificados = !this.showClassificados;
   }
 
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Sair',
+      message: 'Tem certeza que deseja sair?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            console.log('Abrir a página de sair');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   // $('.menu_side_sub').hide();
   // $('.menu_side_item').click(function () {
   //     $(this).children('.menu_side_sub').slideToggle('slow');

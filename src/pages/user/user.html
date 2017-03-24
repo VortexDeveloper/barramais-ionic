@@ -11,8 +11,9 @@
         <div [hidden]="!accountInformations">
           <ion-item class="avatar-user">
             <ion-thumbnail item-left>
-              <img src="{{user.avatar}}" id='user_avatar' [hidden]="user.avatar === null">
-              <img src="assets/images/DESPACHANTE.png" id='user_avatar' [hidden]="user.avatar !== null">
+              <!-- <img src="{{user.avatar_url}}" id='user_avatar' [hidden]="user.avatar_url === null">
+              <img src="assets/images/DESPACHANTE.png" id='user_avatar' [hidden]="user.avatar !== null"> -->
+              <img src="{{user.avatar_url}}" id='user_avatar'>
             </ion-thumbnail>
             <a class="camera-button" (click)="presentActionSheet()">
               <ion-icon name="camera"></ion-icon>
@@ -65,7 +66,7 @@
           </ion-item>
           <ion-list radio-group [(ngModel)]="user.sex" name="sex">
             <ion-list-header>
-              Sexo
+              Gênero
             </ion-list-header>
             <ion-item>
               <ion-label>Masculino</ion-label>

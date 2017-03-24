@@ -11,14 +11,16 @@
     <div class="main-content">
       <ion-item>
         <ion-thumbnail item-left>
-          <img src="assets/images/batman.png">
+          <!-- <img src="assets/images/batman.png"> -->
+          <img src="{{user.avatar_url}}" id='user_avatar'>
         </ion-thumbnail>
         <h2>{{user.first_name + " " + user.last_name}}</h2>
       </ion-item>
       <ion-card>
         <a ion-item (click)="openModal()">
           <ion-avatar item-left>
-            <img src="assets/images/logo.png"/>
+            <!-- <img src="assets/images/logo.png"/> -->
+            <img src="{{user.avatar_url}}" id='user_avatar'>
           </ion-avatar>
           <p>
             O que você está pensando...

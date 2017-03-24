@@ -26,8 +26,8 @@ export class PostModalPage {
     this.post = {};
   }
 
-  dismiss() {
-    this.viewCtrl.dismiss(this.post);
+  dismiss(new_post = null) {
+    this.viewCtrl.dismiss(new_post);
   }
 
   openMediaOptions() {
@@ -66,7 +66,7 @@ export class PostModalPage {
     this.postsProvider.create(this.post).subscribe(
       (post) => {
         this.post = post;
-        this.dismiss();
+        this.dismiss(this.post);
       },
       (error) => console.log(error)
     );

@@ -7,6 +7,7 @@ export class UserModel {
 
   //Account informartion
   avatar: string;
+  avatar_url: string;
   email: string;
   password: string;
   password_confirmation: string;
@@ -39,6 +40,7 @@ export class UserModel {
     this.createdAt = params.created_at || "";
     this.updatedAt = params.updated_at || 0;
     this.avatar = params.avatar || null;
+    this.avatar_url = params.avatar_url || "";
     this.email = params.email || null;
     this.first_name = params.first_name || null;
     this.last_name = params.last_name || null;

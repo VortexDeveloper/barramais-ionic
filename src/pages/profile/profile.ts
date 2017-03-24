@@ -15,6 +15,7 @@ import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
 
+
 /*
   Generated class for the Profile page.
 

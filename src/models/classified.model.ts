@@ -25,7 +25,7 @@ export class ClassifiedModel {
     this.document_number = params.document_number || "";
     this.seller_name = params.seller_name || "";
     this.email = params.email || "";
-    this.landline = params.landile || "";
+    this.landline = params.landline || "";
     this.cell_phone = params.cell_phone || "";
     this.description = params.description || "";
     this.price = params.price || 0;
