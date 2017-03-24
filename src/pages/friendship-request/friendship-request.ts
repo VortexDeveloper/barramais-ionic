@@ -58,7 +58,8 @@ export class FriendshipRequestPage {
     this.userProvider.accept_friendship(user)
     .subscribe(
       (response) => {
-        this.presentToast(response);
+        this.presentToast(response.status);
+        this.pendingFriendships.splice(this.pendingFriendships.indexOf(user), 1)
       },
       (error) => console.log(error)
     );
@@ -69,6 +70,7 @@ export class FriendshipRequestPage {
     .subscribe(
       (response) => {
         this.presentToast(response.status);
+        this.pendingFriendships.splice(this.pendingFriendships.indexOf(user), 1)
       },
       (error) => console.log(error)
     );

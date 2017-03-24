@@ -7,29 +7,22 @@
   <ion-row>
     <ion-col width-50>
       <button ion-button outline color="light" (click)="openPage(friendsPage)">
-        {{friendsCount}}
-        <br>
         Amigos
       </button>
     </ion-col>
     <ion-col width-50>
       <button ion-button outline color="light" (click)="openPage(friendshipRequestPage)">
-        8
-        <br>
         Pendentes
       </button>
     </ion-col>
   </ion-row>
   <ion-list>
     <ion-item *ngFor="let user of friends">
-      <ion-avatar item-left>
+      <ion-avatar item-left (click)='openProfile(user)'>
         <img src="/assets/images/batman.png">
       </ion-avatar>
-      <h2>{{user.first_name}} {{user.last_name}}</h2>
-      <p>{{user.created_at}}</p>
-      <button item-right ion-button color="primary" (click)='openProfile(user)'>
-        <ion-icon name="person"></ion-icon>
-      </button>
+      <h2 (click)='openProfile(user)'>{{user.first_name}} {{user.last_name}}</h2>
+      <p>{{user.birthday | date:'MMMM d, y'}}</p>
       <button item-right ion-button color="danger" (click)="unfriend(user)">
         <ion-icon name="arrow-down"></ion-icon>
       </button>

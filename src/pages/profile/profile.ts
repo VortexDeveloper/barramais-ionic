@@ -14,6 +14,8 @@ import { ToastController } from 'ionic-angular';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
+import { CommentModalPage } from "../comment-modal/comment-modal";
+import { Posts } from '../../providers/posts';
 
 /*
   Generated class for the Profile page.
@@ -42,19 +44,23 @@ export class ProfilePage {
   visitorActions: boolean = false;
   current_user: UserModel;
   isFriend: any;
+  posts: Array<any>;
+
   constructor(
     public navCtrl: NavController,
     params: NavParams,
     private userProvider: User,
     public conversationProvider: Conversations,
     public modalCtrl: ModalController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public postsProvider: Posts
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.user = new UserModel(params.data.user);
       this.checkUser(this.user, this.current_user);
       this.loadFriends();
       this.user.id == this.current_user.id? this.isFriend = null : this.is_friend_of();
+      this.loadPosts();
   }
 
   ionViewDidLoad() {
@@ -71,6 +77,14 @@ export class ProfilePage {
 
   openModal() {
     let modal = this.modalCtrl.create(PostModalPage);
+    modal.onDidDismiss(newPost => {
+      if(newPost) this.posts.unshift(newPost);
+    });
+    modal.present();
+  }
+
+  openCommentsModal(post) {
+    let modal = this.modalCtrl.create(CommentModalPage, {post: post});
     modal.present();
   }
 
@@ -150,6 +164,27 @@ export class ProfilePage {
       },
       (error) => console.log(error)
     );
+  }
+
+  loadPosts() {
+    this.postsProvider.index().subscribe(
+      (posts) => this.posts = posts,
+      (error) => console.log(error)
+    );
+  }
+
+  like(post) {
+    this.postsProvider.like(post).subscribe(
+      (updated_post) => post.likes = updated_post.likes,
+      (error) => console.log(error)
+    );
+  }
+
+  like_color_for(post) {
+    if(post.likes.didILiked)
+      return 'barramais';
+    else
+      return 'grayed'
   }
 
 }
