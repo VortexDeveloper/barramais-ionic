@@ -15,8 +15,10 @@ import 'rxjs/add/operator/catch';
 */
 @Injectable()
 export class Posts {
+  private host: string = "https://barramais.herokuapp.com/posts";
+  // private host: string = "http://localhost:3000/posts";
 
-  private host: string = "http://localhost:3000/posts";
+
   private create_url: string = this.host + ".json";
   private index_url: string = this.host + ".json";
   private user: any;

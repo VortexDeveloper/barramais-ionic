@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
 import { Posts } from '../../providers/posts';
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 
 /*
   Generated class for the PostModal page.
@@ -13,6 +15,11 @@ import { Posts } from '../../providers/posts';
   templateUrl: 'post-modal.html'
 })
 export class PostModalPage {
+
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  current_user: UserModel;
+
   public post: any;
 
   constructor(
@@ -23,6 +30,7 @@ export class PostModalPage {
     public actionsheetCtrl: ActionSheetController,
     public postsProvider: Posts
   ) {
+    this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.post = {};
   }
 

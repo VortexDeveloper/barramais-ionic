@@ -16,9 +16,9 @@
   <ion-list no-lines>
       <ion-item>
         <ion-avatar item-left>
-          <img src="assets/images/logo.png">
+          <img src="{{current_user.avatar_url}}">
         </ion-avatar>
-        <p>User</p>
+        <p>{{current_user.first_name}}</p>
       </ion-item>
       <ion-item>
         <ion-textarea [(ngModel)]="post.description" placeHolder="O que você está pensando..."></ion-textarea>
@@ -31,7 +31,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button color="light" clear (click)="openMediaOptions()" icon-left>
+    <button ion-button class="form-buttons" color="light" clear (click)="openMediaOptions()" icon-left>
       <ion-icon ios="ios-open" md="md-open"></ion-icon>
       Selecionar midia
     </button>
