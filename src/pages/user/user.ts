@@ -1,7 +1,7 @@
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { HomePage } from "../home/home";
-import { ToastController } from 'ionic-angular';
+import { ToastController, AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, NavParams}  from 'ionic-angular';
 import { ViewController,Platform, LoadingController }  from 'ionic-angular';
@@ -43,7 +43,8 @@ export class UserPage {
     public viewCtrl: ViewController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController
   ) {
         this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     }
@@ -145,11 +146,27 @@ export class UserPage {
     };
 
     Camera.getPicture(options).then(image => {
-      this.user.avatar = "data:image/jpeg;base64," + image;
+      let prompt = this.alertCtrl.create({
+        title: 'Usar foto',
+        message: 'Deseja usar esta foto como foto de perfil?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: data => {
+              this.user.avatar = "data:image/jpeg;base64," + image;
+              this.save_avatar(this.user);
+            }
+          }
+        ]
+      });
+      prompt.present();
     });
-
-    var image_tag = document.getElementsByTagName('img')[0];
-    image_tag.src = this.user.avatar;
   }
 
   is_from_gallery(sourceType) {
@@ -163,7 +180,8 @@ export class UserPage {
   save_avatar(user) {
     this.userProvider.save_avatar(user)
     .subscribe(user_params => {
-      this.navCtrl.setRoot(FeedsPage, {}, {animate: true, direction: 'forward'});
+      let image_tag = document.getElementsByTagName('img')[0];
+      image_tag.src = this.user.avatar;
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));
