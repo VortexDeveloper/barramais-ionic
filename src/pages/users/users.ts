@@ -61,6 +61,7 @@ export class UsersPage {
     .subscribe(
       (response) =>{
         this.presentToast(response.status);
+        this.userList[(this.userList.indexOf(user))].isFriend = false;
       },
       (error) => {
         console.log(error.json());
@@ -81,19 +82,10 @@ export class UsersPage {
     .subscribe(
       (response) => {
         this.presentToast(response.status);
+        this.userList[(this.userList.indexOf(user))].isFriend = 'waiting';
       },
       (error) => console.log(error)
     );
   }
-
-  // is_friend_of(user){
-  //   this.userProvider.is_friend_of(user)
-  //   .subscribe(
-  //     (response) => {
-  //       this.isFriend = response;
-  //     },
-  //     (error) => console.log(error)
-  //   );
-  // }
 
 }

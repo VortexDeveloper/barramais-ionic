@@ -52,18 +52,18 @@
                 {{isFriend}}
               </p>
             </ion-col>
-            <ion-col width-25 (click)="refuse_friendship(user)" *ngIf="visitorActions && isFriend && isFriend !== null">
+            <!-- <ion-col width-25 (click)="refuse_friendship(user)" *ngIf="visitorActions && isFriend && isFriend !== null">
               <ion-icon name="arrow-down" class="icon-button"></ion-icon>
               <p class="icon-word">
                 {{isFriend}}
               </p>
-            </ion-col>
+            </ion-col> -->
         </ion-row>
       <ion-row>
-        <ion-col width-17>
+        <ion-col width-17 *ngIf="user.naval_service_patent !== 0">
           <img src="assets/images/{{user.naval_service_patent}}.png" alt="" />
         </ion-col>
-        <ion-col width-17>
+        <ion-col width-17 *ngIf="user.nautical_license !== 0">
           <img src="assets/images/{{user.nautical_license}}.png" alt="" />
         </ion-col>
       </ion-row>
@@ -94,75 +94,45 @@
           </ion-item>
         </ion-list>
       </div>
-      <ion-card>
+      <ion-card *ngFor="let post of posts">
         <ion-item>
           <ion-avatar item-left>
-            <img src="assets/images/logo.png"/>
+            <img src="{{post.user.avatar_url}}"/>
           </ion-avatar>
-          <h2>Marty McFly</h2>
-          <p>November 5, 1955</p>
+          <h2>{{post.user.name}}</h2>
+          <p>{{post.sent_date_format}}</p>
         </ion-item>
         <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+          <p>{{post.description}}</p>
         </ion-card-content>
-        <img src="assets/images/post.jpg"/>
+        <img src="{{post.attched_image_url}}" *ngIf="post.attched_image_url" />
         <ion-row>
           <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+            <button class='like-action' ion-button icon-left clear small (click)='like(post)'>
+              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" [color]="like_color_for(post)"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col width-10>
+            <button ion-button icon-left clear small (click)='openCommentsModal(post)'>
+              <ion-icon ios="ios-text" md="md-text" color="grayed"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-10>
             <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <ion-icon ios="ios-share" md="md-share" color="grayed"></ion-icon>
             </button>
           </ion-col>
         </ion-row>
-      </ion-card>
-      <ion-card>
-        <ion-item>
-          <ion-avatar item-left>
-            <img src="assets/images/logo.png"/>
-          </ion-avatar>
-          <h2>Marty McFly</h2>
-          <p>November 5, 1955</p>
+        <ion-item *ngIf='post.likes.size > 0 || post.comments.length > 0' class="action-status">
+          <div item-left no-margin *ngIf='post.likes.size > 0'>
+            <ion-badge item-left small>{{post.likes.size}}</ion-badge>
+            <ion-icon name="thumbs-up" item-left small></ion-icon>
+          </div>
+          <div item-right no-margin *ngIf='post.comments.length > 0' (click)='openCommentsModal(post)'>
+            <ion-badge item-right small>{{post.comments.length}}</ion-badge>
+            <ion-icon name="text" item-right small></ion-icon>
+          </div>
         </ion-item>
-        <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-        </ion-card-content>
-        <img src="assets/images/post.jpg"/>
-        <ion-row>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <button ion-button icon-left clear small>
-              <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
       </ion-card>
     </div>
   </div>
