@@ -6,6 +6,8 @@ import { FriendshipRequestPage } from '../friendship-request/friendship-request'
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 
 /*
   Generated class for the Friends page.
@@ -19,11 +21,16 @@ import { User } from '../../providers/user';
 })
 export class FriendsPage {
 
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  current_user: UserModel;
+
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
   friendsPage: any = FriendsPage;
   friendshipRequestPage: any = FriendshipRequestPage;
   friends: Array<any>;
+  friendsCount: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -31,7 +38,8 @@ export class FriendsPage {
     params: NavParams,
     public userProvider: User
   ) {
-    this.friends = params.data.friends;
+    this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.loadFriends();
   }
 
   ionViewDidLoad() {
@@ -65,6 +73,17 @@ export class FriendsPage {
       duration: 5000
     });
     toast.present();
+  }
+
+  loadFriends() {
+    this.userProvider.user_friends(this.current_user)
+    .subscribe(
+      (friends) => {
+        this.friends = friends;
+        this.friendsCount = friends.length;
+      },
+      (error) => console.log(error)
+    );
   }
 
 }
