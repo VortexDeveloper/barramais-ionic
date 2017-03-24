@@ -11,6 +11,7 @@ import { RegistrationPage } from '../pages/registration/registration';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { PostModalPage } from '../pages/post-modal/post-modal';
+import { CommentModalPage } from '../pages/comment-modal/comment-modal';
 import { EventModalPage } from '../pages/events/event-modal';
 import { EventGuestsPage } from '../pages/events/event-guests';
 import { EventPagePage } from '../pages/events/event-page';
@@ -44,6 +45,8 @@ import { Classified } from '../providers/classified';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 import { UsersPage } from '../pages/users/users';
+import { Posts } from '../providers/posts';
+
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -64,6 +67,7 @@ export function getAuthHttp(http) {
     HomePage,
     MainPage,
     PostModalPage,
+    CommentModalPage,
     EventModalPage,
     EventGuestsPage,
     EventPagePage,
@@ -105,6 +109,7 @@ export function getAuthHttp(http) {
     HomePage,
     MainPage,
     PostModalPage,
+    CommentModalPage,
     EventModalPage,
     EventGuestsPage,
     EventPagePage,
@@ -140,6 +145,7 @@ export function getAuthHttp(http) {
     Conversations,
     ConversationChannel,
     Classified,
+    Posts,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })

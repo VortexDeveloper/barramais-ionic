@@ -21,8 +21,11 @@
         <p>User</p>
       </ion-item>
       <ion-item>
-        <ion-textarea placeHolder="O que você está pensando..."></ion-textarea>
+        <ion-textarea [(ngModel)]="post.description" placeHolder="O que você está pensando..."></ion-textarea>
       </ion-item>
+      <button ion-button (click)="createPost()">
+        <span ion-text>Publicar</span>
+      </button>
   </ion-list>
 </ion-content>
 

@@ -1,3 +1,9 @@
 page-feeds {
-
+  .action-status {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f3f1f1;
+  }
 }

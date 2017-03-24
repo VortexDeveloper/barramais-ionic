@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
+import { CommentModalPage } from "../comment-modal/comment-modal";
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { Posts } from '../../providers/posts';
+
 
 
 @Component({
@@ -9,16 +12,17 @@ import { BmHeaderComponent } from '../components/bm-header/bm-header';
   templateUrl: 'feeds.html'
 })
 export class FeedsPage {
-
   feeds: any = FeedsPage;
+  posts: Array<any>;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public postsProvider: Posts
   ) {
-
-    }
+    this.loadPosts();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedsPage');
@@ -26,6 +30,14 @@ export class FeedsPage {
 
   openModal() {
     let modal = this.modalCtrl.create(PostModalPage);
+    modal.onDidDismiss(newPost => {
+      if(newPost) this.posts.unshift(newPost);
+    });
+    modal.present();
+  }
+
+  openCommentsModal(post) {
+    let modal = this.modalCtrl.create(CommentModalPage, {post: post});
     modal.present();
   }
 
@@ -33,4 +45,24 @@ export class FeedsPage {
     this.navCtrl.push(page);
   }
 
+  loadPosts() {
+    this.postsProvider.index().subscribe(
+      (posts) => this.posts = posts,
+      (error) => console.log(error)
+    );
+  }
+
+  like(post) {
+    this.postsProvider.like(post).subscribe(
+      (updated_post) => post.likes = updated_post.likes,
+      (error) => console.log(error)
+    );
+  }
+
+  like_color_for(post) {
+    if(post.likes.didILiked)
+      return 'barramais';
+    else
+      return 'grayed'
+  }
 }

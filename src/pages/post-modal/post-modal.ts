@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
+import { Posts } from '../../providers/posts';
 
 /*
   Generated class for the PostModal page.
@@ -11,22 +12,22 @@ import { NavController, NavParams, ViewController, ActionSheetController, Platfo
   selector: 'page-post-modal',
   templateUrl: 'post-modal.html'
 })
-export class PostModalPage { 
+export class PostModalPage {
+  public post: any;
 
   constructor(
     public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public actionsheetCtrl: ActionSheetController
-  ) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PostModalPage');
+    public actionsheetCtrl: ActionSheetController,
+    public postsProvider: Posts
+  ) {
+    this.post = {};
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(this.post);
   }
 
   openMediaOptions() {
@@ -61,4 +62,13 @@ export class PostModalPage {
     actionSheet.present();
   }
 
+  createPost() {
+    this.postsProvider.create(this.post).subscribe(
+      (post) => {
+        this.post = post;
+        this.dismiss();
+      },
+      (error) => console.log(error)
+    );
+  }
 }
