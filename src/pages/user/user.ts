@@ -142,6 +142,7 @@ export class UserPage {
       saveToPhotoAlbum: false,
       correctOrientation: true,
       allowEdit: true,
+      //mediaType: Camera.MediaType.ALLMEDIA,
       destinationType: Camera.DestinationType.DATA_URL
     };
 

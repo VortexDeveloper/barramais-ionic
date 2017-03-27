@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
+import { Camera } from 'ionic-native';
 import { Posts } from '../../providers/posts';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -19,6 +20,7 @@ export class PostModalPage {
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
+  medias: Array<any>;
 
   public post: any;
 
@@ -44,19 +46,26 @@ export class PostModalPage {
       cssClass: 'page-post-modal',
       buttons: [
         {
-          text: 'Video',
-          icon: !this.platform.is('ios') ? 'videocam' : null,
+          text: 'Carregar da Galeria',
           handler: () => {
-            console.log('Play clicked');
+            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Imagem',
-          icon: !this.platform.is('ios') ? 'camera' : null,
+          text: 'Camera',
+          icon: !this.platform.is('ios') ? 'videocam' : null,
           handler: () => {
-            console.log('Favorite clicked');
+            this.takePicture(Camera.PictureSourceType.CAMERA);
+            console.log('Play clicked');
           }
         },
+        // {
+        //   text: 'Imagem',
+        //   icon: !this.platform.is('ios') ? 'camera' : null,
+        //   handler: () => {
+        //     console.log('Image clicked');
+        //   }
+        // },
         {
           text: 'Cancelar',
           role: 'cancel', // will always sort to be on the bottom
@@ -78,5 +87,25 @@ export class PostModalPage {
       },
       (error) => console.log(error)
     );
+  }
+  //
+  // getVideo() {
+  //
+  // }
+
+  takePicture(sourceType) {
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      allowEdit: true,
+      mediaType: Camera.MediaType.ALLMEDIA,
+      destinationType: Camera.DestinationType.DATA_URL
+    };
+
+    Camera.getPicture(options).then(image => {
+      this.medias.push("data:image/jpeg;base64," + image);
+    });
   }
 }
