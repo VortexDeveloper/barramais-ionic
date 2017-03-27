@@ -62,6 +62,7 @@ export class ProfilePage {
       this.loadFriends();
       this.user.id == this.current_user.id? this.isFriend = null : this.is_friend_of();
       this.loadPosts();
+      console.log(this.user);
   }
 
   ionViewDidLoad() {

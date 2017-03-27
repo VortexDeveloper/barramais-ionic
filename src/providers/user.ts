@@ -17,9 +17,9 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  //private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/"
-  private host: string = "http://localhost:3000/"
+  // private host: string = "http://10.0.2.2:3000/"
+  // private host: string = "https://barramais.herokuapp.com/";
+  private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "users";
   private friends_url: string = this.host + "users/event_friends/";
@@ -50,13 +50,18 @@ export class User {
   }
 
   update(user){
-      return this.authHttp.put(this.url + ".json", {'user': user})
-        .map(res => res.json());
+    return this.authHttp.put(this.url + ".json", {'user': user})
+      .map(res => res.json());
   }
 
   // Session sign_up : (post)users.json
   login(user){
     return this.http.post(this.url + "/sign_in.json", {'user': user})
+      .map(res => res.json());
+  }
+
+  logout(){
+    return this.authHttp.delete(this.url + "/sign_out.json")
       .map(res => res.json());
   }
 

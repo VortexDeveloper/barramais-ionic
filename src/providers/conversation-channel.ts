@@ -14,6 +14,7 @@ import { Events } from 'ionic-angular';
 export class ConversationChannel {
   public conversationChannel: any;
   public subscription: any;
+  // public host_cable: string = 'http://1.0.2.2:3000/cable/?jwt=';
   public host_cable: string = 'http://localhost:3000/cable/?jwt=';
   // public host_cable: string = 'http://barramais.herokuapp.com/cable/?jwt=';
 
