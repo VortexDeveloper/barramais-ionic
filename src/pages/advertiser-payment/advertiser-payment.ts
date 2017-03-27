@@ -156,15 +156,16 @@ export class AdvertiserPaymentPage {
   save(advertiser, address){
     var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
     var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
-    var documentRule = (advertiser.document_type == "cpf" && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == "cnpj" && advertiser.document_number.match(documentCNPJRule)) ? true : false;
+    var documentRule = (advertiser.document_type == 0 && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == 1 && advertiser.document_number.match(documentCNPJRule)) ? true : false;
 
     var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
 
     var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
 
-    if(advertiser.document_type == 0){
-      this.presentToast("Selecione o tipo de documento do anunciante!");
-    }else if(documentRule == false){
+    // if(advertiser.document_type == 0){
+    //   this.presentToast("Selecione o tipo de documento do anunciante!");
+    // }else
+    if(documentRule == false){
       this.presentToast("Insira o número do documento do anunciante!");
     }else if(address.state_id == ""){
       this.presentToast("Selecione um estado!");
@@ -193,15 +194,16 @@ export class AdvertiserPaymentPage {
   update(advertiser, address){
     var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
     var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
-    var documentRule = (advertiser.document_type == "cpf" && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == "cnpj" && advertiser.document_number.match(documentCNPJRule)) ? true : false;
+    var documentRule = (advertiser.document_type == 0 && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == 1 && advertiser.document_number.match(documentCNPJRule)) ? true : false;
 
     var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
 
     var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
 
-    if(advertiser.document_type == 0){
-      this.presentToast("Selecione o tipo de documento do anunciante!");
-    }else if(documentRule == false){
+    // if(advertiser.document_type == 0){
+    //   this.presentToast("Selecione o tipo de documento do anunciante!");
+    // }else
+    if(documentRule == false){
       this.presentToast("Insira o número do documento do anunciante!");
     }else if(address.state_id == ""){
       this.presentToast("Selecione um estado!");
