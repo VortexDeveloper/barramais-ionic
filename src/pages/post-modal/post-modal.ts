@@ -20,7 +20,6 @@ export class PostModalPage {
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
-  medias: Array<any>;
 
   public post: any;
 
@@ -34,6 +33,7 @@ export class PostModalPage {
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.post = {};
+    this.post.medias = [];
   }
 
   dismiss(new_post = null) {
@@ -105,7 +105,10 @@ export class PostModalPage {
     };
 
     Camera.getPicture(options).then(image => {
-      this.medias.push("data:image/jpeg;base64," + image);
+      let d = new Date;
+      let new_name = d.getTime();
+      let new_media = {image: "data:image/jpeg;base64," + image, filename: new_name}
+      this.post.medias.push(new_media);
     });
   }
 }
