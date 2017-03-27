@@ -17,6 +17,7 @@ import { AdInterestsPage } from '../pages/ad-interests/ad-interests';
 import { AdDescriptionsPage } from '../pages/ad-descriptions/ad-descriptions';
 import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
 import { AdListPage } from '../pages/ad-list/ad-list';
+import { LoginPage } from '../pages/login/login';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
 import { ClassifiedPage } from '../pages/classified/classified';
@@ -24,6 +25,7 @@ import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classi
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { User } from '../providers/user';
 
 @Component({
   selector: 'app-menu',
@@ -54,6 +56,7 @@ export class MyApp {
   advertiserPaymentPage: any = AdvertiserPaymentPage;
   classifiedPage: any = ClassifiedPage;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
+  loginPage: any = LoginPage;
   // user: UserModel;
   // jwtHelper: JwtHelper = new JwtHelper();
   // user_token: any;
@@ -64,7 +67,8 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private userProvider: User
   ) {
       if (localStorage.getItem("jwt")){
         this.rootPage = this.mainPage;
@@ -115,6 +119,15 @@ export class MyApp {
         {
           text: 'Sim',
           handler: () => {
+            this.userProvider.logout().subscribe(
+              (response) => {
+                localStorage.removeItem("jwt");
+                localStorage.removeItem("user");
+                this.rootPage = this.loginPage;
+                this.nav.setRoot(this.rootPage);
+              },
+              (error) => console.log(error)
+            );
             console.log('Abrir a página de sair');
           }
         }
