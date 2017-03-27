@@ -13,8 +13,8 @@ import 'rxjs/add/operator/map';
 export class EventProvider {
 
   // private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/"
-  private host: string = "http://localhost:3000/";
+  private host: string = "https://barramais.herokuapp.com/"
+  // private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "events";
   private country_url: string = this.host + "events/country_for_select";
