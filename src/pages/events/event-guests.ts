@@ -93,6 +93,7 @@ export class EventGuestsPage {
     for (let i = 0; i < this.selectedGuests.length; i++) {
         this.guests.splice(this.guests.indexOf(this.selectedGuests[i]), 1);
     }
+    this.selectedGuests = [];
   }
 
 }

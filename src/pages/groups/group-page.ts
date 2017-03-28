@@ -37,7 +37,7 @@ export class GroupPagePage {
   groupsPage: any = GroupsPage;
   eventsPage: any = EventsPage;
   friendsPage: any = FriendsPage;
-  group: GroupModel = new GroupModel();
+  group: any;
   postModal: any = PostModalPage;
   groupMembers: any = GroupMembersPage;
   allMembers: any;
@@ -50,6 +50,7 @@ export class GroupPagePage {
   l_refusedMembers: any;
   showAdminActions: boolean = false;
   showMemberActions: boolean = false;
+  showInvitedMemberActions: boolean = false;
   friends: any;
 
   constructor(
@@ -78,8 +79,8 @@ export class GroupPagePage {
     this.userFriends(group);
   }
 
-  openPage(page, event) {
-    this.navCtrl.push(page, {event: event});
+  openPage(page, group) {
+    this.navCtrl.push(page, {group: group});
   }
 
   openModal(page, members) {
@@ -91,7 +92,7 @@ export class GroupPagePage {
   }
 
   verifyGroupAdmin(){
-    if(this.group.user_id == this.user.id){
+    if(this.group.admin.id == this.user.id){
       this.showAdminActions = true;
       this.showMemberActions = false;
     }
@@ -106,12 +107,21 @@ export class GroupPagePage {
     }
   }
 
+  verifyInvitedGroupMember(list){
+    var members_id = [];
+    for(let user of list) members_id.push(user.id);
+    if(members_id.indexOf(this.user.id) > -1 ){
+      this.showInvitedMemberActions = true;
+      this.verifyGroupAdmin();
+    }
+  }
+
   all_members(group){
     this.groupProvider.all_members(group)
       .subscribe(response =>{
         this.allMembers = response.all_members;
         this.l_allMembers = response.all_members.length;
-        this.verifyGroupMember(this.allMembers);
+        this.verifyInvitedGroupMember(this.allMembers);
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
       });
@@ -122,6 +132,7 @@ export class GroupPagePage {
       .subscribe(response =>{
         this.confirmedMembers = response.confirmed_members;
         this.l_confirmedMembers = response.confirmed_members.length;
+        this.verifyGroupMember(this.confirmedMembers);
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
       });
@@ -167,7 +178,7 @@ export class GroupPagePage {
     });
   }
 
-  accept_event(){
+  accept_group(){
     this.userProvider.accept_group(this.user, this.group).
     subscribe(response =>{
       this.openPage(GroupPagePage, this.group);

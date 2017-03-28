@@ -40,8 +40,8 @@ export class User {
   private my_groups_url: string = this.host + "users/my_groups";
   private confirmed_groups_url: string = this.host + "users/confirmed_groups";
   private pending_groups_url: string = this.host + "users/pending_groups";
-  private accept_group_url: string = this.host + "users/accept_group/";
-  private refuse_group_url: string = this.host + "users/refuse_group/";
+  private accept_group_url: string = this.host + "users/accept_group";
+  private refuse_group_url: string = this.host + "users/refuse_group";
 
 
   constructor(

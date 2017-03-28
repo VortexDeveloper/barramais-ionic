@@ -1,5 +1,7 @@
-<ion-tabs selectedIndex="0" tabsPlacement="bottom">
-  <ion-tab tabTitle="Feed" [root]="feeds"></ion-tab>
-  <ion-tab tabTitle="Eventos" [root]="events"></ion-tab>
-  <ion-tab tabTitle="Grupos" [root]="groups"></ion-tab>
+<ion-tabs selectedIndex="0" tabsPlacement="bottom" tabs-md-tab-text-color="#fff">
+  <ion-tab tabIcon="boat" [root]="feeds"></ion-tab>
+  <ion-tab tabIcon="people" [root]="groups"></ion-tab>
+  <ion-tab tabIcon="compass" [root]=""></ion-tab>
+  <ion-tab tabIcon="chatbubbles" [root]="conversation"></ion-tab>
+  <ion-tab tabIcon="person" [root]="profile" [rootParams]="{user: current_user}"></ion-tab>
 </ion-tabs>

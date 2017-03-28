@@ -58,11 +58,11 @@ export class ProfilePage {
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.user = new UserModel(params.data.user);
+      console.log(params.data);
       this.checkUser(this.user, this.current_user);
       this.loadFriends();
       this.user.id == this.current_user.id? this.isFriend = null : this.is_friend_of();
       this.loadPosts();
-      console.log(this.user);
   }
 
   ionViewDidLoad() {

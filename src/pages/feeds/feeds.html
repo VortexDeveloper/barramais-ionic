@@ -25,8 +25,13 @@
     </ion-item>
     <ion-card-content>
       <p>{{post.description}}</p>
+      <img src="{{post.attched_image_url}}" *ngIf="post.attched_image_url" />
+      <div class="post-images">
+        <div class="post-image" *ngFor="let i of [1,2,3,4]">
+          <img src="assets/images/pesca.png" alt="" />
+        </div>
+      </div>
     </ion-card-content>
-    <img src="{{post.attched_image_url}}" *ngIf="post.attched_image_url" />
     <ion-row>
       <ion-col width-10>
         <button class='like-action' ion-button icon-left clear small (click)='like(post)'>
