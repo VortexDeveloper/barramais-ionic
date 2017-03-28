@@ -29,6 +29,7 @@ import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
+import { MenuController } from 'ionic-angular';
 
 @Component({
   selector: 'app-menu',
@@ -74,7 +75,8 @@ export class MyApp {
   constructor(
     public platform: Platform,
     private alertCtrl: AlertController,
-    private userProvider: User
+    private userProvider: User,
+    private menuCtrl: MenuController
   ) {
       if (localStorage.getItem("jwt")){
         this.rootPage = this.mainPage;

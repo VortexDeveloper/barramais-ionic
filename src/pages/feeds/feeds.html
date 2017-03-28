@@ -25,10 +25,9 @@
     </ion-item>
     <ion-card-content>
       <p>{{post.description}}</p>
-      <img src="{{post.attched_image_url}}" *ngIf="post.attched_image_url" />
-      <div class="post-images">
-        <div class="post-image" *ngFor="let i of [1,2,3,4]">
-          <img src="assets/images/pesca.png" alt="" />
+      <div class="post-images" *ngIf="post.post_images">
+        <div class="post-image" *ngFor="let image of post.post_images; let i = index">
+          <img src="{{image.post_image}}" *ngIf='i < 4' alt="" />
         </div>
       </div>
     </ion-card-content>

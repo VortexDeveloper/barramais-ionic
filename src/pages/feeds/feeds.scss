@@ -22,12 +22,14 @@ page-feeds {
     height: 150px;
     /* display: flex; */
     align-self: stretch;
+    padding: 2px;
   }
 
   .post-image img {
     min-width: calc(100% - 30px);
     width: auto;
     max-width: 136%;
+    border-radius: 0;
   }
 
 }
