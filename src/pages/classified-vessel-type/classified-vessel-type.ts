@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { ClassifiedModel } from "../../models/classified.model";
 import { UserModel } from "../../models/user.model";
+import { VesselModel } from "../../models/vessel.model";
+import { ClassifiedVesselStatusPage } from '../classified-vessel-status/classified-vessel-status';
 
 
 /*
@@ -20,6 +22,8 @@ export class ClassifiedVesselTypePage {
   current_user: UserModel;
   user_token: any = localStorage.getItem('user');
   classified: ClassifiedModel;
+  vessel: VesselModel;
+  classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
 
   constructor(
     public navCtrl: NavController,
@@ -37,10 +41,19 @@ export class ClassifiedVesselTypePage {
       }
 
       console.log(this.classified);
+
+      this.vessel = new VesselModel();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassifiedVesselTypePage');
   }
 
+  openNextPage(page, vessel){
+    this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+  }
+
+  goBack(){
+    this.navCtrl.pop();
+  }
 }

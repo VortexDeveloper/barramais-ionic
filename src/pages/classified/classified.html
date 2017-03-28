@@ -13,9 +13,11 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-item-divider color="light">Dados do anunciante</ion-item-divider>
+
   <ion-item>
     <ion-label>Vincular perfil</ion-label>
-    <ion-checkbox item-right [(ngModel)]="classified.bonded"></ion-checkbox>
+    <ion-checkbox item-right [(ngModel)]="classified.bonded" name="classified_bonded"></ion-checkbox>
   </ion-item>
 
   <ion-item>

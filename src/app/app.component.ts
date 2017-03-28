@@ -22,6 +22,8 @@ import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
+import { ClassifiedVesselStatusPage } from '../pages/classified-vessel-status/classified-vessel-status';
+import { ClassifiedVesselManufacturerPage } from '../pages/classified-vessel-manufacturer/classified-vessel-manufacturer';
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -56,6 +58,8 @@ export class MyApp {
   advertiserPaymentPage: any = AdvertiserPaymentPage;
   classifiedPage: any = ClassifiedPage;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
+  classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
+  ClassifiedVesselManufacturerPage: any = ClassifiedVesselManufacturerPage;
   loginPage: any = LoginPage;
   // user: UserModel;
   // jwtHelper: JwtHelper = new JwtHelper();
