@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
+import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdsPage } from '../pages/ads/ads';
@@ -61,6 +62,7 @@ export class MyApp {
   classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
   ClassifiedVesselManufacturerPage: any = ClassifiedVesselManufacturerPage;
   loginPage: any = LoginPage;
+  eventsPage: any = EventsPage;
   // user: UserModel;
   // jwtHelper: JwtHelper = new JwtHelper();
   // user_token: any;

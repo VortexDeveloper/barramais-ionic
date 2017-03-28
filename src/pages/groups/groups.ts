@@ -81,7 +81,7 @@ export class GroupsPage {
     this.userProvider.pendingGroups(current_user)
       .subscribe(response =>{
         // console.log(response.pending_events);
-        this.pending_groups = response.pending_events;
+        this.pending_groups = response.pending_groups;
       }, error =>{
         console.log("Erro ao exibir eventos confirmados: " + error.json());
       });

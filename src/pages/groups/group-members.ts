@@ -22,7 +22,7 @@ import { GroupsPage } from "../groups/groups";
 export class GroupMembersPage {
 
   members: any;
-  group: GroupModel = new GroupModel();
+  group: any;
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
@@ -42,7 +42,7 @@ export class GroupMembersPage {
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.group = params.data.group;
-      this.group = params.data.group;
+      this.members = params.data.members;
       this.verifyGroupAdmin();
     }
 
@@ -51,7 +51,7 @@ export class GroupMembersPage {
   }
 
   verifyGroupAdmin(){
-    if(this.group.user_id == this.current_user.id){
+    if(this.group.admin.id == this.current_user.id){
       this.showAdminActions = true;
     }
   }
@@ -90,8 +90,9 @@ export class GroupMembersPage {
 
   clearInvitedMembers(){
     for (let i = 0; i < this.selectedMembers.length; i++) {
-        this.members.splice(this.members.indexOf(this.selectedMembers[i]), 1);
+      this.members.splice(this.members.indexOf(this.selectedMembers[i]), 1);
     }
+    this.selectedMembers = [];
   }
 
 }

@@ -27,7 +27,6 @@ export class FeedsPage {
   ) {
     this.loadPosts();
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-    console.log(this.user);
   }
 
   ionViewDidLoad() {

@@ -6,13 +6,13 @@
           <ion-item no-lines class="avatar">
             <ion-thumbnail item-left>
               <!-- <img src="{{user.avatar_url}}" id='user_avatar' [hidden]="user.avatar_url === null">-->
-              <img src="assets/images/DESPACHANTE.png" id='user_avatar' > 
+              <img src="assets/images/DESPACHANTE.png" id='user_avatar' >
               <!-- <img src="{{user.avatar_url}}" id='user_avatar'> -->
             </ion-thumbnail>
           </ion-item>
         </li>
       </ul>
-      <ul>
+      <ul class="menu-item">
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
             <img src="assets/images/INICIO.png" class="icon-itens" />
@@ -38,7 +38,7 @@
               </li>
               <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
-                  Negócios
+                  Seguindo
                 </button>
               </li>
             </ul>
@@ -52,22 +52,28 @@
             </a>
             <ul class="sub-menu-item" [hidden]="!showAnuncios">
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adListPage)">
-                  Meus anúncios
-                </button>
-              </li>
-              <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adBannersPage)">
                   Criar Anúncios
                 </button>
               </li>
               <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adListPage)">
+                  Meus anúncios
+                </button>
+              </li>
+              <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage(advertisersPage)">
-                  Meu cadastro
+                  Minha conta
                 </button>
               </li>
             </ul>
           </ion-item>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage(eventsPage)">
+            <img src="assets/images/EVENTO.png" class="icon-itens" />
+            Eventos
+          </button>
         </li>
         <li>
           <ion-item>
@@ -105,15 +111,21 @@
           </ion-item>
         </li>
         <li>
-          <button menuClose ion-item (click)="openLink('http://barramais.com.br/blog/')">
-            <img src="assets/images/BLOG.png" class="icon-itens" />
-            Blog
+          <button menuClose ion-item (click)="openPage(mainPage)">
+            <img src="assets/images/pesca.png" class="icon-itens" />
+            Pesca
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage(conversationPage)">
-            <img src="assets/images/SOCIAL.png" class="icon-itens" />
-            Mensagens
+          <button menuClose ion-item (click)="openPage(mainPage)">
+            <img src="assets/images/cruzeiro.png" class="icon-itens" />
+            Viagens
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openLink('http://barramais.com.br/blog/')">
+            <img src="assets/images/BLOG.png" class="icon-itens" />
+            Blog
           </button>
         </li>
       </ul>
@@ -154,6 +166,12 @@
           </a>
           <a (click)="openLink('https://www.instagram.com/barramaisoficial/')">
             <img src="assets/images/instagram.png" alt="instagram" class="icon-itens social-media" />
+          </a>
+          <a (click)="openLink('https://plus.google.com/u/0/116777254689631886658')" >
+            <img src="assets/images/google.png" alt="google" class="icon-itens social-media" />
+          </a>
+          <a (click)="openLink('https://www.youtube.com/channel/UCQY10_M3S9eJt1YdPTxBkVg')">
+            <img src="assets/images/youtube.png" alt="youtube" class="icon-itens social-media" />
           </a>
         </li>
       </ul>

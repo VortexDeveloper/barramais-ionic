@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
@@ -8,8 +9,9 @@ import { MainPage }from '../main/main';
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
+
 export class LoginPage {
 
   user: UserModel = new UserModel();
@@ -22,7 +24,10 @@ export class LoginPage {
     public viewCtrl: ViewController,
     private userProvider: User,
     public toastCtrl: ToastController
-  ) {}
+  ) {
+
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
