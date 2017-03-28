@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-navbar>
+    <bm-header></bm-header>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="background-image">
+    <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
+  </div>
+  <div class="main-content">
+    <ion-item>
+      <h2>{{group.name}}</h2>
+      <p>{{group.created_at | date:'MMMM d, y'}}</p>
+    </ion-item>
+    <ion-item>
+      <p>
+        {{group.about}}
+      </p>
+    </ion-item>
+    <ion-card>
+      <a ion-item (click)="openModal(postModal)">
+        <ion-avatar item-left>
+          <img src="{{user.avatar_url}}"/>
+        </ion-avatar>
+        <p>
+          Digite alguma coisa...
+        </p>
+      </a>
+    </ion-card>
+    <ion-row [hidden]="!showAdminActions">
+      <ion-col width-33>
+        <button ion-button outline block color="light" (click)="openModal(groupMembers, friends)" icon-left>
+          Convidar
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="!showMemberActions">
+      <ion-col width-50>
+        <button ng-disabled="buttonStatus" block ion-button outline color="light" (click)="refuse_group()" icon-left>
+          Não vou
+        </button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button outline block color="light" (click)="accept_group()" icon-left>
+          Vou
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-33>
+        <a (click)="openModal(groupMembers, confirmedMembers)">
+          <h2>{{l_confirmedMembers}}</h2>
+        </a>
+        <p>
+          Confirmaram
+        </p>
+      </ion-col>
+      <ion-col width-33>
+        <a (click)="openModal(groupMembers, allMembers)">
+          <h2>{{l_allMembers}}</h2>
+        </a>
+        <p>
+          Membros
+        </p>
+      </ion-col>
+      <ion-col width-33>
+        <a (click)="openModal(groupMembers, pendingMembers)">
+          <h2>{{l_pendingMembers}}</h2>
+        </a>
+        <p>
+          Pendentes
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/images/logo.png"/>
+        </ion-avatar>
+        <h2>Marty McFly</h2>
+        <p>November 5, 1955</p>
+      </ion-item>
+      <ion-card-content>
+        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      </ion-card-content>
+      <img src="assets/images/post.jpg"/>
+      <ion-row>
+        <ion-col width-15>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-15>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-15>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-15>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/images/logo.png"/>
+        </ion-avatar>
+        <h2>Marty McFly</h2>
+        <p>November 5, 1955</p>
+      </ion-item>
+      <ion-card-content>
+        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      </ion-card-content>
+      <img src="assets/images/post.jpg"/>
+      <ion-row>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-10>
+          <button ion-button icon-left clear small>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>
