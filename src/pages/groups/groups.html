@@ -7,11 +7,11 @@
       <ion-segment-button value="my-groups">
         Meus Grupos
       </ion-segment-button>
-      <ion-segment-button value="present-groups">
-        Grupos Presentes
+      <ion-segment-button value="confirmed-groups">
+        Membro
       </ion-segment-button>
-      <ion-segment-button value="pending-invitations">
-        Convites Pendentes
+      <ion-segment-button value="pending-groups">
+        Pendentes
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -20,67 +20,30 @@
 
   <div [ngSwitch]="groups">
     <ion-list *ngSwitchCase="'my-groups'">
-      <ion-card>
-        <img src="assets/images/1.jpg"/>
-        <div class="card-title">Grupo 1</div>
-        <div class="card-subtitle">41 membros</div>
-      </ion-card>
-
-      <ion-card>
-        <img src="assets/images/2.jpg"/>
-        <div class="card-title">Grupo 2</div>
-        <div class="card-subtitle">23 membros</div>
-      </ion-card>
-
-      <ion-card>
-        <img src="assets/images/3.jpg"/>
-        <div class="card-title">Grupo 3</div>
-        <div class="card-subtitle">67 membros</div>
-      </ion-card>
-
-      <ion-card>
-        <img src="assets/images/4.jpg"/>
-        <div class="card-title">Grupo 4</div>
-        <div class="card-subtitle">45 membros</div>
+      <ion-card *ngFor="let group of my_groups" (click)="openPage(group)">
+        <img src="{{group.cover_photo_url}}"/>
+        <div class="card-title">{{group.name}}</div>
+        <!-- <div class="card-subtitle">{{group.members.length}}</div> -->
       </ion-card>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'present-groups'">
-      <ion-card>
-        <img src="assets/images/1.jpg"/>
-        <div class="card-title">Grupo 1</div>
-        <div class="card-subtitle">41 membros</div>
-      </ion-card>
-
-      <ion-card>
-        <img src="assets/images/2.jpg"/>
-        <div class="card-title">Grupo 2</div>
-        <div class="card-subtitle">23 membros</div>
-      </ion-card>
-
-      <ion-card>
-        <img src="assets/images/4.jpg"/>
-        <div class="card-title">Grupo 4</div>
-        <div class="card-subtitle">45 membros</div>
+    <ion-list *ngSwitchCase="'confirmed-groups'">
+      <ion-card *ngFor="let group of confirmed_groups" (click)="openPage(group)">
+        <img src="{{group.cover_photo_url}}"/>
+        <div class="card-title">{{group.name}}</div>
+        <!-- <div class="card-subtitle">{{group.members.length}}</div> -->
       </ion-card>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'pending-invitations'">
-      <ion-card>
-        <img src="assets/images/1.jpg"/>
-        <div class="card-title">Grupo 1</div>
-        <div class="card-subtitle">41 membros</div>
+    <ion-list *ngSwitchCase="'pending-groups'">
+      <ion-card *ngFor="let group of pending_groups" (click)="openPage(group)">
+        <img src="{{group.cover_photo_url}}"/>
+        <div class="card-title">{{group.name}}</div>
+        <!-- <div class="card-subtitle">{{group.members.length}}</div> -->
       </ion-card>
-
-      <ion-card>
-        <img src="assets/images/2.jpg"/>
-        <div class="card-title">Grupo 2</div>
-        <div class="card-subtitle">23 membros</div>
-      </ion-card>
-
     </ion-list>
   </div>
   <ion-fab right bottom>
-    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="danger" (click)="openModal()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

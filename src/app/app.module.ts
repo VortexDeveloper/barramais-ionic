@@ -7,6 +7,7 @@ import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { User } from '../providers/user';
 import { EventProvider } from '../providers/events';
+import { Groups } from '../providers/groups';
 import { RegistrationPage } from '../pages/registration/registration';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
@@ -15,6 +16,9 @@ import { CommentModalPage } from '../pages/comment-modal/comment-modal';
 import { EventModalPage } from '../pages/events/event-modal';
 import { EventGuestsPage } from '../pages/events/event-guests';
 import { EventPagePage } from '../pages/events/event-page';
+import { GroupModalPage } from '../pages/groups/group-modal';
+import { GroupMembersPage } from '../pages/groups/group-members';
+import { GroupPagePage } from '../pages/groups/group-page';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile';
 import { FriendsPage } from '../pages/friends/friends';
@@ -97,7 +101,10 @@ export function getAuthHttp(http) {
     ClassifiedVesselTypePage,
     ClassifiedVesselStatusPage,
     ClassifiedVesselManufacturerPage,
-    UsersPage
+    UsersPage,
+    GroupModalPage,
+    GroupMembersPage,
+    GroupPagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -140,7 +147,10 @@ export function getAuthHttp(http) {
     ClassifiedVesselTypePage,
     ClassifiedVesselStatusPage,
     ClassifiedVesselManufacturerPage,
-    UsersPage
+    UsersPage,
+    GroupModalPage,
+    GroupMembersPage,
+    GroupPagePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -152,6 +162,7 @@ export function getAuthHttp(http) {
     ConversationChannel,
     Classified,
     Posts,
+    Groups,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })

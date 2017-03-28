@@ -22,7 +22,8 @@ export class User {
   private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "users";
-  private friends_url: string = this.host + "users/event_friends/";
+  private event_friends_url: string = this.host + "users/event_friends/";
+  private group_friends_url: string = this.host + "users/group_friends/";
   private my_events_url: string = this.host + "users/my_events/";
   private confirmed_events_url: string = this.host + "users/confirmed_events/";
   private pending_events_url: string = this.host + "users/pending_events/";
@@ -36,6 +37,12 @@ export class User {
   private is_friend_of_url: string = this.host + "users/is_friend_of/";
   private pending_friendships_url: string = this.host + "users/pending_friendships";
   private unfriend_url: string = this.host + "users/unfriend/";
+  private my_groups_url: string = this.host + "users/my_groups";
+  private confirmed_groups_url: string = this.host + "users/confirmed_groups";
+  private pending_groups_url: string = this.host + "users/pending_groups";
+  private accept_group_url: string = this.host + "users/accept_group/";
+  private refuse_group_url: string = this.host + "users/refuse_group/";
+
 
   constructor(
     public http: Http,
@@ -65,8 +72,13 @@ export class User {
       .map(res => res.json());
   }
 
-  friends(event){
-    return this.authHttp.get(this.friends_url + event + ".json")
+  event_friends(event){
+    return this.authHttp.get(this.event_friends_url + event + ".json")
+      .map(res => res.json());
+  }
+
+  group_friends(group){
+    return this.authHttp.get(this.group_friends_url + group + ".json")
       .map(res => res.json());
   }
 
@@ -92,6 +104,31 @@ export class User {
 
   refuse_event(current_user, event){
     return this.authHttp.put(this.refuse_event_url + current_user.id + ".json", {'event': event.id})
+    .map(res => res.json());
+  }
+
+  myGroups(current_user){
+    return this.authHttp.get(this.my_groups_url + ".json")
+      .map(res => res.json());
+  }
+
+  confirmedGroups(current_user){
+    return this.authHttp.get(this.confirmed_groups_url + ".json")
+      .map(res => res.json());
+  }
+
+  pendingGroups(current_user){
+    return this.authHttp.get(this.pending_groups_url + ".json")
+      .map(res => res.json());
+  }
+
+  accept_group(current_user, group){
+    return this.authHttp.put(this.accept_group_url + ".json", {'group': group.id})
+    .map(res => res.json());
+  }
+
+  refuse_group(current_user, group){
+    return this.authHttp.put(this.refuse_group_url + ".json", {'group': group.id})
     .map(res => res.json());
   }
 

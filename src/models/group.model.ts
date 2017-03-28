@@ -7,6 +7,8 @@ export class GroupModel {
   user_id: number;
   name: string;
   about: string;
+  cover_photo: string;
+  cover_photo_url: string;
 
   constructor(public params?:any) {
     params = params || {}
@@ -17,6 +19,8 @@ export class GroupModel {
     this.user_id = params.user_id || 0;
     this.name = params.name || null;
     this.about = params.about || null;
+    this.cover_photo = params.cover_photo || null;
+    this.cover_photo_url = params.cover_photo_url || "/assets/images/EVENTO.jpg";
 
   }
 }

@@ -5,16 +5,16 @@ import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
-import { EventGuestsPage } from "../events/event-guests";
+import { GroupMembersPage } from "../groups/group-members";
 import { FriendsPage } from '../friends/friends';
 import { HomePage } from '../home/home';
 import { UserModel } from "../../models/user.model";
-import { EventModel } from "../../models/event.model";
+import { GroupModel } from "../../models/group.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
-import { EventProvider } from '../../providers/events';
+import { Groups } from '../../providers/groups';
 
 /*
   Generated class for the Profile page.
@@ -24,10 +24,10 @@ import { EventProvider } from '../../providers/events';
 */
 
 @Component({
-  selector: 'page-event-page',
-  templateUrl: 'event-page.html'
+  selector: 'page-group-page',
+  templateUrl: 'group-page.html'
 })
-export class EventPagePage {
+export class GroupPagePage {
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
@@ -37,118 +37,118 @@ export class EventPagePage {
   groupsPage: any = GroupsPage;
   eventsPage: any = EventsPage;
   friendsPage: any = FriendsPage;
-  event: EventModel = new EventModel();
+  group: GroupModel = new GroupModel();
   postModal: any = PostModalPage;
-  eventGuests: any = EventGuestsPage;
-  allGuests: any;
-  l_allGuests: any;
-  confirmedGuests: any;
-  l_confirmedGuests: any;
-  pendingGuests: any;
-  l_pendingGuests: any;
-  refusedGuests: any;
-  l_refusedGuests: any;
+  groupMembers: any = GroupMembersPage;
+  allMembers: any;
+  l_allMembers: any;
+  confirmedMembers: any;
+  l_confirmedMembers: any;
+  pendingMembers: any;
+  l_pendingMembers: any;
+  refusedMembers: any;
+  l_refusedMembers: any;
   showAdminActions: boolean = false;
-  showGuestActions: boolean = false;
+  showMemberActions: boolean = false;
   friends: any;
 
   constructor(
     public navCtrl: NavController,
     params: NavParams,
-    public eventProvider: EventProvider,
+    public groupProvider: Groups,
     private userProvider: User,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.event = params.data.event;
-      this.verifyEventAdmin();
-      this.loadGuests(this.event);
+      this.group = params.data.group;
+      this.verifyGroupAdmin();
+      this.loadMembers(this.group);
     }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  loadGuests(event){
-    this.pending_guests(event);
-    this.confirmed_guests(event);
-    this.all_guests(event);
-    this.refused_guests(event);
-    this.userFriends(event);
+  loadMembers(group){
+    this.pending_members(group);
+    this.confirmed_members(group);
+    this.all_members(group);
+    this.refused_members(group);
+    this.userFriends(group);
   }
 
   openPage(page, event) {
     this.navCtrl.push(page, {event: event});
   }
 
-  openModal(page, guests) {
-    let modal = this.modalCtrl.create(page, {event: this.event, guests: guests});
-    modal.onDidDismiss(event => {
-      this.loadGuests(this.event);
+  openModal(page, members) {
+    let modal = this.modalCtrl.create(page, {group: this.group, members: members});
+    modal.onDidDismiss(group => {
+      this.loadMembers(this.group);
     });
     modal.present();
   }
 
-  verifyEventAdmin(){
-    if(this.event.user_id == this.user.id){
+  verifyGroupAdmin(){
+    if(this.group.user_id == this.user.id){
       this.showAdminActions = true;
-      this.showGuestActions = false;
+      this.showMemberActions = false;
     }
   }
 
-  verifyEventGuest(list){
-    var guests_id = [];
-    for(let user of list) guests_id.push(user.id);
-    if(guests_id.indexOf(this.user.id) > -1 ){
-      this.showGuestActions = true;
-      this.verifyEventAdmin();
+  verifyGroupMember(list){
+    var members_id = [];
+    for(let user of list) members_id.push(user.id);
+    if(members_id.indexOf(this.user.id) > -1 ){
+      this.showMemberActions = true;
+      this.verifyGroupAdmin();
     }
   }
 
-  all_guests(event){
-    this.eventProvider.all_guests(event)
+  all_members(group){
+    this.groupProvider.all_members(group)
       .subscribe(response =>{
-        this.allGuests = response.all_guests;
-        this.l_allGuests = response.all_guests.length;
-        this.verifyEventGuest(this.allGuests);
+        this.allMembers = response.all_members;
+        this.l_allMembers = response.all_members.length;
+        this.verifyGroupMember(this.allMembers);
+      }, error =>{
+        console.log("Erro ao exibir os membros: " + error.json());
+      });
+  }
+
+  confirmed_members(group){
+    this.groupProvider.confirmed_members(group)
+      .subscribe(response =>{
+        this.confirmedMembers = response.confirmed_members;
+        this.l_confirmedMembers = response.confirmed_members.length;
+      }, error =>{
+        console.log("Erro ao exibir os membros: " + error.json());
+      });
+  }
+
+  pending_members(group){
+    this.groupProvider.pending_members(group)
+      .subscribe(response =>{
+        this.pendingMembers= response.pending_members;
+        this.l_pendingMembers = response.pending_members.length;
+      }, error =>{
+        console.log("Erro ao exibir os membros: " + error.json());
+      });
+  }
+
+  refused_members(group){
+    this.groupProvider.refused_members(group)
+      .subscribe(response =>{
+        this.refusedMembers = response.refused_members;
+        this.l_refusedMembers = response.refused_members.length;
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
   }
 
-  confirmed_guests(event){
-    this.eventProvider.confirmed_guests(event)
-      .subscribe(response =>{
-        this.confirmedGuests = response.confirmed_guests;
-        this.l_confirmedGuests = response.confirmed_guests.length;
-      }, error =>{
-        console.log("Erro ao exibir os convidados: " + error.json());
-      });
-  }
-
-  pending_guests(event){
-    this.eventProvider.pending_guests(event)
-      .subscribe(response =>{
-        this.pendingGuests = response.pending_guests;
-        this.l_pendingGuests = response.pending_guests.length;
-      }, error =>{
-        console.log("Erro ao exibir os convidados: " + error.json());
-      });
-  }
-
-  refused_guests(event){
-    this.eventProvider.refused_guests(event)
-      .subscribe(response =>{
-        this.refusedGuests = response.refused_guests;
-        this.l_refusedGuests = response.refused_guests.length;
-      }, error =>{
-        console.log("Erro ao exibir os convidados: " + error.json());
-      });
-  }
-
-  userFriends(event){
-    this.userProvider.event_friends(event.id)
+  userFriends(group){
+    this.userProvider.group_friends(group.id)
     .subscribe(response => {
       this.friends = response.users;
     }, error => {
@@ -156,10 +156,10 @@ export class EventPagePage {
     });
   }
 
-  refuse_event(){
-    this.userProvider.refuse_event(this.user, this.event).
+  refuse_group(){
+    this.userProvider.refuse_group(this.user, this.group).
     subscribe(response =>{
-      this.openPage(EventPagePage, this.event);
+      this.openPage(GroupPagePage, this.group);
       this.presentToast(response.sucess);
     }, error =>{
       this.presentToast(error.json());
@@ -168,9 +168,9 @@ export class EventPagePage {
   }
 
   accept_event(){
-    this.userProvider.accept_event(this.user, this.event).
+    this.userProvider.accept_group(this.user, this.group).
     subscribe(response =>{
-      this.openPage(EventPagePage, this.event);
+      this.openPage(GroupPagePage, this.group);
       this.presentToast(response.sucess);
     }, error =>{
       this.presentToast(error.json());
