@@ -46,8 +46,8 @@ export class UserPage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController
   ) {
-        this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-    }
+    this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserPage');
@@ -188,5 +188,4 @@ export class UserPage {
         console.log(JSON.stringify(error.json()));
     });
   }
-
 }

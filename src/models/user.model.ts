@@ -33,6 +33,8 @@ export class UserModel {
   advertiser: AdvertiserModel;
   nautical_license: number;
   has_nautical_license: number;
+  nautical_tour: boolean;
+  fishing: boolean;
 
   constructor(public params?:any) {
     params = params || {}
@@ -59,5 +61,7 @@ export class UserModel {
     this.nautical_license = params.nautical_license || 0;
     this.has_nautical_license = params.has_nautical_license || false;
     this.work = params.work || "";
+    this.nautical_tour = params.nautical_tour || false;
+    this.fishing = params.fishing || false;
   }
 }
