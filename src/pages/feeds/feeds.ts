@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { CommentModalPage } from "../comment-modal/comment-modal";
-import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { Posts } from '../../providers/posts';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';

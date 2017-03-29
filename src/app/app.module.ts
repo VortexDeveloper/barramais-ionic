@@ -107,7 +107,20 @@ export function getAuthHttp(http) {
     GroupPagePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp
+      , {
+        platforms : {
+          ios : {
+            scrollAssist: false,    // Valid options appear to be [true, false]
+            autoFocusAssist: false  // Valid options appear to be ['instant', 'delay', false]
+          },
+          android : {
+            scrollAssist: false,    // Valid options appear to be [true, false]
+            autoFocusAssist: false  // Valid options appear to be ['instant', 'delay', false]
+          }
+        }
+      }
+    )
   ],
   bootstrap: [IonicApp],
   entryComponents: [

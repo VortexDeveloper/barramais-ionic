@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, MenuController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { ToastController } from 'ionic-angular';
 import { FeedsPage }from '../feeds/feeds';
 import { MainPage }from '../main/main';
+import { JwtHelper } from 'angular2-jwt';
+import { Events } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 @Component({
   selector: 'page-login',
@@ -14,6 +17,7 @@ import { MainPage }from '../main/main';
 
 export class LoginPage {
 
+  jwtHelper: JwtHelper = new JwtHelper();
   user: UserModel = new UserModel();
   feeds: any = FeedsPage;
   main: any = MainPage;
@@ -23,11 +27,13 @@ export class LoginPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     private userProvider: User,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public events: Events,
+    public menu: MenuController
   ) {
-
+      // Keyboard.disableScroll(true);
+      this.menu.enable(false, 'menu');
   }
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -42,6 +48,7 @@ export class LoginPage {
     .subscribe(token_params => {
         localStorage.setItem("jwt", token_params.token);
         localStorage.setItem("user", token_params.user);
+        this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
         this.openPage(this.main);
     }, error => {
         console.log(error.json() || 'Server error');

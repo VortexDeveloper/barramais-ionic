@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { UserModel } from "../../models/user.model";
 import { MainPage } from "../main/main";
 import { User } from '../../providers/user';
@@ -29,9 +29,11 @@ export class RegistrationPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private userProvider: User,
-    public toastCtrl: ToastController
-  ) {
+    public toastCtrl: ToastController,
+    public menu: MenuController
 
+  ) {
+    this.menu.enable(false, 'menu');
     }
 
   ionViewDidLoad() {
