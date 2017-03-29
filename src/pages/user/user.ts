@@ -10,6 +10,8 @@ import { FeedsPage } from '../feeds/feeds';
 import { ProfilePage } from '../profile/profile';
 import { JwtHelper } from 'angular2-jwt';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { Events } from 'ionic-angular';
+
 
 declare var cordova: any;
 
@@ -44,7 +46,9 @@ export class UserPage {
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public events: Events
+
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
   }
@@ -58,6 +62,7 @@ export class UserPage {
     .subscribe(response => {
         localStorage.setItem("user", response.user);
         this.presentToast("Usuário atualizado com sucesso!");
+        this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(response.user));
     }, error => {
         var errors = error.json().errors;
         var errorMessage;

@@ -33,6 +33,8 @@ import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
 import { MenuController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
+
 
 @Component({
   selector: 'app-menu',
@@ -70,9 +72,9 @@ export class MyApp {
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
-  // user: UserModel;
-  // jwtHelper: JwtHelper = new JwtHelper();
-  // user_token: any;
+  user: UserModel = new UserModel();
+  jwtHelper: JwtHelper = new JwtHelper();
+  user_token: any;
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
@@ -82,17 +84,13 @@ export class MyApp {
     public platform: Platform,
     private alertCtrl: AlertController,
     private userProvider: User,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    public events: Events
+
   ) {
-      if (localStorage.getItem("jwt")){
-        this.rootPage = this.mainPage;
-      }
+      this.checkMainPage();
       this.initializeApp();
-      // console.log(localStorage.getItem('user'));
-      // if(localStorage.getItem('user') != null){
-      //   this.user_token = localStorage.getItem('user');
-      //   this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      // }
+      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });      
   }
 
   initializeApp() {
@@ -100,6 +98,16 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  checkMainPage(){
+    if (localStorage.getItem("user")){
+      this.rootPage = this.mainPage;
+    }
+  }
+
+  checkCurrentUser(){
+    this.events.subscribe('onUpdateUser', (user)=>{this.user = user;});
   }
 
   openPage(page) {
@@ -149,9 +157,5 @@ export class MyApp {
     });
     alert.present();
   }
-  // $('.menu_side_sub').hide();
-  // $('.menu_side_item').click(function () {
-  //     $(this).children('.menu_side_sub').slideToggle('slow');
-  // });
 
 }

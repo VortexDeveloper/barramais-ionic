@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController} from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { GroupsPage } from '../groups/groups';
 import { FeedsPage } from '../feeds/feeds';
@@ -37,8 +37,6 @@ export class MainPage {
   ) {
       this.menu.enable(true, 'menu');
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      console.log('this.current_user');
-      console.log(this.current_user);
     }
 
   ionViewDidLoad() {

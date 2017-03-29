@@ -1,7 +1,7 @@
 <ion-menu [content]="content" id="menu" persistent="true">
   <ion-content>
     <ion-list>
-      <!-- <ul class="photo-menu">
+      <ul class="photo-menu">
         <li (click)="openPage(profilePage)" menuClose>
           <ion-item no-lines class="avatar">
             <ion-thumbnail item-left>
@@ -9,7 +9,7 @@
             </ion-thumbnail>
           </ion-item>
         </li>
-      </ul> -->
+      </ul>
       <ul class="menu-item">
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
@@ -159,16 +159,16 @@
           </button>
         </li>
         <li ion-item no-lines>
-          <a (click)="openLink('https://www.facebook.com/barramaisoficial/')" >
+          <a menuClose (click)="openLink('https://www.facebook.com/barramaisoficial/')" >
             <img src="assets/images/facebook.png" alt="facebook" class="icon-itens social-media" />
           </a>
-          <a (click)="openLink('https://www.instagram.com/barramaisoficial/')">
+          <a menuClose (click)="openLink('https://www.instagram.com/barramaisoficial/')">
             <img src="assets/images/instagram.png" alt="instagram" class="icon-itens social-media" />
           </a>
-          <a (click)="openLink('https://plus.google.com/u/0/116777254689631886658')" >
+          <a menuClose (click)="openLink('https://plus.google.com/u/0/116777254689631886658')" >
             <img src="assets/images/google.png" alt="google" class="icon-itens social-media" />
           </a>
-          <a (click)="openLink('https://www.youtube.com/channel/UCQY10_M3S9eJt1YdPTxBkVg')">
+          <a menuClose (click)="openLink('https://www.youtube.com/channel/UCQY10_M3S9eJt1YdPTxBkVg')">
             <img src="assets/images/youtube.png" alt="youtube" class="icon-itens social-media" />
           </a>
         </li>
