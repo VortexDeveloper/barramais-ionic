@@ -27,7 +27,6 @@ export class FeedsPage {
   ) {
     this.loadPosts();
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-    console.log(this.user);
   }
 
   ionViewDidLoad() {
@@ -53,7 +52,10 @@ export class FeedsPage {
 
   loadPosts() {
     this.postsProvider.index().subscribe(
-      (posts) => this.posts = posts,
+      (posts) => {
+        this.posts = posts;
+        console.log(posts);
+      },
       (error) => console.log(error)
     );
   }

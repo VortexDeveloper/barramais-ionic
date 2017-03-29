@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { GroupsPage } from '../groups/groups';
-import { EventsPage } from '../events/events';
 import { FeedsPage } from '../feeds/feeds';
 import { ProfilePage } from '../profile/profile';
+import { ConversationPage } from '../../pages/conversation/conversation';
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 
 /*
   Generated class for the Main page.
@@ -20,9 +22,13 @@ export class MainPage {
 
   user: any = UserPage;
   feeds: any = FeedsPage;
-  events: any = EventsPage;
   groups: any = GroupsPage;
-  profilePage: any = ProfilePage;
+  profile: any = ProfilePage;
+  conversation: any = ConversationPage;
+
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  current_user: UserModel;
 
   constructor(
     public navCtrl: NavController,
@@ -30,6 +36,9 @@ export class MainPage {
     public menu: MenuController
   ) {
       this.menu.enable(true, 'menu');
+      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      console.log('this.current_user');
+      console.log(this.current_user);
     }
 
   ionViewDidLoad() {
@@ -38,6 +47,10 @@ export class MainPage {
 
   openPage(page) {
     this.navCtrl.push(page);
+  }
+
+  openProfile(){
+    this.navCtrl.setRoot(this.profile, {user: this.current_user})
   }
 
 }

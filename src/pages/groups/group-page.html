@@ -10,7 +10,7 @@
   <div class="main-content">
     <ion-item>
       <h2>{{group.name}}</h2>
-      <p>{{group.created_at | date:'MMMM d, y'}}</p>
+      Desde <p>{{group.created_at | date:'MMMM d, y'}}</p>
     </ion-item>
     <ion-item>
       <p>
@@ -28,21 +28,20 @@
       </a>
     </ion-card>
     <ion-row [hidden]="!showAdminActions">
-      <ion-col width-33>
-        <button ion-button outline block color="light" (click)="openModal(groupMembers, friends)" icon-left>
-          Convidar
+        <button ion-button outline block icon-left color="light" (click)="openModal(groupMembers, friends)" icon-left>
+          <ion-icon name="person-add"></ion-icon>
+          Adicionar membros
         </button>
-      </ion-col>
     </ion-row>
-    <ion-row [hidden]="!showMemberActions">
-      <ion-col width-50>
+    <ion-row [hidden]="!showInvitedMemberActions">
+      <ion-col width-50 [hidden]="!showMemberActions">
         <button ng-disabled="buttonStatus" block ion-button outline color="light" (click)="refuse_group()" icon-left>
-          Não vou
+          Não participar
         </button>
       </ion-col>
-      <ion-col width-50>
+      <ion-col width-50 [hidden]="showMemberActions">
         <button ion-button outline block color="light" (click)="accept_group()" icon-left>
-          Vou
+          Participar
         </button>
       </ion-col>
     </ion-row>
@@ -52,18 +51,18 @@
           <h2>{{l_confirmedMembers}}</h2>
         </a>
         <p>
-          Confirmaram
+          Membros
         </p>
       </ion-col>
-      <ion-col width-33>
+      <ion-col width-33 [hidden]="!showAdminActions">
         <a (click)="openModal(groupMembers, allMembers)">
           <h2>{{l_allMembers}}</h2>
         </a>
         <p>
-          Membros
+          Todos
         </p>
       </ion-col>
-      <ion-col width-33>
+      <ion-col width-33 [hidden]="!showAdminActions">
         <a (click)="openModal(groupMembers, pendingMembers)">
           <h2>{{l_pendingMembers}}</h2>
         </a>

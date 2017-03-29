@@ -18,8 +18,8 @@ import 'rxjs/add/operator/catch';
 export class User {
 
   // private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string = "https://barramais.herokuapp.com/";
+  // private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "users";
   private event_friends_url: string = this.host + "users/event_friends/";
@@ -40,8 +40,8 @@ export class User {
   private my_groups_url: string = this.host + "users/my_groups";
   private confirmed_groups_url: string = this.host + "users/confirmed_groups";
   private pending_groups_url: string = this.host + "users/pending_groups";
-  private accept_group_url: string = this.host + "users/accept_group/";
-  private refuse_group_url: string = this.host + "users/refuse_group/";
+  private accept_group_url: string = this.host + "users/accept_group";
+  private refuse_group_url: string = this.host + "users/refuse_group";
 
 
   constructor(
@@ -58,7 +58,11 @@ export class User {
 
   update(user){
     return this.authHttp.put(this.url + ".json", {'user': user})
-      .map(res => res.json());
+      .map(res => {
+        let user_token = res.json();
+        localStorage.setItem("user", user_token.user);
+        return user_token;
+      });
   }
 
   // Session sign_up : (post)users.json
@@ -137,7 +141,11 @@ export class User {
     let new_name = user.id + d.getTime();
 
     return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
-      .map(res => res.json());
+      .map(res => {
+        let user_token = res.json();
+        localStorage.setItem("user", user_token.user);
+        return user_token;
+      });
   }
 
   userAdvertiser(current_user){

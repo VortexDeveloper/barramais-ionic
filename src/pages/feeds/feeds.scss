@@ -6,4 +6,30 @@ page-feeds {
     justify-content: space-around;
     background-color: #f3f1f1;
   }
+
+  .post-images {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* align-content: center; */
+  }
+
+  .post-image {
+    width: 50%;
+    margin-bottom: 15px;
+    overflow: hidden;
+    height: 150px;
+    /* display: flex; */
+    align-self: stretch;
+    padding: 2px;
+  }
+
+  .post-image img {
+    min-width: calc(100% - 30px);
+    width: auto;
+    max-width: 136%;
+    border-radius: 0;
+  }
+
 }

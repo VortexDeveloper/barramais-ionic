@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
+import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { AdsPage } from '../pages/ads/ads';
@@ -31,6 +32,7 @@ import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
+import { MenuController } from 'ionic-angular';
 
 @Component({
   selector: 'app-menu',
@@ -67,6 +69,7 @@ export class MyApp {
   classifiedVesselDescriptionPage: any = ClassifiedVesselDescriptionPage;
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
   loginPage: any = LoginPage;
+  eventsPage: any = EventsPage;
   // user: UserModel;
   // jwtHelper: JwtHelper = new JwtHelper();
   // user_token: any;
@@ -78,7 +81,8 @@ export class MyApp {
   constructor(
     public platform: Platform,
     private alertCtrl: AlertController,
-    private userProvider: User
+    private userProvider: User,
+    private menuCtrl: MenuController
   ) {
       if (localStorage.getItem("jwt")){
         this.rootPage = this.mainPage;
