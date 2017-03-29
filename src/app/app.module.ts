@@ -50,6 +50,9 @@ import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 import { ClassifiedVesselStatusPage } from '../pages/classified-vessel-status/classified-vessel-status';
 import { ClassifiedVesselManufacturerPage } from '../pages/classified-vessel-manufacturer/classified-vessel-manufacturer';
+import { ClassifiedVesselAccessoriesPage } from '../pages/classified-vessel-accessories/classified-vessel-accessories';
+import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-description/classified-vessel-description';
+import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 
@@ -101,6 +104,9 @@ export function getAuthHttp(http) {
     ClassifiedVesselTypePage,
     ClassifiedVesselStatusPage,
     ClassifiedVesselManufacturerPage,
+    ClassifiedVesselAccessoriesPage,
+    ClassifiedVesselDescriptionPage,
+    ClassifiedVesselPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
@@ -147,6 +153,9 @@ export function getAuthHttp(http) {
     ClassifiedVesselTypePage,
     ClassifiedVesselStatusPage,
     ClassifiedVesselManufacturerPage,
+    ClassifiedVesselAccessoriesPage,
+    ClassifiedVesselDescriptionPage,
+    ClassifiedVesselPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,

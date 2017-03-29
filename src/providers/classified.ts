@@ -18,7 +18,10 @@ export class Classified {
 
   private url: string = this.host + "classifieds";
   private brands_url: string = this.host + "classifieds/brands_for_select";
-  private molds_url: string = this.host + "classifieds/molds_for_select";
+  private molds_url: string = this.host + "classifieds/molds_for_select/";
+  private accessories_url: string = this.host + "classifieds/accessories_for_select";
+  private communications_url: string = this.host + "classifieds/communications_for_select";
+  private eletronics_url: string = this.host + "classifieds/eletronics_for_select";
 
   constructor(
     public http: Http,
@@ -32,6 +35,21 @@ export class Classified {
 
   getMolds(brand){
     return this.authHttp.get(this.molds_url + brand + ".json")
+      .map(res => res.json());
+  }
+
+  getAccessories(){
+    return this.authHttp.get(this.accessories_url + ".json")
+      .map(res => res.json());
+  }
+
+  getCommunications(){
+    return this.authHttp.get(this.communications_url + ".json")
+      .map(res => res.json());
+  }
+
+  getEletronics(){
+    return this.authHttp.get(this.eletronics_url + ".json")
       .map(res => res.json());
   }
 }

@@ -17,7 +17,7 @@ import { ClassifiedVesselManufacturerPage } from '../classified-vessel-manufactu
 export class ClassifiedVesselStatusPage {
   classified: ClassifiedModel;
   vessel: VesselModel;
-  ClassifiedVesselManufacturerPage: any = ClassifiedVesselManufacturerPage;
+  classifiedVesselManufacturerPage: any = ClassifiedVesselManufacturerPage;
 
   constructor(
     public navCtrl: NavController,
