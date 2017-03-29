@@ -36,7 +36,7 @@ export class AdInterestsPage {
   ads: any;
   advertiserPage: AdvertiserPage;
   interestList: any;
-  selectedAreas: any[] = []
+  selectedAreas: any[] = [];
   isEditing: boolean = false;
   chosenAreas: any[] = [];
   midiaKit: boolean = false;
