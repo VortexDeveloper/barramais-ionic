@@ -29,6 +29,8 @@ export class ClassifiedVesselDescriptionPage {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
       this.accessories = navParams.data.accessories;
+
+      console.log(this.vessel);
   }
 
   ionViewDidLoad() {

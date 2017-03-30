@@ -17,6 +17,9 @@ export class Classified {
   private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "classifieds";
+  private create_vessel_url: string = this.host + "classifieds/create_vessel"
+  private brand_url: string = this.host + "classifieds/get_brand_by_id/";
+  private mold_url: string = this.host + "classifieds/get_mold_by_id/";
   private brands_url: string = this.host + "classifieds/brands_for_select";
   private molds_url: string = this.host + "classifieds/molds_for_select/";
   private accessories_url: string = this.host + "classifieds/accessories_for_select";
@@ -27,6 +30,21 @@ export class Classified {
     public http: Http,
     public authHttp: AuthHttp
   ) {}
+
+  createVessel(classified, vessel, accessories){
+    return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
+      .map(res => res.json());
+  }
+
+  getBrandById(brand){
+    return this.authHttp.get(this.brand_url + brand + ".json")
+      .map(res => res.json());
+  }
+
+  getMoldById(mold){
+    return this.authHttp.get(this.mold_url + mold + ".json")
+      .map(res => res.json());
+  }
 
   getBrands(){
     return this.authHttp.get(this.brands_url + ".json")
