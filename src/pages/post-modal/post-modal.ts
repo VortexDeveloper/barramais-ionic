@@ -32,8 +32,7 @@ export class PostModalPage {
     public postsProvider: Posts
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-    this.post = {};
-    this.post.medias = [];
+    this.post = {medias: []};
   }
 
   dismiss(new_post = null) {
@@ -109,6 +108,7 @@ export class PostModalPage {
       let new_name = d.getTime();
       let new_media = {image: "data:image/jpeg;base64," + image, filename: new_name}
       this.post.medias.push(new_media);
+      console.debug(this.post);
     });
   }
 }
