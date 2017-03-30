@@ -17,6 +17,8 @@ export class Classified {
   private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "classifieds";
+  private classified_user_url: string = this.host + "classifieds/get_classifieds_by_user/"
+  private destroy_url: string = this.host + "classifieds/"
   private create_vessel_url: string = this.host + "classifieds/create_vessel"
   private brand_url: string = this.host + "classifieds/get_brand_by_id/";
   private mold_url: string = this.host + "classifieds/get_mold_by_id/";
@@ -33,6 +35,16 @@ export class Classified {
 
   createVessel(classified, vessel, accessories){
     return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
+      .map(res => res.json());
+  }
+
+  destroy(classified){
+    return this.authHttp.delete(this.destroy_url + classified + ".json")
+      .map(res => res.json());
+  }
+
+  getClassifiedsByUser(user){
+    return this.authHttp.get(this.classified_user_url + user + ".json")
       .map(res => res.json());
   }
 

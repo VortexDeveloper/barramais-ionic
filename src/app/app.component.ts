@@ -21,6 +21,7 @@ import { AdListPage } from '../pages/ad-list/ad-list';
 import { LoginPage } from '../pages/login/login';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
+import { ClassifiedUserListPage } from '../pages/classified-user-list/classified-user-list';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 import { ClassifiedVesselStatusPage } from '../pages/classified-vessel-status/classified-vessel-status';
@@ -63,6 +64,7 @@ export class MyApp {
   adListPage: any = AdListPage;
   advertisersPage: any = AdvertisersPage;
   advertiserPaymentPage: any = AdvertiserPaymentPage;
+  classifiedUserListPage: any = ClassifiedUserListPage;
   classifiedPage: any = ClassifiedPage;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
   classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
@@ -90,7 +92,7 @@ export class MyApp {
   ) {
       this.checkMainPage();
       this.initializeApp();
-      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });      
+      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });
   }
 
   initializeApp() {
