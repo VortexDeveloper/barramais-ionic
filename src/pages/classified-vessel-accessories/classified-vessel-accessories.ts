@@ -25,7 +25,6 @@ export class ClassifiedVesselAccessoriesPage {
   communication_for_select: any;
   eletronic_for_select: any;
   chosenAccessories: any[] = [];
-  accessoriesPrice: number = 0;
   classifiedVesselDescriptionPage: any = ClassifiedVesselDescriptionPage;
 
   constructor(
@@ -43,13 +42,6 @@ export class ClassifiedVesselAccessoriesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassifiedVesselAccessoriesPage');
-  }
-
-  calculateAccessoriesPrice(){
-    this.accessoriesPrice = 0;
-    for(var i = 0; i < this.chosenAccessories.length; i++){
-        this.accessoriesPrice = this.accessoriesPrice + this.chosenAccessories[i].accessory_price;
-    }
   }
 
   getAccessories() {
@@ -79,24 +71,39 @@ export class ClassifiedVesselAccessoriesPage {
     });
   }
 
+  checkPermissionToInclude(itemForSelect){
+    var permissionToInclude = true;
+    for(var i = 0; i < this.chosenAccessories.length; i++){
+      if(this.chosenAccessories[i].id == itemForSelect){
+        permissionToInclude = false;
+      }
+    }
+
+    return permissionToInclude;
+  }
+
   includeAccessoryToVessel(){
-    this.chosenAccessories.push(this.accessory_for_select);
-    this.calculateAccessoriesPrice();
+    if(this.checkPermissionToInclude(this.accessory_for_select.id))
+      this.chosenAccessories.push(this.accessory_for_select);
   }
 
   includeCommunicationToVessel(){
-    this.chosenAccessories.push(this.communication_for_select);
-    this.calculateAccessoriesPrice();
+    if(this.checkPermissionToInclude(this.communication_for_select.id))
+      this.chosenAccessories.push(this.communication_for_select);
   }
 
   includeEletronicToVessel(){
-    this.chosenAccessories.push(this.eletronic_for_select);
-    this.calculateAccessoriesPrice();
+    if(this.checkPermissionToInclude(this.eletronic_for_select.id))
+      // this.includeAccessoryToVessel(this.eletronic_for_select.id);
+      this.chosenAccessories.push(this.eletronic_for_select);
   }
+
+  // includeAccessoryToVessel(what_to_include){
+  //   this.chosenAccessories.push(what_to_include);
+  // }
 
   excludeAccessoryFromVessel(accessory){
     this.chosenAccessories.splice(this.chosenAccessories.indexOf(accessory), 1);
-    this.calculateAccessoriesPrice();
   }
 
   openNextPage(page){

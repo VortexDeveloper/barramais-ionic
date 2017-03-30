@@ -72,20 +72,17 @@
 
     <ion-item>
       <ion-label>Fabricante</ion-label>
+      <ion-label>{{brand.name}}</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label>Modelo</ion-label>
+      <ion-label>{{mold.name}}</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label>Número do chassi</ion-label>
       <ion-label>{{vessel.chassis_number}}</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Valor da embarcação</ion-label>
-      <ion-label>{{classified.price}}</ion-label>
     </ion-item>
 
     <ion-item-divider color="light"  *ngIf="accessoriesPrice!=0">Acessórios da embarcação</ion-item-divider>
@@ -94,14 +91,9 @@
       {{accessory.name}}
     </ion-item>
 
-    <ion-item *ngIf="accessoriesPrice!=0">
-      <ion-label>Valor dos acessórios</ion-label>
-      <ion-label>{{accessoriesPrice}}</ion-label>
-    </ion-item>
-
     <ion-item>
-      <ion-label>Valor total</ion-label>
-      <!-- fazer uma função para o total -->
+      <ion-label>Valor da embarcação</ion-label>
+      <ion-label>{{classified.price}}</ion-label>
     </ion-item>
   </div>
 
@@ -148,6 +140,8 @@
   </div>
 
   <button class="form-buttons" ion-button type="button" (click)="toggleClassifiedInformation()" block>Mudar</button>
+
+  <button class="form-buttons" ion-button type="button" (click)="save()" block>Cadastrar Classificado</button>
 
   <button class="form-buttons" ion-button type="button" (click)="goBack()" block>Voltar</button>
 </ion-content>
