@@ -6,10 +6,10 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let user of userList">
-      <ion-avatar item-left (click)='openProfile(user)' >
-        <img src="/assets/images/batman.png">
+      <ion-avatar item-left (click)='openProfile(user.id)' >
+        <img src="{{user.avatar_url}}">
       </ion-avatar>
-      <h2 (click)='openProfile(user)'>{{user.first_name}} {{user.last_name}}</h2>
+      <h2 (click)='openProfile(user.id)'>{{user.first_name}} {{user.last_name}}</h2>
       <p>{{user.birthday | date:'MMMM d, y'}}</p>
       <button item-right ion-button color="primary" (click)='request_friendship(user)' *ngIf="user.isFriend === false">
         <ion-icon name="person-add"></ion-icon>

@@ -19,7 +19,7 @@
   <ion-list>
     <ion-item *ngFor="let user of pendingFriendships">
       <ion-avatar item-left (click)='openProfile(user)'>
-        <img src="/assets/images/batman.png">
+        <img src="{{user.avatar_url}}">
       </ion-avatar>
       <h2 (click)='openProfile(user)'>{{user.first_name}} {{user.last_name}}</h2>
       <p>{{user.birthday | date:'MMMM d, y'}}</p>

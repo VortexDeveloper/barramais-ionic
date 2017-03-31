@@ -24,7 +24,7 @@ export class FriendsPage {
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
-
+  user: UserModel = new UserModel();
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
   friendsPage: any = FriendsPage;
@@ -39,6 +39,7 @@ export class FriendsPage {
     public userProvider: User
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.user = new UserModel(params.data.user);
     this.loadFriends();
   }
 
@@ -51,7 +52,7 @@ export class FriendsPage {
   }
 
   openProfile(user) {
-    this.navCtrl.push(this.profilePage, {user: user})
+    this.navCtrl.push(this.profilePage, {user: user.id})
   }
 
   unfriend(user){
@@ -76,7 +77,7 @@ export class FriendsPage {
   }
 
   loadFriends() {
-    this.userProvider.user_friends(this.current_user)
+    this.userProvider.user_friends(this.user)
     .subscribe(
       (friends) => {
         this.friends = friends;
