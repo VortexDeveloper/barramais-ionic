@@ -5,6 +5,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { UserModel } from "../../models/user.model";
 import { FishingModel } from "../../models/fishing.model";
 import { Classified } from '../../providers/classified';
+import { ClassifiedFishingStatusPage } from '../classified-fishing-status/classified-fishing-status';
 
 /*
   Generated class for the ClassifiedFishing page.
@@ -24,6 +25,8 @@ export class ClassifiedFishingPage {
   fishing: FishingModel;
   fishingCategories: any;
   fishingSubCategories: any;
+  provisionalCategory: boolean = false;
+  classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
 
   constructor(
     public navCtrl: NavController,
@@ -70,8 +73,8 @@ export class ClassifiedFishingPage {
     });
   }
 
-  openNextPage(page){
-    this.navCtrl.push(page, {'fishing': this.fishing, 'classified': this.classified});
+  openNextPage(page, fishing){
+    this.navCtrl.push(page, {'fishing': fishing, 'classified': this.classified});
   }
 
   goBack(){

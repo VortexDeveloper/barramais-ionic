@@ -14,8 +14,8 @@ export class FishingModel {
     this.createdAt = params.createdAt || "";
     this.updatedAt = params.updatedAt || "";
     this.status = params.status || 0;
-    this.fishing_category_id = params.fishing_category || null;
-    this.fishing_sub_category_id = params.fishing_sub_category || null;
+    this.fishing_category_id = params.fishing_category_id || null;
+    this.fishing_sub_category_id = params.fishing_sub_category_id || null;
     this.provisional_category = params.provisional_category || "";
   }
 }
