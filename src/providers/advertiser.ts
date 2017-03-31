@@ -47,7 +47,7 @@ export class Advertiser {
   }
 
   createAd(ad, advertiser){
-    console.log(ad.interest_areas)
+    // console.log(ad.interest_areas)
     return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})
       .map(res => res.json())
   }

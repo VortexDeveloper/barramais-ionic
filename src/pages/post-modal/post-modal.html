@@ -23,9 +23,22 @@
       <ion-item>
         <ion-textarea [(ngModel)]="post.description" placeHolder="O que você está pensando..."></ion-textarea>
       </ion-item>
-      <button ion-button (click)="createPost()">
-        <span ion-text>Publicar</span>
-      </button>
+      <ion-grid>
+        <ion-row>
+          <ion-item>
+            <button ion-button item-right (click)="createPost()">
+              <span ion-text>Publicar</span>
+            </button>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <div class="post-attaches" *ngIf="post.medias">
+            <div class="post-attach post-image" *ngFor="let media of post.medias">
+              <img src="{{media.image}}" alt="" />
+            </div>
+          </div>
+        </ion-row>
+      </ion-grid>
   </ion-list>
 </ion-content>
 
