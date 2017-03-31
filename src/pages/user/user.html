@@ -5,9 +5,17 @@
 </ion-header>
 <ion-content>
   <div class="container">
-    <form (ngSubmit)="save(user)">
       <ion-item-group>
-        <ion-item-divider color="light" (click)="showAccountInformations()" >Informações de conta</ion-item-divider>
+        <ion-item-divider color="light" (click)="showAccountInformations()" >
+          <a ion-item>
+            <ion-avatar item-left>
+              <img src="assets/images/infor_conta.png"/>
+            </ion-avatar>
+            <p>
+              Informações de conta
+            </p>
+          </a>
+        </ion-item-divider>
         <div [hidden]="!accountInformations">
           <ion-item class="avatar-user">
             <ion-thumbnail item-left>
@@ -41,7 +49,16 @@
           </ion-item>
         </div>
         <br>
-        <ion-item-divider color="light" (click)="showPersonalInformations()">Informações pessoais</ion-item-divider>
+        <ion-item-divider color="light" (click)="showPersonalInformations()">
+          <a ion-item>
+            <ion-avatar item-left>
+              <img src="assets/images/infor_pessoal.png"/>
+            </ion-avatar>
+            <p>
+              Informações pessoais
+            </p>
+          </a>
+        </ion-item-divider>
         <div [hidden]="!personalInformations">
           <ion-item>
             <ion-label floating>Sobre mim</ion-label>
@@ -100,7 +117,16 @@
           </ion-item>
         </div>
         <br>
-        <ion-item-divider color="light" (click)="showNauticalInformations()">Informações náuticas</ion-item-divider>
+        <ion-item-divider color="light" (click)="showNauticalInformations()">
+          <a ion-item>
+            <ion-avatar item-left>
+              <img src="assets/images/infor_nautica.png"/>
+            </ion-avatar>
+            <p>
+              Informações náuticas
+            </p>
+          </a>
+        </ion-item-divider>
         <div [hidden]="!nauticalInformations">
           <ion-item>
             <ion-label>Trabalha com náutica</ion-label>
@@ -246,7 +272,9 @@
         </div>
         <br>
       </ion-item-group>
-      <button class="form-buttons" ion-button type="submit" block>Salvar</button>
-    </form>
+      <!-- <button class="form-buttons" ion-button type="submit" block>Salvar</button> -->
   </div>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="save(user)"><ion-icon name="done-all"></ion-icon></button>
+  </ion-fab>
 </ion-content>

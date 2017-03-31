@@ -1,7 +1,7 @@
 
     <div class="toolbar-ios-fix">
       <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
+        <img src="assets/images/menu.png" alt="MENU">
       </button>
       <button class="bar-buttons" right ion-button (click)="openPage(usersPage)">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
@@ -10,3 +10,9 @@
         <img src="assets/images/logo.png" alt="Barramais" />
       </button>
     </div>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>

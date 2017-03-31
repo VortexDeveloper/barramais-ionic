@@ -17,10 +17,10 @@
   </ion-card>
   <ion-card *ngFor="let post of posts">
     <ion-item>
-      <ion-avatar item-left>
+      <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
         <img src="{{post.user.avatar_url}}"/>
       </ion-avatar>
-      <h2>{{post.user.name}}</h2>
+      <h2 (click)='openProfile(post.user.user_id)'>{{post.user.name}}</h2>
       <p>{{post.sent_date_format}}</p>
     </ion-item>
     <ion-card-content>
@@ -57,28 +57,33 @@
       </ion-col>
     </ion-row>
     <div *ngIf="post.showComments">
-      <ion-card *ngFor='let comment of post.comments'>
+      <div class="post-comments" *ngFor='let comment of post.comments'>
         <ion-item>
-          <ion-avatar item-left>
+          <ion-avatar item-left (click)='openProfile(comment.commentator.user_id)'>
             <img src="{{comment.commentator.avatar_url}}">
           </ion-avatar>
-          <h2>{{comment.commentator.name}}</h2>
-          <p>{{comment.created_at}}</p>
+          <h2 (click)='openProfile(comment.commentator.user_id)'>{{comment.commentator.name}}</h2>
+          <p>{{comment.sent_date_format}}</p>
         </ion-item>
         <ion-card-content>
           <p>{{comment.body}}</p>
         </ion-card-content>
-      </ion-card>
+      </div>
     </div>
-    <!-- <ion-item *ngIf='post.likes.size > 0 || post.comments.length > 0' class="action-status">
-      <div item-left no-margin *ngIf='post.likes.size > 0'>
-        <ion-badge item-left small>{{post.likes.size}}</ion-badge>
-        <ion-icon name="thumbs-up" item-left small></ion-icon>
-      </div>
-      <div item-right no-margin *ngIf='post.comments.length > 0' (click)='openCommentsModal(post)'>
-        <ion-badge item-right small>{{post.comments.length}}</ion-badge>
-        <ion-icon name="text" item-right small></ion-icon>
-      </div>
-    </ion-item> -->
+    <ion-grid class='formgrid'>
+      <!-- <ion-row> -->
+        <!-- <ion-col width-80> -->
+        <ion-item class="item-comment">
+          <ion-textarea placeholder='Comentar..' [(ngModel)]="post.new_comment_body"></ion-textarea>
+        <!-- </ion-col>
+        <ion-col> -->
+          <button class="send-comment-button" item-right icon-button ion-button color="primary" (click)="createComment(post, post.new_comment_body)">
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </ion-item>
+
+        <!-- </ion-col>
+      </ion-row> -->
+    </ion-grid>
   </ion-card>
 </ion-content>
