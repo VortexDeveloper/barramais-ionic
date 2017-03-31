@@ -29,6 +29,7 @@ import { ClassifiedVesselManufacturerPage } from '../pages/classified-vessel-man
 import { ClassifiedVesselAccessoriesPage } from '../pages/classified-vessel-accessories/classified-vessel-accessories';
 import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-description/classified-vessel-description';
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
+import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -72,6 +73,7 @@ export class MyApp {
   classifiedVesselAccessoriesPage: any = ClassifiedVesselAccessoriesPage;
   classifiedVesselDescriptionPage: any = ClassifiedVesselDescriptionPage;
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
+  classifiedFishingPage: any = ClassifiedFishingPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
   user: UserModel = new UserModel();
@@ -121,6 +123,10 @@ export class MyApp {
 
   openPage(page) {
     this.nav.push(page);
+  }
+
+  openPageWithClassifiedConditional(page, classifiedConditional){
+    this.nav.push(page, {'classifiedConditional': classifiedConditional});
   }
 
   showSubMenuAnuncios() {

@@ -27,6 +27,8 @@ export class Classified {
   private accessories_url: string = this.host + "classifieds/accessories_for_select";
   private communications_url: string = this.host + "classifieds/communications_for_select";
   private eletronics_url: string = this.host + "classifieds/eletronics_for_select";
+  private fishing_categories_url: string = this.host + "classifieds/fishing_categories_for_select";
+  private fishing_sub_categories_url: string = this.host + "classifieds/fishing_sub_categories_for_select/"
 
   constructor(
     public http: Http,
@@ -80,6 +82,16 @@ export class Classified {
 
   getEletronics(){
     return this.authHttp.get(this.eletronics_url + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingCategories(){
+    return this.authHttp.get(this.fishing_categories_url + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingSubCategories(fishing_category){
+    return this.authHttp.get(this.fishing_sub_categories_url + fishing_category + ".json")
       .map(res => res.json());
   }
 }
