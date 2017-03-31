@@ -50,6 +50,8 @@ export class ClassifiedUserListPage {
   checkClassifiedList(){
     if(this.classifieds.length > 0){
       this.isClassifiedsEmpty = false;
+    }else{
+      this.isClassifiedsEmpty = true;
     }
   }
 
