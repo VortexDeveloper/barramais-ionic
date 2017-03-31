@@ -51,6 +51,11 @@ export class User {
 
    }
 
+  getUser(user_id){
+    return this.authHttp.get(this.url + "/" + user_id + ".json")
+      .map(res => res.json());
+  }
+
   create(user){
     return this.http.post(this.url + ".json", {'user': user})
       .map(res => res.json());

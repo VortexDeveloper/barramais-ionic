@@ -90,7 +90,8 @@ export class MyApp {
   ) {
       this.checkMainPage();
       this.initializeApp();
-      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });      
+      this.setUser();
+      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });
   }
 
   initializeApp() {
@@ -98,6 +99,12 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  setUser(){
+    if(localStorage.getItem("user")){
+      this.user = new UserModel(this.jwtHelper.decodeToken(localStorage.getItem("user")));
+    }
   }
 
   checkMainPage(){

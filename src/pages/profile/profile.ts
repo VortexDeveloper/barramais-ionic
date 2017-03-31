@@ -32,7 +32,7 @@ export class ProfilePage {
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
-  user: UserModel;
+  user: UserModel = new UserModel();
   userPage: any = UserPage;
   profilePage: any = ProfilePage;
   feedsPage: any = FeedsPage;
@@ -57,11 +57,7 @@ export class ProfilePage {
     public postsProvider: Posts
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.user = new UserModel(params.data.user);
-      console.log(params.data);
-      this.checkUser(this.user, this.current_user);
-      this.loadFriends();
-      this.user.id == this.current_user.id? this.isFriend = null : this.is_friend_of();
+      this.setUser(params.data.user);
       this.loadPosts();
   }
 
@@ -70,7 +66,7 @@ export class ProfilePage {
   }
 
   openPage(page) {
-    this.navCtrl.push(page);
+    this.navCtrl.push(page, {user: this.user});
   }
 
   openFriends(){
@@ -90,8 +86,8 @@ export class ProfilePage {
     modal.present();
   }
 
-  loadFriends() {
-    this.userProvider.user_friends(this.user)
+  loadFriends(user) {
+    this.userProvider.user_friends(user)
     .subscribe(
       (friends) => {
         this.friends = friends;
@@ -103,12 +99,6 @@ export class ProfilePage {
 
   showProfileInformation(){
     this.profileInformation = !this.profileInformation;
-  }
-
-  checkUser(user, current_user){
-    if(user.id != current_user.id){
-      this.visitorActions = true;
-    }
   }
 
   createConversationWith(user) {
@@ -158,8 +148,8 @@ export class ProfilePage {
     );
   }
 
-  is_friend_of(){
-    this.userProvider.is_friend_of(this.user)
+  is_friend_of(user){
+    this.userProvider.is_friend_of(user)
     .subscribe(
       (response) => {
         this.isFriend = response;
@@ -187,6 +177,23 @@ export class ProfilePage {
       return 'barramais';
     else
       return 'grayed'
+  }
+
+  setUser(user_id){
+    if(user_id == this.current_user.id){
+      this.user = this.current_user;
+    } else {
+      this.userProvider.getUser(user_id)
+      .subscribe(
+        (user) => {
+          this.user = new UserModel(user);
+          this.visitorActions = true;
+          this.loadFriends(user);
+          user.id == this.current_user.id? this.isFriend = null : this.is_friend_of(user);
+        },
+        (error) => console.log(error)
+      );
+    }
   }
 
 }

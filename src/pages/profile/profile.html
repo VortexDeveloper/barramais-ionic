@@ -9,11 +9,11 @@
       <img src="assets/images/post.jpg" alt="Perfil Header" />
     </div>
     <div class="main-content">
+      <ion-thumbnail class="thumb-user" item-left>
+        <!-- <img src="assets/images/batman.png"> -->
+        <img src="{{user.avatar_url}}" id='user_avatar'>
+      </ion-thumbnail>
       <ion-item>
-        <ion-thumbnail item-left>
-          <!-- <img src="assets/images/batman.png"> -->
-          <img src="{{user.avatar_url}}" id='user_avatar'>
-        </ion-thumbnail>
         <h2>{{user.first_name + " " + user.last_name}}</h2>
       </ion-item>
       <ion-card>

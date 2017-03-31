@@ -41,7 +41,6 @@ export class UsersPage {
     .subscribe(
       (users) => {
         this.userList = users;
-        console.log(users);
       }, (error) => {
         console.log(error.json());
       }
@@ -52,8 +51,8 @@ export class UsersPage {
     this.navCtrl.push(page);
   }
 
-  openProfile(user) {
-    this.navCtrl.push(this.profilePage, {user: user})
+  openProfile(user_id) {
+    this.navCtrl.push(this.profilePage, {user: user_id})
   }
 
   unfriend(user){

@@ -76,6 +76,10 @@ export class FriendshipRequestPage {
     );
   }
 
+  openProfile(user) {
+    this.navCtrl.push(this.profilePage, {user: user.id})
+  }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
