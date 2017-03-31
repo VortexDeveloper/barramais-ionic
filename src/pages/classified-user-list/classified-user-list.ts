@@ -4,6 +4,7 @@ import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { Classified } from '../../providers/classified';
 import { ToastController } from 'ionic-angular';
+import { MainPage } from '../main/main';
 
 /*
   Generated class for the ClassifiedUserList page.
@@ -21,6 +22,7 @@ export class ClassifiedUserListPage {
   user_token: any = localStorage.getItem('user');
   classifieds: any;
   isClassifiedsEmpty: boolean = true;
+  mainPage: any = MainPage;
 
   constructor(
     public navCtrl: NavController,
@@ -31,7 +33,6 @@ export class ClassifiedUserListPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       console.log(this.current_user);
       this.loadClassifiedList();
-      // this.checkClassifiedList();
   }
 
   ionViewDidLoad() {
@@ -50,6 +51,8 @@ export class ClassifiedUserListPage {
   checkClassifiedList(){
     if(this.classifieds.length > 0){
       this.isClassifiedsEmpty = false;
+    }else{
+      this.isClassifiedsEmpty = true;
     }
   }
 
@@ -73,5 +76,9 @@ export class ClassifiedUserListPage {
       duration: 5000
     });
     toast.present();
+  }
+
+  goBack(){
+    this.navCtrl.setRoot(this.mainPage);
   }
 }
