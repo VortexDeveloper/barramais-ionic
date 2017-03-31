@@ -196,4 +196,14 @@ export class ProfilePage {
     }
   }
 
+  createComment(post, comment) {
+    this.postsProvider.comment(post, comment).subscribe(
+      (comment) => {
+        post.new_comment_body = "";
+        post.comments.push(comment);
+      },
+      (error) => console.log(error)
+    );
+  }
+
 }

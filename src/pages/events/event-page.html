@@ -25,9 +25,9 @@
       {{event.address.street + " " + event.address.complement + ", " + event.address.neighborhood + ", " + event.city.name + " - " + event.state.name}}
     </p>
     <ion-card>
-      <a ion-item (click)="openModal(postModal)">
+      <a ion-item (click)="openPostModal()">
         <ion-avatar item-left>
-          <img src="assets/images/logo.png"/>
+          <img src="{{user.avatar_url}}" id='user_avatar'>
         </ion-avatar>
         <p>
           Digite alguma coisa...
@@ -79,75 +79,76 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-card>
+    <ion-card *ngFor="let post of posts">
       <ion-item>
-        <ion-avatar item-left>
-          <img src="assets/images/logo.png"/>
+        <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
+          <img src="{{post.user.avatar_url}}"/>
         </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
+        <h2 (click)='openProfile(post.user.user_id)'>{{post.user.name}}</h2>
+        <p>{{post.sent_date_format}}</p>
       </ion-item>
       <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        <p>{{post.description}}</p>
+        <div class="post-images" *ngIf="post.post_images">
+          <div class="post-image" *ngFor="let image of post.post_images; let i = index">
+            <img src="{{image.post_image}}" *ngIf='i < 4' alt="" />
+          </div>
+        </div>
       </ion-card-content>
-      <img src="assets/images/post.jpg"/>
       <ion-row>
-        <ion-col width-15>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+        <ion-col width-25>
+          <div class="badges-container">
+            <ion-badge item-left small *ngIf='post.likes.size > 0'>{{post.likes.size}}</ion-badge>
+          </div>
+          <button class='like-action' ion-button icon-left clear small (click)='like(post)'>
+            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" [color]="like_color_for(post)"></ion-icon>
           </button>
         </ion-col>
-        <ion-col width-15>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+        <ion-col width-25>
+          <div class="badges-container">
+            <ion-badge item-left small *ngIf='post.comments.length > 0'>{{post.comments.length}}</ion-badge>
+          </div>
+          <button ion-button icon-left clear small (click)='post.showComments = !post.showComments'>
+            <ion-icon ios="ios-text" md="md-text" color="barramais"></ion-icon>
           </button>
         </ion-col>
-        <ion-col width-15>
+        <ion-col width-25>
+          <div class="badges-container">
+          </div>
           <button ion-button icon-left clear small>
-            <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col width-15>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+            <ion-icon ios="ios-share" md="md-share" color="grayed"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-avatar item-left>
-          <img src="assets/images/logo.png"/>
-        </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
-      </ion-item>
-      <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-      </ion-card-content>
-      <img src="assets/images/post.jpg"/>
-      <ion-row>
-        <ion-col width-10>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col width-10>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-text" md="md-text"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col width-10>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col width-10>
-          <button ion-button icon-left clear small>
-            <ion-icon ios="ios-share" md="md-share"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
+      <div *ngIf="post.showComments">
+        <div class="post-comments" *ngFor='let comment of post.comments'>
+          <ion-item>
+            <ion-avatar item-left (click)='openProfile(comment.commentator.user_id)'>
+              <img src="{{comment.commentator.avatar_url}}">
+            </ion-avatar>
+            <h2 (click)='openProfile(comment.commentator.user_id)'>{{comment.commentator.name}}</h2>
+            <p>{{comment.sent_date_format}}</p>
+          </ion-item>
+          <ion-card-content>
+            <p>{{comment.body}}</p>
+          </ion-card-content>
+        </div>
+      </div>
+      <ion-grid class='formgrid'>
+        <!-- <ion-row> -->
+          <!-- <ion-col width-80> -->
+          <ion-item class="item-comment">
+            <ion-textarea placeholder='Comentar..' [(ngModel)]="post.new_comment_body"></ion-textarea>
+          <!-- </ion-col>
+          <ion-col> -->
+            <button class="send-comment-button" item-right icon-button ion-button color="primary" (click)="createComment(post, post.new_comment_body)">
+              <ion-icon name="send"></ion-icon>
+            </button>
+          </ion-item>
+
+          <!-- </ion-col>
+        </ion-row> -->
+      </ion-grid>
     </ion-card>
   </div>
 </ion-content>

@@ -13,8 +13,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Classified {
   // private host: string = "http://10.0.2.2:3000/";
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string = "https://barramais.herokuapp.com/";
+  // private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "classifieds";
   private classified_user_url: string = this.host + "classifieds/get_classifieds_by_user/"
