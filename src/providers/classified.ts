@@ -13,10 +13,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Classified {
   // private host: string = "http://10.0.2.2:3000/";
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string = "https://barramais.herokuapp.com/";
+  // private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "classifieds";
+  private classified_user_url: string = this.host + "classifieds/get_classifieds_by_user/"
+  private destroy_url: string = this.host + "classifieds/"
   private create_vessel_url: string = this.host + "classifieds/create_vessel"
   private brand_url: string = this.host + "classifieds/get_brand_by_id/";
   private mold_url: string = this.host + "classifieds/get_mold_by_id/";
@@ -25,6 +27,8 @@ export class Classified {
   private accessories_url: string = this.host + "classifieds/accessories_for_select";
   private communications_url: string = this.host + "classifieds/communications_for_select";
   private eletronics_url: string = this.host + "classifieds/eletronics_for_select";
+  private fishing_categories_url: string = this.host + "classifieds/fishing_categories_for_select";
+  private fishing_sub_categories_url: string = this.host + "classifieds/fishing_sub_categories_for_select/"
 
   constructor(
     public http: Http,
@@ -33,6 +37,16 @@ export class Classified {
 
   createVessel(classified, vessel, accessories){
     return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
+      .map(res => res.json());
+  }
+
+  destroy(classified){
+    return this.authHttp.delete(this.destroy_url + classified + ".json")
+      .map(res => res.json());
+  }
+
+  getClassifiedsByUser(user){
+    return this.authHttp.get(this.classified_user_url + user + ".json")
       .map(res => res.json());
   }
 
@@ -68,6 +82,16 @@ export class Classified {
 
   getEletronics(){
     return this.authHttp.get(this.eletronics_url + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingCategories(){
+    return this.authHttp.get(this.fishing_categories_url + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingSubCategories(fishing_category){
+    return this.authHttp.get(this.fishing_sub_categories_url + fishing_category + ".json")
       .map(res => res.json());
   }
 }

@@ -20,7 +20,7 @@
         <li>
           <ion-item>
             <a (click)="showSubMenuPaginas()">
-              <img src="assets/images/SERVICOS.png" class="icon-itens" />
+              <img src="assets/images/paginas.png" class="icon-itens" />
               Páginas
             </a>
             <ul class="sub-menu-item" [hidden]="!showPaginas">
@@ -45,7 +45,7 @@
         <li>
           <ion-item>
             <a (click)="showSubMenuAnuncios()">
-              <img src="assets/images/PARCEIROS.png" class="icon-itens" />
+              <img src="assets/images/anuncios.png" class="icon-itens" />
               Anúncios
             </a>
             <ul class="sub-menu-item" [hidden]="!showAnuncios">
@@ -69,40 +69,35 @@
         </li>
         <li>
           <button menuClose ion-item (click)="openPage(eventsPage)">
-            <img src="assets/images/EVENTO.png" class="icon-itens" />
+            <img src="assets/images/eventos.png" class="icon-itens" />
             Eventos
           </button>
         </li>
         <li>
           <ion-item>
             <a (click)="showSubMenuClassificados()">
-              <img src="assets/images/CLASSIFICADOS.png" class="icon-itens" />
+              <img src="assets/images/classificados2.png" class="icon-itens" />
               Classificados
             </a>
             <ul class="sub-menu-item" [hidden]="!showClassificados">
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(classifiedPage)">
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(classifiedUserListPage)">
+                  Meus Classificados
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPageWithClassifiedConditional(classifiedPage, 0)">
                   Embarcações
                 </button>
               </li>
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
-                  Negócios
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPageWithClassifiedConditional(classifiedPage, 1)">
+                  Pesca
                 </button>
               </li>
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
-                  Mecânicos
-                </button>
-              </li>
-              <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
-                  Despachantes
-                </button>
-              </li>
-              <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
-                  Profissionais
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPageWithClassifiedConditional(classifiedPage, 2)">
+                  Produtos Náuticos
                 </button>
               </li>
             </ul>
@@ -116,39 +111,45 @@
         </li>
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/cruzeiro.png" class="icon-itens" />
+            <img src="assets/images/turismo.png" class="icon-itens" />
             Viagens
           </button>
         </li>
         <li>
           <button menuClose ion-item (click)="openLink('http://barramais.com.br/blog/')">
-            <img src="assets/images/BLOG.png" class="icon-itens" />
+            <img src="assets/images/blog.png" class="icon-itens" />
             Blog
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage(mainPage)">
+            <img src="assets/images/convite.png" class="icon-itens" />
+            Convidar do facebook
           </button>
         </li>
       </ul>
       <ul class="menu-config">
         <li>
           <button menuClose ion-item (click)="openPage(userPage)">
-            <img src="assets/images/CONFIG.png" class="icon-itens" />
+            <ion-icon name="cog" class="icon-itens"></ion-icon>
             Configuração
           </button>
         </li>
         <li>
           <button menuClose ion-item (click)="openPage()">
-            <img src="assets/images/DENUNCIA.png" class="icon-itens" />
+            <ion-icon name="megaphone" class="icon-itens"></ion-icon>
             Denúncias
           </button>
         </li>
         <li>
           <button menuClose ion-item (click)="openPage()">
-            <img src="assets/images/INFORMACOES.png" class="icon-itens" />
+            <ion-icon name="information-circle" class="icon-itens"></ion-icon>
             Enviar feedback
           </button>
         </li>
         <li>
           <button menuClose ion-item (click)="openPage()">
-            <img src="assets/images/AJUDA.png" class="icon-itens" />
+            <ion-icon name="help-buoy" class="icon-itens"></ion-icon>
             Ajuda
           </button>
         </li>

@@ -4,6 +4,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { ClassifiedModel } from "../../models/classified.model";
 import { ClassifiedVesselTypePage } from '../classified-vessel-type/classified-vessel-type';
+import { ClassifiedFishingPage } from '../classified-fishing/classified-fishing';
 
 /*
   Generated class for the Classified page.
@@ -20,7 +21,9 @@ export class ClassifiedPage {
   current_user: UserModel;
   user_token: any = localStorage.getItem('user');
   classified: ClassifiedModel;
+  classifiedConditional: number = 0;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
+  classifiedFishingPage: any = ClassifiedFishingPage;
 
   constructor(
     public navCtrl: NavController,
@@ -29,6 +32,8 @@ export class ClassifiedPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel();
       this.classified.user_id = this.current_user.id;
+
+      this.classifiedConditional = navParams.data.classifiedConditional;
   }
 
   ionViewDidLoad() {

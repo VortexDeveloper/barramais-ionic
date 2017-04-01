@@ -43,4 +43,52 @@ page-user {
       border: none !important;
   }
 
+  .fab{
+    border-radius: 25%;
+  }
+
+  .fab-md-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-ios-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-wp-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-md-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-ios-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-wp-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left] {
+    margin: 8px 16px 8px 16px;
+  }
+
+  .item-md ion-avatar ion-img, .item-md ion-avatar img {
+    border-radius: 0;
+  }
+
+  .item-md,
+  .item-ios,
+  .item-wp {
+    background-color: #fff;
+  }
+
 }

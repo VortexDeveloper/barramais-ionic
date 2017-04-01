@@ -18,8 +18,8 @@ import 'rxjs/add/operator/catch';
 export class User {
 
   // private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string = "https://barramais.herokuapp.com/";
+  // private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "users";
   private event_friends_url: string = this.host + "users/event_friends/";
@@ -50,6 +50,11 @@ export class User {
   ) {
 
    }
+
+  getUser(user_id){
+    return this.authHttp.get(this.url + "/" + user_id + ".json")
+      .map(res => res.json());
+  }
 
   create(user){
     return this.http.post(this.url + ".json", {'user': user})

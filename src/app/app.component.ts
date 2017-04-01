@@ -21,6 +21,7 @@ import { AdListPage } from '../pages/ad-list/ad-list';
 import { LoginPage } from '../pages/login/login';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
+import { ClassifiedUserListPage } from '../pages/classified-user-list/classified-user-list';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
 import { ClassifiedVesselStatusPage } from '../pages/classified-vessel-status/classified-vessel-status';
@@ -28,6 +29,10 @@ import { ClassifiedVesselManufacturerPage } from '../pages/classified-vessel-man
 import { ClassifiedVesselAccessoriesPage } from '../pages/classified-vessel-accessories/classified-vessel-accessories';
 import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-description/classified-vessel-description';
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
+import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
+import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -63,6 +68,7 @@ export class MyApp {
   adListPage: any = AdListPage;
   advertisersPage: any = AdvertisersPage;
   advertiserPaymentPage: any = AdvertiserPaymentPage;
+  classifiedUserListPage: any = ClassifiedUserListPage;
   classifiedPage: any = ClassifiedPage;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
   classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
@@ -70,6 +76,10 @@ export class MyApp {
   classifiedVesselAccessoriesPage: any = ClassifiedVesselAccessoriesPage;
   classifiedVesselDescriptionPage: any = ClassifiedVesselDescriptionPage;
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
+  classifiedFishingPage: any = ClassifiedFishingPage;
+  classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
+  classifiedFishingDescriptionPage: any = ClassifiedVesselDescriptionPage;
+  classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
   user: UserModel = new UserModel();
@@ -90,7 +100,8 @@ export class MyApp {
   ) {
       this.checkMainPage();
       this.initializeApp();
-      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });      
+      this.setUser();
+      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });
   }
 
   initializeApp() {
@@ -98,6 +109,12 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  setUser(){
+    if(localStorage.getItem("user")){
+      this.user = new UserModel(this.jwtHelper.decodeToken(localStorage.getItem("user")));
+    }
   }
 
   checkMainPage(){
@@ -112,6 +129,10 @@ export class MyApp {
 
   openPage(page) {
     this.nav.push(page);
+  }
+
+  openPageWithClassifiedConditional(page, classifiedConditional){
+    this.nav.push(page, {'classifiedConditional': classifiedConditional});
   }
 
   showSubMenuAnuncios() {

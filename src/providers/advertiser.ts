@@ -16,8 +16,8 @@ import 'rxjs/add/operator/map';
 export class Advertiser {
 
   // private host: string = "http://10.0.2.2:3000/";
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string = "https://barramais.herokuapp.com/";
+  // private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "advertisers";
   private country_url: string = this.host + "advertisers/country_for_select";
@@ -47,7 +47,7 @@ export class Advertiser {
   }
 
   createAd(ad, advertiser){
-    console.log(ad.interest_areas)
+    // console.log(ad.interest_areas)
     return this.authHttp.post(this.create_ad_url + advertiser.id + ".json", {'ad': ad, 'interest_areas': ad.interest_areas})
       .map(res => res.json())
   }

@@ -45,6 +45,7 @@ import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
 import { AdListPage } from '../pages/ad-list/ad-list';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
+import { ClassifiedUserListPage } from '../pages/classified-user-list/classified-user-list';
 import { Classified } from '../providers/classified';
 import { ClassifiedPage } from '../pages/classified/classified';
 import { ClassifiedVesselTypePage } from '../pages/classified-vessel-type/classified-vessel-type';
@@ -53,6 +54,10 @@ import { ClassifiedVesselManufacturerPage } from '../pages/classified-vessel-man
 import { ClassifiedVesselAccessoriesPage } from '../pages/classified-vessel-accessories/classified-vessel-accessories';
 import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-description/classified-vessel-description';
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
+import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
+import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 
@@ -100,6 +105,7 @@ export function getAuthHttp(http) {
     AdListPage,
     AdvertisersPage,
     AdvertiserPaymentPage,
+    ClassifiedUserListPage,
     ClassifiedPage,
     ClassifiedVesselTypePage,
     ClassifiedVesselStatusPage,
@@ -107,26 +113,17 @@ export function getAuthHttp(http) {
     ClassifiedVesselAccessoriesPage,
     ClassifiedVesselDescriptionPage,
     ClassifiedVesselPreviewPage,
+    ClassifiedFishingPage,
+    ClassifiedFishingStatusPage,
+    ClassifiedFishingDescriptionPage,
+    ClassifiedFishingPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
     GroupPagePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp
-      , {
-        platforms : {
-          ios : {
-            scrollAssist: false,    // Valid options appear to be [true, false]
-            autoFocusAssist: false  // Valid options appear to be ['instant', 'delay', false]
-          },
-          android : {
-            scrollAssist: false,    // Valid options appear to be [true, false]
-            autoFocusAssist: false  // Valid options appear to be ['instant', 'delay', false]
-          }
-        }
-      }
-    )
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -162,6 +159,7 @@ export function getAuthHttp(http) {
     AdListPage,
     AdvertisersPage,
     AdvertiserPaymentPage,
+    ClassifiedUserListPage,
     ClassifiedPage,
     ClassifiedVesselTypePage,
     ClassifiedVesselStatusPage,
@@ -169,6 +167,10 @@ export function getAuthHttp(http) {
     ClassifiedVesselAccessoriesPage,
     ClassifiedVesselDescriptionPage,
     ClassifiedVesselPreviewPage,
+    ClassifiedFishingPage,
+    ClassifiedFishingStatusPage,
+    ClassifiedFishingDescriptionPage,
+    ClassifiedFishingPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
