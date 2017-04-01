@@ -35,6 +35,8 @@ export class UserModel {
   has_nautical_license: number;
   nautical_tour: boolean;
   fishing: boolean;
+  own_vessels: Array<any>;
+  own_vessels_id: Array<any>;
 
   constructor(public params?:any) {
     params = params || {}
@@ -63,5 +65,11 @@ export class UserModel {
     this.work = params.work || "";
     this.nautical_tour = params.nautical_tour || false;
     this.fishing = params.fishing || false;
+    this.own_vessels = params.own_vessels || [];
+    this.own_vessels_id = [];
+
+    for (let i = 0; i < this.own_vessels.length; i++) {
+      this.own_vessels_id.push(this.own_vessels[i].id);
+    }
   }
 }
