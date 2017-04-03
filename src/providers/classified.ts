@@ -13,13 +13,14 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Classified {
   // private host: string = "http://10.0.2.2:3000/";
-  private host: string = "https://barramais.herokuapp.com/";
-  // private host: string = "http://localhost:3000/";
+  // private host: string = "https://barramais.herokuapp.com/";
+  private host: string = "http://localhost:3000/";
 
   private url: string = this.host + "classifieds";
   private classified_user_url: string = this.host + "classifieds/get_classifieds_by_user/"
   private destroy_url: string = this.host + "classifieds/"
   private create_vessel_url: string = this.host + "classifieds/create_vessel"
+  private create_fishing_url: string = this.host + "classifieds/create_fishing"
   private brand_url: string = this.host + "classifieds/get_brand_by_id/";
   private mold_url: string = this.host + "classifieds/get_mold_by_id/";
   private brands_url: string = this.host + "classifieds/brands_for_select";
@@ -27,6 +28,8 @@ export class Classified {
   private accessories_url: string = this.host + "classifieds/accessories_for_select";
   private communications_url: string = this.host + "classifieds/communications_for_select";
   private eletronics_url: string = this.host + "classifieds/eletronics_for_select";
+  private fishing_category_url: string = this.host + "classifieds/get_fishing_category_by_id/"
+  private fishing_sub_category_url: string = this.host + "classifieds/get_fishing_sub_category_by_id/"
   private fishing_categories_url: string = this.host + "classifieds/fishing_categories_for_select";
   private fishing_sub_categories_url: string = this.host + "classifieds/fishing_sub_categories_for_select/"
 
@@ -37,6 +40,11 @@ export class Classified {
 
   createVessel(classified, vessel, accessories){
     return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
+      .map(res => res.json());
+  }
+
+  createFishing(classified, fishing){
+    return this.authHttp.post(this.create_fishing_url + ".json", {'classified': classified, 'fishing': fishing})
       .map(res => res.json());
   }
 
@@ -82,6 +90,16 @@ export class Classified {
 
   getEletronics(){
     return this.authHttp.get(this.eletronics_url + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingCategoryById(category){
+    return this.authHttp.get(this.fishing_category_url + category + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingSubCategoryById(subCategory){
+    return this.authHttp.get(this.fishing_sub_category_url + subCategory + ".json")
       .map(res => res.json());
   }
 
