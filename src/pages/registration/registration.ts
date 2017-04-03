@@ -24,6 +24,7 @@ export class RegistrationPage {
   rootPage = MainPage;
   privacyPage: any = PrivacyPage;
   termsPage: any = TermsPage;
+  userEmailConfirmation: string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -41,22 +42,26 @@ export class RegistrationPage {
   }
 
   save(user) {
-    this.userProvider.create(user)
-    .subscribe(user_params => {
-        this.user = new UserModel(user_params);
-        console.log(user);
-        this.login(user);
-    }, error => {
-        console.log(error.json().errors);
-        var errors = error.json().errors;
-        var errorMessage;
-        for(let campo in errors) {
-           for(let campos of errors[campo]){
-             errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
-           }
-        }
-        this.presentToast(errorMessage);
-    });
+    if(this.userEmailConfirmation != this.user.email){
+      this.presentToast("A confirmação do email deve ser igual ao email!");
+    }else{
+      this.userProvider.create(user)
+      .subscribe(user_params => {
+          this.user = new UserModel(user_params);
+          console.log(user);
+          this.login(user);
+      }, error => {
+          console.log(error.json().errors);
+          var errors = error.json().errors;
+          var errorMessage;
+          for(let campo in errors) {
+             for(let campos of errors[campo]){
+               errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
+             }
+          }
+          this.presentToast(errorMessage);
+      });
+    }
   }
 
   presentToast(msg) {

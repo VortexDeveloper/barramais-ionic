@@ -178,4 +178,17 @@ app-menu {
     background-image: none;
   }
 
+  .item-sub ion-label {
+    font-size: .8em;
+  }
+
+  .item-border {
+    border-top: #c8c7cc;
+    border-style: solid;
+  }
+
+  .menu-item li:last-child .item-block .item-inner {
+    border-bottom: none;
+  }
+
 }
