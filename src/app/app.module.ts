@@ -55,6 +55,9 @@ import { ClassifiedVesselAccessoriesPage } from '../pages/classified-vessel-acce
 import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-description/classified-vessel-description';
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
+import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 
@@ -111,6 +114,9 @@ export function getAuthHttp(http) {
     ClassifiedVesselDescriptionPage,
     ClassifiedVesselPreviewPage,
     ClassifiedFishingPage,
+    ClassifiedFishingStatusPage,
+    ClassifiedFishingDescriptionPage,
+    ClassifiedFishingPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
@@ -162,6 +168,9 @@ export function getAuthHttp(http) {
     ClassifiedVesselDescriptionPage,
     ClassifiedVesselPreviewPage,
     ClassifiedFishingPage,
+    ClassifiedFishingStatusPage,
+    ClassifiedFishingDescriptionPage,
+    ClassifiedFishingPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,

@@ -36,6 +36,8 @@ export class UserPage {
   accountInformations: boolean = false;
   personalInformations: boolean = false;
   nauticalInformations: boolean = false;
+  vessels_type: Array<any>;
+  showVesselsType: boolean = true;
 
   constructor(
     public navCtrl: NavController,
@@ -51,16 +53,15 @@ export class UserPage {
 
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage');
+    this.populateVesselsType();
   }
 
   save(user) {
     this.userProvider.update(user)
     .subscribe(response => {
         localStorage.setItem("user", response.user);
+        this.user_token = response.user;
+        this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
         this.presentToast("Usuário atualizado com sucesso!");
         this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(response.user));
     }, error => {
@@ -113,6 +114,10 @@ export class UserPage {
 
   showAccountInformations(){
     this.accountInformations = !this.accountInformations;
+  }
+
+  showOwnVesselsType() {
+    // toggleInformatin();
   }
 
   public presentActionSheet() {
@@ -192,5 +197,23 @@ export class UserPage {
         alert(error.json());
         console.log(JSON.stringify(error.json()));
     });
+  }
+
+  populateVesselsType() {
+    this.vessels_type = JSON.parse(localStorage.getItem('vessels_type'));
+    for (let vessel_type of this.vessels_type) {
+      if(this.user.own_vessels_id.indexOf(vessel_type.id) != -1)
+        vessel_type.checked = true;
+    }
+  }
+
+
+  includeVesselTypeToOwnVessels(vessel_type) {
+    let position = this.user.own_vessels_id.indexOf(vessel_type.id);
+    if(position != -1) {
+      this.user.own_vessels_id.splice(position, 1);
+    } else {
+      this.user.own_vessels_id.push(vessel_type.id);
+    }
   }
 }

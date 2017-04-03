@@ -30,6 +30,9 @@ import { ClassifiedVesselAccessoriesPage } from '../pages/classified-vessel-acce
 import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-description/classified-vessel-description';
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
+import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -74,6 +77,9 @@ export class MyApp {
   classifiedVesselDescriptionPage: any = ClassifiedVesselDescriptionPage;
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
   classifiedFishingPage: any = ClassifiedFishingPage;
+  classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
+  classifiedFishingDescriptionPage: any = ClassifiedVesselDescriptionPage;
+  classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
   user: UserModel = new UserModel();

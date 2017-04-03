@@ -48,6 +48,7 @@ export class LoginPage {
     .subscribe(token_params => {
         localStorage.setItem("jwt", token_params.token);
         localStorage.setItem("user", token_params.user);
+        localStorage.setItem('vessels_type', JSON.stringify(token_params.vessels_type));
         this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
         this.openPage(this.main);
     }, error => {

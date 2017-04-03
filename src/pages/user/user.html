@@ -142,8 +142,18 @@
           </ion-item>
           <ion-item>
             <ion-label>Possui embarcação?</ion-label>
-            <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation"></ion-toggle>
+            <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation" (ionChange)="showOwnVesselsType()"></ion-toggle>
           </ion-item>
+          <ion-list [hidden]="!showVesselsType">
+            <ion-list-header>
+              Selecione o tipo da Embarcação
+            </ion-list-header>
+            <ion-item *ngFor='let vessel_type of vessels_type'>
+              <ion-checkbox item-right (click)='includeVesselTypeToOwnVessels(vessel_type)' [(ngModel)]='vessel_type.checked'></ion-checkbox>
+              <ion-label>{{vessel_type.name}}</ion-label>
+              <ion-icon item-left><img class="nautical_license" src="assets/images/motonauta.png"/></ion-icon>
+            </ion-item>
+          </ion-list>
           <ion-item>
             <ion-label>Possui habilitação náutica?</ion-label>
             <ion-toggle [(ngModel)]="user.has_nautical_license" name="has_nautical_license" (ionChange)="hideNauticalLicenses()"></ion-toggle>
@@ -272,7 +282,7 @@
         </div>
         <br>
       </ion-item-group>
-      <!-- <button class="form-buttons" ion-button type="submit" block>Salvar</button> -->
+      <button class="form-buttons" ion-button (click)="save(user)" block>Salvar</button>
   </div>
   <ion-fab right bottom>
     <button ion-fab color="danger" (click)="save(user)"><ion-icon name="done-all"></ion-icon></button>
