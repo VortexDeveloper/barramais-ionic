@@ -49,6 +49,10 @@ export class BmHeaderComponent {
     this.navCtrl.setRoot(page);
   }
 
+  openUserPage(page){
+    this.navCtrl.push(page);
+  }
+
   openProfile(){
     this.navCtrl.setRoot(this.profilePage, {user: this.current_user})
   }

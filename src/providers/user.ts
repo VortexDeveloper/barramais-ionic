@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Routes } from '../providers/routes';
 
 import { AuthHttp } from 'angular2-jwt';
 
@@ -17,39 +18,64 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class User {
 
-  // private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string;
 
-  private url: string = this.host + "users";
-  private event_friends_url: string = this.host + "users/event_friends/";
-  private group_friends_url: string = this.host + "users/group_friends/";
-  private my_events_url: string = this.host + "users/my_events/";
-  private confirmed_events_url: string = this.host + "users/confirmed_events/";
-  private pending_events_url: string = this.host + "users/pending_events/";
-  private accept_event_url: string = this.host + "users/accept_event/";
-  private refuse_event_url: string = this.host + "users/refuse_event/";
-  private user_advertiser_url: string = this.host + "users/user_advertiser/";
-  private user_friends_url: string = this.host + "users/user_friends/";
-  private accept_friendship_url: string = this.host + "users/accept_friendship/";
-  private refuse_friendship_url: string = this.host + "users/refuse_friendship/";
-  private request_friendship_url: string = this.host + "users/request_friendship/";
-  private is_friend_of_url: string = this.host + "users/is_friend_of/";
-  private pending_friendships_url: string = this.host + "users/pending_friendships";
-  private unfriend_url: string = this.host + "users/unfriend/";
-  private my_groups_url: string = this.host + "users/my_groups";
-  private confirmed_groups_url: string = this.host + "users/confirmed_groups";
-  private pending_groups_url: string = this.host + "users/pending_groups";
-  private accept_group_url: string = this.host + "users/accept_group";
-  private refuse_group_url: string = this.host + "users/refuse_group";
+  private url: string;
+  private event_friends_url: string;
+  private group_friends_url: string;
+  private my_events_url: string;
+  private confirmed_events_url: string;
+  private pending_events_url: string;
+  private accept_event_url: string;
+  private refuse_event_url: string;
+  private user_advertiser_url: string;
+  private user_friends_url: string;
+  private accept_friendship_url: string;
+  private refuse_friendship_url: string;
+  private request_friendship_url: string;
+  private is_friend_of_url: string;
+  private pending_friendships_url: string;
+  private unfriend_url: string;
+  private my_groups_url: string;
+  private confirmed_groups_url: string;
+  private pending_groups_url: string;
+  private accept_group_url: string;
+  private refuse_group_url: string;
 
 
   constructor(
     public http: Http,
-    public authHttp: AuthHttp
-  ) {
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
 
+  ) {
+      this.host = this.routesProvider.host();
+      this.setRoutes(this.host);
    }
+
+  setRoutes(host){
+    this.url = host + "users";
+    this.event_friends_url = host + "users/event_friends/";
+    this.group_friends_url = host + "users/group_friends/";
+    this.my_events_url = host + "users/my_events/";
+    this.confirmed_events_url = host + "users/confirmed_events/";
+    this.pending_events_url = host + "users/pending_events/";
+    this.accept_event_url = host + "users/accept_event/";
+    this.refuse_event_url = host + "users/refuse_event/";
+    this.user_advertiser_url = host + "users/user_advertiser/";
+    this.user_friends_url = host + "users/user_friends/";
+    this.accept_friendship_url = host + "users/accept_friendship/";
+    this.refuse_friendship_url = host + "users/refuse_friendship/";
+    this.request_friendship_url = host + "users/request_friendship/";
+    this.is_friend_of_url = host + "users/is_friend_of/";
+    this.pending_friendships_url = host + "users/pending_friendships";
+    this.unfriend_url = host + "users/unfriend/";
+    this.my_groups_url = host + "users/my_groups";
+    this.confirmed_groups_url = host + "users/confirmed_groups";
+    this.pending_groups_url = host + "users/pending_groups";
+    this.accept_group_url = host + "users/accept_group";
+    this.refuse_group_url = host + "users/refuse_group";
+  }
 
   getUser(user_id){
     return this.authHttp.get(this.url + "/" + user_id + ".json")
@@ -146,6 +172,18 @@ export class User {
     let new_name = user.id + d.getTime();
 
     return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
+      .map(res => {
+        let user_token = res.json();
+        localStorage.setItem("user", user_token.user);
+        return user_token;
+      });
+  }
+
+  save_cover_photo(user){
+    let d = new Date;
+    let new_name = user.id + d.getTime();
+
+    return this.http.put(this.url + "/" + user.id + "/" + "save_cover_photo.json", {'cover_photo': {'image': user.cover_photo, 'filename': new_name}})
       .map(res => {
         let user_token = res.json();
         localStorage.setItem("user", user_token.user);

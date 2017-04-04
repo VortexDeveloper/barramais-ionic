@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
+import { Routes } from '../providers/routes';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -15,21 +16,28 @@ import 'rxjs/add/operator/catch';
 */
 @Injectable()
 export class Posts {
-  // private host: string = "https://barramais.herokuapp.com/posts";
-  private host: string = "http://localhost:3000/posts";
-  // private host: string = "http://10.0.2.2:3000/posts";
+  private host: string;
 
-
-  private create_url: string = this.host + ".json";
-  private index_url: string = this.host + ".json";
+  private host_post: string;
+  private create_url: string;
+  private index_url: string;
   private user: any;
   private jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
     public http: Http,
-    public authHttp: AuthHttp
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
+
   ) {
-    console.log('Hello Posts Provider');
+    this.host = this.routesProvider.host();
+    this.setRoutes(this.host);
+  }
+
+  setRoutes(host){
+    this.host_post = host + "posts";
+    this.create_url = this.host_post + ".json";
+    this.index_url = this.host_post + ".json";
   }
 
   create(post) {
@@ -59,14 +67,14 @@ export class Posts {
   }
 
   like_url(post) {
-    return this.host + '/' + post.id + '/like.json';
+    return this.host_post + '/' + post.id + '/like.json';
   }
 
   comment_url(post) {
-    return this.host + '/' + post.id + '/comment.json';
+    return this.host_post + '/' + post.id + '/comment.json';
   }
 
   post_comments_url(post) {
-    return this.host + '/' + post.id + '/comments.json';
+    return this.host_post + '/' + post.id + '/comments.json';
   }
 }

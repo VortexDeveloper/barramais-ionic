@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import * as ActionCable from 'actioncable';
 import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
+import { Routes } from '../providers/routes';
 
 /*
   Generated class for the ConversationChannel provider.
@@ -12,18 +13,21 @@ import { Events } from 'ionic-angular';
 */
 @Injectable()
 export class ConversationChannel {
+
+  private host: string;
+  public host_cable: string;
   public conversationChannel: any;
   public subscription: any;
-  // public host_cable: string = 'http://1.0.2.2:3000/cable/?jwt=';
-  public host_cable: string = 'http://localhost:3000/cable/?jwt=';
-  // public host_cable: string = 'http://barramais.herokuapp.com/cable/?jwt=';
 
   constructor(
     public http: Http,
-    public events: Events
-  ) {
-    this.conversationChannel = ActionCable.createConsumer(this.host_cable+localStorage.getItem('jwt'));
+    public events: Events,
+    public routesProvider: Routes
 
+  ) {
+    this.host = this.routesProvider.host();
+    this.setRoutes(this.host);
+    this.conversationChannel = ActionCable.createConsumer(this.host_cable+localStorage.getItem('jwt'));
     var subscription = this.conversationChannel.subscriptions.create('ConversationChannel', {
       connected: function() {},
       disconnected: function() {},
@@ -36,6 +40,10 @@ export class ConversationChannel {
       }
     });
     this.subscription = subscription;
+  }
+
+  setRoutes(host){
+    this.host_cable = host + 'cable/?jwt=';
   }
 
   createMessage(message_data) {

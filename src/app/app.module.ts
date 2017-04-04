@@ -6,6 +6,7 @@ import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { User } from '../providers/user';
+import { Routes } from '../providers/routes';
 import { EventProvider } from '../providers/events';
 import { Groups } from '../providers/groups';
 import { RegistrationPage } from '../pages/registration/registration';
@@ -18,6 +19,7 @@ import { EventGuestsPage } from '../pages/events/event-guests';
 import { EventPagePage } from '../pages/events/event-page';
 import { GroupModalPage } from '../pages/groups/group-modal';
 import { GroupMembersPage } from '../pages/groups/group-members';
+import { GalleryModalPage } from '../pages/gallery-modal/gallery-modal';
 import { GroupPagePage } from '../pages/groups/group-page';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile';
@@ -120,7 +122,8 @@ export function getAuthHttp(http) {
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
-    GroupPagePage
+    GroupPagePage,
+    GalleryModalPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -174,7 +177,8 @@ export function getAuthHttp(http) {
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
-    GroupPagePage
+    GroupPagePage,
+    GalleryModalPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -187,6 +191,7 @@ export function getAuthHttp(http) {
     Classified,
     Posts,
     Groups,
+    Routes,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })

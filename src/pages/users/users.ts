@@ -6,6 +6,8 @@ import { FriendshipRequestPage } from '../friendship-request/friendship-request'
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 
 /*
   Generated class for the Users page.
@@ -22,6 +24,9 @@ export class UsersPage {
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
   userList: Array<any>;
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  current_user: UserModel = new UserModel();
 
   constructor(
     public navCtrl: NavController,
@@ -29,6 +34,7 @@ export class UsersPage {
     params: NavParams,
     public userProvider: User
   ) {
+    this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.user_list();
   }
 

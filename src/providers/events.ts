@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
+import { Routes } from '../providers/routes';
+
 import 'rxjs/add/operator/map';
 
 /*
@@ -12,25 +14,37 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EventProvider {
 
-  // private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/"
-  private host: string = "http://localhost:3000/";
-
-  private url: string = this.host + "events";
-  private country_url: string = this.host + "events/country_for_select";
-  private states_url: string = this.host + "events/states_for_select/";
-  private cities_url: string = this.host + "events/cities_for_select/";
-  private invitation_url: string = this.host + "events/invitation/";
-  private all_guests_url: string = this.host + "events/all_guests/";
-  private confirmed_guests_url: string = this.host + "events/confirmed_guests/";
-  private pending_guests_url: string = this.host + "events/pending_guests/";
-  private refused_guests_url: string = this.host + "events/refused_guests/";
+  private host: string;
+  private url: string;
+  private country_url: string;
+  private states_url: string;
+  private cities_url: string;
+  private invitation_url: string;
+  private all_guests_url: string;
+  private confirmed_guests_url: string;
+  private pending_guests_url: string;
+  private refused_guests_url: string;
 
   constructor(
     public http: Http,
-    public authHttp: AuthHttp
-  ) {
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
 
+  ) {
+    this.host = this.routesProvider.host();
+    this.setRoutes(this.host);
+  }
+
+  setRoutes(host){
+    this.url = this.host + "events";
+    this.country_url = this.host + "events/country_for_select";
+    this.states_url = this.host + "events/states_for_select/";
+    this.cities_url = this.host + "events/cities_for_select/";
+    this.invitation_url = this.host + "events/invitation/";
+    this.all_guests_url = this.host + "events/all_guests/";
+    this.confirmed_guests_url = this.host + "events/confirmed_guests/";
+    this.pending_guests_url = this.host + "events/pending_guests/";
+    this.refused_guests_url = this.host + "events/refused_guests/";
   }
 
   create(event, address){

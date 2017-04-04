@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Routes } from '../providers/routes';
 
 import { AuthHttp } from 'angular2-jwt';
 
@@ -16,14 +17,26 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class Conversations {
 
-  private host: string = "http://localhost:3000/conversations";
-  // private host: string = "http://10.0.2.2:3000/conversations"
-  // private host: string = "https://barramais.herokuapp.com/conversations";
+  private host: string;
+  private host_conversation: string;
+  private conversation_url: string;
+  private conversation_messages_url: string;
 
-  private conversation_url: string = this.host + ".json";
-  private conversation_messages_url: string = "/messages.json";
+  constructor(
+    public http: Http,
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
+  )
+    {
+      this.host = this.routesProvider.host();
+      this.setRoutes(this.host);
+     }
 
-  constructor(public http: Http, public authHttp: AuthHttp) { }
+  setRoutes(host){
+    this.host_conversation = host + "conversations";
+    this.conversation_url = this.host_conversation + ".json";
+    this.conversation_messages_url = "/messages.json";
+  }
 
   my_conversations() {
     return this.authHttp.get(this.conversation_url)
@@ -31,7 +44,7 @@ export class Conversations {
   }
 
   conversation_messages(conversation_id) {
-    return this.authHttp.get(this.host + "/" + conversation_id + this.conversation_messages_url)
+    return this.authHttp.get(this.host_conversation + "/" + conversation_id + this.conversation_messages_url)
       .map(res => res.json());
   }
 

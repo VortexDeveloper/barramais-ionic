@@ -10,26 +10,48 @@ page-feeds {
   .post-images {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* align-content: center; */
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
   }
 
   .post-image {
-    width: 50%;
-    margin-bottom: 15px;
+    width: 49%;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
     overflow: hidden;
-    height: 150px;
-    /* display: flex; */
-    align-self: stretch;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    -webkit-flex-basis: auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
     padding: 2px;
+    margin: 0 0 2px 2px;
+    height: 152px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
   }
 
+
+
   .post-image img {
-    min-width: calc(100% - 30px);
     width: auto;
-    max-width: 136%;
-    border-radius: 0;
+    max-width: 278%;
+    display: inline;
+    margin: 0;
   }
 
   ion-badge {

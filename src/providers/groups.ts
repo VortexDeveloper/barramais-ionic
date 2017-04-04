@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
+import { Routes } from '../providers/routes';
+
 import 'rxjs/add/operator/map';
 
 /*
@@ -12,23 +14,33 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Groups {
 
-  // private host: string = "http://10.0.2.2:3000/"
-  // private host: string = "https://barramais.herokuapp.com/"
-  private host: string = "http://localhost:3000/";
+  private host: string;
 
-  private url: string = this.host + "groups";
-  private invitation_url: string = this.host + "groups/invitation/";
-  private all_members_url: string = this.host + "groups/all_members/";
-  private confirmed_members_url: string = this.host + "groups/confirmed_members/";
-  private pending_members_url: string = this.host + "groups/pending_members/";
-  private refused_members_url: string = this.host + "groups/refused_members/";
+  private url: string;
+  private invitation_url: string;
+  private all_members_url: string;
+  private confirmed_members_url: string;
+  private pending_members_url: string;
+  private refused_members_url: string;
 
   constructor(
     public http: Http,
-    public authHttp: AuthHttp
-  ) {
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
 
+  ) {
+    this.host = this.routesProvider.host();
+    this.setRoutes(this.host);
   }
+
+    setRoutes(host){
+      this.url = host + "groups";
+      this.invitation_url = host + "groups/invitation/";
+      this.all_members_url = host + "groups/all_members/";
+      this.confirmed_members_url = host + "groups/confirmed_members/";
+      this.pending_members_url = host + "groups/pending_members/";
+      this.refused_members_url = host + "groups/refused_members/";
+    }
 
     create(group){
       let d = new Date;

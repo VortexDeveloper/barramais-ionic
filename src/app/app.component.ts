@@ -166,6 +166,7 @@ export class MyApp {
               (response) => {
                 localStorage.removeItem("jwt");
                 localStorage.removeItem("user");
+                localStorage.removeItem("vessels_type");
                 this.rootPage = this.loginPage;
                 this.nav.setRoot(this.rootPage);
               },

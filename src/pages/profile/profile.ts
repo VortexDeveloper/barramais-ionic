@@ -10,13 +10,17 @@ import { HomePage } from '../home/home';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
-import { ToastController } from 'ionic-angular';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
 import { CommentModalPage } from "../comment-modal/comment-modal";
 import { Posts } from '../../providers/posts';
+import { Camera } from 'ionic-native';
+import { ActionSheetController }  from 'ionic-angular';
+import { ToastController, AlertController } from 'ionic-angular';
+import { ViewController,Platform, LoadingController }  from 'ionic-angular';
 
+declare var cordova: any;
 
 /*
   Generated class for the Profile page.
@@ -43,7 +47,7 @@ export class ProfilePage {
   friendsCount: number;
   profileInformation: boolean = false;
   visitorActions: boolean = false;
-  current_user: UserModel;
+  current_user: UserModel = new UserModel();
   isFriend: any;
   posts: Array<any>;
 
@@ -54,7 +58,11 @@ export class ProfilePage {
     public conversationProvider: Conversations,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public postsProvider: Posts
+    public postsProvider: Posts,
+    public actionSheetCtrl: ActionSheetController,
+    public platform: Platform,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.setUser(params.data.user);
@@ -67,6 +75,10 @@ export class ProfilePage {
 
   openPage(page) {
     this.navCtrl.push(page, {user: this.user});
+  }
+
+  openProfile(user_id) {
+    this.navCtrl.push(this.profilePage, {user: user_id})
   }
 
   openFriends(){
@@ -204,6 +216,103 @@ export class ProfilePage {
       },
       (error) => console.log(error)
     );
+  }
+
+  public presentActionSheet(picture) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Selecione a origem da imagem',
+      buttons: [
+        {
+          text: 'Carregar da Galeria',
+          handler: () => {
+            this.takePicture(picture, Camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Camera',
+          handler: () => {
+            this.takePicture(picture, Camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takePicture(picture, sourceType) {
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      allowEdit: true,
+      //mediaType: Camera.MediaType.ALLMEDIA,
+      destinationType: Camera.DestinationType.DATA_URL
+    };
+
+    Camera.getPicture(options).then(image => {
+      let prompt = this.alertCtrl.create({
+        title: 'Usar foto',
+        message: 'Deseja usar esta foto como foto de perfil?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: data => {
+              if(picture == "avatar"){
+                this.user.avatar = "data:image/jpeg;base64," + image;
+                this.save_avatar();
+              }else{
+                this.user.cover_photo = "data:image/jpeg;base64," + image;
+                this.save_cover_photo();
+              }
+            }
+          }
+        ]
+      });
+      prompt.present();
+    });
+  }
+
+
+
+  is_from_gallery(sourceType) {
+    sourceType === Camera.PictureSourceType.PHOTOLIBRARY
+  }
+
+  is_android() {
+    this.platform.is('android')
+  }
+
+  save_avatar() {
+    this.userProvider.save_avatar(this.current_user)
+    .subscribe(user_params => {
+      let image_tag = document.getElementsByTagName('img')[0];
+      image_tag.src = this.current_user.avatar;
+    }, error => {
+        alert(error.json());
+        console.log(JSON.stringify(error.json()));
+    });
+  }
+
+  save_cover_photo() {
+    this.userProvider.save_cover_photo(this.current_user)
+    .subscribe(user_params => {
+      let image_tag = document.getElementsByTagName('img')[0];
+      image_tag.src = this.current_user.cover_photo;
+    }, error => {
+        alert(error.json());
+        console.log(JSON.stringify(error.json()));
+    });
   }
 
 }

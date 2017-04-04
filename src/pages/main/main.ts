@@ -28,7 +28,7 @@ export class MainPage {
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
-  current_user: UserModel;
+  current_user: UserModel = new UserModel();
 
   constructor(
     public navCtrl: NavController,
@@ -48,7 +48,7 @@ export class MainPage {
   }
 
   openProfile(){
-    this.navCtrl.setRoot(this.profile, {user: this.current_user})
+    this.navCtrl.setRoot(this.profile, {user: this.current_user.id});
   }
 
 }

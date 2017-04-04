@@ -178,4 +178,27 @@ app-menu {
     background-image: none;
   }
 
+  .item-md ion-avatar img,
+  .item-ios ion-avatar img,
+  .item-wp ion-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  ion-thumbnail img {
+    display: block;
+    border-radius: 4px;
+  }
+
+  .background-image {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: solid 2px #f5f5f5;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
 }

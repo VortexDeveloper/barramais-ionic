@@ -26,7 +26,7 @@
     <ion-card-content>
       <p>{{post.description}}</p>
       <div class="post-images" *ngIf="post.post_images">
-        <div class="post-image" *ngFor="let image of post.post_images; let i = index">
+        <div class="post-image" *ngFor="let image of post.post_images; let i = index" (click)="openPhotos(post.post_images)">
           <img src="{{image.post_image}}" *ngIf='i < 4' alt="" />
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { AdvertiserModel } from "../models/advertiser.model";
 import { AdModel } from "../models/ad.model";
 import { AuthHttp } from 'angular2-jwt';
+import { Routes } from '../providers/routes';
 
 import 'rxjs/add/operator/map';
 
@@ -15,26 +16,39 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Advertiser {
 
-  // private host: string = "http://10.0.2.2:3000/";
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
+  private host: string;
 
-  private url: string = this.host + "advertisers";
-  private country_url: string = this.host + "advertisers/country_for_select";
-  private states_url: string = this.host + "advertisers/states_for_select/";
-  private cities_url: string = this.host + "advertisers/cities_for_select/";
-  private create_ad_url: string = this.host + "advertisers/create_ad/";
-  private destroy_ad: string = this.host + "ads/";
-  private update_ad_url: string = this.host + "ads/"
-  private advertiser_area_url: string = this.host + "advertisers/advertiser_area/";
+  private url: string;
+  private country_url: string;
+  private states_url: string;
+  private cities_url: string;
+  private create_ad_url: string;
+  private destroy_ad: string;
+  private update_ad_url: string;
+  private advertiser_area_url: string;
 
   public advertiser: AdvertiserModel;
   public ad: AdModel;
 
   constructor(
     public http: Http,
-    public authHttp: AuthHttp
-  ) { }
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
+  ) {
+    this.host = this.routesProvider.host();
+    this.setRoutes(this.host);
+   }
+
+  setRoutes(host){
+    this.url = host + "advertisers";
+    this.country_url = host + "advertisers/country_for_select";
+    this.states_url = host + "advertisers/states_for_select/";
+    this.cities_url = host + "advertisers/cities_for_select/";
+    this.create_ad_url = host + "advertisers/create_ad/";
+    this.destroy_ad = host + "ads/";
+    this.update_ad_url = host + "ads/"
+    this.advertiser_area_url = host + "advertisers/advertiser_area/";
+  }
 
   create(advertiser, address){
     return this.authHttp.post(this.url + ".json", {'advertiser': advertiser, 'address': address})

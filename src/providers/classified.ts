@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
+import { Routes } from '../providers/routes';
 
 import 'rxjs/add/operator/map';
 
@@ -12,28 +13,47 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Classified {
-  // private host: string = "http://10.0.2.2:3000/";
-  // private host: string = "https://barramais.herokuapp.com/";
-  private host: string = "http://localhost:3000/";
 
-  private url: string = this.host + "classifieds";
-  private classified_user_url: string = this.host + "classifieds/get_classifieds_by_user/"
-  private destroy_url: string = this.host + "classifieds/"
-  private create_vessel_url: string = this.host + "classifieds/create_vessel"
-  private brand_url: string = this.host + "classifieds/get_brand_by_id/";
-  private mold_url: string = this.host + "classifieds/get_mold_by_id/";
-  private brands_url: string = this.host + "classifieds/brands_for_select";
-  private molds_url: string = this.host + "classifieds/molds_for_select/";
-  private accessories_url: string = this.host + "classifieds/accessories_for_select";
-  private communications_url: string = this.host + "classifieds/communications_for_select";
-  private eletronics_url: string = this.host + "classifieds/eletronics_for_select";
-  private fishing_categories_url: string = this.host + "classifieds/fishing_categories_for_select";
-  private fishing_sub_categories_url: string = this.host + "classifieds/fishing_sub_categories_for_select/"
+  private host: string;
+
+  private url: string;
+  private classified_user_url: string;
+  private destroy_url: string;
+  private create_vessel_url: string;
+  private brand_url: string;
+  private mold_url: string;
+  private brands_url: string;
+  private molds_url: string;
+  private accessories_url: string;
+  private communications_url: string;
+  private eletronics_url: string;
+  private fishing_categories_url: string;
+  private fishing_sub_categories_url: string;
 
   constructor(
     public http: Http,
-    public authHttp: AuthHttp
-  ) {}
+    public authHttp: AuthHttp,
+    public routesProvider: Routes
+  ) {
+    this.host = this.routesProvider.host();
+    this.setRoutes(this.host);
+  }
+
+  setRoutes(host){
+    this.url = host + "classifieds";
+    this.classified_user_url = host + "classifieds/get_classifieds_by_user/"
+    this.destroy_url = host + "classifieds/"
+    this.create_vessel_url = host + "classifieds/create_vessel"
+    this.brand_url = host + "classifieds/get_brand_by_id/";
+    this.mold_url = host + "classifieds/get_mold_by_id/";
+    this.brands_url = host + "classifieds/brands_for_select";
+    this.molds_url = host + "classifieds/molds_for_select/";
+    this.accessories_url = host + "classifieds/accessories_for_select";
+    this.communications_url = host + "classifieds/communications_for_select";
+    this.eletronics_url = host + "classifieds/eletronics_for_select";
+    this.fishing_categories_url = host + "classifieds/fishing_categories_for_select";
+    this.fishing_sub_categories_url = host + "classifieds/fishing_sub_categories_for_select/"
+  }
 
   createVessel(classified, vessel, accessories){
     return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})

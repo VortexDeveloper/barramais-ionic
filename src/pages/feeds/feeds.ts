@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { CommentModalPage } from "../comment-modal/comment-modal";
+import { GalleryModalPage } from "../gallery-modal/gallery-modal";
 import { ProfilePage } from "../profile/profile";
 import { Posts } from '../../providers/posts';
 import { UserModel } from "../../models/user.model";
@@ -14,6 +15,7 @@ import { JwtHelper } from 'angular2-jwt';
 export class FeedsPage {
 
   public comment: any;
+  galleryModal: any = GalleryModalPage;
   feeds: any = FeedsPage;
   posts: Array<any>;
   profilePage: any = ProfilePage;
@@ -55,6 +57,10 @@ export class FeedsPage {
 
   openProfile(user_id) {
     this.navCtrl.push(this.profilePage, {user: user_id})
+  }
+
+  openPhotos(photos){
+    this.navCtrl.push(this.galleryModal, {photos: photos})
   }
 
   loadPosts() {
