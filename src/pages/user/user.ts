@@ -24,7 +24,7 @@ export class UserPage {
   jwtHelper: JwtHelper = new JwtHelper();
   token: any = localStorage.getItem('jwt');
   user_token: any = localStorage.getItem('user');
-
+  nauticalSports: any[] = [];
   user: UserModel;
   avatar: string;
   rootPage = HomePage;
@@ -38,6 +38,9 @@ export class UserPage {
   nauticalInformations: boolean = false;
   vessels_type: Array<any>;
   showVesselsType: boolean = true;
+  userEmailConfirmation: string = "";
+  userPasswordConfirmation: string = "";
+  inviteFriendsMenu: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -54,26 +57,36 @@ export class UserPage {
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.populateVesselsType();
+    this.load_nautical_sports();
+
+    console.log(this.nauticalSports);
   }
 
   save(user) {
-    this.userProvider.update(user)
-    .subscribe(response => {
-        localStorage.setItem("user", response.user);
-        this.user_token = response.user;
-        this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-        this.presentToast("Usuário atualizado com sucesso!");
-        this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(response.user));
-    }, error => {
-        var errors = error.json().errors;
-        var errorMessage;
-        for(let campo in errors) {
-           for(let campos of errors[campo]){
-             errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
-           }
-        }
-        this.presentToast(errorMessage);
-    });
+    if(this.userEmailConfirmation != this.user.email){
+      this.presentToast("A confirmação do email deve ser igual ao email!");
+    }else if(this.userPasswordConfirmation != this.user.current_password){
+      this.presentToast("A confirmação da senha deve ser igual à senha!");
+    }else{
+      this.userProvider.update(user)
+      .subscribe(response => {
+          localStorage.setItem("user", response.user);
+          this.user_token = response.user;
+          this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+          this.presentToast("Usuário atualizado com sucesso!");
+          this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(response.user));
+      }, error => {
+          var errors = error.json().errors;
+          var errorMessage;
+          for(let campo in errors) {
+             for(let campos of errors[campo]){
+               errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
+             }
+          }
+          this.presentToast(errorMessage);
+      });
+    }
+    this.userPasswordConfirmation = "";
   }
 
   presentToast(msg) {
@@ -114,6 +127,10 @@ export class UserPage {
 
   showAccountInformations(){
     this.accountInformations = !this.accountInformations;
+  }
+
+  toggleInviteFriendsMenu() {
+    this.inviteFriendsMenu = !this.inviteFriendsMenu;
   }
 
   showOwnVesselsType() {
@@ -215,5 +232,15 @@ export class UserPage {
     } else {
       this.user.own_vessels_id.push(vessel_type.id);
     }
+  }
+
+  load_nautical_sports(){
+    this.userProvider.load_nautical_sports()
+      .subscribe(response =>{
+        this.nauticalSports = response;
+        console.log(response);
+      }, error => {
+          console.log("Erro ao exibir as áreas de interesse" + error.json());
+      });
   }
 }

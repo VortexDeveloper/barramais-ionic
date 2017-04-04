@@ -22,14 +22,22 @@ export class ClassifiedFishingStatusPage {
   user_token: any = localStorage.getItem('user');
   classified: ClassifiedModel;
   fishing: FishingModel;
+  provisionalCategory: boolean = false;
   classifiedFishingDescriptionPage: any = ClassifiedFishingDescriptionPage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
+      this.provisionalCategory = navParams.data.provisionalCategory;
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
+
+      if(this.provisionalCategory == false){
+        this.fishing.provisional_category = "";
+      }
+
+      console.log(this.fishing);
   }
 
   ionViewDidLoad() {

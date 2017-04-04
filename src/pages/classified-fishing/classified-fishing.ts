@@ -73,8 +73,8 @@ export class ClassifiedFishingPage {
     });
   }
 
-  openNextPage(page, fishing){
-    this.navCtrl.push(page, {'fishing': fishing, 'classified': this.classified});
+  openNextPage(page, provisionalCategory, fishing){
+    this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified});
   }
 
   goBack(){

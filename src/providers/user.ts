@@ -19,7 +19,6 @@ import 'rxjs/add/operator/catch';
 export class User {
 
   private host: string;
-
   private url: string;
   private event_friends_url: string;
   private group_friends_url: string;
@@ -41,7 +40,7 @@ export class User {
   private pending_groups_url: string;
   private accept_group_url: string;
   private refuse_group_url: string;
-
+  private load_nautical_sports_url: string;
 
   constructor(
     public http: Http,
@@ -75,6 +74,12 @@ export class User {
     this.pending_groups_url = host + "users/pending_groups";
     this.accept_group_url = host + "users/accept_group";
     this.refuse_group_url = host + "users/refuse_group";
+    this.load_nautical_sports_url = host + "users/load_nautical_sports";
+  }
+
+  load_nautical_sports(){
+    return this.authHttp.get(this.load_nautical_sports_url + ".json")
+      .map(res => res.json());
   }
 
   getUser(user_id){

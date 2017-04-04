@@ -57,6 +57,9 @@ export class MyApp {
   showPaginas: boolean = false;
   showAnuncios: boolean = false;
   showClassificados: boolean = false;
+  showAjudaESuporte: boolean = false;
+  showBlog: boolean = false;
+  showConvidarAmigos: boolean = false;
   termsPage: any = TermsPage;
   privacyPage: any = PrivacyPage;
   conversationPage: any = ConversationPage;
@@ -145,6 +148,18 @@ export class MyApp {
 
   showSubMenuClassificados() {
     this.showClassificados = !this.showClassificados;
+  }
+
+  showSubMenuAjudaESuporte() {
+    this.showAjudaESuporte = !this.showAjudaESuporte;
+  }
+
+  showSubMenuBlog() {
+    this.showBlog = !this.showBlog;
+  }
+
+  showSubMenuConvidarAmigos() {
+    this.showConvidarAmigos = !this.showConvidarAmigos;
   }
 
   presentConfirm() {

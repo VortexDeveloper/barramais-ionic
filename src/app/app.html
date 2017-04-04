@@ -13,8 +13,34 @@
       <ul class="menu-item">
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/INICIO.png" class="icon-itens" />
+            <img src="assets/images/barco2.png" class="icon-itens" />
             Início
+          </button>
+        </li>
+        <li>
+          <ion-item>
+            <a (click)="showSubMenuConvidarAmigos()">
+              <img src="assets/images/convite.png" class="icon-itens" />
+              Convidar Amigos
+            </a>
+            <ul class="sub-menu-item" [hidden]="!showConvidarAmigos">
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                  Convidar do Facebook
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                  Convidar Contatos
+                </button>
+              </li>
+            </ul>
+          </ion-item>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage(mainPage)">
+            <img src="assets/images/amigos.png" class="icon-itens" />
+            Amigos
           </button>
         </li>
         <li>
@@ -44,24 +70,19 @@
         </li>
         <li>
           <ion-item>
-            <a (click)="showSubMenuAnuncios()">
-              <img src="assets/images/anuncios.png" class="icon-itens" />
-              Anúncios
+            <a (click)="showSubMenuBlog()">
+              <img src="assets/images/blog.png" class="icon-itens" />
+              Blog
             </a>
-            <ul class="sub-menu-item" [hidden]="!showAnuncios">
+            <ul class="sub-menu-item" [hidden]="!showBlog">
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adBannersPage)">
-                  Criar Anúncios
+                <button class="item-sub" menuClose ion-item no-lines (click)="openLink('http://barramais.com.br/blog/')">
+                  Acessar Blog
                 </button>
               </li>
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adListPage)">
-                  Meus anúncios
-                </button>
-              </li>
-              <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(advertisersPage)">
-                  Minha conta
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                  Enviar Matéria
                 </button>
               </li>
             </ul>
@@ -71,6 +92,18 @@
           <button menuClose ion-item (click)="openPage(eventsPage)">
             <img src="assets/images/eventos.png" class="icon-itens" />
             Eventos
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage(mainPage)">
+            <img src="assets/images/turismo.png" class="icon-itens" />
+            Viagens
+          </button>
+        </li>
+        <li>
+          <button menuClose ion-item (click)="openPage(mainPage)">
+            <img src="assets/images/pesca.png" class="icon-itens" />
+            Pesca
           </button>
         </li>
         <li>
@@ -104,35 +137,36 @@
           </ion-item>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/pesca.png" class="icon-itens" />
-            Pesca
-          </button>
-        </li>
-        <li>
-          <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/turismo.png" class="icon-itens" />
-            Viagens
-          </button>
-        </li>
-        <li>
-          <button menuClose ion-item (click)="openLink('http://barramais.com.br/blog/')">
-            <img src="assets/images/blog.png" class="icon-itens" />
-            Blog
-          </button>
-        </li>
-        <li>
-          <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/convite.png" class="icon-itens" />
-            Convidar do facebook
-          </button>
+          <ion-item>
+            <a (click)="showSubMenuAnuncios()">
+              <img src="assets/images/anuncios.png" class="icon-itens" />
+              Publicidade
+            </a>
+            <ul class="sub-menu-item" [hidden]="!showAnuncios">
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adBannersPage)">
+                  Anunciar sua marca
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adListPage)">
+                  Meus anúncios
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(advertisersPage)">
+                  Minha conta
+                </button>
+              </li>
+            </ul>
+          </ion-item>
         </li>
       </ul>
       <ul class="menu-config">
         <li>
-          <button menuClose ion-item (click)="openPage(userPage)">
+          <button class="item item-block item-ios item-border" menuClose ion-item (click)="openPage(userPage)">
             <ion-icon name="cog" class="icon-itens"></ion-icon>
-            Configuração
+            Configurações
           </button>
         </li>
         <li>
@@ -148,10 +182,29 @@
           </button>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage()">
-            <ion-icon name="help-buoy" class="icon-itens"></ion-icon>
-            Ajuda
-          </button>
+          <ion-item>
+            <a (click)="showSubMenuAjudaESuporte()">
+              <ion-icon name="help-buoy" class="icon-itens"></ion-icon>
+              Ajuda e Suporte
+            </a>
+            <ul class="sub-menu-item" [hidden]="!showAjudaESuporte">
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                  Ajuda e Suporte
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(privacyPage)">
+                  Política de Privacidade
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(termsPage)">
+                  Termos e Condições
+                </button>
+              </li>
+            </ul>
+          </ion-item>
         </li>
         <li>
           <button menuClose ion-item (click)="presentConfirm()">
@@ -175,12 +228,6 @@
         </li>
       </ul>
     </ion-list>
-    <button menuClose ion-item no-lines (click)="openPage(privacyPage)" class="last-links">
-      Política de Privacidade
-    </button>
-    <button menuClose ion-item no-lines (click)="openPage(termsPage)" class="last-links">
-      Termos e condições de uso
-    </button>
   </ion-content>
 </ion-menu>
 

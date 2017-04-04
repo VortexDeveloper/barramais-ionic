@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Classified {
 
+<<<<<<< HEAD
   private host: string;
 
   private url: string;
@@ -29,6 +30,10 @@ export class Classified {
   private eletronics_url: string;
   private fishing_categories_url: string;
   private fishing_sub_categories_url: string;
+  private create_fishing_url: string;
+  private fishing_category_url: string;
+  private fishing_sub_category_url: string;
+
 
   constructor(
     public http: Http,
@@ -41,9 +46,9 @@ export class Classified {
 
   setRoutes(host){
     this.url = host + "classifieds";
-    this.classified_user_url = host + "classifieds/get_classifieds_by_user/"
-    this.destroy_url = host + "classifieds/"
-    this.create_vessel_url = host + "classifieds/create_vessel"
+    this.classified_user_url = host + "classifieds/get_classifieds_by_user/";
+    this.destroy_url = host + "classifieds/";
+    this.create_vessel_url = host + "classifieds/create_vessel";
     this.brand_url = host + "classifieds/get_brand_by_id/";
     this.mold_url = host + "classifieds/get_mold_by_id/";
     this.brands_url = host + "classifieds/brands_for_select";
@@ -52,11 +57,19 @@ export class Classified {
     this.communications_url = host + "classifieds/communications_for_select";
     this.eletronics_url = host + "classifieds/eletronics_for_select";
     this.fishing_categories_url = host + "classifieds/fishing_categories_for_select";
-    this.fishing_sub_categories_url = host + "classifieds/fishing_sub_categories_for_select/"
+    this.fishing_sub_categories_url = host + "classifieds/fishing_sub_categories_for_select/";
+    this.create_fishing_url = host + "classifieds/create_fishing";
+    this.fishing_category_url = host + "classifieds/get_fishing_category_by_id/";
+    this.fishing_sub_category_url = host + "classifieds/get_fishing_sub_category_by_id/";
   }
 
   createVessel(classified, vessel, accessories){
     return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
+      .map(res => res.json());
+  }
+
+  createFishing(classified, fishing){
+    return this.authHttp.post(this.create_fishing_url + ".json", {'classified': classified, 'fishing': fishing})
       .map(res => res.json());
   }
 
@@ -102,6 +115,16 @@ export class Classified {
 
   getEletronics(){
     return this.authHttp.get(this.eletronics_url + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingCategoryById(category){
+    return this.authHttp.get(this.fishing_category_url + category + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingSubCategoryById(subCategory){
+    return this.authHttp.get(this.fishing_sub_category_url + subCategory + ".json")
       .map(res => res.json());
   }
 
