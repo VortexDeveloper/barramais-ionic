@@ -54,6 +54,8 @@ export class UserPage {
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.populateVesselsType();
+
+    console.log(this.user);
   }
 
   save(user) {

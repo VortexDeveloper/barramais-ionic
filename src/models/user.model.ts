@@ -14,6 +14,7 @@ export class UserModel {
   current_password: string;
   first_name: string;
   last_name: string;
+  nickname: string;
 
   //Personal information
   sex: string;
@@ -48,6 +49,7 @@ export class UserModel {
     this.email = params.email || null;
     this.first_name = params.first_name || null;
     this.last_name = params.last_name || null;
+    this.nickname = params.nickname || null;
     this.sex = params.sex || null;
     this.birthday = params.birthday || null;
     this.cellphone = params.cellphone || "";
