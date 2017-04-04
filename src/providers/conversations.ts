@@ -17,7 +17,7 @@ import 'rxjs/add/operator/catch';
 export class Conversations {
 
   private host: string = "http://localhost:3000/conversations";
-  // private host: string = "http://10.0.2.2:3000/conversations"
+  // private host: string = "http://10.0.2.2:3000/conversations";
   // private host: string = "https://barramais.herokuapp.com/conversations";
 
   private conversation_url: string = this.host + ".json";

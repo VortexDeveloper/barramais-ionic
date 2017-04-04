@@ -32,9 +32,11 @@
           </ion-item>
         </ion-row>
         <ion-row>
-          <div class="post-attaches" *ngIf="post.medias">
+          <img id='treta' src="{{image_test}}" alt="" />
+          <div class="post-attaches2" *ngIf="post.medias">
             <div class="post-attach post-image" *ngFor="let media of post.medias">
               <img src="{{media.image}}" alt="" />
+              {{erro}}
             </div>
           </div>
         </ion-row>
