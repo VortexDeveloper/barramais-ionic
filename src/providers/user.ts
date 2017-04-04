@@ -42,7 +42,7 @@ export class User {
   private pending_groups_url: string = this.host + "users/pending_groups";
   private accept_group_url: string = this.host + "users/accept_group";
   private refuse_group_url: string = this.host + "users/refuse_group";
-
+  private load_nautical_sports_url: string = this.host + "users/load_nautical_sports";
 
   constructor(
     public http: Http,
@@ -50,6 +50,11 @@ export class User {
   ) {
 
    }
+
+  load_nautical_sports(){
+    return this.authHttp.get(this.load_nautical_sports_url + ".json")
+      .map(res => res.json());
+  }
 
   getUser(user_id){
     return this.authHttp.get(this.url + "/" + user_id + ".json")

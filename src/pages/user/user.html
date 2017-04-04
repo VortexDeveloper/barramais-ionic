@@ -18,6 +18,7 @@
         </ion-item-divider>
         <div [hidden]="!accountInformations">
           <ion-item class="avatar-user">
+            <label>Adicionar/Editar Foto</label>
             <ion-thumbnail item-left>
               <!-- <img src="{{user.avatar_url}}" id='user_avatar' [hidden]="user.avatar_url === null">
               <img src="assets/images/DESPACHANTE.png" id='user_avatar' [hidden]="user.avatar !== null"> -->
@@ -48,8 +49,33 @@
             <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
           </ion-item>
           <ion-item>
+            <ion-label floating>Confirmar Email</ion-label>
+            <ion-input type="text" [(ngModel)]="userEmailConfirmation" name="email_confirmation"></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label floating>Senha</ion-label>
             <ion-input type="password" [(ngModel)]="user.current_password" name="current_password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Confirmar Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="userPasswordConfirmation" name="password_confirmation"></ion-input>
+          </ion-item>
+          <ion-item>
+            <label (click)="toggleInviteFriendsMenu()">
+              Convidar Amigos
+            </label>
+            <ul class="sub-menu-item" [hidden]="!inviteFriendsMenu">
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines>
+                  Convidar do Facebook
+                </button>
+              </li>
+              <li>
+                <button class="item-sub" menuClose ion-item no-lines>
+                  Convidar Contatos
+                </button>
+              </li>
+            </ul>
           </ion-item>
         </div>
         <br>
@@ -65,8 +91,28 @@
         </ion-item-divider>
         <div [hidden]="!personalInformations">
           <ion-item>
-            <ion-label floating>Sobre mim</ion-label>
+            <ion-label floating>Biografia</ion-label>
             <ion-textarea [(ngModel)]="user.about" name="about"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Facebook</ion-label>
+            <ion-input type="text" [(ngModel)]="user.facebook" name="facebook"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Instagram</ion-label>
+            <ion-input type="text" [(ngModel)]="user.instagram" name="instagram"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Twitter</ion-label>
+            <ion-input type="text" [(ngModel)]="user.twitter" name="twitter"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Linkedin</ion-label>
+            <ion-input type="text" [(ngModel)]="user.linkedin" name="linkedin"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Site</ion-label>
+            <ion-input type="text" [(ngModel)]="user.website" name="website"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Educação</ion-label>
@@ -78,8 +124,16 @@
             </ion-select>
           </ion-item>
           <ion-item>
+            <ion-label floating>Profissão</ion-label>
+            <ion-input type="text" [(ngModel)]="user.profession" name="profession"></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label floating>Trabalho</ion-label>
             <ion-input type="text" [(ngModel)]="user.work" name="work"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Idioma</ion-label>
+            <ion-textarea [(ngModel)]="user.language" name="language"></ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label floating>Data de nascimento</ion-label>
@@ -100,24 +154,44 @@
           </ion-list>
           <ion-list radio-group no-lines [(ngModel)]="user.relationship" name="relationship">
             <ion-list-header>
-              Estado Civil
+              Relacionamento
             </ion-list-header>
-            <ion-item>
-              <ion-label>Casado</ion-label>
-              <ion-radio value="married"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Namorando</ion-label>
-              <ion-radio value="serious_relationship"></ion-radio>
-            </ion-item>
             <ion-item>
               <ion-label>Solteiro</ion-label>
               <ion-radio value="single"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Em um relacionamento sério</ion-label>
+              <ion-radio value="serious_relationship"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Casado(a)</ion-label>
+              <ion-radio value="married"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Em um relacionamento aberto</ion-label>
+              <ion-radio value="open_relationship"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Divorciado(a)</ion-label>
+              <ion-radio value="divorced"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Viúvo(a)</ion-label>
+              <ion-radio value="widow"></ion-radio>
             </ion-item>
           </ion-list>
           <ion-item>
             <ion-label floating>Celular</ion-label>
             <ion-input type="text" [(ngModel)]="user.cellphone" name="cellphone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Operadora</ion-label>
+            <ion-input type="text" [(ngModel)]="user.mobile_operator" name="mobile_operator"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Email Alternativo</ion-label>
+            <ion-input type="text" [(ngModel)]="user.alternative_email" name="alternative_email"></ion-input>
           </ion-item>
         </div>
         <br>
@@ -132,6 +206,25 @@
           </a>
         </ion-item-divider>
         <div [hidden]="!nauticalInformations">
+          <ion-item-divider color="light">Experiência em viagens</ion-item-divider>
+          <ion-item>
+            <ion-label floating>Viagens de cruzeiro</ion-label>
+            <ion-input type="text" [(ngModel)]="user.cruise_trips" name="cruise_trips"></ion-input>
+          </ion-item>
+          <ion-item-divider color="light">Experiência em estilo</ion-item-divider>
+          <ion-item>
+            <ion-label floating>Literaturas náuticas favoritas</ion-label>
+            <ion-input type="text" [(ngModel)]="user.nautical_literature" name="nautical_literature"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Aplicativos náuticos favoritos</ion-label>
+            <ion-input type="text" [(ngModel)]="user.nautical_application" name="nautical_application"></ion-input>/
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Marcas náuticas favoritas</ion-label>
+            <ion-input type="text" [(ngModel)]="user.nautical_brand" name="nautical_brando"></ion-input>/
+          </ion-item>
+          <ion-item-divider color="light">Experiência náutica</ion-item-divider>
           <ion-item>
             <ion-label>Trabalha com náutica</ion-label>
             <ion-toggle [(ngModel)]="user.nautical_professional" name="nautical_professional" (ionChange)="hideNautical()"></ion-toggle>
@@ -139,13 +232,24 @@
           <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
             <ion-label>Selecione seu trabalho:</ion-label>
             <ion-select [(ngModel)]="user.nautical_profession_description" name="nautical_profession_description">
+              <ion-option [value]="empresario" >Empresário</ion-option>
+              <ion-option [value]="representante" >Representante</ion-option>
+              <ion-option [value]="broker" >Broker</ion-option>
+              <ion-option [value]="investidor" >Investidor</ion-option>
+              <ion-option [value]="instrutor" >Instrutor</ion-option>
+              <ion-option [value]="navio" >Navio</ion-option>
+              <ion-option [value]="cruzeiro" >Cruzeiro</ion-option>
               <ion-option [value]="despachante" >Despachante náutico</ion-option>
               <ion-option [value]="mecanico" >Mecâncico náutico</ion-option>
+              <ion-option [value]="marinheiro" >Marinheiro</ion-option>
+              <ion-option [value]="marina" >Marina</ion-option>
+              <ion-option [value]="lojista" >Lojista</ion-option>
+              <ion-option [value]="servicos_gerais" >Serviços gerais</ion-option>
               <ion-option [value]="outros" >Outros</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-label>Possui embarcação?</ion-label>
+            <ion-label>Possui alguma embarcação?</ion-label>
             <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation" (ionChange)="showOwnVesselsType()"></ion-toggle>
           </ion-item>
           <ion-list [hidden]="!showVesselsType">
@@ -279,10 +383,31 @@
             <ion-label>Praticante de pesca?</ion-label>
             <ion-toggle [(ngModel)]="user.fishing" name='fishing'></ion-toggle>
           </ion-item>
-          <ion-item>
-            <ion-label>Faz turismo náutico?</ion-label>
-            <ion-toggle [(ngModel)]="user.nautical_tour" name='nautical_tour_practicer'></ion-toggle>
+          <ion-item *ngIf="user.fishing">
+            <ion-label>Tipo de pesca</ion-label>
+            <ion-select [(ngModel)]="user.fishing_type" name="fishing_type">
+              <ion-option [value]="pesca_tradicional" >Pesca tradicional</ion-option>
+              <ion-option [value]="pesca_profissional" >Pesca profissional</ion-option>
+            </ion-select>
           </ion-item>
+          <ion-item>
+            <ion-label>Pratica turismo de pesca?</ion-label>
+            <ion-toggle [(ngModel)]="user.fishing_tourist" name='fishing_tourist'></ion-toggle>
+          </ion-item>
+          <ion-item *ngIf="user.fishing_tourist">
+            <ion-label floating>Quais lugares?</ion-label>
+            <ion-input type="text" [(ngModel)]="user.tourist_places" name="tourist_places"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Pratica esporte náutico?</ion-label>
+            <ion-toggle [(ngModel)]="user.water_sportsman" name='water_sportsman'></ion-toggle>
+          </ion-item>
+          <div *ngIf="user.water_sportsman">
+            <ion-item *ngFor='let nauticalSport of nauticalSports'>
+              <ion-checkbox item-right></ion-checkbox>
+              <ion-label>{{nauticalSport.name}}</ion-label>
+            </ion-item>
+          </div>
         </div>
         <br>
       </ion-item-group>
