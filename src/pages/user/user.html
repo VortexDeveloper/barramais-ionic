@@ -36,6 +36,10 @@
             <ion-input type="text" [(ngModel)]="user.last_name" name="last_name"></ion-input>
           </ion-item>
           <ion-item>
+            <ion-label floating>Apelido</ion-label>
+            <ion-input type="text" [(ngModel)]="user.nickname" name="nickname"></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label floating>Data de nascimento</ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birthday" name="birthday"></ion-datetime>
           </ion-item>

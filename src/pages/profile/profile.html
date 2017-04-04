@@ -59,16 +59,8 @@
               </p>
             </ion-col> -->
         </ion-row>
-      <ion-row>
-        <ion-col width-17 *ngIf="user.naval_service_patent !== 0">
-          <img src="assets/images/{{user.naval_service_patent}}.png" alt="" />
-        </ion-col>
-        <ion-col width-17 *ngIf="user.nautical_license !== 0">
-          <img src="assets/images/{{user.nautical_license}}.png" alt="" />
-        </ion-col>
-      </ion-row>
       <button ion-button block outline color="light" class="information-button" (click)="showProfileInformation()">
-        Perfil Completo
+        Visualizar Perfil
       </button>
       <div [hidden]="!profileInformation">
         <ion-list class="profile-information">
@@ -93,6 +85,14 @@
             <p>Feminino</p>
           </ion-item>
         </ion-list>
+        <ion-row>
+          <ion-col width-17 *ngIf="user.naval_service_patent !== 0">
+            <img src="assets/images/{{user.naval_service_patent}}.png" alt="" />
+          </ion-col>
+          <ion-col width-17 *ngIf="user.nautical_license !== 0">
+            <img src="assets/images/{{user.nautical_license}}.png" alt="" />
+          </ion-col>
+        </ion-row>
       </div>
       <ion-card *ngFor="let post of posts">
         <ion-item>
