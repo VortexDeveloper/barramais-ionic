@@ -207,6 +207,36 @@
         </ion-item-divider>
         <div [hidden]="!nauticalInformations">
           <ion-item-divider color="light">Experiência em viagens</ion-item-divider>
+          <!-- <ion-item>
+            <ion-label>Viajens nacionais</ion-label>
+            <ion-toggle [(ngModel)]="stateTrip" name='stateTrip'></ion-toggle>
+          </ion-item>
+          <div *ngIf="stateTrip">
+            <ion-item *ngFor="let stateForTravel of stateForTravels" (click)="toggleUserSelectedState(stateForTravel)">
+              <ion-label>{{stateForTravel.name}}</ion-label>
+              <ion-icon item-right name="boat" *ngIf="checkSelectedStates(stateForTravel)"></ion-icon>
+              <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedStates(stateForTravel)"></ion-icon>
+            </ion-item>
+          </div>
+          <ion-item>
+            <ion-label>Viajens internacionais</ion-label>
+            <ion-toggle [(ngModel)]="countryTrip" name='countryTrip'></ion-toggle>
+          </ion-item>
+          <div *ngIf="countryTrip">
+            <ion-item *ngFor="let countryForTravel of countryForTravels" (click)="toggleUserSelectedCountry(countryForTravel)">
+              <ion-label>{{countryForTravel.name}}</ion-label>
+              <ion-icon item-right name="boat" *ngIf="checkSelectedCountries(countryForTravel)"></ion-icon>
+              <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedCountries(countryForTravel)"></ion-icon>
+            </ion-item>
+          </div> -->
+          <ion-item>
+            <ion-label floating>Viagens nacionais</ion-label>
+            <ion-input type="text" [(ngModel)]="user.national_trips" name="national_trips"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Viagens interenacionais</ion-label>
+            <ion-input type="text" [(ngModel)]="user.international_trips" name="international_trips"></ion-input>
+          </ion-item>
           <ion-item>
             <ion-label floating>Viagens de cruzeiro</ion-label>
             <ion-input type="text" [(ngModel)]="user.cruise_trips" name="cruise_trips"></ion-input>
@@ -250,9 +280,11 @@
           </ion-item>
           <ion-item>
             <ion-label>Possui alguma embarcação?</ion-label>
-            <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation" (ionChange)="showOwnVesselsType()"></ion-toggle>
+            <ion-toggle [(ngModel)]="user.has_embarcation" name="has_embarcation"></ion-toggle>
+            <!-- (ionChange)="showOwnVesselsType() -->
           </ion-item>
-          <ion-list [hidden]="!showVesselsType">
+          <ion-list *ngIf="user.has_embarcation">
+            <!-- [hidden]="!showVesselsType" -->
             <ion-list-header>
               Selecione o tipo da Embarcação
             </ion-list-header>
@@ -267,7 +299,7 @@
             <ion-toggle [(ngModel)]="user.has_nautical_license" name="has_nautical_license" (ionChange)="hideNauticalLicenses()"></ion-toggle>
           </ion-item>
           <ion-item [hidden]="showNauticalLicenses == true">
-            <ion-label>Tem interesse em se habilitar?</ion-label>
+            <ion-label>Interesse em se habilitar?</ion-label>
             <ion-toggle item-right [(ngModel)]="user.license_interest" name="license_interest"></ion-toggle>
           </ion-item>
           <ion-list radio-group [(ngModel)]="user.nautical_license" name="nautical_license" id="nautical_license" [hidden]="showNauticalLicenses == false">
@@ -296,7 +328,7 @@
             </ion-item>
           </ion-list>
           <ion-item>
-            <ion-label>Integrante da Marinha do Brasil?</ion-label>
+            <ion-label>Integrante da Marinha?</ion-label>
             <ion-toggle [(ngModel)]="user.naval_service" name="naval_service" (ionChange)="hideNavalPatents()"></ion-toggle>
           </ion-item>
           <ion-list radio-group [(ngModel)]="user.naval_service_patent" name="naval_service_patent" id="naval_service_patent" [hidden]="showNavalPatents == false">
@@ -402,13 +434,16 @@
             <ion-label>Pratica esporte náutico?</ion-label>
             <ion-toggle [(ngModel)]="user.water_sportsman" name='water_sportsman'></ion-toggle>
           </ion-item>
-          <div *ngIf="user.water_sportsman">
+          <ion-list *ngIf="user.water_sportsman">
+            <ion-list-header>
+              Selecione o(s) esporte(s)
+            </ion-list-header>
             <ion-item *ngFor="let nauticalSport of nauticalSports" (click)="toggleUserSelectedArea(nauticalSport)">
               {{nauticalSport.name}}
               <ion-icon item-right name="boat" *ngIf="checkSelectedAreas(nauticalSport)"></ion-icon>
               <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedAreas(nauticalSport)"></ion-icon>
             </ion-item>
-          </div>
+          </ion-list>
         </div>
         <br>
       </ion-item-group>
