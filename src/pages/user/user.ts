@@ -25,6 +25,8 @@ export class UserPage {
   token: any = localStorage.getItem('jwt');
   user_token: any = localStorage.getItem('user');
   nauticalSports: any[] = [];
+  stateForTravels: any[] = [];
+  countryForTravels: any[] = [];
   user: UserModel;
   avatar: string;
   rootPage = HomePage;
@@ -42,6 +44,10 @@ export class UserPage {
   userPasswordConfirmation: string = "";
   inviteFriendsMenu: boolean = false;
   selectedAreas: any[] = [];
+  selectedStates: any[] = [];
+  selectedCountries: any[] = [];
+  stateTrip: boolean = false;
+  countryTrip: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -59,6 +65,8 @@ export class UserPage {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.populateVesselsType();
     this.load_nautical_sports();
+    this.load_state_for_travels();
+    this.load_country_for_travels();
   }
 
   save(user) {
@@ -239,7 +247,25 @@ export class UserPage {
         this.nauticalSports = response;
         console.log(response);
       }, error => {
-          console.log("Erro ao exibir as áreas de interesse" + error.json());
+          console.log("Erro ao exibir os esportes náuticos" + error.json());
+      });
+  }
+
+  load_state_for_travels(){
+    this.userProvider.load_state_for_travels()
+      .subscribe(response =>{
+        this.stateForTravels = response;
+      }, error => {
+        console.log("Erro ao exibir os estados" + error.json());
+      });
+  }
+
+  load_country_for_travels(){
+    this.userProvider.load_country_for_travels()
+      .subscribe(response =>{
+        this.countryForTravels = response;
+      }, error =>{
+          console.log("Erro ao exibir os países" + error.json());
       });
   }
 
@@ -259,10 +285,64 @@ export class UserPage {
     console.log(this.selectedAreas);
   }
 
+  toggleUserSelectedState(stateForTravel){
+    var found = false;
+    for(var i = 0; i < this.selectedStates.length; i++){
+      if(this.selectedStates[i].name == stateForTravel.name){
+        this.selectedStates.splice(this.selectedStates.indexOf(this.selectedStates[i]), 1);
+        found = true;
+      }
+    }
+
+    if(!found){
+      this.selectedStates.push(stateForTravel);
+    }
+
+    console.log(this.selectedStates);
+  }
+
+  toggleUserSelectedCountry(countryForTravel){
+    var found = false;
+    for(var i = 0; i < this.selectedCountries.length; i++){
+      if(this.selectedCountries[i].name == countryForTravel.name){
+        this.selectedCountries.splice(this.selectedCountries.indexOf(this.selectedCountries[i]), 1);
+        found = true;
+      }
+    }
+
+    if(!found){
+      this.selectedCountries.push(countryForTravel);
+    }
+
+    console.log(this.selectedCountries);
+  }
+
   checkSelectedAreas(nauticalSport){
     var check = false;
     for(var i = 0; i < this.selectedAreas.length; i++){
       if(this.selectedAreas[i].name == nauticalSport.name){
+        check = true;
+      }
+    }
+
+    return check;
+  }
+
+  checkSelectedStates(stateForTravel){
+    var check = false;
+    for(var i = 0; i < this.selectedStates.length; i++){
+      if(this.selectedStates[i].name == stateForTravel.name){
+        check = true;
+      }
+    }
+
+    return check;
+  }
+
+  checkSelectedCountries(countryForTravel){
+    var check = false;
+    for(var i = 0; i < this.selectedCountries.length; i++){
+      if(this.selectedCountries[i].name == countryForTravel.name){
         check = true;
       }
     }
