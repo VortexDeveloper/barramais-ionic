@@ -41,6 +41,7 @@ export class UserPage {
   userEmailConfirmation: string = "";
   userPasswordConfirmation: string = "";
   inviteFriendsMenu: boolean = false;
+  selectedAreas: any[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -58,8 +59,6 @@ export class UserPage {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.populateVesselsType();
     this.load_nautical_sports();
-
-    console.log(this.nauticalSports);
   }
 
   save(user) {
@@ -242,5 +241,32 @@ export class UserPage {
       }, error => {
           console.log("Erro ao exibir as áreas de interesse" + error.json());
       });
+  }
+
+  toggleUserSelectedArea(nauticalSport){
+    var found = false;
+    for(var i = 0; i < this.selectedAreas.length; i++){
+      if(this.selectedAreas[i].name == nauticalSport.name){
+        this.selectedAreas.splice(this.selectedAreas.indexOf(this.selectedAreas[i]), 1);
+        found = true;
+      }
+    }
+
+    if(!found){
+      this.selectedAreas.push(nauticalSport);
+    }
+
+    console.log(this.selectedAreas);
+  }
+
+  checkSelectedAreas(nauticalSport){
+    var check = false;
+    for(var i = 0; i < this.selectedAreas.length; i++){
+      if(this.selectedAreas[i].name == nauticalSport.name){
+        check = true;
+      }
+    }
+
+    return check;
   }
 }
