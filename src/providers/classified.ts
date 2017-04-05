@@ -15,7 +15,6 @@ import 'rxjs/add/operator/map';
 export class Classified {
 
   private host: string;
-
   private url: string;
   private classified_user_url: string;
   private destroy_url: string;

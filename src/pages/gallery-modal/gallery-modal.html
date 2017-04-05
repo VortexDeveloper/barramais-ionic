@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    
+
   </ion-navbar>
 
 </ion-header>
@@ -18,7 +18,7 @@
   <ion-slides pager>
 
   <ion-slide *ngFor="let photo of photos">
-    <img src="{{photo.post_image}}"/>
+    <img src="{{photo.post_image}}" (click)="imageOpen(photo.post_image)"/>
   </ion-slide>
 
 </ion-slides>
