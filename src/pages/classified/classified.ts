@@ -5,6 +5,7 @@ import { UserModel } from "../../models/user.model";
 import { ClassifiedModel } from "../../models/classified.model";
 import { ClassifiedVesselTypePage } from '../classified-vessel-type/classified-vessel-type';
 import { ClassifiedFishingPage } from '../classified-fishing/classified-fishing';
+import { ClassifiedProductCategoryPage } from '../classified-product-category/classified-product-category';
 
 /*
   Generated class for the Classified page.
@@ -24,6 +25,7 @@ export class ClassifiedPage {
   classifiedConditional: number = 0;
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
   classifiedFishingPage: any = ClassifiedFishingPage;
+  classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
 
   constructor(
     public navCtrl: NavController,

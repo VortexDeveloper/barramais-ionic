@@ -33,6 +33,7 @@ import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fi
 import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
 import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
 import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
+import { ClassifiedProductCategoryPage } from '../pages/classified-product-category/classified-product-category';
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -83,6 +84,7 @@ export class MyApp {
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
   classifiedFishingDescriptionPage: any = ClassifiedVesselDescriptionPage;
   classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
+  classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
   user: UserModel = new UserModel();
