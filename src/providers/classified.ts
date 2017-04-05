@@ -14,7 +14,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Classified {
 
-<<<<<<< HEAD
   private host: string;
 
   private url: string;
