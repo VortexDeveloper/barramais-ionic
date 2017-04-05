@@ -403,9 +403,10 @@
             <ion-toggle [(ngModel)]="user.water_sportsman" name='water_sportsman'></ion-toggle>
           </ion-item>
           <div *ngIf="user.water_sportsman">
-            <ion-item *ngFor='let nauticalSport of nauticalSports'>
-              <ion-checkbox item-right></ion-checkbox>
-              <ion-label>{{nauticalSport.name}}</ion-label>
+            <ion-item *ngFor="let nauticalSport of nauticalSports" (click)="toggleUserSelectedArea(nauticalSport)">
+              {{nauticalSport.name}}
+              <ion-icon item-right name="boat" *ngIf="checkSelectedAreas(nauticalSport)"></ion-icon>
+              <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedAreas(nauticalSport)"></ion-icon>
             </ion-item>
           </div>
         </div>

@@ -41,6 +41,8 @@ export class User {
   private accept_group_url: string;
   private refuse_group_url: string;
   private load_nautical_sports_url: string;
+  private load_state_for_travels_url: string;
+  private load_country_for_travels_url: string;
 
   constructor(
     public http: Http,
@@ -75,10 +77,22 @@ export class User {
     this.accept_group_url = host + "users/accept_group";
     this.refuse_group_url = host + "users/refuse_group";
     this.load_nautical_sports_url = host + "users/load_nautical_sports";
+    this.load_state_for_travels_url = host + "users/load_state_for_travels";
+    this.load_country_for_travels_url = host + "users/load_country_for_travels";
   }
 
   load_nautical_sports(){
     return this.authHttp.get(this.load_nautical_sports_url + ".json")
+      .map(res => res.json());
+  }
+
+  load_state_for_travels(){
+    return this.authHttp.get(this.load_state_for_travels_url + ".json")
+      .map(res => res.json());
+  }
+
+  load_country_for_travels(){
+    return this.authHttp.get(this.load_country_for_travels_url + ".json")
       .map(res => res.json());
   }
 
