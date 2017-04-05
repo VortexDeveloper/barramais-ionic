@@ -299,7 +299,7 @@
             <ion-toggle [(ngModel)]="user.has_nautical_license" name="has_nautical_license" (ionChange)="hideNauticalLicenses()"></ion-toggle>
           </ion-item>
           <ion-item [hidden]="showNauticalLicenses == true">
-            <ion-label>Tem interesse em se habilitar?</ion-label>
+            <ion-label>Interesse em se habilitar?</ion-label>
             <ion-toggle item-right [(ngModel)]="user.license_interest" name="license_interest"></ion-toggle>
           </ion-item>
           <ion-list radio-group [(ngModel)]="user.nautical_license" name="nautical_license" id="nautical_license" [hidden]="showNauticalLicenses == false">
@@ -328,7 +328,7 @@
             </ion-item>
           </ion-list>
           <ion-item>
-            <ion-label>Integrante da Marinha do Brasil?</ion-label>
+            <ion-label>Integrante da Marinha?</ion-label>
             <ion-toggle [(ngModel)]="user.naval_service" name="naval_service" (ionChange)="hideNavalPatents()"></ion-toggle>
           </ion-item>
           <ion-list radio-group [(ngModel)]="user.naval_service_patent" name="naval_service_patent" id="naval_service_patent" [hidden]="showNavalPatents == false">
