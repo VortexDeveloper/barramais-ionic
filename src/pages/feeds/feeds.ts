@@ -60,7 +60,8 @@ export class FeedsPage {
   }
 
   openPhotos(photos){
-    this.navCtrl.push(this.galleryModal, {photos: photos})
+    let modal = this.modalCtrl.create(this.galleryModal, {photos: photos});
+    modal.present();
   }
 
   loadPosts() {
@@ -97,5 +98,12 @@ export class FeedsPage {
     );
   }
 
+  show_plus_sign(i) {
+    if(i==3) return "plus-sign-icon";
+    return "";
+  }
 
+  bringsFourImages(post_images) {
+    return post_images.filter((item, index) => { index < 4 })
+  }
 }

@@ -16,8 +16,7 @@ page-feeds {
     align-content: stretch;
   }
 
-  .post-image {
-    width: 49%;
+  .post-image-block {
     -webkit-order: 0;
     -ms-flex-order: 0;
     order: 0;
@@ -34,24 +33,56 @@ page-feeds {
     -webkit-align-self: auto;
     -ms-flex-item-align: auto;
     align-self: auto;
-    padding: 2px;
-    margin: 0 0 2px 2px;
-    height: 152px;
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
     align-items: center;
     -webkit-justify-content: center;
     justify-content: center;
+    width: 49%;
+    padding: 2px;
+    margin: 0 0 2px 2px;
+    height: 152px;
+  }
+
+  .post-image {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    overflow: hidden;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    -webkit-flex-basis: auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 49%;
+    padding: 2px;
+    margin: 0 0 2px 2px;
+    height: 152px;
+    position: relative;
   }
 
 
 
   .post-image img {
-    width: auto;
-    max-width: 278%;
-    display: inline;
-    margin: 0;
+    width: auto !important;
+    max-width: 278% !important;
+    display: inline !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
 
   ion-badge {
@@ -97,5 +128,22 @@ page-feeds {
     height: 25px !important;
     font-size: 0.8rem !important;
   }
+
+  .plus-sign-icon::before{
+    content: "+ Imagens";
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 42% 10%;
+    color: #fff;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+
 
 }

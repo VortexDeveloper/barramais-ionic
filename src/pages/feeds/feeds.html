@@ -25,10 +25,14 @@
     </ion-item>
     <ion-card-content>
       <p>{{post.description}}</p>
-      <div class="post-images" *ngIf="post.post_images">
-        <div class="post-image" *ngFor="let image of post.post_images; let i = index" (click)="openPhotos(post.post_images)">
-          <img src="{{image.post_image}}" *ngIf='i < 4' alt="" />
-        </div>
+      <div *ngIf="post.post_images">
+
+          <div class='post-images' (click)="openPhotos(post.post_images)">
+            <div *ngFor="let image of post.post_images | slice:0:4; let i = index" class="{{i == 3 ? 'post-image plus-sign-icon' : 'post-image'}}">
+              <img src="{{image.post_image}}" />
+            </div>
+          </div>
+
       </div>
     </ion-card-content>
     <ion-row>

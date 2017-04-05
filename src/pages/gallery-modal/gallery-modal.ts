@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 /*
   Generated class for the GalleryModal page.
 
@@ -17,7 +17,8 @@ export class GalleryModalPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private photoViewer: PhotoViewer
   ) {
     this.photos = navParams.data.photos;
     console.log(navParams.data.photos);
@@ -25,6 +26,10 @@ export class GalleryModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GalleryModalPage');
+  }
+
+  imageOpen(image_url){
+    this.photoViewer.show(image_url, '', {share: true});
   }
 
 }

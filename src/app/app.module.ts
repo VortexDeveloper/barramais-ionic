@@ -63,6 +63,7 @@ import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-previe
 import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 import { Camera } from '@ionic-native/camera';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -193,6 +194,7 @@ export function getAuthHttp(http) {
     Groups,
     Routes,
     Camera,
+    PhotoViewer,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
