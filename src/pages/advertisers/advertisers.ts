@@ -25,7 +25,6 @@ import { AdvertiserPaymentPage } from '../advertiser-payment/advertiser-payment'
   templateUrl: 'advertisers.html'
 })
 export class AdvertisersPage {
-  host: string = "http://localhost:3000";
   advertiser: AdvertiserModel;
   address: AddressModel = new AddressModel();
   cities: any;
@@ -142,7 +141,7 @@ export class AdvertisersPage {
 
     var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
 
-    var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
+    // var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
 
     // if(advertiser.document_type == 0){
     //   this.presentToast("Selecione o tipo de documento do anunciante!");

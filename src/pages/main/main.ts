@@ -37,6 +37,8 @@ export class MainPage {
   ) {
       this.menu.enable(true, 'menu');
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      console.log("MAINPAGE")
+      console.log(this.current_user);
     }
 
   ionViewDidLoad() {
@@ -48,7 +50,7 @@ export class MainPage {
   }
 
   openProfile(){
-    this.navCtrl.setRoot(this.profile, {user: this.current_user.id});
+    this.navCtrl.setRoot(this.profile);
   }
 
 }

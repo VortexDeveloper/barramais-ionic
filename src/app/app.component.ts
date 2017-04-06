@@ -33,7 +33,7 @@ import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-desc
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
 import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
-import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+// import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
 import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { ClassifiedProductCategoryPage } from '../pages/classified-product-category/classified-product-category';
 import { AlertController } from 'ionic-angular';
@@ -133,7 +133,7 @@ export class MyApp {
   }
 
   checkCurrentUser(){
-    this.events.subscribe('onUpdateUser', (user)=>{this.user = user;});
+    this.events.subscribe('onUpdateUser', (user)=>{this.user = new UserModel(user);});
   }
 
   openPage(page) {

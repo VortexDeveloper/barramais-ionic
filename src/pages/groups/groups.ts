@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile'; 
+import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
-import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { GroupModalPage } from "../groups/group-modal";
 import { Groups } from '../../providers/groups';
 import { User } from '../../providers/user';

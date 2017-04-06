@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { Content } from 'ionic-angular';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, MenuController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
@@ -8,7 +7,6 @@ import { FeedsPage }from '../feeds/feeds';
 import { MainPage }from '../main/main';
 import { JwtHelper } from 'angular2-jwt';
 import { Events } from 'ionic-angular';
-import { Keyboard } from 'ionic-native';
 
 @Component({
   selector: 'page-login',

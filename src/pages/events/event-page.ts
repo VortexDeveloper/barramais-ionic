@@ -7,13 +7,11 @@ import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { EventGuestsPage } from "../events/event-guests";
 import { FriendsPage } from '../friends/friends';
-import { HomePage } from '../home/home';
 import { UserModel } from "../../models/user.model";
 import { EventModel } from "../../models/event.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
-import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { EventProvider } from '../../providers/events';
 import { Posts } from '../../providers/posts';
 

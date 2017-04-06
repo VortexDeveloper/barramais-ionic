@@ -2,12 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
 import { Groups } from "../../providers/groups";
 import { User } from "../../providers/user";
-import { GroupModel } from "../../models/group.model";
 import { ToastController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
-import { Camera } from 'ionic-native';
-import { GroupsPage } from "../groups/groups";
 
 /*
   Generated class for the PostModal page.

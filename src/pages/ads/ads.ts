@@ -8,9 +8,7 @@ import { AdModel } from "../../models/ad.model";
 import { Advertiser } from '../../providers/advertiser';
 import { ToastController } from 'ionic-angular';
 import { AdvertiserPage } from '../advertiser/advertiser';
-import { InterestAreaModel } from "../../models/interest_area.model";
 import { Ads } from '../../providers/ads';
-import { AreaModel } from "../../models/area.model";
 import { Camera } from 'ionic-native';
 import { MidiaKitPage } from '../midia-kit/midia-kit';
 
