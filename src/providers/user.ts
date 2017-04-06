@@ -43,6 +43,8 @@ export class User {
   private load_nautical_sports_url: string;
   private load_state_for_travels_url: string;
   private load_country_for_travels_url: string;
+  private get_user_album_url: string;
+  private user_album_url: string;
 
   constructor(
     public http: Http,
@@ -79,6 +81,23 @@ export class User {
     this.load_nautical_sports_url = host + "users/load_nautical_sports";
     this.load_state_for_travels_url = host + "users/load_state_for_travels";
     this.load_country_for_travels_url = host + "users/load_country_for_travels";
+    this.get_user_album_url = host + "album_photos/get_user_album/";
+    this.user_album_url = host + "album_photos"
+  }
+
+  create_album_photo(albumPhoto){
+    return this.authHttp.post(this.user_album_url + ".json", {'photo': albumPhoto})
+      .map(res => res.json());
+  }
+
+  get_user_album(user_id){
+    return this.authHttp.get(this.get_user_album_url + user_id + ".json")
+      .map(res => res.json());
+  }
+
+  destroy_user_album_photo(photo_id){
+    return this.authHttp.delete(this.user_album_url + "/" + photo_id + ".json")
+      .map(res => res.json());
   }
 
   load_nautical_sports(){

@@ -40,6 +40,8 @@ import { Conversations } from '../providers/conversations';
 import { ConversationChannel } from '../providers/conversation-channel';
 import { MessagesPage } from '../pages/messages/messages';
 import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
+import { AlbumListPage } from '../pages/album-list/album-list';
+import { AlbumPhotoCreatePage } from '../pages/album-photo-create/album-photo-create';
 import { AdBannersPage } from '../pages/ad-banners/ad-banners';
 import { AdInterestsPage } from '../pages/ad-interests/ad-interests';
 import { AdDescriptionsPage } from '../pages/ad-descriptions/ad-descriptions';
@@ -102,6 +104,8 @@ export function getAuthHttp(http) {
     ConversationPage,
     MessagesPage,
     MidiaKitPage,
+    AlbumListPage,
+    AlbumPhotoCreatePage,
     AdBannersPage,
     AdInterestsPage,
     AdDescriptionsPage,
@@ -158,6 +162,8 @@ export function getAuthHttp(http) {
     ConversationPage,
     MessagesPage,
     MidiaKitPage,
+    AlbumListPage,
+    AlbumPhotoCreatePage,
     AdBannersPage,
     AdInterestsPage,
     AdDescriptionsPage,

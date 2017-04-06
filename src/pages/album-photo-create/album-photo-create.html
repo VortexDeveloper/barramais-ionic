@@ -1,0 +1,31 @@
+<!--
+  Generated template for the AlbumPhotoCreate page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <bm-header></bm-header>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <a (click)="presentActionSheet()" [hidden]="albumPhoto.photo_url == ''">
+      <ion-thumbnail item-left>
+        <img src="{{host + albumPhoto.photo_url}}" id='albumPhoto_photo'>
+      </ion-thumbnail>
+    </a>
+    <a (click)="presentActionSheet()" [hidden]="albumPhoto.photo_url != ''">
+      <ion-thumbnail item-left>
+        <img src="assets/images/bg_app.png" id='albumPhoto_photo'>
+      </ion-thumbnail>
+    </a>
+  </ion-item>
+
+  <button class="form-buttons" ion-button type="button" (click)="save(albumPhoto)" [hidden]="isEditing" block>Cadastrar anúncio</button>
+  <!-- <button class="form-buttons" ion-button type="button" (click)="update(ad)" [hidden]="!isEditing" block>Modificar anúncio</button> -->
+</ion-content>
