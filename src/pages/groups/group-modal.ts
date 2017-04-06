@@ -6,7 +6,6 @@ import { ToastController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { Camera } from 'ionic-native';
-import { GroupsPage } from "../groups/groups";
 
 /*
   Generated class for the PostModal page.

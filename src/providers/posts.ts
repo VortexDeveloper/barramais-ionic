@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { JwtHelper } from 'angular2-jwt';
 import { Routes } from '../providers/routes';
 
 import 'rxjs/add/operator/map';
@@ -21,8 +20,6 @@ export class Posts {
   private host_post: string;
   private create_url: string;
   private index_url: string;
-  private user: any;
-  private jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
     public http: Http,

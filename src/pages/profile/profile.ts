@@ -6,19 +6,17 @@ import { FeedsPage } from '../feeds/feeds';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { FriendsPage } from '../friends/friends';
-import { HomePage } from '../home/home';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
-import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
 import { CommentModalPage } from "../comment-modal/comment-modal";
 import { Posts } from '../../providers/posts';
-import { Camera } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
 import { ActionSheetController }  from 'ionic-angular';
 import { ToastController, AlertController } from 'ionic-angular';
-import { ViewController,Platform, LoadingController }  from 'ionic-angular';
+import { Platform, LoadingController }  from 'ionic-angular';
 
 declare var cordova: any;
 
@@ -50,6 +48,7 @@ export class ProfilePage {
   current_user: UserModel = new UserModel();
   isFriend: any;
   posts: Array<any>;
+  erro: string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -63,6 +62,7 @@ export class ProfilePage {
     public platform: Platform,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
+    private camera: Camera
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.setUser(params.data.user);
@@ -192,19 +192,27 @@ export class ProfilePage {
   }
 
   setUser(user_id){
-    if(user_id == this.current_user.id){
+    if(!user_id){
       this.user = this.current_user;
     } else {
       this.userProvider.getUser(user_id)
       .subscribe(
         (user) => {
           this.user = new UserModel(user);
-          this.visitorActions = true;
+          this.checkUser();
           this.loadFriends(user);
           user.id == this.current_user.id? this.isFriend = null : this.is_friend_of(user);
         },
         (error) => console.log(error)
       );
+    }
+  }
+
+  checkUser(){
+    if(this.user.id == this.current_user.id){
+        this.visitorActions = false;
+    }else{
+        this.visitorActions = true;
     }
   }
 
@@ -218,97 +226,134 @@ export class ProfilePage {
     );
   }
 
-  public presentActionSheet(picture) {
+  // public presentActionSheet(picture) {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'Selecione a origem da imagem',
+  //     buttons: [
+  //       {
+  //         text: 'Carregar da Galeria',
+  //         handler: () => {
+  //           this.takePicture(picture, Camera.PictureSourceType.PHOTOLIBRARY);
+  //         }
+  //       },
+  //       {
+  //         text: 'Camera',
+  //         handler: () => {
+  //           this.takePicture(picture, Camera.PictureSourceType.CAMERA);
+  //         }
+  //       },
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancel'
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
+  //
+  // takePicture(picture, sourceType) {
+  //   var options = {
+  //     quality: 100,
+  //     sourceType: sourceType,
+  //     saveToPhotoAlbum: false,
+  //     correctOrientation: true,
+  //     allowEdit: true,
+  //     //mediaType: Camera.MediaType.ALLMEDIA,
+  //     destinationType: Camera.DestinationType.DATA_URL
+  //   };
+  //
+  //   Camera.getPicture(options).then(image => {
+  //     let prompt = this.alertCtrl.create({
+  //       title: 'Usar foto',
+  //       message: 'Deseja usar esta foto como foto de perfil?',
+  //       buttons: [
+  //         {
+  //           text: 'Não',
+  //           handler: data => {
+  //             console.log('Cancel clicked');
+  //           }
+  //         },
+  //         {
+  //           text: 'Sim',
+  //           handler: data => {
+  //             if(picture == "avatar"){
+  //               this.user.avatar = "data:image/jpeg;base64," + image;
+  //               this.save_avatar();
+  //             }else{
+  //               this.user.cover_photo = "data:image/jpeg;base64," + image;
+  //               this.save_cover_photo();
+  //             }
+  //           }
+  //         }
+  //       ]
+  //     });
+  //     prompt.present();
+  //   });
+  // }
+
+  openMediaOptions() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Selecione a origem da imagem',
+      title: 'Carregar midia',
+      cssClass: 'page-post-modal',
       buttons: [
         {
           text: 'Carregar da Galeria',
           handler: () => {
-            this.takePicture(picture, Camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Camera',
+          text: 'Fotos',
+          icon: !this.platform.is('ios') ? 'videocam' : null,
           handler: () => {
-            this.takePicture(picture, Camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            console.log('Play clicked');
           }
         },
         {
           text: 'Cancelar',
-          role: 'cancel'
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
         }
       ]
     });
     actionSheet.present();
   }
 
-  takePicture(picture, sourceType) {
+  takePicture(sourceType) {
     var options = {
       quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      saveToPhotoAlbum: false,
+      saveToPhotoAlbum: true,
       correctOrientation: true,
-      allowEdit: true,
-      //mediaType: Camera.MediaType.ALLMEDIA,
-      destinationType: Camera.DestinationType.DATA_URL
+      allowEdit: true
     };
 
-    Camera.getPicture(options).then(image => {
-      let prompt = this.alertCtrl.create({
-        title: 'Usar foto',
-        message: 'Deseja usar esta foto como foto de perfil?',
-        buttons: [
-          {
-            text: 'Não',
-            handler: data => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Sim',
-            handler: data => {
-              if(picture == "avatar"){
-                this.user.avatar = "data:image/jpeg;base64," + image;
-                this.save_avatar();
-              }else{
-                this.user.cover_photo = "data:image/jpeg;base64," + image;
-                this.save_cover_photo();
-              }
-            }
-          }
-        ]
-      });
-      prompt.present();
-    });
-  }
+    this.camera.getPicture(options).then(
+      image_url => {
+        let includeToNewMedia = (image) => {
+          this.user.cover_photo = 'data:image/jpeg;base64,' + image;
+          this.save_cover_photo();
+        };
 
-
-
-  is_from_gallery(sourceType) {
-    sourceType === Camera.PictureSourceType.PHOTOLIBRARY
-  }
-
-  is_android() {
-    this.platform.is('android')
-  }
-
-  save_avatar() {
-    this.userProvider.save_avatar(this.current_user)
-    .subscribe(user_params => {
-      let image_tag = document.getElementsByTagName('img')[0];
-      image_tag.src = this.current_user.avatar;
-    }, error => {
-        alert(error.json());
-        console.log(JSON.stringify(error.json()));
-    });
+        includeToNewMedia(image_url);
+      },
+      error => {
+        this.erro = error;
+      }
+    );
   }
 
   save_cover_photo() {
-    this.userProvider.save_cover_photo(this.current_user)
-    .subscribe(user_params => {
-      let image_tag = document.getElementsByTagName('img')[0];
-      image_tag.src = this.current_user.cover_photo;
+    this.userProvider.save_cover_photo(this.user)
+    .subscribe((user_params) => {
+        this.user = new UserModel(this.jwtHelper.decodeToken(user_params));
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));

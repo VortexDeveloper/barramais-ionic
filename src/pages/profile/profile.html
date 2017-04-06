@@ -7,7 +7,7 @@
   <div class="container">
     <div class="background-image">
       <img src="{{user.cover_photo_url}}" id='user_cover_photo' />
-      <ion-icon class="cover-camera-icon" name="camera" (click)="presentActionSheet('cover_photo')" [hidden]="visitorActions"></ion-icon>
+      <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()" [hidden]="visitorActions"></ion-icon>
     </div>
     <div class="main-content">
       <ion-thumbnail class="thumb-user" item-left>

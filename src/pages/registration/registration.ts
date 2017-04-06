@@ -4,7 +4,6 @@ import { UserModel } from "../../models/user.model";
 import { MainPage } from "../main/main";
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
-import { FeedsPage } from "../feeds/feeds";
 import { PrivacyPage } from "../privacy/privacy";
 import { TermsPage } from "../terms/terms";
 

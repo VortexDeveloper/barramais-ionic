@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { FeedsPage } from '../feeds/feeds';
-import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { EventModalPage } from "../events/event-modal";
 import { EventProvider } from '../../providers/events';
 import { User } from '../../providers/user';
