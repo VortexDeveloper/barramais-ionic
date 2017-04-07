@@ -47,6 +47,7 @@ export class User {
   private user_album_url: string;
   private get_interests_by_user_url: string;
   private interests_url: string;
+  private update_user_interests_url: string;
 
   constructor(
     public http: Http,
@@ -85,8 +86,14 @@ export class User {
     this.load_country_for_travels_url = host + "users/load_country_for_travels";
     this.get_user_album_url = host + "album_photos/get_user_album/";
     this.user_album_url = host + "album_photos"
+    this.update_user_interests_url = host + "users/update_user_interests";
     this.get_interests_by_user_url = host + "interests/get_interests_by_user/";
     this.interests_url = host + "interests";
+  }
+
+  update_user_interests(user_id, userInterests){
+    return this.authHttp.put(this.update_user_interests_url + "/" + user_id + ".json", {'user_interests': userInterests})
+      .map(res => res.json());
   }
 
   get_interests_by_user(user_id){
