@@ -17,6 +17,7 @@ import { Camera } from '@ionic-native/camera';
 import { ActionSheetController }  from 'ionic-angular';
 import { ToastController, AlertController } from 'ionic-angular';
 import { Platform, LoadingController }  from 'ionic-angular';
+import { AlbumListPage } from '../album-list/album-list';
 
 declare var cordova: any;
 
@@ -49,6 +50,7 @@ export class ProfilePage {
   isFriend: any;
   posts: Array<any>;
   erro: string = "";
+  albumListPage: any = AlbumListPage;
 
 
   constructor(

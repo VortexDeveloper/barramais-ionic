@@ -10,7 +10,7 @@ import { FeedsPage } from '../feeds/feeds';
 import { ProfilePage } from '../profile/profile';
 import { JwtHelper } from 'angular2-jwt';
 import { Events } from 'ionic-angular';
-
+import { MainPage } from '../main/main';
 
 declare var cordova: any;
 
@@ -37,6 +37,7 @@ export class UserPage {
   accountInformations: boolean = false;
   personalInformations: boolean = false;
   nauticalInformations: boolean = false;
+  interestInformations: boolean = false;
   vessels_type: Array<any>;
   showVesselsType: boolean = true;
   userEmailConfirmation: string = "";
@@ -47,6 +48,9 @@ export class UserPage {
   selectedCountries: any[] = [];
   stateTrip: boolean = false;
   countryTrip: boolean = false;
+  interests: any[] = [];
+  userInterests: any[] = [];
+  mainPage: any = MainPage;
 
   constructor(
     public navCtrl: NavController,
@@ -66,14 +70,19 @@ export class UserPage {
     this.load_nautical_sports();
     this.load_state_for_travels();
     this.load_country_for_travels();
+    this.getInterests();
+    this.getUserInterests();
   }
 
   save(user) {
-    if(this.userEmailConfirmation != this.user.email){
-      this.presentToast("A confirmação do email deve ser igual ao email!");
-    }else if(this.userPasswordConfirmation != this.user.current_password){
-      this.presentToast("A confirmação da senha deve ser igual à senha!");
-    }else{
+    this.updateUserInterests();
+
+    // MANTER A VALIDAÇÃO, ELA ESTÁ COMENTADA APENAS PARA ADIANTAR NOS TESTES
+    // if(this.userEmailConfirmation != this.user.email){
+    //   this.presentToast("A confirmação do email deve ser igual ao email!");
+    // }else if(this.userPasswordConfirmation != this.user.current_password){
+    //   this.presentToast("A confirmação da senha deve ser igual à senha!");
+    // }else{
       this.userProvider.update(user)
       .subscribe(response => {
           localStorage.setItem("user", response.user);
@@ -81,6 +90,7 @@ export class UserPage {
           this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
           this.presentToast("Usuário atualizado com sucesso!");
           this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(response.user));
+          this.redirectPage(this.mainPage);
       }, error => {
           var errors = error.json().errors;
           var errorMessage;
@@ -91,7 +101,7 @@ export class UserPage {
           }
           this.presentToast(errorMessage);
       });
-    }
+    // }
     this.userPasswordConfirmation = "";
   }
 
@@ -133,6 +143,10 @@ export class UserPage {
 
   showAccountInformations(){
     this.accountInformations = !this.accountInformations;
+  }
+
+  showInterestInformations(){
+    this.interestInformations = !this.interestInformations;
   }
 
   toggleInviteFriendsMenu() {
@@ -347,5 +361,65 @@ export class UserPage {
     }
 
     return check;
+  }
+
+  getInterests(){
+    this.userProvider.get_interests()
+      .subscribe(response =>{
+        this.interests = response;
+        // console.log(this.interests);
+      }, error => {
+        console.log("Erro ao exibir os interesses" + error.json());
+      });
+  }
+
+  getUserInterests(){
+    this.userProvider.get_interests_by_user(this.user.id)
+      .subscribe(response =>{
+        this.userInterests = response;
+        // console.log(this.userInterests);
+      }, error => {
+        console.log("Erro ao exibir os interesses do usuário" + error.json());
+      });
+  }
+
+  checkUserInterests(interest){
+    var check = false;
+    for(var i = 0; i < this.userInterests.length; i++){
+      if(this.userInterests[i].id == interest.id){
+        check = true;
+      }
+    }
+
+    return check;
+  }
+
+  toggleUserInterests(interest){
+    var found = false;
+    for(var i = 0; i < this.userInterests.length; i++){
+      if(this.userInterests[i].id == interest.id){
+        this.userInterests.splice(this.userInterests.indexOf(this.userInterests[i]), 1);
+        found = true;
+      }
+    }
+
+    if(!found){
+      this.userInterests.push(interest);
+    }
+
+    // console.log(this.selectedAreas);
+  }
+
+  updateUserInterests(){
+    this.userProvider.update_user_interests(this.user.id, this.userInterests)
+      .subscribe(response =>{
+        // this.presentToast("Lista de interesses atualizada com sucesso!")
+      }, error => {
+        console.log("Erro ao atualizar os interesses do usuário" + error.json());
+      });
+  }
+
+  redirectPage(page){
+    this.navCtrl.setRoot(page);
   }
 }

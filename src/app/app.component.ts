@@ -13,6 +13,8 @@ import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { InAppBrowser } from 'ionic-native';
 import { ConversationPage } from '../pages/conversation/conversation';
+import { AlbumListPage } from '../pages/album-list/album-list';
+import { AlbumPhotoCreatePage } from '../pages/album-photo-create/album-photo-create';
 import { AdBannersPage } from '../pages/ad-banners/ad-banners';
 import { AdInterestsPage } from '../pages/ad-interests/ad-interests';
 import { AdDescriptionsPage } from '../pages/ad-descriptions/ad-descriptions';
@@ -65,6 +67,8 @@ export class MyApp {
   privacyPage: any = PrivacyPage;
   conversationPage: any = ConversationPage;
   midiaKitPage: any = MidiaKitPage;
+  albumListPage: any = AlbumListPage;
+  albumPhotoCreatePage: any = AlbumPhotoCreatePage;
   adBannersPage: any = AdBannersPage;
   adInterestsPage: any = AdInterestsPage;
   adDescriptionsPage: any = AdDescriptionsPage;

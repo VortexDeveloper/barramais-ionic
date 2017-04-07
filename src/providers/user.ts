@@ -43,6 +43,11 @@ export class User {
   private load_nautical_sports_url: string;
   private load_state_for_travels_url: string;
   private load_country_for_travels_url: string;
+  private get_user_album_url: string;
+  private user_album_url: string;
+  private get_interests_by_user_url: string;
+  private interests_url: string;
+  private update_user_interests_url: string;
 
   constructor(
     public http: Http,
@@ -79,6 +84,46 @@ export class User {
     this.load_nautical_sports_url = host + "users/load_nautical_sports";
     this.load_state_for_travels_url = host + "users/load_state_for_travels";
     this.load_country_for_travels_url = host + "users/load_country_for_travels";
+    this.get_user_album_url = host + "album_photos/get_user_album/";
+    this.user_album_url = host + "album_photos"
+    this.update_user_interests_url = host + "users/update_user_interests";
+    this.get_interests_by_user_url = host + "interests/get_interests_by_user/";
+    this.interests_url = host + "interests";
+  }
+
+  update_user_interests(user_id, userInterests){
+    return this.authHttp.put(this.update_user_interests_url + "/" + user_id + ".json", {'user_interests': userInterests})
+      .map(res => res.json());
+  }
+
+  get_interests_by_user(user_id){
+    return this.authHttp.get(this.get_interests_by_user_url + "/" + user_id + ".json")
+      .map(res => res.json());
+  }
+
+  get_interests(){
+    return this.authHttp.get(this.interests_url + ".json")
+      .map(res => res.json());
+  }
+
+  create_album_photo(albumPhoto){
+    return this.authHttp.post(this.user_album_url + ".json", {'album_photo': albumPhoto})
+      .map(res => res.json());
+  }
+
+  update_album_photo(albumPhoto){
+    return this.authHttp.put(this.user_album_url + "/" + albumPhoto.id + ".json", {'album_photo': albumPhoto})
+      .map(res => res.json());
+  }
+
+  get_user_album(user_id){
+    return this.authHttp.get(this.get_user_album_url + user_id + ".json")
+      .map(res => res.json());
+  }
+
+  destroy_user_album_photo(photo_id){
+    return this.authHttp.delete(this.user_album_url + "/" + photo_id + ".json")
+      .map(res => res.json());
   }
 
   load_nautical_sports(){
