@@ -11,7 +11,6 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
-import { CommentModalPage } from "../comment-modal/comment-modal";
 import { Posts } from '../../providers/posts';
 import { Camera } from '@ionic-native/camera';
 import { ActionSheetController }  from 'ionic-angular';
