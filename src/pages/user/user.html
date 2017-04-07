@@ -445,6 +445,27 @@
             </ion-item>
           </ion-list>
         </div>
+        <ion-item-divider color="light" (click)="showInterestInformations()">
+          <a ion-item>
+            <ion-avatar item-left>
+              <img src="assets/images/infor_nautica.png"/>
+            </ion-avatar>
+            <p>
+              Informações de interesse
+            </p>
+          </a>
+        </ion-item-divider>
+        <div [hidden]="!interestInformations">
+          <ion-list>
+            <ion-item-divider color="light">Áreas de interesse</ion-item-divider>
+                <ion-item *ngFor="let interest of interests" (click)="toggleUserInterests(interest)">
+                  <img class="image-list" src="{{host + interest.photo_url}}" alt="Sem foto" item-left>
+                  {{interest.name}}
+                  <ion-icon item-right name="boat" *ngIf="checkUserInterests(interest)"></ion-icon>
+                  <ion-icon item-right name="boat-outline" *ngIf="!checkUserInterests(interest)"></ion-icon>
+                </ion-item>
+          </ion-list>
+        </div>
         <br>
       </ion-item-group>
   </div>

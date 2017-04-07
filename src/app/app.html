@@ -14,7 +14,7 @@
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
             <img src="assets/images/barco2.png" class="icon-itens" />
-            Início
+            Navegar
           </button>
         </li>
         <li>
@@ -140,14 +140,9 @@
           <ion-item>
             <a (click)="showSubMenuAnuncios()">
               <img src="assets/images/anuncios.png" class="icon-itens" />
-              Publicidade
+              Gerenciador de Anúncios
             </a>
             <ul class="sub-menu-item" [hidden]="!showAnuncios">
-              <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(albumListPage)">
-                  Album
-                </button>
-              </li>
               <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adBannersPage)">
                   Anunciar sua marca

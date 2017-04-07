@@ -37,6 +37,7 @@ export class UserPage {
   accountInformations: boolean = false;
   personalInformations: boolean = false;
   nauticalInformations: boolean = false;
+  interestInformations: boolean = false;
   vessels_type: Array<any>;
   showVesselsType: boolean = true;
   userEmailConfirmation: string = "";
@@ -47,6 +48,8 @@ export class UserPage {
   selectedCountries: any[] = [];
   stateTrip: boolean = false;
   countryTrip: boolean = false;
+  interests: any[] = [];
+  userInterests: any[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -66,6 +69,8 @@ export class UserPage {
     this.load_nautical_sports();
     this.load_state_for_travels();
     this.load_country_for_travels();
+    this.getInterests();
+    this.getUserInterests();
   }
 
   save(user) {
@@ -133,6 +138,10 @@ export class UserPage {
 
   showAccountInformations(){
     this.accountInformations = !this.accountInformations;
+  }
+
+  showInterestInformations(){
+    this.interestInformations = !this.interestInformations;
   }
 
   toggleInviteFriendsMenu() {
@@ -347,5 +356,52 @@ export class UserPage {
     }
 
     return check;
+  }
+
+  getInterests(){
+    this.userProvider.get_interests()
+      .subscribe(response =>{
+        this.interests = response;
+        console.log(this.interests);
+      }, error => {
+        console.log("Erro ao exibir os interesses" + error.json());
+      });
+  }
+
+  getUserInterests(){
+    this.userProvider.get_interests_by_user(this.user.id)
+      .subscribe(response =>{
+        this.userInterests = response;
+        console.log(this.userInterests);
+      }, error => {
+        console.log("Erro ao exibir os interesses do usuário" + error.json());
+      });
+  }
+
+  checkUserInterests(interest){
+    var check = false;
+    for(var i = 0; i < this.userInterests.length; i++){
+      if(this.userInterests[i].id == interest.id){
+        check = true;
+      }
+    }
+
+    return check;
+  }
+
+  toggleUserInterests(interest){
+    var found = false;
+    for(var i = 0; i < this.userInterests.length; i++){
+      if(this.userInterests[i].id == interest.id){
+        this.userInterests.splice(this.userInterests.indexOf(this.userInterests[i]), 1);
+        found = true;
+      }
+    }
+
+    if(!found){
+      this.userInterests.push(interest);
+    }
+
+    // console.log(this.selectedAreas);
   }
 }

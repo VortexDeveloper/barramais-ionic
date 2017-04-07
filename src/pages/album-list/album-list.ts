@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { User } from '../../providers/user';
-import { MainPage } from '../main/main';
+import { ProfilePage } from '../profile/profile';
 import { AlbumPhotoCreatePage } from '../album-photo-create/album-photo-create';
 
 /*
@@ -22,7 +22,7 @@ export class AlbumListPage {
   user_token: any = localStorage.getItem('user');
   album: any[] = [];
   isAlbumEmpty: boolean = false;
-  mainPage: any = MainPage;
+  profilePage: any = ProfilePage;
   albumPhotoCreatePage: any = AlbumPhotoCreatePage;
 
   constructor(
@@ -76,6 +76,6 @@ export class AlbumListPage {
   }
 
   goBack(){
-    this.navCtrl.setRoot(this.mainPage);
+    this.navCtrl.setRoot(this.profilePage);
   }
 }
