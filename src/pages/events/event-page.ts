@@ -30,7 +30,7 @@ export class EventPagePage {
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
-  user: UserModel;
+  user: UserModel = new UserModel();
   userPage: any = UserPage;
   feedsPage: any = FeedsPage;
   groupsPage: any = GroupsPage;
@@ -52,6 +52,7 @@ export class EventPagePage {
   friends: any;
   posts: Array<any>;
 
+
   constructor(
     public navCtrl: NavController,
     params: NavParams,
@@ -61,15 +62,15 @@ export class EventPagePage {
     public toastCtrl: ToastController,
     public postsProvider: Posts
   ) {
-      this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.event = params.data.event;
-      this.verifyEventAdmin();
-      this.loadGuests(this.event);
-      this.loadPosts();
+    this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.event = params.data.event;
+    this.verifyEventAdmin();
+    this.loadGuests(this.event);
+    this.loadPosts();
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+
   }
 
   loadGuests(event){
@@ -199,30 +200,6 @@ export class EventPagePage {
   loadPosts() {
     this.postsProvider.index().subscribe(
       (posts) => this.posts = posts,
-      (error) => console.log(error)
-    );
-  }
-
-  like(post) {
-    this.postsProvider.like(post).subscribe(
-      (updated_post) => post.likes = updated_post.likes,
-      (error) => console.log(error)
-    );
-  }
-
-  like_color_for(post) {
-    if(post.likes.didILiked)
-      return 'barramais';
-    else
-      return 'grayed'
-  }
-
-  createComment(post, comment) {
-    this.postsProvider.comment(post, comment).subscribe(
-      (comment) => {
-        post.new_comment_body = "";
-        post.comments.push(comment);
-      },
       (error) => console.log(error)
     );
   }

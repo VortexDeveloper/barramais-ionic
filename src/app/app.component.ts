@@ -93,6 +93,7 @@ export class MyApp {
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
+    browser
   }
 
   constructor(

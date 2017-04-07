@@ -29,6 +29,7 @@ import { LoginPage } from '../pages/login/login';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
+import { BmPostComponent } from '../components/bm-post/bm-post';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { TermsPage } from '../pages/terms/terms';
@@ -95,6 +96,7 @@ export function getAuthHttp(http) {
     FriendshipRequestPage,
     LoginPage,
     BmHeaderComponent,
+    BmPostComponent,
     AdvertiserPage,
     AdsPage,
     TermsPage,
@@ -151,6 +153,7 @@ export function getAuthHttp(http) {
     FriendshipRequestPage,
     LoginPage,
     BmHeaderComponent,
+    BmPostComponent,
     AdvertiserPage,
     AdsPage,
     TermsPage,

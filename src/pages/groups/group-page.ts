@@ -10,6 +10,7 @@ import { FriendsPage } from '../friends/friends';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
+import { Posts } from '../../providers/posts';
 import { ToastController } from 'ionic-angular';
 import { Groups } from '../../providers/groups';
 
@@ -28,7 +29,7 @@ export class GroupPagePage {
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
-  user: UserModel;
+  user: UserModel = new UserModel();
   userPage: any = UserPage;
   feedsPage: any = FeedsPage;
   groupsPage: any = GroupsPage;
@@ -49,12 +50,15 @@ export class GroupPagePage {
   showMemberActions: boolean = false;
   showInvitedMemberActions: boolean = false;
   friends: any;
+  posts: Array<any>;
+
 
   constructor(
     public navCtrl: NavController,
     params: NavParams,
     public groupProvider: Groups,
     private userProvider: User,
+    private postsProvider: Posts,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController
   ) {
@@ -62,10 +66,11 @@ export class GroupPagePage {
       this.group = params.data.group;
       this.verifyGroupAdmin();
       this.loadMembers(this.group);
+      this.loadPosts();
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+
   }
 
   loadMembers(group){
@@ -192,6 +197,15 @@ export class GroupPagePage {
       duration: 5000
     });
     toast.present();
+  }
+
+  loadPosts() {
+    this.postsProvider.index().subscribe(
+      (posts) => {
+        this.posts = posts;
+      },
+      (error) => console.log(error)
+    );
   }
 
 }

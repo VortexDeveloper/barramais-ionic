@@ -35,14 +35,12 @@ export class MainPage {
     public navParams: NavParams,
     public menu: MenuController
   ) {
-      this.menu.enable(true, 'menu');
-      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      console.log("MAINPAGE")
-      console.log(this.current_user);
+
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
+    this.menu.enable(true, 'menu');
+    this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
   }
 
   openPage(page) {

@@ -13,15 +13,19 @@
       <ul class="menu-item">
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/barco2.png" class="icon-itens" />
-            Início
+            <div class="menu-item-container">
+              <i class="menu-item-icone inicio"></i>
+              Início
+            </div>
           </button>
         </li>
         <li>
           <ion-item>
             <a (click)="showSubMenuConvidarAmigos()">
-              <img src="assets/images/convite.png" class="icon-itens" />
-              Convidar Amigos
+              <div class="menu-item-container">
+                <i class="menu-item-icone conv-amigos"></i>
+                Convidar Amigos
+              </div>
             </a>
             <ul class="sub-menu-item" [hidden]="!showConvidarAmigos">
               <li>
@@ -39,15 +43,19 @@
         </li>
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/amigos.png" class="icon-itens" />
-            Amigos
+            <div class="menu-item-container">
+              <i class="menu-item-icone amigos"></i>
+              Amigos
+            </div>
           </button>
         </li>
         <li>
           <ion-item>
             <a (click)="showSubMenuPaginas()">
-              <img src="assets/images/paginas.png" class="icon-itens" />
-              Páginas
+              <div class="menu-item-container">
+                <i class="menu-item-icone paginas"></i>
+                Páginas
+              </div>
             </a>
             <ul class="sub-menu-item" [hidden]="!showPaginas">
               <li>
@@ -71,8 +79,10 @@
         <li>
           <ion-item>
             <a (click)="showSubMenuBlog()">
-              <img src="assets/images/blog.png" class="icon-itens" />
-              Blog
+              <div class="menu-item-container">
+                <i class="menu-item-icone blog"></i>
+                Blog
+              </div>
             </a>
             <ul class="sub-menu-item" [hidden]="!showBlog">
               <li>
@@ -90,27 +100,35 @@
         </li>
         <li>
           <button menuClose ion-item (click)="openPage(eventsPage)">
-            <img src="assets/images/eventos.png" class="icon-itens" />
-            Eventos
+            <div class="menu-item-container">
+              <i class="menu-item-icone eventos"></i>
+              Eventos
+            </div>
           </button>
         </li>
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/turismo.png" class="icon-itens" />
-            Viagens
+            <div class="menu-item-container">
+              <i class="menu-item-icone viagens"></i>
+              Viagens
+            </div>
           </button>
         </li>
         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
-            <img src="assets/images/pesca.png" class="icon-itens" />
-            Pesca
+            <div class="menu-item-container">
+              <i class="menu-item-icone pesca"></i>
+              Pesca
+            </div>
           </button>
         </li>
         <li>
           <ion-item>
             <a (click)="showSubMenuClassificados()">
-              <img src="assets/images/classificados2.png" class="icon-itens" />
-              Classificados
+              <div class="menu-item-container">
+                <i class="menu-item-icone classificados"></i>
+                Classificados
+              </div>
             </a>
             <ul class="sub-menu-item" [hidden]="!showClassificados">
               <li>
@@ -139,8 +157,10 @@
         <li>
           <ion-item>
             <a (click)="showSubMenuAnuncios()">
-              <img src="assets/images/anuncios.png" class="icon-itens" />
-              Publicidade
+              <div class="menu-item-container">
+                <i class="menu-item-icone publicidade"></i>
+                Gerenciador de anúncios
+              </div>
             </a>
             <ul class="sub-menu-item" [hidden]="!showAnuncios">
               <li>

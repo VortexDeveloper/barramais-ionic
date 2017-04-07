@@ -50,6 +50,7 @@ export class ProfilePage {
   posts: Array<any>;
   erro: string = "";
 
+
   constructor(
     public navCtrl: NavController,
     params: NavParams,
@@ -64,13 +65,13 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     private camera: Camera
   ) {
-      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.setUser(params.data.user);
-      this.loadPosts();
+    this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.setUser(params.data.user);
+    this.loadPosts();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+
   }
 
   openPage(page) {
@@ -90,11 +91,6 @@ export class ProfilePage {
     modal.onDidDismiss(newPost => {
       if(newPost) this.posts.unshift(newPost);
     });
-    modal.present();
-  }
-
-  openCommentsModal(post) {
-    let modal = this.modalCtrl.create(CommentModalPage, {post: post});
     modal.present();
   }
 
@@ -177,20 +173,6 @@ export class ProfilePage {
     );
   }
 
-  like(post) {
-    this.postsProvider.like(post).subscribe(
-      (updated_post) => post.likes = updated_post.likes,
-      (error) => console.log(error)
-    );
-  }
-
-  like_color_for(post) {
-    if(post.likes.didILiked)
-      return 'barramais';
-    else
-      return 'grayed'
-  }
-
   setUser(user_id){
     if(!user_id){
       this.user = this.current_user;
@@ -225,71 +207,6 @@ export class ProfilePage {
       (error) => console.log(error)
     );
   }
-
-  // public presentActionSheet(picture) {
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     title: 'Selecione a origem da imagem',
-  //     buttons: [
-  //       {
-  //         text: 'Carregar da Galeria',
-  //         handler: () => {
-  //           this.takePicture(picture, Camera.PictureSourceType.PHOTOLIBRARY);
-  //         }
-  //       },
-  //       {
-  //         text: 'Camera',
-  //         handler: () => {
-  //           this.takePicture(picture, Camera.PictureSourceType.CAMERA);
-  //         }
-  //       },
-  //       {
-  //         text: 'Cancelar',
-  //         role: 'cancel'
-  //       }
-  //     ]
-  //   });
-  //   actionSheet.present();
-  // }
-  //
-  // takePicture(picture, sourceType) {
-  //   var options = {
-  //     quality: 100,
-  //     sourceType: sourceType,
-  //     saveToPhotoAlbum: false,
-  //     correctOrientation: true,
-  //     allowEdit: true,
-  //     //mediaType: Camera.MediaType.ALLMEDIA,
-  //     destinationType: Camera.DestinationType.DATA_URL
-  //   };
-  //
-  //   Camera.getPicture(options).then(image => {
-  //     let prompt = this.alertCtrl.create({
-  //       title: 'Usar foto',
-  //       message: 'Deseja usar esta foto como foto de perfil?',
-  //       buttons: [
-  //         {
-  //           text: 'Não',
-  //           handler: data => {
-  //             console.log('Cancel clicked');
-  //           }
-  //         },
-  //         {
-  //           text: 'Sim',
-  //           handler: data => {
-  //             if(picture == "avatar"){
-  //               this.user.avatar = "data:image/jpeg;base64," + image;
-  //               this.save_avatar();
-  //             }else{
-  //               this.user.cover_photo = "data:image/jpeg;base64," + image;
-  //               this.save_cover_photo();
-  //             }
-  //           }
-  //         }
-  //       ]
-  //     });
-  //     prompt.present();
-  //   });
-  // }
 
   openMediaOptions() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -353,7 +270,8 @@ export class ProfilePage {
   save_cover_photo() {
     this.userProvider.save_cover_photo(this.user)
     .subscribe((user_params) => {
-        this.user = new UserModel(this.jwtHelper.decodeToken(user_params));
+        this.current_user = new UserModel(this.jwtHelper.decodeToken(user_params.user));
+        this.user = new UserModel(this.jwtHelper.decodeToken(user_params.user));
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));
