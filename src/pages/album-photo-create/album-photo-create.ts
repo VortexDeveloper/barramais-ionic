@@ -6,6 +6,7 @@ import { User } from '../../providers/user';
 import { AlbumPhotoModel } from "../../models/album_photo.model";
 import { Camera } from 'ionic-native';
 import { ToastController } from 'ionic-angular';
+import { AlbumListPage } from '../album-list/album-list';
 
 /*
   Generated class for the AlbumPhotoCreate page.
@@ -23,6 +24,7 @@ export class AlbumPhotoCreatePage {
   user_token: any = localStorage.getItem('user');
   albumPhoto: AlbumPhotoModel;
   isEditing: boolean = false;
+  albumListPage: any = AlbumListPage;
 
   constructor(
     public navCtrl: NavController,
@@ -44,6 +46,19 @@ export class AlbumPhotoCreatePage {
   save(albumPhoto){
     this.userProvider.create_album_photo(albumPhoto)
       .subscribe(response => {
+        this.redirectPage(this.albumListPage);
+        this.presentToast("Foto cadastrada com sucesso!");
+    }, error => {
+        console.log(error.json());
+        this.presentToast(error.json());
+    });
+  }
+
+  update(albumPhoto){
+    this.userProvider.update_album_photo(albumPhoto)
+      .subscribe(response => {
+        this.redirectPage(this.albumListPage);
+        this.presentToast("Foto atualizada com sucesso!");
     }, error => {
         console.log(error.json());
         this.presentToast(error.json());
@@ -94,11 +109,10 @@ export class AlbumPhotoCreatePage {
   }
 
   bondPhotoWithUserAlbum(){
-    if(this.albumPhoto.user_id == 0){
-      this.albumPhoto.user_id = this.current_user.id;
-    }else{
+    if(this.albumPhoto.id != null){
       this.isEditing = true;
     }
+    this.albumPhoto.user_id = this.current_user.id;
   }
 
   presentToast(msg){
@@ -107,5 +121,13 @@ export class AlbumPhotoCreatePage {
       duration: 5000
     });
     toast.present();
+  }
+
+  redirectPage(page){
+    this.navCtrl.setRoot(page);
+  }
+
+  goBack(){
+    this.navCtrl.pop();
   }
 }

@@ -71,6 +71,10 @@ export class AlbumListPage {
     this.navCtrl.push(page);
   }
 
+  openEditPage(page, albumPhoto){
+    this.navCtrl.push(page, {'albumPhoto': albumPhoto});
+  }
+
   goBack(){
     this.navCtrl.setRoot(this.mainPage);
   }

@@ -24,7 +24,7 @@
       <ion-label class="line-break">
         <h2><strong>{{photo.id}}</strong></h2>
 
-        <button class="form-buttons actionButton" ion-button icon-only>
+        <button class="form-buttons actionButton" ion-button icon-only (click)="openEditPage(albumPhotoCreatePage, photo)">
           <ion-icon name="create"></ion-icon>
         </button>
 
@@ -38,6 +38,6 @@
   <ion-fab right bottom>
     <button ion-fab color="danger" (click)="openPage(albumPhotoCreatePage)"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-  
+
   <button class="form-buttonsBack" ion-button type="button" (click)="goBack()" block>Voltar</button>
 </ion-content>

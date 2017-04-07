@@ -86,7 +86,12 @@ export class User {
   }
 
   create_album_photo(albumPhoto){
-    return this.authHttp.post(this.user_album_url + ".json", {'photo': albumPhoto})
+    return this.authHttp.post(this.user_album_url + ".json", {'album_photo': albumPhoto})
+      .map(res => res.json());
+  }
+
+  update_album_photo(albumPhoto){
+    return this.authHttp.put(this.user_album_url + "/" + albumPhoto.id + ".json", {'album_photo': albumPhoto})
       .map(res => res.json());
   }
 
