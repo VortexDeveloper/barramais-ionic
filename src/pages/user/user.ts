@@ -80,11 +80,11 @@ export class UserPage {
     this.updateUserNauticalSports();
 
     // MANTER A VALIDAÇÃO, ELA ESTÁ COMENTADA APENAS PARA ADIANTAR NOS TESTES
-    // if(this.userEmailConfirmation != this.user.email){
-    //   this.presentToast("A confirmação do email deve ser igual ao email!");
-    // }else if(this.userPasswordConfirmation != this.user.current_password){
-    //   this.presentToast("A confirmação da senha deve ser igual à senha!");
-    // }else{
+    if(this.userEmailConfirmation != this.user.email){
+      this.presentToast("A confirmação do email deve ser igual ao email!");
+    }else if(this.userPasswordConfirmation != this.user.current_password){
+      this.presentToast("A confirmação da senha deve ser igual à senha!");
+    }else{
       this.userProvider.update(user)
       .subscribe(response => {
           localStorage.setItem("user", response.user);
@@ -103,7 +103,7 @@ export class UserPage {
           }
           this.presentToast(errorMessage);
       });
-    // }
+    }
     this.userPasswordConfirmation = "";
   }
 
