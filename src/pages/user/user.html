@@ -252,7 +252,7 @@
           </ion-item>
           <ion-item>
             <ion-label floating>Marcas náuticas favoritas</ion-label>
-            <ion-input type="text" [(ngModel)]="user.nautical_brand" name="nautical_brando"></ion-input>/
+            <ion-input type="text" [(ngModel)]="user.nautical_brand" name="nautical_brand"></ion-input>/
           </ion-item>
           <ion-item-divider color="light">Experiência náutica</ion-item-divider>
           <ion-item>
@@ -418,8 +418,8 @@
           <ion-item *ngIf="user.fishing">
             <ion-label>Tipo de pesca</ion-label>
             <ion-select [(ngModel)]="user.fishing_type" name="fishing_type">
-              <ion-option [value]="pesca_tradicional" >Pesca tradicional</ion-option>
-              <ion-option [value]="pesca_profissional" >Pesca profissional</ion-option>
+              <ion-option [value]=0 >Pesca tradicional</ion-option>
+              <ion-option [value]=1 >Pesca profissional</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>

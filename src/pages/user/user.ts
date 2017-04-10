@@ -72,10 +72,12 @@ export class UserPage {
     this.load_country_for_travels();
     this.getInterests();
     this.getUserInterests();
+    this.getUserNauticalSports();
   }
 
   save(user) {
     this.updateUserInterests();
+    this.updateUserNauticalSports();
 
     // MANTER A VALIDAÇÃO, ELA ESTÁ COMENTADA APENAS PARA ADIANTAR NOS TESTES
     // if(this.userEmailConfirmation != this.user.email){
@@ -383,6 +385,16 @@ export class UserPage {
       });
   }
 
+  getUserNauticalSports(){
+    this.userProvider.get_nautical_sports_by_user(this.user.id)
+      .subscribe(response =>{
+        this.selectedAreas = response;
+        console.log(this.selectedAreas);
+      }, error => {
+        console.log("Erro ao exibir os interesses do usuário" + error.json());
+      });
+  }
+
   checkUserInterests(interest){
     var check = false;
     for(var i = 0; i < this.userInterests.length; i++){
@@ -416,6 +428,15 @@ export class UserPage {
         // this.presentToast("Lista de interesses atualizada com sucesso!")
       }, error => {
         console.log("Erro ao atualizar os interesses do usuário" + error.json());
+      });
+  }
+
+  updateUserNauticalSports(){
+    this.userProvider.update_user_nautical_sports(this.user.id, this.selectedAreas)
+      .subscribe(response =>{
+
+      }, error =>{
+        console.log("Erro ao atualizar os esportes do usuário" + error.json());
       });
   }
 
