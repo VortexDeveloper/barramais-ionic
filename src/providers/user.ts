@@ -48,6 +48,8 @@ export class User {
   private get_interests_by_user_url: string;
   private interests_url: string;
   private update_user_interests_url: string;
+  private update_user_nautical_sports_url: string;
+  private get_nautical_sports_by_user_url: string;
 
   constructor(
     public http: Http,
@@ -89,6 +91,18 @@ export class User {
     this.update_user_interests_url = host + "users/update_user_interests";
     this.get_interests_by_user_url = host + "interests/get_interests_by_user/";
     this.interests_url = host + "interests";
+    this.update_user_nautical_sports_url = host + "users/update_user_nautical_sports";
+    this.get_nautical_sports_by_user_url = host + "nautical_sports/get_nautical_sports_by_user";
+  }
+
+  get_nautical_sports_by_user(user_id){
+    return this.authHttp.get(this.get_nautical_sports_by_user_url + "/" + user_id + ".json")
+      .map(res => res.json());
+  }
+
+  update_user_nautical_sports(user_id, userNauticalSports){
+    return this.authHttp.put(this.update_user_nautical_sports_url + "/" + user_id + ".json", {'user_nautical_sports': userNauticalSports})
+      .map(res => res.json());
   }
 
   update_user_interests(user_id, userInterests){

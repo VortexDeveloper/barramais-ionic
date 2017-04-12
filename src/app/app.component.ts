@@ -33,7 +33,7 @@ import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-desc
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
 import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
-// import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
 import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { ClassifiedProductCategoryPage } from '../pages/classified-product-category/classified-product-category';
 import { AlertController } from 'ionic-angular';
@@ -43,7 +43,8 @@ import { User } from '../providers/user';
 import { MenuController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-
+import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @Component({
   selector: 'app-menu',
@@ -87,11 +88,13 @@ export class MyApp {
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
   classifiedFishingPage: any = ClassifiedFishingPage;
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
-  classifiedFishingDescriptionPage: any = ClassifiedVesselDescriptionPage;
+  classifiedFishingDescriptionPage: any = ClassifiedFishingDescriptionPage;
   classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
   classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
+  interestSelectionPage: any = InterestSelectionPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
+
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any;
@@ -118,8 +121,8 @@ export class MyApp {
     private userProvider: User,
     private menuCtrl: MenuController,
     public events: Events,
-    private nativePageTransitions: NativePageTransitions
-
+    private nativePageTransitions: NativePageTransitions,
+    public fb: Facebook
   ) {
       this.checkMainPage();
       this.initializeApp();
@@ -195,11 +198,10 @@ export class MyApp {
           handler: () => {
             this.userProvider.logout().subscribe(
               (response) => {
+                this.nav.setRoot(this.rootPage);
                 localStorage.removeItem("jwt");
                 localStorage.removeItem("user");
                 localStorage.removeItem("vessels_type");
-                this.rootPage = this.loginPage;
-                this.nav.setRoot(this.rootPage);
               },
               (error) => console.log(error)
             );
@@ -211,9 +213,21 @@ export class MyApp {
     alert.present();
   }
 
+
   openPage(page) {
     this.nativePageTransitions.slide(this.options);
     this.nav.push(page);
+  }
+
+  inviteFacebookFriends() {
+    let options = {
+      url: "https://fb.me/202248836944012",
+      picture: "https://placehold.it/350x350"
+    }
+    this.fb.appInvite(options).then(
+      (obj) => console.log(obj),
+      (error) => console.log(error)
+    );
   }
 
 }

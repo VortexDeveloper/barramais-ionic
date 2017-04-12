@@ -6,7 +6,9 @@ import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { PrivacyPage } from "../privacy/privacy";
 import { TermsPage } from "../terms/terms";
-
+import { InterestSelectionPage } from "../interest-selection/interest-selection";
+import { Events } from 'ionic-angular';
+import { JwtHelper } from 'angular2-jwt';
 /*
   Generated class for the Registration1 page.
 
@@ -20,6 +22,7 @@ import { TermsPage } from "../terms/terms";
 export class RegistrationPage {
 
   user: UserModel = new UserModel();
+  jwtHelper: JwtHelper = new JwtHelper();
   rootPage = MainPage;
   privacyPage: any = PrivacyPage;
   termsPage: any = TermsPage;
@@ -30,7 +33,8 @@ export class RegistrationPage {
     public navParams: NavParams,
     private userProvider: User,
     public toastCtrl: ToastController,
-    public menu: MenuController
+    public menu: MenuController,
+    public events: Events,
 
   ) {
     this.menu.enable(false, 'menu');
@@ -84,12 +88,15 @@ export class RegistrationPage {
     .subscribe(token_params => {
         localStorage.setItem("jwt", token_params.token);
         localStorage.setItem("user", token_params.user);
-        this.openPage(MainPage);
+        localStorage.setItem('vessels_type', JSON.stringify(token_params.vessels_type));
+        this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
+        this.openPage(InterestSelectionPage);
         this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
     }, error => {
         console.log(error.json() || 'Server error');
         this.presentToast(error.json().error);
     });
   }
+
 
 }

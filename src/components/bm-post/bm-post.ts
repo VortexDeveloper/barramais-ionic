@@ -5,6 +5,7 @@ import { CommentModalPage } from "../../pages/comment-modal/comment-modal";
 import { GalleryModalPage } from "../../pages/gallery-modal/gallery-modal";
 import { ProfilePage } from "../../pages/profile/profile";
 import { Posts } from '../../providers/posts';
+import { InAppBrowser } from 'ionic-native';
 
 /*
   Generated class for the BmPost component.
@@ -59,6 +60,13 @@ export class BmPostComponent {
     openPhotos(photos){
       let modal = this.modalCtrl.create(this.galleryModal, {photos: photos});
       modal.present();
+    }
+
+    openLink(link){
+      if(link){
+        let browser = new InAppBrowser(link, '_system');
+        browser
+      }
     }
 
 
