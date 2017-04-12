@@ -23,6 +23,7 @@
     "@ionic-native/core": "^3.4.4",
     "@ionic-native/facebook": "^3.4.4",
     "@ionic-native/media-capture": "^3.4.4",
+    "@ionic-native/native-page-transitions": "^3.4.4",
     "@ionic-native/photo-viewer": "^3.4.4",
     "@ionic/storage": "1.1.7",
     "@types/node": "^7.0.12",

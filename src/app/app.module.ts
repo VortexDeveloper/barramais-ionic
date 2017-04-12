@@ -68,6 +68,8 @@ import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 import { Camera } from '@ionic-native/camera';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 import { Facebook } from '@ionic-native/facebook';
 
 export function getAuthHttp(http) {
@@ -133,7 +135,8 @@ export function getAuthHttp(http) {
     GroupModalPage,
     GroupMembersPage,
     GroupPagePage,
-    GalleryModalPage
+    GalleryModalPage,
+    InterestSelectionPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -192,7 +195,8 @@ export function getAuthHttp(http) {
     GroupModalPage,
     GroupMembersPage,
     GroupPagePage,
-    GalleryModalPage
+    GalleryModalPage,
+    InterestSelectionPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -208,6 +212,7 @@ export function getAuthHttp(http) {
     Routes,
     Camera,
     PhotoViewer,
+    NativePageTransitions,
     Facebook,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]

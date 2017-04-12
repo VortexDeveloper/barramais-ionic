@@ -6,71 +6,78 @@
 <ion-content>
   <div class="background-image">
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
+    <button
+      icon-left
+      class="perfil-actions"
+      ion-button color="secondary"
+      style="right: 79px !important;"
+      [hidden]="!showAdminActions"
+      (click)="openModal(groupMembers, friends)">
+      <ion-icon name="add"></ion-icon>
+      membro
+    </button>
+    <button
+      icon-left
+      class="perfil-actions"
+      ion-button color="primary"
+      (click)="accept_group()"
+      *ngIf="showMemberActions && !showInvitedMemberActions">
+      Participar
+    </button>
+    <button
+      icon-left
+      class="perfil-actions"
+      ion-button color="danger"
+      (click)="refuse_group()"
+      *ngIf="!showMemberActions && !showInvitedMemberActions">
+      Não Participar
+    </button>
   </div>
   <div class="main-content">
     <ion-item>
       <h2>{{group.name}}</h2>
-      Desde <p>{{group.created_at | date:'MMMM d, y'}}</p>
+      Criado em <p>{{group.created_at | date:'MMMM d, y'}}</p>
     </ion-item>
     <ion-item>
       <p>
         {{group.about}}
       </p>
     </ion-item>
-    <ion-card>
-      <a ion-item (click)="openModal(postModal)">
-        <ion-avatar item-left>
-          <img src="{{user.avatar_url}}"/>
-        </ion-avatar>
-        <p>
-          Digite alguma coisa...
-        </p>
-      </a>
-    </ion-card>
-    <ion-row [hidden]="!showAdminActions">
-        <button ion-button outline block icon-left color="light" (click)="openModal(groupMembers, friends)" icon-left>
-          <ion-icon name="person-add"></ion-icon>
-          Adicionar membros
-        </button>
-    </ion-row>
-    <ion-row [hidden]="!showInvitedMemberActions">
-      <ion-col width-50 [hidden]="!showMemberActions">
-        <button ng-disabled="buttonStatus" block ion-button outline color="light" (click)="refuse_group()" icon-left>
-          Não participar
-        </button>
-      </ion-col>
-      <ion-col width-50 [hidden]="showMemberActions">
-        <button ion-button outline block color="light" (click)="accept_group()" icon-left>
-          Participar
-        </button>
-      </ion-col>
-    </ion-row>
     <ion-row>
       <ion-col width-33>
-        <a (click)="openModal(groupMembers, confirmedMembers)">
-          <h2>{{l_confirmedMembers}}</h2>
-        </a>
-        <p>
-          Membros
-        </p>
+        <div class="members-col">
+          <a (click)="openModal(groupMembers, confirmedMembers)">
+            <h2>{{l_confirmedMembers}}</h2>
+          </a>
+          <p>
+            Membros
+          </p>
+        </div>
       </ion-col>
       <ion-col width-33 [hidden]="!showAdminActions">
-        <a (click)="openModal(groupMembers, allMembers)">
-          <h2>{{l_allMembers}}</h2>
-        </a>
-        <p>
-          Todos
-        </p>
+        <div class="members-col">
+          <a (click)="openModal(groupMembers, allMembers)">
+            <h2>{{l_allMembers}}</h2>
+          </a>
+          <p>
+            Todos
+          </p>
+        </div>
       </ion-col>
       <ion-col width-33 [hidden]="!showAdminActions">
-        <a (click)="openModal(groupMembers, pendingMembers)">
-          <h2>{{l_pendingMembers}}</h2>
-        </a>
-        <p>
-          Pendentes
-        </p>
+        <div class="members-col">
+          <a (click)="openModal(groupMembers, pendingMembers)">
+            <h2>{{l_pendingMembers}}</h2>
+          </a>
+          <p>
+            Pendentes
+          </p>
+        </div>
       </ion-col>
     </ion-row>
     <bm-post [posts]="posts"></bm-post>
   </div>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="openPostModal()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
 </ion-content>

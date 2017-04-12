@@ -1,11 +1,19 @@
 app-menu {
 
+  .icon-person-tab:before {
+    content: "\e900";
+  }
+
+  .icon-ion-ios-add-circle-outline:before {
+    content: "\f100";
+  }
+
   * {
     box-shadow: none !important;
   }
 
   a {
-    color: #123f5f;
+    color: #192d52;
   }
 
   ul {
@@ -28,7 +36,6 @@ app-menu {
 
   ion-card img {
     display: block;
-    width: 89%;
     margin: 0 auto;
     border-radius: 5px;
   }
@@ -63,10 +70,16 @@ app-menu {
     text-decoration: none;
   }
 
+  .bar-button-default-md,
+  .bar-button-default-ios,
+  .bar-button-default-wp {
+    color: #f5f5f5;
+  }
+
   .toolbar-background-md,
   .toolbar-background-ios,
   .toolbar-background-wp {
-    background: #123f5f;
+    background: #192d52;
     color: #f5f5f5;
   }
 
@@ -77,7 +90,7 @@ app-menu {
 
   .item-inner {
     font-size: 1.2rem;
-    color: #123f5f;
+    color: #192d52;
   }
 
   .menu-item img{
@@ -122,7 +135,7 @@ app-menu {
   .button-clear-md,
   .button-clear-ios,
   .button-clear-wp {
-    color: #123f5f;
+    color: #192d52;
     font-size: 1.4rem;
   }
 
@@ -132,7 +145,7 @@ app-menu {
   }
 
   .form-buttons{
-    background-color: #123f5f !important;
+    background-color: #192d52 !important;
   }
 
   .toolbar-ios {
@@ -291,7 +304,7 @@ app-menu {
 
   .button-md-primary, .button-ios-primary, .button-wp-primary {
     color: #fff;
-    background-color: #123f5f;
+    background-color: #192d52;
   }
 
   .item-md, .item-ios, .item-wp{
@@ -357,43 +370,43 @@ app-menu {
   }
 
   .inicio{
-    background: url(/assets/images/icones.png) -124px -31px;
+    background: url('../assets/images/icones.png') -124px -31px;
   }
 
   .conv-amigos{
-    background: url(/assets/images/icones.png) -465px 0;
+    background: url('../assets/images/icones.png') -465px 0;
   }
 
   .amigos{
-    background: url(/assets/images/icones.png) -310px -31px;
+    background: url('../assets/images/icones.png') -310px -31px;
   }
 
   .paginas{
-    background: url(/assets/images/icones.png) -62px 0;
+    background: url('../assets/images/icones.png') -62px 0;
   }
 
   .blog{
-    background: url(/assets/images/icones.png) -93px -31px;
+    background: url('../assets/images/icones.png') -93px -31px;
   }
 
   .eventos{
-    background: url(/assets/images/icones.png) -341px 0;
+    background: url('../assets/images/icones.png') -341px 0;
   }
 
   .viagens{
-    background: url(/assets/images/icones.png) -434px -31px;
+    background: url('../assets/images/icones.png') -434px -31px;
   }
 
   .pesca{
-    background: url(/assets/images/icones.png) -31px 0;
+    background: url('../assets/images/icones.png') -31px 0;
   }
 
   .classificados{
-    background: url(/assets/images/icones.png) 0 -31px;
+    background: url('../assets/images/icones.png') 0 -31px;
   }
 
   .publicidade{
-    background: url(/assets/images/icones.png) -248px -31px;
+    background: url('../assets/images/icones.png') -248px -31px;
   }
 
   .menu-item-container{
@@ -401,41 +414,80 @@ app-menu {
     align-items: center;
   }
 
-  // .ion-md-boat:before {
-  //   content: " ";
-  //   height: 30px;
-  //   width: 30px;
-  //   background: url(/assets/images/icones.png) -278px -62px;
-  // }
-  //
-  // .ion-md-people:before {
-  //   content: " ";
-  //   height: 30px;
-  //   width: 30px;
-  //   background: url(/assets/images/icones.png) -308px -62px;
-  // }
-  //
-  // .ion-md-compass:before {
-  //   content: " ";
-  //   height: 30px;
-  //   width: 30px;
-  //   background: url(/assets/images/icones.png) -339px -62px;
-  // }
-  //
-  // .ion-md-chatbubbles:before {
-  //   content: " ";
-  //   height: 30px;
-  //   width: 30px;
-  //   background: url(/assets/images/icones.png) -370px -62px;
-  // }
-  //
-  // .ion-md-person:before {
-  //   content: " ";
-  //   height: 30px;
-  //   width: 30px;
-  //   background: url(/assets/images/icones.png) -247px -62px;
-  // }
+  .fab{
+    border-radius: 25%;
+  }
 
+  .fab-md-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
 
+  .fab-ios-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-wp-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-md-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-ios-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-wp-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .item-friends{
+    background: #fff !important;
+    border-bottom: solid 4px #dedede !important;
+    margin: 8px !important;
+    width: calc(100% - 16px) !important;
+    padding-left: 8px !important;
+    border-radius: 2px !important;
+  }
+
+  .item-friends .item-inner{
+    border-bottom: none !important;
+  }
+
+  .friend-information-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .friend-information-text{
+    display: flex;
+    order: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-start;
+    flex-direction: column;
+  }
+
+  .friend-information-buttons{
+    display: flex;
+    order: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-end;
+    flex-direction: end;
+  }
 
 }

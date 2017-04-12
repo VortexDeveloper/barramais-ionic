@@ -1,37 +1,23 @@
 <ion-content>
-  <ion-slides pager>
-    <ion-slide class="slide1">
-      <div class="logo-home">
-          <img src="assets/images/slide1.png" alt="Barra Mais" />
-      </div>
-    </ion-slide>
-    <ion-slide class="slide2">
-      <div class="logo-home">
-          <img src="assets/images/slide2.png" alt="Barra Mais" />
-      </div>
-    </ion-slide>
-    <ion-slide class="slide3">
-      <div class="container">
-        <div class="logo-home">
-            <img src="assets/images/slide3.png" alt="Barra Mais" />
-        </div>
-        <div class="actions">
-          <button ion-button class="buttons-color-facebook" block color="light" (click)="openPage(mainPage)" icon-left>
-            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-            Entrar com o Facebook
-          </button>
-          <button ion-button class="buttons-color-google" block color="light" (click)="openPage(mainPage)" icon-left>
-            <ion-icon ios="logo-google" md="logo-google"></ion-icon>
-            Entrar com o Google
-          </button>
-          <button ion-button color="light" clear class="links-color" (click)="openPage(registration)">
-            Cadastrar-se
-          </button>
-          <button ion-button color="light" clear class="links-color" (click)="openPage(login)">
-            Login
-          </button>
-        </div>
-      </div>
-    </ion-slide>
-  </ion-slides>
+  <div class="container">
+    <div class="logo-home">
+        <img src="assets/images/slide3.png" alt="Barra Mais" />
+    </div>
+    <div class="actions">
+      <button ion-button class="buttons-color-facebook" block color="light" (click)="openPage(mainPage)" icon-left>
+        <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+        Entrar com o Facebook
+      </button>
+      <button ion-button class="buttons-color-google" block color="light" (click)="openPage(mainPage)" icon-left>
+        <ion-icon ios="logo-google" md="logo-google"></ion-icon>
+        Entrar com o Google
+      </button>
+      <button ion-button color="light" clear class="links-color" (click)="openPage(registration)">
+        Cadastrar-se
+      </button>
+      <button ion-button color="light" clear class="links-color" (click)="openPage(login)">
+        Login
+      </button>
+    </div>
+  </div>    
 </ion-content>

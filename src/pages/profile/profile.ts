@@ -127,6 +127,19 @@ export class ProfilePage {
     toast.present();
   }
 
+  unfriend(user){
+    this.userProvider.unfriend(user)
+    .subscribe(
+      (response) =>{
+        this.presentToast(response.status);
+        this.isFriend = false;
+      },
+      (error) => {
+        console.log(error.json());
+      }
+    );
+  }
+
   accept_friendship(user){
     this.userProvider.accept_friendship(user)
     .subscribe(
@@ -152,6 +165,7 @@ export class ProfilePage {
     .subscribe(
       (response) => {
         this.presentToast(response.status);
+        this.isFriend = "waiting";
       },
       (error) => console.log(error)
     );

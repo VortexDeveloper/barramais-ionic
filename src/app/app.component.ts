@@ -33,7 +33,7 @@ import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-desc
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
 import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
-// import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
 import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { ClassifiedProductCategoryPage } from '../pages/classified-product-category/classified-product-category';
 import { AlertController } from 'ionic-angular';
@@ -42,8 +42,9 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
 import { MenuController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
 
 @Component({
   selector: 'app-menu',
@@ -87,15 +88,27 @@ export class MyApp {
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
   classifiedFishingPage: any = ClassifiedFishingPage;
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
-  classifiedFishingDescriptionPage: any = ClassifiedVesselDescriptionPage;
+  classifiedFishingDescriptionPage: any = ClassifiedFishingDescriptionPage;
   classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
   classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
+  interestSelectionPage: any = InterestSelectionPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
 
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any;
+
+  options: NativeTransitionOptions = {
+     direction: 'up',
+     duration: 500,
+     slowdownfactor: 3,
+     slidePixels: 20,
+     iosdelay: 100,
+     androiddelay: 150,
+     fixedPixelsTop: 0,
+     fixedPixelsBottom: 60
+    };
 
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
@@ -108,6 +121,7 @@ export class MyApp {
     private userProvider: User,
     private menuCtrl: MenuController,
     public events: Events,
+    private nativePageTransitions: NativePageTransitions,
     public fb: Facebook
   ) {
       this.checkMainPage();
@@ -137,10 +151,6 @@ export class MyApp {
 
   checkCurrentUser(){
     this.events.subscribe('onUpdateUser', (user)=>{this.user = new UserModel(user);});
-  }
-
-  openPage(page) {
-    this.nav.push(page);
   }
 
   openPageWithClassifiedConditional(page, classifiedConditional){
@@ -191,8 +201,7 @@ export class MyApp {
                 localStorage.removeItem("jwt");
                 localStorage.removeItem("user");
                 localStorage.removeItem("vessels_type");
-                this.rootPage = this.loginPage;
-                this.nav.setRoot(this.rootPage);
+                this.nav.setRoot(HomePage);
               },
               (error) => console.log(error)
             );
@@ -202,6 +211,12 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+
+  openPage(page) {
+    this.nativePageTransitions.slide(this.options);
+    this.nav.push(page);
   }
 
   inviteFacebookFriends() {

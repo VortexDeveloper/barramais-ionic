@@ -91,4 +91,26 @@ page-user {
     background-color: #fff;
   }
 
+  .image-list {
+    border: 0;
+    min-width: 100%;
+  }
+
+  .image-selected{
+    opacity: 0.3;
+  }
+
+  .interest-list{
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: stretch;
+     align-content: stretch;
+ }
+
+ .interest-list-items{
+     display: flex;
+     width: 33.3333%;
+ }
 }

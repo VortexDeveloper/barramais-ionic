@@ -8,6 +8,21 @@
     <div class="background-image">
       <img src="{{user.cover_photo_url}}" id='user_cover_photo' />
       <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()" [hidden]="visitorActions"></ion-icon>
+      <button icon-left class="perfil-actions" ion-button color="secondary" style="right: 79px !important;" *ngIf="visitorActions && isFriend == false">
+        <ion-icon name="add"></ion-icon>
+        Amigo
+      </button>
+      <button (click)='unfriend(user)' icon-left class="perfil-actions" ion-button color="danger" style="right: 79px !important;" *ngIf="visitorActions && isFriend == true">
+        <ion-icon name="remove"></ion-icon>
+        Amigo
+      </button>
+      <button icon-left class="perfil-actions" ion-button style="right: 79px !important;" *ngIf="visitorActions && isFriend == 'waiting'">
+        <ion-icon name="time"></ion-icon>
+      </button>
+      <button icon-left class="perfil-actions" ion-button *ngIf="visitorActions" (click)='createConversationWith(user)'>
+        <ion-icon name="chatbubbles"></ion-icon>
+        Chat
+      </button>
     </div>
     <div class="main-content">
       <ion-thumbnail class="thumb-user" item-left>
@@ -16,52 +31,18 @@
       <ion-item class="item-name-field">
         <h2>{{user.first_name + " " + user.last_name}}</h2>
       </ion-item>
-      <ion-card>
-        <a ion-item (click)="openModal()">
-          <ion-avatar item-left>
-            <!-- <img src="assets/images/logo.png"/> -->
-            <img src="{{current_user.avatar_url}}" id='user_avatar'>
-          </ion-avatar>
-          <p>
-            O que você está pensando...
-          </p>
-        </a>
-      </ion-card>
+      <div class="profile-description">
         <ion-row class="actions-row">
+          <ion-col width-25 (click)="showProfileInformation()">
+            <ion-icon name="person" class="icon-button"></ion-icon>
+          </ion-col>
           <ion-col width-25 (click)="openPage(friendsPage)">
             <ion-icon name="people" class="icon-button"></ion-icon>
-            <p class="icon-word">
-              Amigos
-            </p>
           </ion-col>
           <ion-col width-25 (click)="openPage(albumListPage)">
             <ion-icon name="images" class="icon-button"></ion-icon>
-            <p class="icon-word">
-              Album
-            </p>
           </ion-col>
-            <ion-col width-25 (click)='createConversationWith(user)' [hidden]="!visitorActions">
-              <ion-icon name="chatbubbles" class="icon-button"></ion-icon>
-              <p class="icon-word">
-                Chat
-              </p>
-            </ion-col>
-            <ion-col width-25 (click)="request_friendship(user)" *ngIf="visitorActions && !isFriend">
-              <ion-icon name="person-add" class="icon-button"></ion-icon>
-              <p class="icon-word">
-                {{isFriend}}
-              </p>
-            </ion-col>
-            <!-- <ion-col width-25 (click)="refuse_friendship(user)" *ngIf="visitorActions && isFriend && isFriend !== null">
-              <ion-icon name="arrow-down" class="icon-button"></ion-icon>
-              <p class="icon-word">
-                {{isFriend}}
-              </p>
-            </ion-col> -->
         </ion-row>
-      <button ion-button block outline color="light" class="information-button" (click)="showProfileInformation()">
-        Visualizar Perfil
-      </button>
       <div [hidden]="!profileInformation">
         <ion-list class="profile-information">
           <ion-item *ngIf="user.academic_profile!==''">
@@ -85,7 +66,7 @@
             <p>Feminino</p>
           </ion-item>
         </ion-list>
-        <ion-row>
+        <ion-row class="skill-icons">
           <ion-col width-17 *ngIf="user.naval_service_patent !== 0">
             <img src="assets/images/{{user.naval_service_patent}}.png" alt="" />
           </ion-col>
@@ -94,7 +75,11 @@
           </ion-col>
         </ion-row>
       </div>
+      </div>
       <bm-post [posts]="posts"></bm-post>
     </div>
   </div>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="openModal()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
 </ion-content>

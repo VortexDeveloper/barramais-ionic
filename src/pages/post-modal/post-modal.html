@@ -26,25 +26,27 @@
       <ion-grid>
         <ion-row>
           <ion-item>
-            <button ion-button item-right (click)="createPost()">
+            <button ion-button item-right color="primary" (click)="createPost()">
               <span ion-text>Publicar</span>
             </button>
           </ion-item>
         </ion-row>
         <ion-row>
-          <img id='image_test' src="" alt="" />
-          <div class="post-attaches2" *ngIf="post.medias.images">
-            <div class="post-attach post-image" *ngFor="let media of post.medias.images">
-              <img src="../../assets/images/4.jpg" alt="" />
-              {{erro}}
+          <div *ngIf="post.medias">
+            <div class='post-images' (click)="openPhotos(post.post_images)">
+              <div *ngFor="let media of post.medias | slice:0:4; let i = index" class="{{i == 3 ? 'post-image plus-sign-icon' : 'post-image'}}">
+                <img src="{{media.image}}" />
+              </div>
             </div>
           </div>
-          <div class="post-attaches2" *ngIf="link_preview">
-            <div class="post-attach rich_url" >
-              Site: {{link_preview.title}}
-              Descrição: {{link_preview.description}}
+          <div class="post-attach rich_url" *ngIf="link_preview">
+            <div class="rich_url-image">
               <img src="{{link_preview.images[0].src}}" *ngIf="link_preview.images.length > 0" alt="" />
             </div>
+            <h2>{{link_preview.title}}</h2>
+            <p>
+              {{link_preview.description}}
+            </p>
           </div>
         </ion-row>
       </ion-grid>

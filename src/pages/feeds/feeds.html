@@ -4,16 +4,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <a ion-item (click)="openModal()">
-      <ion-avatar item-left>
-        <!-- <img src="assets/images/logo.png"/> -->
-        <img src="{{user.avatar_url}}" id='user_avatar'>
-      </ion-avatar>
-      <p>
-        O que você está pensando...
-      </p>
-    </a>
-  </ion-card>
   <bm-post [posts]="posts"></bm-post>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="openModal()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
 </ion-content>
