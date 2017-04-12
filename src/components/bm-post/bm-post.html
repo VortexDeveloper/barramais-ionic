@@ -3,6 +3,10 @@
     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
       <img src="{{post.user.avatar_url}}"/>
     </ion-avatar>
+    <button type="button" item-right small (click)="deletePost(post)">
+      <ion-icon name="close"></ion-icon>
+    </button>
+
     <h2 (click)='openProfile(post.user.user_id)'>{{post.user.name}}</h2>
     <p>{{post.sent_date_format}}</p>
   </ion-item>
@@ -15,8 +19,7 @@
         </div>
       </div>
     </div>
-
-    <div class="post-attach rich_url" *ngIf="post.rich_url">
+    <div class="post-attach rich_url" *ngIf="post.rich_url" (click)="openLink(post.rich_url.url)">
       <div class="rich_url-image">
         <img src="{{post.rich_url.images[0].src}}" *ngIf="post.rich_url.images.length > 0" alt="" />
       </div>

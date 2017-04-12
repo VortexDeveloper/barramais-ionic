@@ -58,6 +58,11 @@ export class Posts {
       .map(res => res.json());
   }
 
+  delete(post) {
+    return this.authHttp.delete(this.delete_url(post))
+      .map(res => res.json());
+  }
+
   post_comments(post) {
     return this.authHttp.get(this.post_comments_url(post))
       .map(res => res.json());
@@ -82,5 +87,9 @@ export class Posts {
 
   post_comments_url(post) {
     return this.host_post + '/' + post.id + '/comments.json';
+  }
+
+  delete_url(post) {
+    return this.host_post + '/' + post.id + '.json';
   }
 }

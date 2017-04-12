@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ActionSheetController, Platform, ModalController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 // import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { Posts } from '../../providers/posts';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { GalleryModalPage } from "../../pages/gallery-modal/gallery-modal";
 import 'rxjs/add/operator/debounceTime';
 
 /*
   Generated class for the PostModal page.
-
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
@@ -24,6 +24,7 @@ export class PostModalPage {
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
   erro: string = "";
+  galleryModal: any = GalleryModalPage;
   postController: any = new FormControl();
   urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/;
 
@@ -34,6 +35,7 @@ export class PostModalPage {
   constructor(
     public platform: Platform,
     public navCtrl: NavController,
+    public modalCtrl: ModalController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public actionsheetCtrl: ActionSheetController,
@@ -58,8 +60,13 @@ export class PostModalPage {
     });
   }
 
+  openPhotos(photos){
+    let modal = this.modalCtrl.create(this.galleryModal, {photos: photos});
+    modal.present();
+  }
+
   dismiss(new_post = null) {
-    // this.post = {medias: {images: [], videos: [], rich_url:[]}};
+    this.post = {medias: {images: [], videos: [], rich_url:[]}};
     this.viewCtrl.dismiss(new_post);
   }
 

@@ -11,8 +11,8 @@ page-groups {
 
   .card-title {
     position: absolute;
-    bottom: 40px;
-    font-size: 2.0em;
+    bottom: 15px;
+    font-size: 1.1em;
     width: 100%;
     font-weight: bold;
     color: #fff;
@@ -126,6 +126,27 @@ page-groups {
   .fab-wp-danger.activated {
     color: #fff;
     background-color: #faa35f;
+  }
+
+  .groups{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+  }
+
+  .group{
+    display: flex;
+    width: calc(50% - 4px);
+    order: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    height: 130px;
+    margin: 2px;
   }
 
 

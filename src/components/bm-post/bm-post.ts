@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { PostModalPage } from "../../pages/post-modal/post-modal";
 import { CommentModalPage } from "../../pages/comment-modal/comment-modal";
 import { GalleryModalPage } from "../../pages/gallery-modal/gallery-modal";
@@ -27,7 +27,8 @@ export class BmPostComponent {
       public navCtrl: NavController,
       public navParams: NavParams,
       public modalCtrl: ModalController,
-      public postsProvider: Posts
+      public postsProvider: Posts,
+      public alertCtrl: AlertController,
     ) {
       this.comment = {}
     }
@@ -63,6 +64,7 @@ export class BmPostComponent {
     }
 
     openLink(link){
+      console.log(link);
       if(link){
         let browser = new InAppBrowser(link, '_system');
         browser
@@ -75,6 +77,33 @@ export class BmPostComponent {
         (updated_post) => post.likes = updated_post.likes,
         (error) => console.log(error)
       );
+    }
+
+    deletePost(post) {
+      let prompt = this.alertCtrl.create({
+        title: 'Deletar postagem',
+        message: 'Deseja deletar este post?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: data => {
+              this.postsProvider.delete(post).subscribe(
+                (data) => {
+                  this.posts = this.posts.filter(data => data.id < post.id || data.id > post.id);
+                },
+                (error) => console.log(error)
+              );
+            }
+          }
+        ]
+      });
+      prompt.present();
     }
 
     like_color_for(post) {

@@ -20,27 +20,30 @@
 
   <div [ngSwitch]="groups">
     <ion-list *ngSwitchCase="'my-groups'">
-      <ion-card *ngFor="let group of my_groups" (click)="openPage(group)">
-        <img src="{{group.cover_photo_url}}"/>
-        <div class="card-title">{{group.name}}</div>
-        <!-- <div class="card-subtitle">{{group.members.length}}</div> -->
-      </ion-card>
+      <div class="groups">
+        <ion-card class="group" *ngFor="let group of my_groups" (click)="openPage(group)">
+          <img src="{{group.cover_photo_url}}"/>
+          <div class="card-title">{{group.name}}</div>
+        </ion-card>  
+      </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'confirmed-groups'">
-      <ion-card *ngFor="let group of confirmed_groups" (click)="openPage(group)">
-        <img src="{{group.cover_photo_url}}"/>
-        <div class="card-title">{{group.name}}</div>
-        <!-- <div class="card-subtitle">{{group.members.length}}</div> -->
-      </ion-card>
+      <div class="groups">
+        <ion-card class="group" *ngFor="let group of confirmed_groups" (click)="openPage(group)">
+          <img src="{{group.cover_photo_url}}"/>
+          <div class="card-title">{{group.name}}</div>
+        </ion-card>
+      </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'pending-groups'">
-      <ion-card *ngFor="let group of pending_groups" (click)="openPage(group)">
-        <img src="{{group.cover_photo_url}}"/>
-        <div class="card-title">{{group.name}}</div>
-        <!-- <div class="card-subtitle">{{group.members.length}}</div> -->
-      </ion-card>
+      <div class="groups">
+        <ion-card class="group" *ngFor="let group of pending_groups" (click)="openPage(group)">
+          <img src="{{group.cover_photo_url}}"/>
+          <div class="card-title">{{group.name}}</div>
+        </ion-card>
+      </div>
     </ion-list>
   </div>
   <ion-fab right bottom>

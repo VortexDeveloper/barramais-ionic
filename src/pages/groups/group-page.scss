@@ -1,5 +1,20 @@
 page-group-page {
 
+  .perfil-actions{
+    position: absolute !important;
+    top: 158px !important;
+    right: 6px !important;
+    z-index: 999 !important;
+    width: 66px;
+    font-size: .7em;
+    height: 28px;
+  }
+
+
+  .members-col{
+    background: #fff;
+  }
+
   .ion-avatar-event{
     background: #faa35f;
     border-radius: 5%;
@@ -23,7 +38,7 @@ page-group-page {
     .background-image {
         background-size: cover;
         background-position: center;
-        height: 50vw;
+        height: 200px;
     }
 
     .main-content {
