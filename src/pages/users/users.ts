@@ -34,6 +34,7 @@ export class UsersPage {
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.user_list();
+    console.log(this.current_user);
   }
 
   ionViewDidLoad() {

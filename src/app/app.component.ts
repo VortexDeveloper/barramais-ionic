@@ -33,7 +33,7 @@ import { ClassifiedVesselDescriptionPage } from '../pages/classified-vessel-desc
 import { ClassifiedVesselPreviewPage } from '../pages/classified-vessel-preview/classified-vessel-preview';
 import { ClassifiedFishingPage } from '../pages/classified-fishing/classified-fishing';
 import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/classified-fishing-status';
-// import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
+import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
 import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { ClassifiedProductCategoryPage } from '../pages/classified-product-category/classified-product-category';
 import { AlertController } from 'ionic-angular';
@@ -42,7 +42,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
 import { MenuController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
-
+import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 
 @Component({
   selector: 'app-menu',
@@ -86,9 +86,10 @@ export class MyApp {
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
   classifiedFishingPage: any = ClassifiedFishingPage;
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
-  classifiedFishingDescriptionPage: any = ClassifiedVesselDescriptionPage;
+  classifiedFishingDescriptionPage: any = ClassifiedFishingDescriptionPage;
   classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
   classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
+  interestSelectionPage: any = InterestSelectionPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
   user: UserModel = new UserModel();
@@ -186,11 +187,10 @@ export class MyApp {
           handler: () => {
             this.userProvider.logout().subscribe(
               (response) => {
+                this.nav.setRoot(this.rootPage);
                 localStorage.removeItem("jwt");
                 localStorage.removeItem("user");
                 localStorage.removeItem("vessels_type");
-                this.rootPage = this.loginPage;
-                this.nav.setRoot(this.rootPage);
               },
               (error) => console.log(error)
             );
