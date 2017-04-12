@@ -3,6 +3,10 @@
     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
       <img src="{{post.user.avatar_url}}"/>
     </ion-avatar>
+    <button type="button" item-right small (click)="deletePost(post)">
+      <ion-icon name="close"></ion-icon>
+    </button>
+
     <h2 (click)='openProfile(post.user.user_id)'>{{post.user.name}}</h2>
     <p>{{post.sent_date_format}}</p>
   </ion-item>
