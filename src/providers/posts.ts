@@ -63,8 +63,17 @@ export class Posts {
       .map(res => res.json());
   }
 
+  enrich_link(post, link) {
+    return this.authHttp.get(this.enrich_link_url(post, link))
+      .map(res => res.json());
+  }
+
   like_url(post) {
     return this.host_post + '/' + post.id + '/like.json';
+  }
+
+  enrich_link_url(post, url) {
+    return this.host_post + '/enrich_link.json?url='+url;
   }
 
   comment_url(post) {

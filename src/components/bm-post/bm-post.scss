@@ -1,3 +1,19 @@
 bm-post {
+  .rich_url-image img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
+  .rich_url p {
+    font: .8em;
+    color: #666;
+  }
+
+  .post-attach.rich_url {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: .3em .5em;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
 }
