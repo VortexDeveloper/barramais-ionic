@@ -6,6 +6,9 @@ import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { Conversations } from '../../providers/conversations';
+import { MessagesPage } from '../messages/messages';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the Users page.
@@ -29,7 +32,9 @@ export class UsersPage {
   constructor(
     public navCtrl: NavController,
     public toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     params: NavParams,
+    public conversationProvider: Conversations,
     public userProvider: User
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
@@ -55,8 +60,8 @@ export class UsersPage {
     this.navCtrl.push(page);
   }
 
-  openProfile(user_id) {
-    this.navCtrl.push(this.profilePage, {user: user_id})
+  openProfile(user) {
+    this.navCtrl.push(this.profilePage, {user: user.id})
   }
 
   unfriend(user){
@@ -89,6 +94,32 @@ export class UsersPage {
       },
       (error) => console.log(error)
     );
+  }
+
+  createConversationWith(user) {
+    this.conversationProvider.create(user).subscribe(
+      (conversation) => {
+        this.navCtrl.push(MessagesPage, { conversation: conversation });
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  isWaiting(user_name) {
+    let alert = this.alertCtrl.create({
+      title: 'Aguardando',
+      message: 'Você já convidou ' + user_name + ', aguarde a aceitação de eu convite.',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

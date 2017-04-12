@@ -42,6 +42,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
 import { MenuController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 
 @Component({
@@ -95,6 +96,17 @@ export class MyApp {
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any;
 
+  options: NativeTransitionOptions = {
+     direction: 'up',
+     duration: 500,
+     slowdownfactor: 3,
+     slidePixels: 20,
+     iosdelay: 100,
+     androiddelay: 150,
+     fixedPixelsTop: 0,
+     fixedPixelsBottom: 60
+    };
+
   openLink(link){
     let browser = new InAppBrowser(link, '_system');
     browser
@@ -105,7 +117,8 @@ export class MyApp {
     private alertCtrl: AlertController,
     private userProvider: User,
     private menuCtrl: MenuController,
-    public events: Events
+    public events: Events,
+    private nativePageTransitions: NativePageTransitions
 
   ) {
       this.checkMainPage();
@@ -135,10 +148,6 @@ export class MyApp {
 
   checkCurrentUser(){
     this.events.subscribe('onUpdateUser', (user)=>{this.user = new UserModel(user);});
-  }
-
-  openPage(page) {
-    this.nav.push(page);
   }
 
   openPageWithClassifiedConditional(page, classifiedConditional){
@@ -200,6 +209,11 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  openPage(page) {
+    this.nativePageTransitions.slide(this.options);
+    this.nav.push(page);
   }
 
 }

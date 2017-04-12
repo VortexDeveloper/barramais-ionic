@@ -13,54 +13,24 @@ page-friends {
     color: #123f5f;
     width: 100%;
   }
-  //
-  // .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left] {
-  //   margin: 8px 16px 8px 0;
-  //   position: relative;
-  //   top: 0px;
-  //   left: -17px;
-  // }
-  //
-  // .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left] {
-  //   margin: 8px 16px 8px 0;
-  //   position: relative;
-  //   top: 0px;
-  //   left: -17px;
-  // }
-  //
-  // .item-wp ion-avatar[item-left], .item-wp ion-thumbnail[item-left] {
-  //   margin: 8px 16px 8px 0;
-  //   position: relative;
-  //   top: 0px;
-  //   left: -17px;
-  // }
-  //
-  // .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
-  //     width: 60px;
-  //     height: 60px;
-  // }
-  //
-  // .item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img {
-  //   width: 60px;
-  //   height: 60px;
-  // }
-  //
-  // .item-wp ion-thumbnail ion-img, .item-wp ion-thumbnail img {
-  //     width: 60px;
-  //     height: 60px;
-  // }
-
+  
   .button-md-primary, .button-ios-primary, .button-wp-primary {
     color: #fff;
     background-color: #123f5f;
   }
 
   .item-md  .item-button, .item-ios  .item-button, .item-wp  .item-button{
-    height: 3.6rem;
+    height: 2.4rem;
   }
 
   .item-inner {
     border-bottom: 1px solid #dedede !important;
+  }
+
+  .label-md,
+  .label-ios,
+  .label-wp {
+    margin: 13px 1px 5px 0;
   }
 
 }

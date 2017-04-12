@@ -5,6 +5,8 @@ import { FeedsPage } from '../feeds/feeds';
 import { FriendsPage } from '../friends/friends'
 import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
+import { Conversations } from '../../providers/conversations';
+import { MessagesPage } from '../messages/messages';
 /*
   Generated class for the FriendshipRequest page.
 
@@ -25,6 +27,7 @@ export class FriendshipRequestPage {
 
   constructor(
     public navCtrl: NavController,
+    public conversationProvider: Conversations,
     public navParams: NavParams,
     public toastCtrl: ToastController,
     public userProvider: User
@@ -77,6 +80,15 @@ export class FriendshipRequestPage {
 
   openProfile(user) {
     this.navCtrl.push(this.profilePage, {user: user.id})
+  }
+
+  createConversationWith(user) {
+    this.conversationProvider.create(user).subscribe(
+      (conversation) => {
+        this.navCtrl.push(MessagesPage, { conversation: conversation });
+      },
+      (error) => console.log(error)
+    );
   }
 
   presentToast(msg) {
