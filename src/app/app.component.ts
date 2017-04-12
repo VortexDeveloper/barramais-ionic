@@ -198,10 +198,10 @@ export class MyApp {
           handler: () => {
             this.userProvider.logout().subscribe(
               (response) => {
-                this.nav.setRoot(this.rootPage);
                 localStorage.removeItem("jwt");
                 localStorage.removeItem("user");
                 localStorage.removeItem("vessels_type");
+                this.nav.setRoot(HomePage);
               },
               (error) => console.log(error)
             );

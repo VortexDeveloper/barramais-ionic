@@ -93,6 +93,14 @@ export class GroupPagePage {
     modal.present();
   }
 
+  openPostModal() {
+    let modal = this.modalCtrl.create(PostModalPage);
+    modal.onDidDismiss(newPost => {
+      if(newPost) this.posts.unshift(newPost);
+    });
+    modal.present();
+  }
+
   verifyGroupAdmin(){
     if(this.group.admin.id == this.user.id){
       this.showAdminActions = true;

@@ -63,6 +63,7 @@ export class BmPostComponent {
     }
 
     openLink(link){
+      console.log(link);
       if(link){
         let browser = new InAppBrowser(link, '_system');
         browser

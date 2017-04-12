@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="post-attach rich_url" *ngIf="post.rich_url">
+    <div class="post-attach rich_url" *ngIf="post.rich_url" (click)="openLink(post.rich_url.url)">
       <div class="rich_url-image">
         <img src="{{post.rich_url.images[0].src}}" *ngIf="post.rich_url.images.length > 0" alt="" />
       </div>
