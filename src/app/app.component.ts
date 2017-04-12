@@ -42,6 +42,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
 import { MenuController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 
 @Component({
@@ -91,6 +92,7 @@ export class MyApp {
   classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
+
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any;
@@ -105,8 +107,8 @@ export class MyApp {
     private alertCtrl: AlertController,
     private userProvider: User,
     private menuCtrl: MenuController,
-    public events: Events
-
+    public events: Events,
+    public fb: Facebook
   ) {
       this.checkMainPage();
       this.initializeApp();
@@ -200,6 +202,17 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  inviteFacebookFriends() {
+    let options = {
+      url: "https://fb.me/202248836944012",
+      picture: "https://placehold.it/350x350"
+    }
+    this.fb.appInvite(options).then(
+      (obj) => console.log(obj),
+      (error) => console.log(error)
+    );
   }
 
 }

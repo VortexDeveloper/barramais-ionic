@@ -68,6 +68,7 @@ import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 import { Camera } from '@ionic-native/camera';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Facebook } from '@ionic-native/facebook';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -207,6 +208,7 @@ export function getAuthHttp(http) {
     Routes,
     Camera,
     PhotoViewer,
+    Facebook,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })

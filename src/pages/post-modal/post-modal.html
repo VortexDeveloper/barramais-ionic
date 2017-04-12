@@ -21,7 +21,7 @@
         <p>{{current_user.first_name}}</p>
       </ion-item>
       <ion-item>
-        <ion-textarea [(ngModel)]="post.description" placeHolder="O que você está pensando..."></ion-textarea>
+        <ion-textarea [(ngModel)]="post.description" [formControl]="postController" placeHolder="O que você está pensando..."></ion-textarea>
       </ion-item>
       <ion-grid>
         <ion-row>
@@ -33,10 +33,17 @@
         </ion-row>
         <ion-row>
           <img id='image_test' src="" alt="" />
-          <div class="post-attaches2" *ngIf="post.medias">
-            <div class="post-attach post-image" *ngFor="let media of post.medias">
+          <div class="post-attaches2" *ngIf="post.medias.images">
+            <div class="post-attach post-image" *ngFor="let media of post.medias.images">
               <img src="../../assets/images/4.jpg" alt="" />
               {{erro}}
+            </div>
+          </div>
+          <div class="post-attaches2" *ngIf="link_preview">
+            <div class="post-attach rich_url" >
+              Site: {{link_preview.title}}
+              Descrição: {{link_preview.description}}
+              <img src="{{link_preview.images[0].src}}" *ngIf="link_preview.images.length > 0" alt="" />
             </div>
           </div>
         </ion-row>

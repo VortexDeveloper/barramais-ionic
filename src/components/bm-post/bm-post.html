@@ -15,6 +15,16 @@
         </div>
       </div>
     </div>
+
+    <div class="post-attach rich_url" *ngIf="post.rich_url">
+      <div class="rich_url-image">
+        <img src="{{post.rich_url.images[0].src}}" *ngIf="post.rich_url.images.length > 0" alt="" />
+      </div>
+      <h2>{{post.rich_url.title}}</h2>
+      <p>
+        {{post.rich_url.description}}
+      </p>
+    </div>
   </ion-card-content>
   <ion-row>
     <ion-col width-25>
