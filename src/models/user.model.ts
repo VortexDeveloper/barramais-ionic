@@ -22,9 +22,18 @@ export class UserModel {
   sex: string;
   birthday: Date;
   cellphone: string;
+  mobile_operator: string;
   about: string;
   academic_profile: string;
+  profession: string;
   work: string;
+  language: string;
+  alternative_email: string;
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  linkedin: string;
+  website: string;
 
   //Nautical Information
   nautical_professional: boolean;
@@ -40,6 +49,16 @@ export class UserModel {
   fishing: boolean;
   own_vessels: Array<any>;
   own_vessels_id: Array<any>;
+  national_trips: string;
+  international_trips: string;
+  cruise_trips: string;
+  nautical_literature: string;
+  nautical_application: string;
+  nautical_brand: string;
+  fishing_tourist: boolean;
+  tourist_places: string;
+  water_sportsman: boolean;
+  fishing_type: number;
 
   constructor(public params?:any) {
     params = params || {}
@@ -73,6 +92,25 @@ export class UserModel {
     this.fishing = params.fishing || false;
     this.own_vessels = params.own_vessels || [];
     this.own_vessels_id = [];
+    this.profession = params.profession || "";
+    this.language = params.language || "";
+    this.mobile_operator = params.mobile_operator || "";
+    this.alternative_email = params.alternative_email || "";
+    this.facebook = params.facebook || "";
+    this.instagram = params.instagram || "";
+    this.twitter = params.twitter || "";
+    this.linkedin = params.linkedin || "";
+    this.website = params.website || "";
+    this.national_trips = params.national_trips || "";
+    this.international_trips = params.international_trips || "";
+    this.cruise_trips = params.cruise_trips || "";
+    this.nautical_literature = params.nautical_literature || "";
+    this.nautical_application = params.nautical_application || "";
+    this.nautical_brand = params.nautical_brand || "";
+    this.fishing_tourist = params.fishing_tourist || false;
+    this.tourist_places = params.tourist_places || "";
+    this.water_sportsman = params.water_sportsman || false;
+    this.fishing_type = params.fishing_type || 0;
 
     for (let i = 0; i < this.own_vessels.length; i++) {
       this.own_vessels_id.push(this.own_vessels[i].id);
