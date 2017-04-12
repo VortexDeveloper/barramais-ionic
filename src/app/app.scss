@@ -233,54 +233,6 @@ app-menu {
     background-color: #f3f1f1;
   }
 
-  .post-images {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-    align-content: stretch;
-  }
-
-  .post-image {
-    order: 0;
-    overflow: hidden;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    -webkit-flex-shrink: 1;
-    -ms-flex-negative: 1;
-    flex-shrink: 1;
-    -webkit-flex-basis: auto;
-    -ms-flex-preferred-size: auto;
-    flex-basis: auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    width: 49%;
-    padding: 2px;
-    margin: 0 0 2px 2px;
-    height: 152px;
-    position: relative;
-    border-radius: 4px;
-  }
-
-
-
-  .post-image img {
-    width: auto !important;
-    max-width: 278% !important;
-    display: inline !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-  }
-
   ion-badge {
     display: inline-block;
     font-weight: bold;
