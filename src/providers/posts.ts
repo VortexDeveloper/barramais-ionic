@@ -18,6 +18,7 @@ export class Posts {
   private host: string;
 
   private host_post: string;
+  private host_comment: string;
   private create_url: string;
   private index_url: string;
 
@@ -33,6 +34,7 @@ export class Posts {
 
   setRoutes(host){
     this.host_post = host + "posts";
+    this.host_comment = host + "comments";
     this.create_url = this.host_post + ".json";
     this.index_url = this.host_post + ".json";
   }
@@ -48,6 +50,11 @@ export class Posts {
       .map(res => res.json());
   }
 
+  delete(post) {
+    return this.authHttp.delete(this.delete_url(post))
+    .map(res => res.json());
+  }
+
   like(post) {
     return this.authHttp.get(this.like_url(post))
       .map(res => res.json());
@@ -58,10 +65,11 @@ export class Posts {
       .map(res => res.json());
   }
 
-  delete(post) {
-    return this.authHttp.delete(this.delete_url(post))
+  delete_comment(comment) {
+    return this.authHttp.delete(this.delete_comment_url(comment))
       .map(res => res.json());
   }
+
 
   post_comments(post) {
     return this.authHttp.get(this.post_comments_url(post))
@@ -91,5 +99,9 @@ export class Posts {
 
   delete_url(post) {
     return this.host_post + '/' + post.id + '.json';
+  }
+
+  delete_comment_url(comment) {
+    return this.host_comment + '/' + comment.id + '.json';
   }
 }

@@ -32,26 +32,10 @@
           </ion-item>
         </ion-row>
         <ion-row>
-          <!-- <div *ngIf="post.medias">
+          <div *ngIf="post.medias.images">
             <div class='post-images' (click)="openPhotos(post.post_images)">
               <div *ngFor="let media of post.medias.images | slice:0:4; let i = index" class="{{i == 3 ? 'post-image plus-sign-icon' : 'post-image'}}">
                 <img src="{{media.image}}" />
-              </div>
-            </div>
-          </div> -->
-          <div>
-            <div class='post-images' (click)="openPhotos(post.post_images)">
-              <div class="post-image">
-                <img src="assets/images/icones.png" />
-              </div>
-              <div class="post-image">
-                <img src="assets/images/icones.png" />
-              </div>
-              <div class="post-image">
-                <img src="assets/images/icones.png" />
-              </div>
-              <div class="post-image">
-                <img src="assets/images/icones.png" />
               </div>
             </div>
           </div>
@@ -60,6 +44,8 @@
           <div class="post-attach rich_url" *ngIf="link_preview">
             <div class="rich_url-image">
               <img src="{{link_preview.images[0].src}}" *ngIf="link_preview.images.length > 0" alt="" />
+              <!-- <img src="{{link_preview.images[0].src}}" *ngIf="link_preview.images.length > 0 && link_preview.videos.length == 0" alt="" /> -->
+              <!-- <iframe src="{{transform(link_preview.videos[0].src)}}" *ngIf="link_preview.videos.length > 0"></iframe> -->
             </div>
             <h2>{{link_preview.title}}</h2>
             <p>

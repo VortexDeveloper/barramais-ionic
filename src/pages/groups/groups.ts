@@ -7,6 +7,7 @@ import { Groups } from '../../providers/groups';
 import { User } from '../../providers/user';
 import { GroupPagePage } from '../groups/group-page';
 import { UserModel } from "../../models/user.model";
+import { GroupModel } from "../../models/group.model";
 import { JwtHelper } from 'angular2-jwt';
 
 /*
@@ -54,7 +55,7 @@ export class GroupsPage {
 
   presentLoading() {
     let loader = this.loadingCtrl.create({
-      content: "Carregando Eventos...",
+      content: "Carregando Grupos...",
       duration: 1000
     });
     loader.present();
@@ -100,14 +101,10 @@ export class GroupsPage {
     this.navCtrl.push(GroupPagePage, {group: group});
   }
 
-  openModal() {
-    let modal = this.modalCtrl.create(GroupModalPage, { my_groups: this.my_groups });
+  openModal(group) {
+    let modal = this.modalCtrl.create(GroupModalPage, { my_groups: this.my_groups, group: group });
     modal.onDidDismiss(group => {
       if(group){
-        console.log(this.my_groups);
-        console.log(this.confirmed_groups);
-        console.log(group);
-
         this.my_groups.push(group);
         this.confirmed_groups.push(group);
       }

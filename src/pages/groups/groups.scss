@@ -6,7 +6,11 @@ page-groups {
     padding: 10px;
   }
   ion-card img{
-    margin-left: 0px;
+    position: absolute;
+    max-width: 130%;
+    width: 130%;
+    top: -10%;
+    left: -13%;
   }
 
   .card-title {
@@ -145,8 +149,10 @@ page-groups {
     flex-shrink: 1;
     flex-basis: auto;
     align-self: auto;
-    height: 130px;
+    height: 89px;
     margin: 2px;
+    overflow: hidden;
+    padding: 0;
   }
 
 

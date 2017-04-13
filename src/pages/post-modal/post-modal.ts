@@ -8,6 +8,7 @@ import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { GalleryModalPage } from "../../pages/gallery-modal/gallery-modal";
 import 'rxjs/add/operator/debounceTime';
+import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeHtml} from '@angular/platform-browser';
 
 /*
   Generated class for the PostModal page.
@@ -28,7 +29,6 @@ export class PostModalPage {
   postController: any = new FormControl();
   urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/;
 
-
   public post: any = {medias: {images: [], videos: [], rich_url:[]}};
   public link_preview: any;
 
@@ -40,6 +40,7 @@ export class PostModalPage {
     public viewCtrl: ViewController,
     public actionsheetCtrl: ActionSheetController,
     public postsProvider: Posts,
+    private sanitizer: DomSanitizer,
     private camera: Camera
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
@@ -58,6 +59,11 @@ export class PostModalPage {
         );
       }
     });
+  }
+
+  transform(url) {
+    let videoUrl: SafeHtml = this.sanitizer.bypassSecurityTrustHtml(url);
+    return videoUrl;
   }
 
   openPhotos(photos){
