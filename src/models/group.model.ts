@@ -9,6 +9,7 @@ export class GroupModel {
   about: string;
   cover_photo: string;
   cover_photo_url: string;
+  admin: any;
 
   constructor(public params?:any) {
     params = params || {}
@@ -21,6 +22,6 @@ export class GroupModel {
     this.about = params.about || null;
     this.cover_photo = params.cover_photo || null;
     this.cover_photo_url = params.cover_photo_url || "/assets/images/EVENTO.jpg";
-
+    this.admin = params.admin || {};
   }
 }

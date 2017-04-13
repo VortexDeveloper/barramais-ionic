@@ -3,11 +3,13 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
+import { GroupModalPage } from '../groups/group-modal';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { GroupMembersPage } from "../groups/group-members";
 import { FriendsPage } from '../friends/friends';
 import { UserModel } from "../../models/user.model";
+import { GroupModel } from "../../models/group.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { Posts } from '../../providers/posts';
@@ -35,7 +37,8 @@ export class GroupPagePage {
   groupsPage: any = GroupsPage;
   eventsPage: any = EventsPage;
   friendsPage: any = FriendsPage;
-  group: any;
+  groupModal: any = GroupModalPage;
+  group: GroupModel = new GroupModel();
   postModal: any = PostModalPage;
   groupMembers: any = GroupMembersPage;
   allMembers: any;
@@ -63,7 +66,7 @@ export class GroupPagePage {
     public toastCtrl: ToastController
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.group = params.data.group;
+      this.group = new GroupModel(params.data.group);
       this.verifyGroupAdmin();
       this.loadMembers(this.group);
       this.loadPosts();
@@ -93,6 +96,11 @@ export class GroupPagePage {
     modal.present();
   }
 
+  openEditModal(page, group){
+    let modal = this.modalCtrl.create(page, {group: group});
+    modal.present();
+  }
+
   openPostModal() {
     let modal = this.modalCtrl.create(PostModalPage);
     modal.onDidDismiss(newPost => {
@@ -115,6 +123,7 @@ export class GroupPagePage {
       this.showMemberActions = true;
       this.verifyGroupAdmin();
     }
+    console.log(this.showMemberActions);
   }
 
   verifyInvitedGroupMember(list){

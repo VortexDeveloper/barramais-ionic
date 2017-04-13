@@ -101,4 +101,51 @@ page-group-members {
     background-color: #123f5f !important;
   }
 
+  ion-thumbnail img {
+    display: block;
+    border-radius: 4px;
+  }
+
+  .item-friends{
+    background: #fff !important;
+    border-bottom: solid 4px #dedede !important;
+    margin: 8px !important;
+    width: calc(100% - 16px) !important;
+    padding-left: 8px !important;
+    border-radius: 2px !important;
+  }
+
+  .item-friends .item-inner{
+    border-bottom: none !important;
+  }
+
+  .friend-information-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .friend-information-text{
+    display: flex;
+    order: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-start;
+    flex-direction: column;
+  }
+
+  .friend-information-buttons{
+    display: flex;
+    order: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-end;
+    flex-direction: end;
+  }
+
 }

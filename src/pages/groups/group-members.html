@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Convidados
+      Membros
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -13,16 +13,35 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let member of members">
-      <ion-thumbnail item-left>
-        <img src="{{member.cover_photo_url}}">
+    <ion-item class="item-friends" *ngFor="let member of members">
+      <ion-thumbnail item-left (click)='openProfile(member)'>
+        <img src="{{member.avatar_url}}">
       </ion-thumbnail>
-      <ion-label>
-        <h2>{{member.first_name}}</h2>
-      </ion-label>
-      <ion-checkbox [hidden]="!showAdminActions" item-right color="dark" checked="false" [(ngModel)]="member.invited" (ionChange)="getSelect(member.invited, member)"></ion-checkbox>
+      <div class="friend-information-container">
+        <div class="friend-information-text">
+          <h2 (click)='openProfile(member)'>{{member.first_name}} {{member.last_name}}</h2>
+          <p>{{member.birthday | date:'MMMM d, y'}}</p>
+        </div>
+        <div class="friend-information-buttons">
+          <button ion-button icon-left color="danger" (click)="unfriend(member)" *ngIf="member.isFriend == true">
+            <ion-icon name="remove"></ion-icon>
+            Amigo
+          </button>
+          <button ion-button icon-left color="primary" (click)='request_friendship(member)' *ngIf="member.isFriend == false && member.id != current_user.id">
+            <ion-icon name="add"></ion-icon>
+            Amigo
+          </button>
+          <button ion-button icon-only clear (click)='isWaiting(member.first_name)' *ngIf="member.isFriend == 'waiting'" >
+            <ion-icon name="person-tab"></ion-icon>
+          </button>
+          <button ion-button icon-left  (click)='createConversationWith(member)' *ngIf="member.id != current_user.id">
+            <ion-icon name="chatbubbles"></ion-icon>
+            Chat
+          </button>
+          <ion-checkbox [hidden]="!showAdminActions" item-right color="dark" checked="false" [(ngModel)]="member.invited" (ionChange)="getSelect(member.invited, member)"></ion-checkbox>
+        </div>
+      </div>
     </ion-item>
-  </ion-list>
-  <button [hidden]="!showAdminActions" class="form-buttons" ion-button type="button" block name="button" (click)="invitation(selectedMembers)">Convidar</button>
+  </ion-list>  <button [hidden]="!showAdminActions" class="form-buttons" ion-button type="button" block name="button" (click)="invitation(selectedMembers)">Convidar</button>
 
 </ion-content>

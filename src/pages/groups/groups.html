@@ -21,17 +21,17 @@
   <div [ngSwitch]="groups">
     <ion-list *ngSwitchCase="'my-groups'">
       <div class="groups">
-        <ion-card class="group" *ngFor="let group of my_groups" (click)="openPage(group)">
-          <img src="{{group.cover_photo_url}}"/>
+        <ion-card class="group" *ngFor="let group of my_groups">
+          <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
           <div class="card-title">{{group.name}}</div>
-        </ion-card>  
+        </ion-card>
       </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'confirmed-groups'">
       <div class="groups">
-        <ion-card class="group" *ngFor="let group of confirmed_groups" (click)="openPage(group)">
-          <img src="{{group.cover_photo_url}}"/>
+        <ion-card class="group" *ngFor="let group of confirmed_groups">
+          <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
           <div class="card-title">{{group.name}}</div>
         </ion-card>
       </div>
@@ -39,8 +39,8 @@
 
     <ion-list *ngSwitchCase="'pending-groups'">
       <div class="groups">
-        <ion-card class="group" *ngFor="let group of pending_groups" (click)="openPage(group)">
-          <img src="{{group.cover_photo_url}}"/>
+        <ion-card class="group" *ngFor="let group of pending_groups">
+          <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
           <div class="card-title">{{group.name}}</div>
         </ion-card>
       </div>

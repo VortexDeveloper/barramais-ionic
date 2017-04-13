@@ -5,7 +5,10 @@ import { GroupModel } from "../../models/group.model";
 import { ToastController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
-import { Camera } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
+
+
+declare var cordova: any;
 
 /*
   Generated class for the PostModal page.
@@ -22,6 +25,7 @@ export class GroupModalPage {
   group: GroupModel = new GroupModel();
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
+  erro: string = "";
   user: UserModel;
 
   constructor(
@@ -29,11 +33,13 @@ export class GroupModalPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
+    private camera: Camera,
     public groupProvider: Groups,
     public actionsheetCtrl: ActionSheetController,
     public toastCtrl: ToastController
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.group = new GroupModel(navParams.data.group);
   }
 
   ionViewDidLoad() {
@@ -45,12 +51,22 @@ export class GroupModalPage {
   }
 
   create(group){
-    group.user_id = this.user.id;
     this.groupProvider.create(group)
     .subscribe(group_params => {
         this.group = new GroupModel(group_params);
-        this.viewCtrl.dismiss(this.group);
+        this.viewCtrl.dismiss(group_params);
         this.presentToast('Grupo criado com sucesso!');
+    }, error => {
+        console.log(error.json());
+        this.presentToast(error);
+    });
+  }
+
+  update(group){
+    this.groupProvider.update(group)
+    .subscribe(group_params => {
+        this.group = new GroupModel(group_params);
+        this.presentToast('Grupo atualizado com sucesso!');
     }, error => {
         console.log(error.json());
         this.presentToast(error);
@@ -65,25 +81,32 @@ export class GroupModalPage {
     toast.present();
   }
 
-  public presentActionSheet() {
+  openMediaOptions() {
     let actionSheet = this.actionsheetCtrl.create({
-      title: 'Selecione a origem da imagem',
+      title: 'Carregar midia',
+      cssClass: 'page-post-modal',
       buttons: [
         {
           text: 'Carregar da Galeria',
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Camera',
+          text: 'Fotos',
+          icon: !this.platform.is('ios') ? 'videocam' : null,
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            console.log('Play clicked');
           }
         },
         {
           text: 'Cancelar',
-          role: 'cancel'
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
         }
       ]
     });
@@ -93,29 +116,37 @@ export class GroupModalPage {
   takePicture(sourceType) {
     var options = {
       quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      saveToPhotoAlbum: false,
+      saveToPhotoAlbum: true,
       correctOrientation: true,
-      allowEdit: true,
-      destinationType: Camera.DestinationType.DATA_URL,
-      targetWidth: 360,
-		  targetHeight: 232
+      allowEdit: true
     };
 
-    Camera.getPicture(options).then(image => {
-      this.group.cover_photo = "data:image/jpeg;base64," + image;
+    this.camera.getPicture(options).then(
+      image_url => {
+        let includeToNewMedia = (image) => {
+          this.group.cover_photo = 'data:image/jpeg;base64,' + image;
+          this.save_cover_photo();
+        };
+
+        includeToNewMedia(image_url);
+      },
+      error => {
+        this.erro = error;
+      }
+    );
+  }
+
+  save_cover_photo() {
+    this.groupProvider.save_cover_photo(this.group)
+    .subscribe((group_params) => {
+        this.group = new GroupModel(group_params);
+    }, error => {
+        alert(error.json());
+        console.log(JSON.stringify(error.json()));
     });
-
-    var image_tag = document.getElementsByTagName('img')[0];
-    image_tag.src = this.group.cover_photo;
   }
-
-  is_from_gallery(sourceType) {
-    sourceType === Camera.PictureSourceType.PHOTOLIBRARY
-  }
-
-  is_android() {
-    this.platform.is('android')
-  }
-
 }

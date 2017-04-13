@@ -6,75 +6,47 @@
 <ion-content>
   <div class="background-image">
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
-    <button
-      icon-left
-      class="perfil-actions"
-      ion-button color="secondary"
-      style="right: 79px !important;"
-      [hidden]="!showAdminActions"
-      (click)="openModal(groupMembers, friends)">
-      <ion-icon name="add"></ion-icon>
-      membro
-    </button>
-    <button
-      icon-left
-      class="perfil-actions"
-      ion-button color="primary"
-      (click)="accept_group()"
-      *ngIf="showMemberActions && !showInvitedMemberActions">
+    <button icon-left class="perfil-actions" color="primary" ion-button  >
       Participar
     </button>
-    <button
-      icon-left
-      class="perfil-actions"
-      ion-button color="danger"
-      (click)="refuse_group()"
-      *ngIf="!showMemberActions && !showInvitedMemberActions">
-      Não Participar
+      <button icon-left class="perfil-actions" color="secondary" (click)="openEditModal(groupModal, group)" ion-button  >
+      <ion-icon name="create"></ion-icon>
+      Editar
     </button>
   </div>
   <div class="main-content">
     <ion-item>
-      <h2>{{group.name}}</h2>
-      Criado em <p>{{group.created_at | date:'MMMM d, y'}}</p>
+      <h2 class="group-name">{{group.name}}</h2>
+      Criado em {{group.createdAt | date:'MMMM d, y'}}
     </ion-item>
-    <ion-item>
-      <p>
-        {{group.about}}
-      </p>
-    </ion-item>
-    <ion-row>
-      <ion-col width-33>
-        <div class="members-col">
-          <a (click)="openModal(groupMembers, confirmedMembers)">
-            <h2>{{l_confirmedMembers}}</h2>
-          </a>
-          <p>
+    <div class="profile-description">
+      <ion-row class="actions-row">
+        <ion-col width-25 (click)="openModal(groupMembers, confirmedMembers)">
+          <h2 class="icon-button">{{l_confirmedMembers}}</h2>
+          <p class="icon-word">
             Membros
           </p>
-        </div>
-      </ion-col>
-      <ion-col width-33 [hidden]="!showAdminActions">
-        <div class="members-col">
-          <a (click)="openModal(groupMembers, allMembers)">
-            <h2>{{l_allMembers}}</h2>
-          </a>
-          <p>
-            Todos
+        </ion-col>
+        <ion-col width-25 (click)="openModal(groupMembers, friends)" *ngIf="showMemberActions || showAdminActions">
+          <ion-icon name="person-add" class="icon-button"></ion-icon>
+          <p class="icon-word">
+            membros
           </p>
-        </div>
-      </ion-col>
-      <ion-col width-33 [hidden]="!showAdminActions">
-        <div class="members-col">
-          <a (click)="openModal(groupMembers, pendingMembers)">
-            <h2>{{l_pendingMembers}}</h2>
-          </a>
-          <p>
+        </ion-col>
+        <ion-col width-25 (click)="openModal(groupMembers, pendingMembers)" *ngIf="showMemberActions || showAdminActions">
+          <ion-icon name="time" class="icon-button"></ion-icon>
+          <p class="icon-word">
             Pendentes
           </p>
-        </div>
-      </ion-col>
-    </ion-row>
+        </ion-col>
+        <ion-col width-25>
+          <ion-icon name="ios-information-circle" class="icon-button"></ion-icon>
+          <p class="icon-word">
+            Info
+          </p>
+        </ion-col>
+      </ion-row>
+    </div>
     <bm-post [posts]="posts"></bm-post>
   </div>
   <ion-fab right bottom>

@@ -49,6 +49,18 @@ export class Groups {
         .map(res => res.json());
     }
 
+    update(group){
+      return this.authHttp.put(this.url + "/" + group.id + ".json", {'group': group})
+        .map(res => res.json());
+    }
+
+    save_cover_photo(group){
+      let d = new Date;
+      let new_name = group.id + d.getTime();
+      return this.http.put(this.url + "/save_cover_photo/" + group.id + ".json", {'cover_photo': {'image': group.cover_photo, 'filename': new_name}})
+        .map(res => res.json());
+    }
+
     invitation(group, members){
       return this.authHttp.put(this.invitation_url + group.id + ".json", {'members': members})
         .map(res => res.json());
