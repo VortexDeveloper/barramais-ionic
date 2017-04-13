@@ -438,11 +438,21 @@
             <ion-list-header>
               Selecione o(s) esporte(s)
             </ion-list-header>
-            <ion-item *ngFor="let nauticalSport of nauticalSports" (click)="toggleUserSelectedArea(nauticalSport)">
+            <!-- <ion-item *ngFor="let nauticalSport of nauticalSports" (click)="toggleUserSelectedArea(nauticalSport)">
               {{nauticalSport.name}}
               <ion-icon item-right name="boat" *ngIf="checkSelectedAreas(nauticalSport)"></ion-icon>
               <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedAreas(nauticalSport)"></ion-icon>
-            </ion-item>
+            </ion-item> -->
+            <div class="interest-list">
+              <ion-item class="interest-list-items" *ngFor="let nauticalSport of nauticalSports" (click)="toggleUserSelectedArea(nauticalSport)" no-lines>
+                <div class="image-notSelected" *ngIf="checkSelectedAreas(nauticalSport)">
+                  <img class="image-list" src="assets/images/interest_icon1.png">
+                </div>
+                <div class="image-selected" *ngIf="!checkSelectedAreas(nauticalSport)">
+                  <img class="image-list" src="assets/images/interest_icon1.png">
+                </div>
+              </ion-item>
+            </div>
           </ion-list>
         </div>
         <br/>

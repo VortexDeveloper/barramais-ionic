@@ -98,6 +98,11 @@ export class GroupPagePage {
 
   openEditModal(page, group){
     let modal = this.modalCtrl.create(page, {group: group});
+    modal.onDidDismiss(group => {
+      if(group){
+        this.group = new GroupModel(group);
+      }
+    });
     modal.present();
   }
 

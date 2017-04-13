@@ -16,13 +16,24 @@
 <ion-content padding>
   <ion-list>
     <ion-item-divider color="light">Áreas de interesse</ion-item-divider>
-        <ion-item *ngFor="let interest_area of interestList" (click)="toggleUserSelectedArea(interest_area)">
+        <!-- <ion-item *ngFor="let interest_area of interestList" (click)="toggleUserSelectedArea(interest_area)">
           <img class="image-list" src="{{host + interest_area.photo_url}}" alt="Sem foto" item-left>
           {{interest_area.name}}
           <ion-icon item-right name="boat" *ngIf="checkSelectedAreas(interest_area)"></ion-icon>
           <ion-icon item-right name="boat-outline" *ngIf="!checkSelectedAreas(interest_area)"></ion-icon>
 
-        </ion-item>
+        </ion-item> -->
+
+        <div class="interest-list">
+          <ion-item class="interest-list-items" *ngFor="let interest_area of interestList" (click)="toggleUserSelectedArea(interest_area)" no-lines>
+            <div class="image-notSelected" *ngIf="checkSelectedAreas(interest_area)">
+              <img class="image-list" src="assets/images/interest_icon1.png">
+            </div>
+            <div class="image-selected" *ngIf="!checkSelectedAreas(interest_area)">
+              <img class="image-list" src="assets/images/interest_icon1.png">
+            </div>
+          </ion-item>
+        </div>
   </ion-list>
 
   <button class="form-buttons" ion-button type="button" (click)="openNextPage(adDescriptionsPage, ad)" block>Próximo</button>

@@ -3,6 +3,10 @@
     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
       <img src="{{post.user.avatar_url}}"/>
     </ion-avatar>
+    <button type="button" *ngIf="post.user.user_id == current_user.id" item-right small (click)="deletePost(post)">
+      <ion-icon name="close"></ion-icon>
+    </button>
+
     <h2 (click)='openProfile(post.user.user_id)'>{{post.user.name}}</h2>
     <p>{{post.sent_date_format}}</p>
   </ion-item>
@@ -58,6 +62,14 @@
         </ion-avatar>
         <h2 (click)='openProfile(comment.commentator.user_id)'>{{comment.commentator.name}}</h2>
         <p>{{comment.sent_date_format}}</p>
+        <button
+          type="button"
+          *ngIf="post.user.user_id == current_user.id || comment.commentator.user_id == current_user.id"
+          item-right
+          small
+          (click)="deleteComment(post, comment)">
+          <ion-icon name="close"></ion-icon>
+        </button>
       </ion-item>
       <ion-card-content>
         <p>{{comment.body}}</p>
