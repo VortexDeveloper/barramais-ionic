@@ -20,6 +20,7 @@ export class NotificationsPage {
   user_token: any = localStorage.getItem('user');
   notifications: any[] = [];
   users: any[] = [];
+  finalUsers: any[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -28,6 +29,7 @@ export class NotificationsPage {
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.get_notifications();
+      // this.get_user_by_notification(this.notifications);
       this.get_all_users();
   }
 
@@ -38,14 +40,59 @@ export class NotificationsPage {
   get_notifications(){
     this.userProvider.get_all_notifications(this.current_user.id)
       .subscribe(response =>{
+        // console.log(response);
         this.notifications = response;
-        console.log(this.notifications);
 
-        //lógica para adquirir os usuários que notificaram, sem repetição
+        // console.log(this.notifications.length);
+
+        // this.users = [];
+        // this.finalUsers = [];
+        //
+        // for(var i = 0; i < this.notifications.length; i++){
+        //   this.userProvider.getUser(this.notifications[i].notifiable.user_id)
+        //     .subscribe(response => {
+        //       this.users.push(response);
+        //     }, error =>{
+        //       console.log("Erro ao exibir o usuário" + error.json());
+        //     });
+        // }
+        //
+        // var found = false;
+        //
+        // for(var i = 0; i < this.users.length; i++){
+        //   found = false;
+        //
+        //   for(var j = 0; j < this.finalUsers.length; j++){
+        //     if(this.users[i].id == this.finalUsers[j].id){
+        //       found = true;
+        //     }
+        //   }
+        //
+        //   if(!found){
+        //     this.finalUsers.push(this.users[i]);
+        //   }
+        // }
+        //
+        // console.log(this.finalUsers);
       }, error =>{
-          console.log("Erro ao exibir as notificações" + error.json());
+        console.log("Erro ao exibir as notificações" + error.json());
       });
   }
+
+  // get_user_by_notification(notifications){
+  //   console.log(notifications)
+  //   this.users = [];
+  //
+  //   for(var i = 0; i < notifications.length; i++){
+  //     this.userProvider.getUser(notifications[i].notifiable.user_id)
+  //       .subscribe(response => {
+  //         console.log(response);
+  //         this.users.push(response);
+  //       }, error =>{
+  //         console.log("Erro ao exibir o usuário" + error.json());
+  //       });
+  //   }
+  // }
 
   get_all_users(){
     this.userProvider.user_list()
