@@ -1,0 +1,28 @@
+<!--
+  Generated template for the Notifications page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <bm-header></bm-header>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications">
+      <div *ngFor="let user of users">
+        <div *ngIf="user.id == notification.notifiable.user_id">
+          {{user.first_name}} comentou uma publicação sua
+        </div>
+      </div>
+      <div *ngIf="!notification.opened_at">
+        Não aberta
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

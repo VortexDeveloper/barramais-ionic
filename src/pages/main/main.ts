@@ -7,6 +7,8 @@ import { ProfilePage } from '../profile/profile';
 import { ConversationPage } from '../../pages/conversation/conversation';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { NotificationsPage } from '../../pages/notifications/notifications';
+import { User } from '../../providers/user';
 
 /*
   Generated class for the Main page.
@@ -25,15 +27,20 @@ export class MainPage {
   groups: any = GroupsPage;
   profile: any = ProfilePage;
   conversation: any = ConversationPage;
+  notifications: any = NotificationsPage;
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel = new UserModel();
 
+  allNotifications: any[] = [];
+  uncheckedNotifications: any[] = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public menu: MenuController
+    public menu: MenuController,
+    private userProvider: User
   ) {
 
     }
@@ -41,6 +48,7 @@ export class MainPage {
   ionViewDidLoad() {
     this.menu.enable(true, 'menu');
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.get_notifications();
   }
 
   openPage(page) {
@@ -51,4 +59,20 @@ export class MainPage {
     this.navCtrl.setRoot(this.profile);
   }
 
+  get_notifications(){
+    this.userProvider.get_all_notifications(this.current_user.id)
+      .subscribe(response =>{
+        this.allNotifications = response;
+
+        this.uncheckedNotifications = [];
+
+        for(var i = 0; i < this.allNotifications.length; i++){
+          if(!this.allNotifications[i].opened_at){
+            this.uncheckedNotifications.push(this.allNotifications[i]);
+          }
+        }
+      }, error =>{
+          console.log("Erro ao exibir os países" + error.json());
+      });
+  }
 }
