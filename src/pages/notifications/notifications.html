@@ -15,14 +15,19 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let notification of notifications">
+      <ion-thumbnail item-left>
+        <img src="../../assets/images/4.jpg" alt="Sem foto">
+      </ion-thumbnail>
+
       <div *ngFor="let user of users">
         <div *ngIf="user.id == notification.notifiable.user_id">
-          {{user.first_name}} comentou uma publicação sua
+          {{user.first_name}} comentou sua publicação
         </div>
       </div>
-      <div *ngIf="!notification.opened_at">
-        Não aberta
-      </div>
+      <!-- <div *ngIf="!notification.opened_at">
+        Não aberta ion-information-circled
+      </div> -->
+      <ion-icon item-right name="information-circle" *ngIf="!notification.opened_at"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>
