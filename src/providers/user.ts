@@ -96,6 +96,11 @@ export class User {
     this.get_nautical_sports_by_user_url = host + "nautical_sports/get_nautical_sports_by_user";
   }
 
+  // check_notifications(user_id){
+  //   return this.authHttp.get(this.url + "/" + user_id + "/notifications/check_notifications" + ".json")
+  //     .map(res => res.json());
+  // }
+
   get_all_notifications(user_id){
     return this.authHttp.get(this.url + "/" + user_id + "/notifications" + ".json")
       .map(res => res.json());

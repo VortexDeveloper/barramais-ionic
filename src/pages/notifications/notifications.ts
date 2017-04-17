@@ -20,7 +20,6 @@ export class NotificationsPage {
   user_token: any = localStorage.getItem('user');
   notifications: any[] = [];
   users: any[] = [];
-  finalUsers: any[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -29,8 +28,6 @@ export class NotificationsPage {
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.get_notifications();
-      // this.get_user_by_notification(this.notifications);
-      this.get_all_users();
   }
 
   ionViewDidLoad() {
@@ -40,67 +37,65 @@ export class NotificationsPage {
   get_notifications(){
     this.userProvider.get_all_notifications(this.current_user.id)
       .subscribe(response =>{
-        // console.log(response);
         this.notifications = response;
-
-        // console.log(this.notifications.length);
-
-        // this.users = [];
-        // this.finalUsers = [];
-        //
-        // for(var i = 0; i < this.notifications.length; i++){
-        //   this.userProvider.getUser(this.notifications[i].notifiable.user_id)
-        //     .subscribe(response => {
-        //       this.users.push(response);
-        //     }, error =>{
-        //       console.log("Erro ao exibir o usuário" + error.json());
-        //     });
-        // }
-        //
-        // var found = false;
-        //
-        // for(var i = 0; i < this.users.length; i++){
-        //   found = false;
-        //
-        //   for(var j = 0; j < this.finalUsers.length; j++){
-        //     if(this.users[i].id == this.finalUsers[j].id){
-        //       found = true;
-        //     }
-        //   }
-        //
-        //   if(!found){
-        //     this.finalUsers.push(this.users[i]);
-        //   }
-        // }
-        //
-        // console.log(this.finalUsers);
+        this.generate_user_list(this.notifications);
+        this.open_notifications(this.notifications);
+        // this.check_notifications(this.current_user.id);
       }, error =>{
         console.log("Erro ao exibir as notificações" + error.json());
       });
   }
 
-  // get_user_by_notification(notifications){
-  //   console.log(notifications)
-  //   this.users = [];
-  //
-  //   for(var i = 0; i < notifications.length; i++){
-  //     this.userProvider.getUser(notifications[i].notifiable.user_id)
-  //       .subscribe(response => {
-  //         console.log(response);
-  //         this.users.push(response);
-  //       }, error =>{
-  //         console.log("Erro ao exibir o usuário" + error.json());
-  //       });
-  //   }
-  // }
+  generate_user_list(notifications){
+    for(var i = 0; i < notifications.length; i++){
+      this.add_to_users(notifications[i].notifiable.user_id);
+    }
+  }
 
-  get_all_users(){
-    this.userProvider.user_list()
+  add_to_users(user_id){
+    this.userProvider.getUser(user_id)
       .subscribe(response =>{
-        this.users = response;
-        console.log(this.users);
-      }, error =>{
-        console.log("Erro ao listar os usuários" + error.json);
+        var repeated_input = false;
+        repeated_input = this.check_repeated_input(user_id);
+
+        if(!repeated_input){
+          this.users.push(response);
+        }
+      }, error => {
+        console.log("Erro ao exibir o usuário" + error.json());
       });
   }
+
+  check_repeated_input(user_id){
+    var found_repeated_input = false;
+
+    for(var i = 0; i < this.users.length; i ++){
+      if(this.users[i].id == user_id){
+        found_repeated_input = true;
+      }
+    }
+
+    return found_repeated_input;
+  }
+
+  open_notifications(notifications){
+    var today = new Date;
+
+    for(var i = 0; i < notifications.length; i++){
+      if(!notifications[i].opened_at){
+        notifications[i].opened_at = today;
+      }
+    }
+
+    console.log(this.notifications);
+  }
+
+  // check_notifications(user_id){
+  //   this.userProvider.check_notifications(user_id)
+  //     .subscribe(response =>{
+  //
+  //     }, error =>{
+  //       console.log("Não foi possível abrir as notificações" + error.json());
+  //     });
+  // }
 }
