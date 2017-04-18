@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -24,6 +24,7 @@ export class NotificationsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public viewCtrl: ViewController,
     private userProvider: User
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
@@ -39,8 +40,8 @@ export class NotificationsPage {
       .subscribe(response =>{
         this.notifications = response;
         this.generate_user_list(this.notifications);
-        this.open_notifications(this.notifications);
-        // this.check_notifications(this.current_user.id);
+        this.check_notifications(this.current_user.id);
+        console.log(this.notifications);
       }, error =>{
         console.log("Erro ao exibir as notificações" + error.json());
       });
@@ -78,24 +79,16 @@ export class NotificationsPage {
     return found_repeated_input;
   }
 
-  open_notifications(notifications){
-    var today = new Date;
+  check_notifications(user_id){
+    this.userProvider.open_all_user_notifications(user_id)
+      .subscribe(response =>{
 
-    for(var i = 0; i < notifications.length; i++){
-      if(!notifications[i].opened_at){
-        notifications[i].opened_at = today;
-      }
-    }
-
-    console.log(this.notifications);
+      }, error =>{
+        console.log("Não foi possível abrir as notificações" + error.json());
+      });
   }
 
-  // check_notifications(user_id){
-  //   this.userProvider.check_notifications(user_id)
-  //     .subscribe(response =>{
-  //
-  //     }, error =>{
-  //       console.log("Não foi possível abrir as notificações" + error.json());
-  //     });
-  // }
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 }

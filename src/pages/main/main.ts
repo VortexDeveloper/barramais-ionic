@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController} from 'ionic-angular';
+import { NavController, NavParams, MenuController, ModalController} from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { GroupsPage } from '../groups/groups';
 import { FeedsPage } from '../feeds/feeds';
@@ -39,6 +39,7 @@ export class MainPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public modalCtrl: ModalController,
     public menu: MenuController,
     private userProvider: User
   ) {
@@ -57,6 +58,14 @@ export class MainPage {
 
   openProfile(){
     this.navCtrl.setRoot(this.profile);
+  }
+
+  openNotificationsModal(){
+    let modal = this.modalCtrl.create(NotificationsPage);
+    modal.onDidDismiss(notifications => {
+      this.get_notifications();
+    });
+    modal.present();
   }
 
   get_notifications(){
