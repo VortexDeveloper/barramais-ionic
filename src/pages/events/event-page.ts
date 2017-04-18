@@ -161,7 +161,7 @@ export class EventPagePage {
   userFriends(event){
     this.userProvider.event_friends(event.id)
     .subscribe(response => {
-      this.friends = response.users;
+      this.friends = response;
     }, error => {
       console.log(error.json());
     });

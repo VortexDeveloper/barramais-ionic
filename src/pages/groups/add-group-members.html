@@ -25,11 +25,11 @@
           </div>
         </div>
       </ion-label>
-      <!-- <ion-checkbox [hidden]="!showAdminActions" item-right color="dark" checked="false" [(ngModel)]="member.invited" (ionChange)="getSelect(member.invited, member)"></ion-checkbox> -->
+      <ion-checkbox [hidden]="!showAdminActions" item-right color="dark" checked="false" [(ngModel)]="member.invited" (ionChange)="getSelect(member.invited, member)"></ion-checkbox>
     </ion-item>
   </ion-list>
   <!-- <button [hidden]="!showAdminActions" class="form-buttons" ion-button type="button" block name="button" (click)="invitation(selectedMembers)">Convidar</button> -->
-  <!-- <ion-fab [hidden]="!showAdminActions" right bottom>
+  <ion-fab [hidden]="!showAdminActions" right bottom>
     <button ion-fab color="danger" (click)="invitation(selectedMembers)"><ion-icon name="mail"></ion-icon></button>
-  </ion-fab> -->
+  </ion-fab>
 </ion-content>

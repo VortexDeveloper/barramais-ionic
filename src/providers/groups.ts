@@ -20,7 +20,8 @@ export class Groups {
   private invitation_url: string;
   private all_members_url: string;
   private confirmed_members_url: string;
-  private pending_members_url: string;
+  private pending_by_user_url: string;
+  private pending_by_admin_url: string;
   private refused_members_url: string;
 
   constructor(
@@ -38,7 +39,8 @@ export class Groups {
       this.invitation_url = host + "groups/invitation/";
       this.all_members_url = host + "groups/all_members/";
       this.confirmed_members_url = host + "groups/confirmed_members/";
-      this.pending_members_url = host + "groups/pending_members/";
+      this.pending_by_user_url = host + "groups/pending_by_user/";
+      this.pending_by_admin_url = host + "groups/pending_by_admin/";
       this.refused_members_url = host + "groups/refused_members/";
     }
 
@@ -76,8 +78,13 @@ export class Groups {
         .map(res => res.json());
     }
 
-    pending_members(group){
-      return this.authHttp.get(this.pending_members_url + group.id + ".json")
+    pending_by_user(group){
+      return this.authHttp.get(this.pending_by_user_url + group.id + ".json")
+        .map(res => res.json());
+    }
+
+    pending_by_admin(group){
+      return this.authHttp.get(this.pending_by_admin_url + group.id + ".json")
         .map(res => res.json());
     }
 

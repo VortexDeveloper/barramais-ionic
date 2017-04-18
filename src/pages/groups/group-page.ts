@@ -7,6 +7,7 @@ import { GroupModalPage } from '../groups/group-modal';
 import { GroupsPage } from '../groups/groups';
 import { EventsPage } from '../events/events';
 import { GroupMembersPage } from "../groups/group-members";
+import { AddGroupMembersPage } from "../groups/add-group-members";
 import { FriendsPage } from '../friends/friends';
 import { UserModel } from "../../models/user.model";
 import { GroupModel } from "../../models/group.model";
@@ -15,6 +16,8 @@ import { User } from '../../providers/user';
 import { Posts } from '../../providers/posts';
 import { ToastController } from 'ionic-angular';
 import { Groups } from '../../providers/groups';
+import { PopoverController } from 'ionic-angular';
+import { PopoverPage } from '../groups/group-popover';
 
 /*
   Generated class for the Profile page.
@@ -41,17 +44,21 @@ export class GroupPagePage {
   group: GroupModel = new GroupModel();
   postModal: any = PostModalPage;
   groupMembers: any = GroupMembersPage;
+  addGroupMembers: any = AddGroupMembersPage;
   allMembers: any;
   l_allMembers: any;
   confirmedMembers: any;
   l_confirmedMembers: any;
-  pendingMembers: any;
-  l_pendingMembers: any;
+  pendingByUser: any
+  l_pendingByUser: any;
+  pendingByAdmin: any;
+  l_pendingByAdmin: any;
   refusedMembers: any;
   l_refusedMembers: any;
   showAdminActions: boolean = false;
   showMemberActions: boolean = false;
   showInvitedMemberActions: boolean = false;
+  showGroupInformation: boolean = false;
   friends: any;
   posts: Array<any>;
 
@@ -63,7 +70,8 @@ export class GroupPagePage {
     private userProvider: User,
     private postsProvider: Posts,
     public modalCtrl: ModalController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public popoverCtrl: PopoverController
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.group = new GroupModel(params.data.group);
@@ -76,8 +84,27 @@ export class GroupPagePage {
 
   }
 
+  presentPopover(event: Event) {
+    let popover = this.popoverCtrl.create(PopoverPage,
+      {
+        group: this.group,
+        user: this.user,
+        showAdminActions: this.showAdminActions,
+        showMemberActions: this.showMemberActions,
+        showInvitedMemberActions: this.showInvitedMemberActions
+      });
+    popover.onDidDismiss(group => {
+      if(group){
+        this.group = new GroupModel(group);
+      }
+      this.loadMembers(this.group);
+    });
+    popover.present({ ev: event });
+  }
+
   loadMembers(group){
-    this.pending_members(group);
+    this.pending_by_user(group);
+    this.pending_by_admin(group);
     this.confirmed_members(group);
     this.all_members(group);
     this.refused_members(group);
@@ -143,8 +170,8 @@ export class GroupPagePage {
   all_members(group){
     this.groupProvider.all_members(group)
       .subscribe(response =>{
-        this.allMembers = response.all_members;
-        this.l_allMembers = response.all_members.length;
+        this.allMembers = response;
+        this.l_allMembers = response.length;
         this.verifyInvitedGroupMember(this.allMembers);
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
@@ -154,19 +181,29 @@ export class GroupPagePage {
   confirmed_members(group){
     this.groupProvider.confirmed_members(group)
       .subscribe(response =>{
-        this.confirmedMembers = response.confirmed_members;
-        this.l_confirmedMembers = response.confirmed_members.length;
+        this.confirmedMembers = response;
+        this.l_confirmedMembers = response.length;
         this.verifyGroupMember(this.confirmedMembers);
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
       });
   }
 
-  pending_members(group){
-    this.groupProvider.pending_members(group)
+  pending_by_user(group){
+    this.groupProvider.pending_by_user(group)
       .subscribe(response =>{
-        this.pendingMembers= response.pending_members;
-        this.l_pendingMembers = response.pending_members.length;
+        this.pendingByUser= response;
+        this.l_pendingByUser = response.length;
+      }, error =>{
+        console.log("Erro ao exibir os membros: " + error.json());
+      });
+  }
+
+  pending_by_admin(group){
+    this.groupProvider.pending_by_admin(group)
+      .subscribe(response =>{
+        this.pendingByAdmin= response;
+        this.l_pendingByAdmin = response.length;
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
       });
@@ -175,8 +212,8 @@ export class GroupPagePage {
   refused_members(group){
     this.groupProvider.refused_members(group)
       .subscribe(response =>{
-        this.refusedMembers = response.refused_members;
-        this.l_refusedMembers = response.refused_members.length;
+        this.refusedMembers = response;
+        this.l_refusedMembers = response.length;
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
@@ -185,7 +222,7 @@ export class GroupPagePage {
   userFriends(group){
     this.userProvider.group_friends(group.id)
     .subscribe(response => {
-      this.friends = response.users;
+      this.friends = response;
     }, error => {
       console.log(error.json());
     });
@@ -228,6 +265,10 @@ export class GroupPagePage {
       },
       (error) => console.log(error)
     );
+  }
+
+  groupInformation(){
+    this.showGroupInformation = !this.showGroupInformation;
   }
 
 }

@@ -181,4 +181,15 @@ page-group-page {
         margin: 10px;
       }
 
+      .groupInformation{
+        padding: 10px;
+      }
+
+      .button-more {
+          position: absolute !important;
+          z-index: 999 !important;
+          background: transparent !important;
+          background-color: transparent !important;
+      }
+
 }
