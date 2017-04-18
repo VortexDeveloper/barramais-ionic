@@ -14,27 +14,22 @@
 
 <ion-content padding>
   <ion-item-divider color="light">Selecione seus interesses</ion-item-divider>
+  <ion-list>
+      <div class="interest-list">
+        <ion-item class="interest-list-items" *ngFor="let interest of interests" (click)="toggleUserInterests(interest)" no-lines>
+          <div class="image-notSelected" *ngIf="checkUserInterests(interest)">
+            <!-- interest.photo_url -->
+            <img class="image-list" src="assets/images/interest_icon1.png">
+          </div>
+          <div class="image-selected" *ngIf="!checkUserInterests(interest)">
+            <!-- interest.photo_url -->
+            <img class="image-list" src="assets/images/interest_icon1.png">
+          </div>
+        </ion-item>
+      </div>
+  </ion-list>
 
-
-    <ion-list>
-      <ion-item-divider color="light">Áreas de interesse</ion-item-divider>
-        <div class="interest-list">
-          <ion-item class="interest-list-items" *ngFor="let interest of interests" (click)="toggleUserInterests(interest)" no-lines>
-            <!-- item-left -->
-            <div class="image-notSelected" *ngIf="checkUserInterests(interest)">
-              <img class="image-list" src="assets/images/interest_icon1.png">
-            </div>
-            <div class="image-selected" *ngIf="!checkUserInterests(interest)">
-              <img class="image-list" src="assets/images/interest_icon1.png">
-            </div>
-            <!-- {{interest.name}} -->
-            <!-- <ion-icon item-right name="boat" *ngIf="checkUserInterests(interest)"></ion-icon>
-            <ion-icon item-right name="boat-outline" *ngIf="!checkUserInterests(interest)"></ion-icon> -->
-          </ion-item>
-        </div>
-    </ion-list>
-
-
-  <button class="form-buttons" ion-button type="button" (click)="updateUserInterests()" block>Salvar interesses</button>
-  <button class="form-buttons" ion-button type="button" (click)="redirectPage(mainPage)" block>Continuar sem salvar</button>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="updateUserInterests()"><ion-icon name="done-all"></ion-icon></button>
+  </ion-fab>
 </ion-content>
