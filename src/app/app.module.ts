@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { FeedsPage } from '../pages/feeds/feeds';
 import { GroupsPage } from '../pages/groups/groups';
+import { PopoverPage } from '../pages/groups/group-popover';
 import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { User } from '../providers/user';
@@ -19,6 +20,7 @@ import { EventGuestsPage } from '../pages/events/event-guests';
 import { EventPagePage } from '../pages/events/event-page';
 import { GroupModalPage } from '../pages/groups/group-modal';
 import { GroupMembersPage } from '../pages/groups/group-members';
+import { AddGroupMembersPage } from '../pages/groups/add-group-members';
 import { GalleryModalPage } from '../pages/gallery-modal/gallery-modal';
 import { GroupPagePage } from '../pages/groups/group-page';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
@@ -138,7 +140,9 @@ export function getAuthHttp(http) {
     GroupPagePage,
     GalleryModalPage,
     InterestSelectionPage,
-    NotificationsPage
+    NotificationsPage,
+    AddGroupMembersPage,
+    PopoverPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -199,7 +203,9 @@ export function getAuthHttp(http) {
     GroupPagePage,
     GalleryModalPage,
     InterestSelectionPage,
-    NotificationsPage
+    NotificationsPage,
+    AddGroupMembersPage,
+    PopoverPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

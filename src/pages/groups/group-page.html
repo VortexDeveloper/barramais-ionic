@@ -5,14 +5,10 @@
 </ion-header>
 <ion-content>
   <div class="background-image">
+    <button ion-button icon-only class="button-more" (click)="presentPopover($event)">
+      <ion-icon name="more"></ion-icon>
+    </button>
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
-    <button icon-left class="perfil-actions" color="primary" ion-button  >
-      Participar
-    </button>
-      <button icon-left class="perfil-actions" color="secondary" (click)="openEditModal(groupModal, group)" ion-button  >
-      <ion-icon name="create"></ion-icon>
-      Editar
-    </button>
   </div>
   <div class="main-content">
     <ion-item>
@@ -27,25 +23,28 @@
             Membros
           </p>
         </ion-col>
-        <ion-col width-25 (click)="openModal(groupMembers, friends)" *ngIf="showMemberActions || showAdminActions">
+        <ion-col width-25 (click)="openModal(addGroupMembers, friends)" *ngIf="showMemberActions || showAdminActions">
           <ion-icon name="person-add" class="icon-button"></ion-icon>
           <p class="icon-word">
             membros
           </p>
         </ion-col>
-        <ion-col width-25 (click)="openModal(groupMembers, pendingMembers)" *ngIf="showMemberActions || showAdminActions">
+        <ion-col width-25 (click)="openModal(groupMembers, pendingByAdmin)" *ngIf="showMemberActions || showAdminActions">
           <ion-icon name="time" class="icon-button"></ion-icon>
           <p class="icon-word">
             Pendentes
           </p>
         </ion-col>
-        <ion-col width-25>
+        <ion-col width-25 (click)="groupInformation()">
           <ion-icon name="ios-information-circle" class="icon-button"></ion-icon>
           <p class="icon-word">
             Info
           </p>
         </ion-col>
       </ion-row>
+      <div class="groupInformation" [hidden]="!showGroupInformation">
+        {{group.about}}
+      </div>
     </div>
     <bm-post [posts]="posts"></bm-post>
   </div>

@@ -66,6 +66,7 @@ export class GroupModalPage {
     this.groupProvider.update(group)
     .subscribe(group_params => {
         this.group = new GroupModel(group_params);
+        this.viewCtrl.dismiss(group_params);
         this.presentToast('Grupo atualizado com sucesso!');
     }, error => {
         console.log(error.json());

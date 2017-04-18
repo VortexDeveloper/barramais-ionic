@@ -16,10 +16,10 @@ import { MessagesPage } from '../messages/messages';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-group-members',
-  templateUrl: 'group-members.html'
+  selector: 'page-add-group-members',
+  templateUrl: 'add-group-members.html'
 })
-export class GroupMembersPage {
+export class AddGroupMembersPage {
 
   members: any;
   group: any;

@@ -27,4 +27,15 @@ bm-post {
       border-radius: 3px;
   }
 
+  .destroy-button {
+    font-size: 0.7em !important;
+    margin: 10px !important;
+    background-color: transparent !important;
+  }
+
+  .post-comments {
+    background-color: rgba(241, 241, 241, 0.57);
+    border-bottom: 1px solid #efeaea;
+  }
+
 }
