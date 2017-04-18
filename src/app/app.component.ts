@@ -45,6 +45,7 @@ import { Events } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { NotificationViewPage } from '../pages/notification-view/notification-view';
 
 @Component({
   selector: 'app-menu',
