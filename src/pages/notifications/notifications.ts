@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -24,11 +24,11 @@ export class NotificationsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public viewCtrl: ViewController,
     private userProvider: User
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.get_notifications();
-      this.get_all_users();
   }
 
   ionViewDidLoad() {
@@ -39,21 +39,56 @@ export class NotificationsPage {
     this.userProvider.get_all_notifications(this.current_user.id)
       .subscribe(response =>{
         this.notifications = response;
+        this.generate_user_list(this.notifications);
+        this.check_notifications(this.current_user.id);
         console.log(this.notifications);
-
-        //lógica para adquirir os usuários que notificaram, sem repetição
       }, error =>{
-          console.log("Erro ao exibir as notificações" + error.json());
+        console.log("Erro ao exibir as notificações" + error.json());
       });
   }
 
-  get_all_users(){
-    this.userProvider.user_list()
+  generate_user_list(notifications){
+    for(var i = 0; i < notifications.length; i++){
+      this.add_to_users(notifications[i].notifiable.user_id);
+    }
+  }
+
+  add_to_users(user_id){
+    this.userProvider.getUser(user_id)
       .subscribe(response =>{
-        this.users = response;
-        console.log(this.users);
-      }, error =>{
-        console.log("Erro ao listar os usuários" + error.json);
+        var repeated_input = false;
+        repeated_input = this.check_repeated_input(user_id);
+
+        if(!repeated_input){
+          this.users.push(response);
+        }
+      }, error => {
+        console.log("Erro ao exibir o usuário" + error.json());
       });
+  }
+
+  check_repeated_input(user_id){
+    var found_repeated_input = false;
+
+    for(var i = 0; i < this.users.length; i ++){
+      if(this.users[i].id == user_id){
+        found_repeated_input = true;
+      }
+    }
+
+    return found_repeated_input;
+  }
+
+  check_notifications(user_id){
+    this.userProvider.open_all_user_notifications(user_id)
+      .subscribe(response =>{
+
+      }, error =>{
+        console.log("Não foi possível abrir as notificações" + error.json());
+      });
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }
