@@ -94,7 +94,7 @@ export class NotificationsPage {
     this.viewCtrl.dismiss();
   }
 
-  openPage(page){
-    this.navCtrl.push(page);
+  openPage(page, notification_id, user){
+    this.navCtrl.push(page, {'notification_id': notification_id, 'user': user});
   }
 }

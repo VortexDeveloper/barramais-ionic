@@ -50,6 +50,11 @@ export class Posts {
       .map(res => res.json());
   }
 
+  get_post_by_id(post_id){
+    return this.authHttp.get(this.host_post + '/' + post_id + ".json")
+      .map(res => res.json());
+  }
+
   delete(post) {
     return this.authHttp.delete(this.delete_url(post))
     .map(res => res.json());

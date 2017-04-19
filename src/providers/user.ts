@@ -52,6 +52,7 @@ export class User {
   private get_nautical_sports_by_user_url: string;
   private get_notifications: string;
   private open_all_user_notifications_url: string;
+  private comments_url: string;
 
   constructor(
     public http: Http,
@@ -96,6 +97,12 @@ export class User {
     this.update_user_nautical_sports_url = host + "users/update_user_nautical_sports";
     this.get_nautical_sports_by_user_url = host + "nautical_sports/get_nautical_sports_by_user";
     this.open_all_user_notifications_url = host + "users/open_all_user_notifications/";
+    this.comments_url = host + "comments/";
+  }
+
+  get_notification_by_id(user_id, notification_id){
+    return this.authHttp.get(this.comments_url + notification_id + ".json")
+      .map(res => res.json());
   }
 
   open_all_user_notifications(user_id){

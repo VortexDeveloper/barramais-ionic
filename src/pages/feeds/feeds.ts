@@ -48,6 +48,7 @@ export class FeedsPage {
     this.postsProvider.index().subscribe(
       (posts) => {
         this.posts = posts;
+        console.log(this.posts);
       },
       (error) => console.log(error)
     );
