@@ -44,6 +44,9 @@ export class PostModalPage {
     private camera: Camera
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    let domain_config = navParams.get('domain_config');
+    this.post.domain = domain_config.domain;
+    this.post.domain_id = domain_config.domain_id;
   }
 
   ionViewDidLoad() {

@@ -50,6 +50,11 @@ export class Posts {
       .map(res => res.json());
   }
 
+  posts_with_domain(domain_config) {
+    return this.authHttp.get(this.posts_with_domain_url(domain_config))
+      .map(res => res.json());
+  }
+
   delete(post) {
     return this.authHttp.delete(this.delete_url(post))
     .map(res => res.json());
@@ -103,5 +108,9 @@ export class Posts {
 
   delete_comment_url(comment) {
     return this.host_comment + '/' + comment.id + '.json';
+  }
+
+  posts_with_domain_url(config) {
+    return this.host_post + '/' + config.domain + '/' + config.domain_id + '.json';
   }
 }

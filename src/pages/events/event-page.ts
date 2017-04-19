@@ -86,7 +86,12 @@ export class EventPagePage {
   }
 
   openPostModal() {
-    let modal = this.modalCtrl.create(PostModalPage);
+    let domain = {
+      domain: 'events',
+      domain_id: this.event.id
+    };
+
+    let modal = this.modalCtrl.create(PostModalPage, {'domain_config': domain});
     modal.onDidDismiss(newPost => {
       if(newPost) this.posts.unshift(newPost);
     });
@@ -179,7 +184,7 @@ export class EventPagePage {
   }
 
   accept_event(){
-    this.userProvider.accept_event(this.user, this.event).
+    this.userProvider.accept_event(this.event).
     subscribe(response =>{
       this.openPage(EventPagePage, this.event);
       this.presentToast(response.sucess);
@@ -198,7 +203,12 @@ export class EventPagePage {
   }
 
   loadPosts() {
-    this.postsProvider.index().subscribe(
+    let domain_config = {
+      domain: 'events',
+      domain_id: this.event.id
+    };
+
+    this.postsProvider.posts_with_domain(domain_config).subscribe(
       (posts) => this.posts = posts,
       (error) => console.log(error)
     );

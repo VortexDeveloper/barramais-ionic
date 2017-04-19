@@ -134,7 +134,12 @@ export class GroupPagePage {
   }
 
   openPostModal() {
-    let modal = this.modalCtrl.create(PostModalPage);
+    let domain = {
+      domain: 'groups',
+      domain_id: this.group.id
+    };
+
+    let modal = this.modalCtrl.create(PostModalPage, {'domain_config': domain});
     modal.onDidDismiss(newPost => {
       if(newPost) this.posts.unshift(newPost);
     });
@@ -259,7 +264,12 @@ export class GroupPagePage {
   }
 
   loadPosts() {
-    this.postsProvider.index().subscribe(
+    let domain_config = {
+      domain: 'groups',
+      domain_id: this.group.id
+    };
+
+    this.postsProvider.posts_with_domain(domain_config).subscribe(
       (posts) => {
         this.posts = posts;
       },
