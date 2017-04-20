@@ -75,6 +75,7 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 import { Facebook } from '@ionic-native/facebook';
 import { NotificationsPage } from "../pages/notifications/notifications";
+import { NotificationViewPage } from '../pages/notification-view/notification-view';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -144,7 +145,11 @@ export function getAuthHttp(http) {
     NotificationsPage,
     AddGroupMembersPage,
     PopoverPage,
+<<<<<<< HEAD
     PhotoModalPage
+=======
+    NotificationViewPage
+>>>>>>> d110ea970bae388290ca0fbdfe6162c8f04fe564
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -208,7 +213,11 @@ export function getAuthHttp(http) {
     NotificationsPage,
     AddGroupMembersPage,
     PopoverPage,
+<<<<<<< HEAD
     PhotoModalPage
+=======
+    NotificationViewPage
+>>>>>>> d110ea970bae388290ca0fbdfe6162c8f04fe564
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

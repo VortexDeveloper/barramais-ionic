@@ -8,7 +8,15 @@
     <div class="background-image">
       <img src="{{user.cover_photo_url}}" id='user_cover_photo' />
       <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()" [hidden]="visitorActions"></ion-icon>
-      <button icon-left class="perfil-actions" ion-button color="secondary" style="right: 79px !important;" *ngIf="visitorActions && isFriend == false">
+      <button
+      icon-left
+      class="perfil-actions"
+      ion-button
+      color="secondary"
+      style="right: 79px !important;"
+      *ngIf="visitorActions && isFriend == false"
+      (click)='request_friendship(user)'
+      >
         <ion-icon name="add"></ion-icon>
         Amigo
       </button>

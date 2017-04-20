@@ -29,8 +29,12 @@ bm-post {
 
   .destroy-button {
     font-size: 0.7em !important;
-    margin: 10px !important;
+    margin: 4px 0 !important;
     background-color: transparent !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #aeadad;
   }
 
   .post-comments {
@@ -38,4 +42,20 @@ bm-post {
     border-bottom: 1px solid #efeaea;
   }
 
+  .post-header .post-header-title, .post-header ion-avatar {
+    padding-top: 5px;
+  }
+
+  .post-header ion-avatar {
+    margin-right: 10px !important;
+  }
+
+  .post-header-title {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .post-header-title .domain_title {
+    margin-left: 5px;
+  }
 }

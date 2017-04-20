@@ -56,6 +56,7 @@ export class User {
   private is_member_of_url: string;
   private send_request_to_url: string;
   private i_was_invited_to_url: string;
+  private comments_url: string;
 
   constructor(
     public http: Http,
@@ -118,6 +119,11 @@ export class User {
 
   i_was_invited_to(group){
     return this.authHttp.get(this.i_was_invited_to_url + group.id + ".json")
+    this.comments_url = host + "comments/";
+  }
+
+  get_notification_by_id(user_id, notification_id){
+    return this.authHttp.get(this.comments_url + notification_id + ".json")
       .map(res => res.json());
   }
 
@@ -248,8 +254,8 @@ export class User {
       .map(res => res.json());
   }
 
-  accept_event(current_user, event){
-    return this.authHttp.put(this.accept_event_url + current_user.id + ".json", {'event': event.id})
+  accept_event(event){
+    return this.authHttp.put(this.accept_event_url + event.id + ".json", {})
     .map(res => res.json());
   }
 

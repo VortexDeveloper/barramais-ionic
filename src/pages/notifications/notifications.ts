@@ -3,6 +3,8 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { NotificationViewPage } from '../notification-view/notification-view';
+import { MainPage } from '../main/main';
 
 /*
   Generated class for the Notifications page.
@@ -20,6 +22,8 @@ export class NotificationsPage {
   user_token: any = localStorage.getItem('user');
   notifications: any[] = [];
   users: any[] = [];
+  notificationViewPage: any = NotificationViewPage;
+  main: any = MainPage;
 
   constructor(
     public navCtrl: NavController,
@@ -90,5 +94,13 @@ export class NotificationsPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  goBack() {
+    this.navCtrl.setRoot(this.main);
+  }
+
+  openPage(page, notification_id, user){
+    this.navCtrl.push(page, {'notification_id': notification_id, 'user': user});
   }
 }

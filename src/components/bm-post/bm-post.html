@@ -1,5 +1,5 @@
 <ion-card *ngFor="let post of posts">
-  <ion-item>
+  <ion-item class='post-header'>
     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
       <img src="{{post.user.avatar_url}}"/>
     </ion-avatar>
@@ -7,7 +7,18 @@
       <ion-icon name="close"></ion-icon>
     </button>
 
-    <h2 (click)='openProfile(post.user.user_id)'>{{post.user.name}}</h2>
+    <div class='post-header-title'>
+      <h2 (click)='openProfile(post.user.user_id)'>
+        {{post.user.name}}
+      </h2>
+      <h2
+      class='domain_title'
+      (click)='openDomain(post.domain_type, post.domain)'
+      *ngIf='notTheAuthor(post)'
+      >
+        > {{getDomainName(post)}}
+      </h2>
+    </div>
     <p>{{post.sent_date_format}}</p>
   </ion-item>
   <ion-card-content>

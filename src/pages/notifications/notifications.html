@@ -10,9 +10,10 @@
       Notificações
     </ion-title>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      <button ion-button (click)="goBack()">
+        <!-- <span ion-text color="primary" showWhen="ios">Cancel</span> -->
+        <!-- <ion-icon name="md-close" showWhen="android,windows"></ion-icon> -->
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -20,14 +21,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let notification of notifications">
-      <div *ngFor="let user of users">
-        <div *ngIf="user.id == notification.notifiable.user_id">
-          <ion-thumbnail item-left>
+    <ion-item *ngFor="let notification of notifications" >
+      <div *ngFor="let user of users" (click)="openPage(notificationViewPage, notification.notifiable.id, user)">
+        <div style="width: 20%; float:left">
+          <ion-thumbnail *ngIf="user.id == notification.notifiable.user_id" item-left>
             <img src="{{user.avatar_url}}" alt="Sem foto">
           </ion-thumbnail>
+        </div>
 
-          {{user.first_name}} comentou sua publicação
+        <div style="width=80%; float:center">
+          <h2>{{user.first_name}}</h2>
+          <p>Comentou em sua publicação</p>
         </div>
       </div>
     </ion-item>
