@@ -60,4 +60,32 @@ page-album-list {
     color: #fff;
     background-color: #faa35f;
   }
+
+  .photos{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+  }
+
+  .photo {
+      width: 80px;
+      height: 80px;
+      background: #ccc;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1px;
+  }
+
+  .photo img {
+    max-width: 140%;
+    width: auto;
+    height: auto;
+  }
+
 }

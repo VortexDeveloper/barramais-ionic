@@ -23,13 +23,13 @@
             Membros
           </p>
         </ion-col>
-        <ion-col width-25 (click)="openModal(addGroupMembers, friends)" *ngIf="showMemberActions || showAdminActions">
+        <ion-col width-25 (click)="openModal(addGroupMembers, friends)" *ngIf="is_member_of || showAdminActions">
           <ion-icon name="person-add" class="icon-button"></ion-icon>
           <p class="icon-word">
             membros
           </p>
         </ion-col>
-        <ion-col width-25 (click)="openModal(groupMembers, pendingByAdmin)" *ngIf="showMemberActions || showAdminActions">
+        <ion-col width-25 (click)="openModal(groupMembers, pendingByUser)" *ngIf="is_member_of || showAdminActions">
           <ion-icon name="time" class="icon-button"></ion-icon>
           <p class="icon-word">
             Pendentes

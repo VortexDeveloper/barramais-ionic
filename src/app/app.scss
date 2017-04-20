@@ -1,15 +1,10 @@
 app-menu {
 
-  .icon-person-tab:before {
-    content: "\e900";
-  }
-
-  .icon-ion-ios-add-circle-outline:before {
-    content: "\f100";
-  }
+    @import url('https://fonts.googleapis.com/css?family=Lato|Montserrat');
 
   * {
     box-shadow: none !important;
+    font-family: 'Montserrat' !important;
   }
 
   a {

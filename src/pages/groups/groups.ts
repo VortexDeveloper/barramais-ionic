@@ -27,8 +27,9 @@ export class GroupsPage {
 
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
-  groups: any = "my-groups";
+  groups: any = "all-groups";
   groupPage: any = GroupPagePage;
+  all_groups: Array<any>;
   my_groups: Array<any>;
   confirmed_groups: Array<any>;
   pending_groups: Array<any>;
@@ -62,6 +63,7 @@ export class GroupsPage {
   }
 
   loadGroups(current_user){
+    this.allGroups();
     this.myGroups(current_user);
     this.confirmedGroups(current_user);
     this.pendingGroups(current_user);
@@ -74,6 +76,15 @@ export class GroupsPage {
         this.my_groups = response.my_groups;
       }, error =>{
         console.log("Erro ao exibir meus eventos: " + error.json());
+      });
+  }
+
+  allGroups(){
+    this.userProvider.allGroups()
+      .subscribe(response =>{
+        this.all_groups = response.all_groups;
+      }, error =>{
+        console.log("Erro ao exibir todos os eventos: " + error.json());
       });
   }
 

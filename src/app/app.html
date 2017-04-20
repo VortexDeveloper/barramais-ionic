@@ -29,7 +29,7 @@
             </a>
             <ul class="sub-menu-item" [hidden]="!showConvidarAmigos">
               <li>
-                <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
+                <button class="item-sub" menuClose ion-item no-lines (click)="inviteFacebookFriends()">
                   Convidar do Facebook
                 </button>
               </li>
@@ -192,12 +192,6 @@
           <button class="item item-block item-ios item-border" menuClose ion-item (click)="openPage(userPage)">
             <ion-icon name="cog" class="icon-itens"></ion-icon>
             Configurações
-          </button>
-        </li>
-        <li>
-          <button menuClose ion-item (click)="inviteFacebookFriends()">
-            <ion-icon name="cog" class="icon-itens"></ion-icon>
-            Convidar Amigos do Facebook
           </button>
         </li>
         <li>
