@@ -145,11 +145,8 @@ export function getAuthHttp(http) {
     NotificationsPage,
     AddGroupMembersPage,
     PopoverPage,
-<<<<<<< HEAD
-    PhotoModalPage
-=======
+    PhotoModalPage,
     NotificationViewPage
->>>>>>> d110ea970bae388290ca0fbdfe6162c8f04fe564
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -213,11 +210,8 @@ export function getAuthHttp(http) {
     NotificationsPage,
     AddGroupMembersPage,
     PopoverPage,
-<<<<<<< HEAD
-    PhotoModalPage
-=======
+    PhotoModalPage,
     NotificationViewPage
->>>>>>> d110ea970bae388290ca0fbdfe6162c8f04fe564
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
