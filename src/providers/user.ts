@@ -230,8 +230,8 @@ export class User {
       .map(res => res.json());
   }
 
-  accept_event(current_user, event){
-    return this.authHttp.put(this.accept_event_url + current_user.id + ".json", {'event': event.id})
+  accept_event(event){
+    return this.authHttp.put(this.accept_event_url + event.id + ".json", {})
     .map(res => res.json());
   }
 

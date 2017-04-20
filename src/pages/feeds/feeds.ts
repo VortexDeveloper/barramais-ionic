@@ -33,7 +33,12 @@ export class FeedsPage {
   }
 
   openModal() {
-    let modal = this.modalCtrl.create(PostModalPage);
+    let domain = {
+      domain: 'profiles',
+      domain_id: this.user.id
+    };
+
+    let modal = this.modalCtrl.create(PostModalPage, {'domain_config': domain});
     modal.onDidDismiss(newPost => {
       if(newPost) this.posts.unshift(newPost);
     });

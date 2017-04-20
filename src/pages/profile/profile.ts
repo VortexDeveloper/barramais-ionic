@@ -68,7 +68,6 @@ export class ProfilePage {
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.setUser(params.data.user);
-    this.loadPosts();
   }
 
   ionViewDidLoad() {
@@ -88,7 +87,11 @@ export class ProfilePage {
   }
 
   openModal() {
-    let modal = this.modalCtrl.create(PostModalPage);
+    let domain = {
+      domain: 'profiles',
+      domain_id: this.user.id
+    };
+    let modal = this.modalCtrl.create(PostModalPage, {'domain_config': domain});
     modal.onDidDismiss(newPost => {
       if(newPost) this.posts.unshift(newPost);
     });
@@ -182,7 +185,12 @@ export class ProfilePage {
   }
 
   loadPosts() {
-    this.postsProvider.index().subscribe(
+    let domain_config = {
+      domain: 'profiles',
+      domain_id: this.user.id
+    };
+    console.log(domain_config);
+    this.postsProvider.posts_with_domain(domain_config).subscribe(
       (posts) => this.posts = posts,
       (error) => console.log(error)
     );
@@ -191,6 +199,7 @@ export class ProfilePage {
   setUser(user_id){
     if(!user_id){
       this.user = this.current_user;
+      this.loadPosts();
     } else {
       this.userProvider.getUser(user_id)
       .subscribe(
@@ -199,6 +208,7 @@ export class ProfilePage {
           this.checkUser();
           this.loadFriends(user);
           user.id == this.current_user.id? this.isFriend = null : this.is_friend_of(user);
+          this.loadPosts();
         },
         (error) => console.log(error)
       );
