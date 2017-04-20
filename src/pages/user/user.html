@@ -379,11 +379,11 @@
               <ion-item class="interest-list-items" *ngFor="let nauticalSport of nauticalSports" (click)="toggleUserSelectedArea(nauticalSport)" no-lines>
                 <div class="image-notSelected" *ngIf="checkSelectedAreas(nauticalSport)">
                   <!-- nauticalSport.photo_url -->
-                  <img class="image-list" src="assets/images/interest_icon1.png">
+                  <img class="image-list" src="{{nauticalSport.photo_url}}">
                 </div>
                 <div class="image-selected" *ngIf="!checkSelectedAreas(nauticalSport)">
                   <!-- nauticalSport.photo_url -->
-                  <img class="image-list" src="assets/images/interest_icon1.png">
+                  <img class="image-list" src="{{nauticalSport.photo_url}}.png">
                 </div>
               </ion-item>
             </div>

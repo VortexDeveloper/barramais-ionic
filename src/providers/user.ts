@@ -105,6 +105,7 @@ export class User {
     this.is_member_of_url = host + "users/is_member_of/";
     this.send_request_to_url = host + "users/send_request_to/";
     this.i_was_invited_to_url = host + "users/i_was_invited_to/";
+    this.comments_url = host + "comments/";
   }
 
   is_member_of(group){
@@ -119,7 +120,8 @@ export class User {
 
   i_was_invited_to(group){
     return this.authHttp.get(this.i_was_invited_to_url + group.id + ".json")
-    this.comments_url = host + "comments/";
+      .map(res => res.json());
+    // this.comments_url = this.host + "comments/";
   }
 
   get_notification_by_id(user_id, notification_id){
