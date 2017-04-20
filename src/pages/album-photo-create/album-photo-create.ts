@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { User } from '../../providers/user';
@@ -30,13 +30,12 @@ export class AlbumPhotoCreatePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
     private userProvider: User,
     public toastCtrl: ToastController
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.albumPhoto = navParams.data.albumPhoto
-        ? new AlbumPhotoModel(navParams.data.albumPhoto) : new AlbumPhotoModel();
-      this.bondPhotoWithUserAlbum();
+      this.albumPhoto = navParams.data.albumPhoto ? new AlbumPhotoModel(navParams.data.albumPhoto) : new AlbumPhotoModel();
   }
 
   ionViewDidLoad() {
@@ -44,7 +43,7 @@ export class AlbumPhotoCreatePage {
   }
 
   save(albumPhoto){
-    this.userProvider.create_album_photo(albumPhoto)
+    this.userProvider.create_album_photo(albumPhoto, this.current_user.id)
       .subscribe(response => {
         this.redirectPage(this.albumListPage);
         this.presentToast("Foto cadastrada com sucesso!");
@@ -97,22 +96,32 @@ export class AlbumPhotoCreatePage {
       saveToPhotoAlbum: false,
       correctOrientation: true,
       allowEdit: true,
+      //mediaType: Camera.MediaType.ALLMEDIA,
       destinationType: Camera.DestinationType.DATA_URL
     };
 
     Camera.getPicture(options).then(image => {
-      this.albumPhoto.photo = "data:image/jpeg;base64," + image;
+      let prompt = this.alertCtrl.create({
+        title: 'Usar foto',
+        message: 'Deseja usar esta foto como foto de perfil?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: data => {
+              this.albumPhoto.photo = "data:image/jpeg;base64," + image;
+              this.save(this.albumPhoto);
+            }
+          }
+        ]
+      });
+      prompt.present();
     });
-
-    var image_tag = document.getElementsByTagName('img')[0];
-    image_tag.src = this.albumPhoto.photo;
-  }
-
-  bondPhotoWithUserAlbum(){
-    if(this.albumPhoto.id != null){
-      this.isEditing = true;
-    }
-    this.albumPhoto.user_id = this.current_user.id;
   }
 
   presentToast(msg){

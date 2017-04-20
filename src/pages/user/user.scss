@@ -78,7 +78,7 @@ page-user {
   }
 
   .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left] {
-    margin: 8px 16px 8px 16px;
+    margin: 8px 16px;
   }
 
   .item-md ion-avatar ion-img, .item-md ion-avatar img {
@@ -113,4 +113,75 @@ page-user {
      display: flex;
      width: 33.3333%;
  }
+
+ .session-divider{
+   width: 100%;
+   padding: 10px;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+   align-items: center;
+   align-content: center;
+   background: #fff;
+   border-radius: 4px;
+ }
+
+ .session-content{
+   padding: 10px;
+   background: #fff;
+ }
+
+ .session-icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 17px;
+    margin-left: 7px;
+ }
+
+ .account{
+   background: url(../assets/images/icones.png) -62px -62px;
+ }
+
+ .personal{
+   background: url(../assets/images/icones.png) 0px -62px;
+ }
+
+ .nautical{
+  background: url(../assets/images/icones.png) -31px -62px;
+ }
+
+ .interest{
+       background: url(../assets/images/icones.png) -93px -62px;
+ }
+
+ .avatar-user p{
+   margin-left: 10px;
+ }
+
+ .avatar-user ion-label {
+    display: flex;
+    overflow: hidden;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0;
+    font-size: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  ion-item-divider {
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+
+  ion-content{
+    background: #192d52 !important;
+  }
+
 }

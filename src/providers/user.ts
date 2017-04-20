@@ -36,6 +36,7 @@ export class User {
   private pending_friendships_url: string;
   private unfriend_url: string;
   private my_groups_url: string;
+  private all_groups_url: string;
   private confirmed_groups_url: string;
   private pending_groups_url: string;
   private accept_group_url: string;
@@ -52,6 +53,9 @@ export class User {
   private get_nautical_sports_by_user_url: string;
   private get_notifications: string;
   private open_all_user_notifications_url: string;
+  private is_member_of_url: string;
+  private send_request_to_url: string;
+  private i_was_invited_to_url: string;
   private comments_url: string;
 
   constructor(
@@ -82,6 +86,7 @@ export class User {
     this.pending_friendships_url = host + "users/pending_friendships";
     this.unfriend_url = host + "users/unfriend/";
     this.my_groups_url = host + "users/my_groups";
+    this.all_groups_url = host + "users/all_groups";
     this.confirmed_groups_url = host + "users/confirmed_groups";
     this.pending_groups_url = host + "users/pending_groups";
     this.accept_group_url = host + "users/accept_group";
@@ -97,6 +102,23 @@ export class User {
     this.update_user_nautical_sports_url = host + "users/update_user_nautical_sports";
     this.get_nautical_sports_by_user_url = host + "nautical_sports/get_nautical_sports_by_user";
     this.open_all_user_notifications_url = host + "users/open_all_user_notifications/";
+    this.is_member_of_url = host + "users/is_member_of/";
+    this.send_request_to_url = host + "users/send_request_to/";
+    this.i_was_invited_to_url = host + "users/i_was_invited_to/";
+  }
+
+  is_member_of(group){
+    return this.authHttp.get(this.is_member_of_url + group.id + ".json")
+      .map(res => res.json());
+  }
+
+  send_request_to(group){
+    return this.authHttp.get(this.send_request_to_url + group.id + ".json")
+      .map(res => res.json());
+  }
+
+  i_was_invited_to(group){
+    return this.authHttp.get(this.i_was_invited_to_url + group.id + ".json")
     this.comments_url = host + "comments/";
   }
 
@@ -140,8 +162,10 @@ export class User {
       .map(res => res.json());
   }
 
-  create_album_photo(albumPhoto){
-    return this.authHttp.post(this.user_album_url + ".json", {'album_photo': albumPhoto})
+  create_album_photo(albumPhoto, user_id){
+    let d = new Date;
+    let new_name = user_id + d.getTime();
+    return this.authHttp.post(this.user_album_url + ".json", {'photo': {'image': albumPhoto.photo, 'filename': new_name}})
       .map(res => res.json());
   }
 
@@ -242,6 +266,11 @@ export class User {
 
   myGroups(current_user){
     return this.authHttp.get(this.my_groups_url + ".json")
+      .map(res => res.json());
+  }
+
+  allGroups(){
+    return this.authHttp.get(this.all_groups_url + ".json")
       .map(res => res.json());
   }
 

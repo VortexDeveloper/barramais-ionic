@@ -143,7 +143,7 @@ page-profile {
 
       .profile-information p {
         float: left;
-        margin: 9px;
+        margin: 6px;
       }
 
       .profile-information ion-icon {
@@ -158,6 +158,7 @@ page-profile {
 
       .thumb-user{
         width: 84px;
+        height: 84px;
         margin: 10px;
         background: #f5f5f5;
         border-radius: 5px;
@@ -201,9 +202,9 @@ page-profile {
         left: 89px;
       }
 
-      ion-list{
-        border-bottom: solid 1px #666;
-      }
+      // ion-list{
+      //   border-bottom: solid 1px #666;
+      // }
 
       .item-inner {
         color: #666;
@@ -211,6 +212,18 @@ page-profile {
 
       .skill-icons img{
         width: 40px ;
+      }
+
+      ion-col{
+        padding-bottom: 13px;
+      }
+
+      .profile-information p{
+        font-size: 0.8em !important;
+      }
+
+      .profile-information ion-icon{
+        font-size: 1.5em !important;
       }
 
 }

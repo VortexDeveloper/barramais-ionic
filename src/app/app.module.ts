@@ -22,6 +22,7 @@ import { GroupModalPage } from '../pages/groups/group-modal';
 import { GroupMembersPage } from '../pages/groups/group-members';
 import { AddGroupMembersPage } from '../pages/groups/add-group-members';
 import { GalleryModalPage } from '../pages/gallery-modal/gallery-modal';
+import { PhotoModalPage } from '../pages/photo-modal/photo-modal';
 import { GroupPagePage } from '../pages/groups/group-page';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { ProfilePage } from '../pages/profile/profile';
@@ -144,6 +145,7 @@ export function getAuthHttp(http) {
     NotificationsPage,
     AddGroupMembersPage,
     PopoverPage,
+    PhotoModalPage,
     NotificationViewPage
   ],
   imports: [
@@ -208,6 +210,7 @@ export function getAuthHttp(http) {
     NotificationsPage,
     AddGroupMembersPage,
     PopoverPage,
+    PhotoModalPage,
     NotificationViewPage
   ],
   providers: [
