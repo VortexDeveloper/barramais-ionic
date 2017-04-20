@@ -5,6 +5,7 @@
   <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
   <content src="index.html"/>
   <access origin="*"/>
+  <access origin="mailto:*" launch-external="yes" />
   <allow-navigation href="http://ionic.local/*"/>
   <allow-navigation href="http://192.168.0.13:8100"/>
   <allow-navigation href="http://192.168.0.13:8101"/>
