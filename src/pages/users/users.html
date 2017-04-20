@@ -5,37 +5,19 @@
 </ion-header>
 <ion-content>
   <ion-searchbar
-    [(ngModel)]="myInput"
     [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
+    [debounce]='1000'
+    (ionInput)="getResults($event)"
     (ionCancel)="onCancel($event)">
   </ion-searchbar>
   <ion-list>
-    <ion-item class="item-friends" *ngFor="let user of userList">
-      <ion-thumbnail item-left (click)='openProfile(user)'>
-        <img src="{{user.avatar_url}}">
+    <ion-item class="item-friends" *ngFor="let result of results">
+      <ion-thumbnail item-left (click)='openSearchItem(result)'>
+        <img [src]="getAvatarSrc(result)">
       </ion-thumbnail>
       <div class="friend-information-container">
         <div class="friend-information-text">
-          <h2 (click)='openProfile(user)'>{{user.first_name}} {{user.last_name}}</h2>
-          <p>{{user.birthday | date:'MMMM d, y'}}</p>
-        </div>
-        <div class="friend-information-buttons">
-          <button ion-button icon-left color="danger" (click)="unfriend(user)" *ngIf="user.isFriend === true">
-            <ion-icon name="remove"></ion-icon>
-            Amigo
-          </button>
-          <button ion-button icon-left color="primary" (click)='request_friendship(user)' *ngIf="user.isFriend === false && user.id != current_user.id">
-            <ion-icon name="add"></ion-icon>
-            Amigo
-          </button>
-          <button ion-button icon-only clear (click)='isWaiting(user.first_name)' *ngIf="user.isFriend === 'waiting'" >
-            <ion-icon name="person-tab"></ion-icon>
-          </button>
-          <button ion-button icon-left  (click)='createConversationWith(user)' *ngIf="user.id != current_user.id">
-            <ion-icon name="chatbubbles"></ion-icon>
-            Chat
-          </button>
+          <h2 (click)='openSearchItem(result)'>{{getSearchItemName(result)}}</h2>
         </div>
       </div>
     </ion-item>
