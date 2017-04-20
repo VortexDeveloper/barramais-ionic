@@ -18,6 +18,7 @@ export class Groups {
 
   private url: string;
   private invitation_url: string;
+  private apply_group_url: string;
   private all_members_url: string;
   private confirmed_members_url: string;
   private pending_by_user_url: string;
@@ -37,6 +38,7 @@ export class Groups {
     setRoutes(host){
       this.url = host + "groups";
       this.invitation_url = host + "groups/invitation/";
+      this.apply_group_url = host + "groups/apply_group/";
       this.all_members_url = host + "groups/all_members/";
       this.confirmed_members_url = host + "groups/confirmed_members/";
       this.pending_by_user_url = host + "groups/pending_by_user/";
@@ -65,6 +67,11 @@ export class Groups {
 
     invitation(group, members){
       return this.authHttp.put(this.invitation_url + group.id + ".json", {'members': members})
+        .map(res => res.json());
+    }
+
+    apply_group(group){
+      return this.authHttp.get(this.apply_group_url + group.id + ".json")
         .map(res => res.json());
     }
 

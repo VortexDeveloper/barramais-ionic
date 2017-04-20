@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, ModalController} from 'ionic-angular';
+import { NavController, NavParams, MenuController, ModalController, ViewController} from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { GroupsPage } from '../groups/groups';
 import { FeedsPage } from '../feeds/feeds';
@@ -40,6 +40,7 @@ export class MainPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
+    public viewCtrl: ViewController,
     public menu: MenuController,
     private userProvider: User
   ) {
@@ -61,11 +62,12 @@ export class MainPage {
   }
 
   openNotificationsModal(){
-    let modal = this.modalCtrl.create(NotificationsPage);
-    modal.onDidDismiss(notifications => {
-      this.get_notifications();
-    });
-    modal.present();
+    // let modal = this.modalCtrl.create(NotificationsPage);
+    // modal.onDidDismiss(notifications => {
+    //   this.get_notifications();
+    // });
+    // modal.present();
+    this.navCtrl.push(NotificationsPage);
   }
 
   get_notifications(){

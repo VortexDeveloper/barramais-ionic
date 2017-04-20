@@ -57,10 +57,15 @@ export class GroupPagePage {
   l_refusedMembers: any;
   showAdminActions: boolean = false;
   showMemberActions: boolean = false;
-  showInvitedMemberActions: boolean = false;
+  showPendingByUserActions: boolean = false;
+  showPendingByAdminActions: boolean = false;
   showGroupInformation: boolean = false;
   friends: any;
   posts: Array<any>;
+
+  i_was_invited_to: boolean = false;
+  send_request_to: boolean = false;
+  is_member_of: boolean = false;
 
 
   constructor(
@@ -78,10 +83,17 @@ export class GroupPagePage {
       this.verifyGroupAdmin();
       this.loadMembers(this.group);
       this.loadPosts();
+      this.checkMemberShip();
     }
 
   ionViewDidLoad() {
 
+  }
+
+  checkMemberShip(){
+    this.is_memberOf();
+    this.i_was_invitedTo();
+    this.send_requestTo();
   }
 
   presentPopover(event: Event) {
@@ -90,13 +102,15 @@ export class GroupPagePage {
         group: this.group,
         user: this.user,
         showAdminActions: this.showAdminActions,
-        showMemberActions: this.showMemberActions,
-        showInvitedMemberActions: this.showInvitedMemberActions
+        is_member_of: this.is_member_of,
+        i_was_invited_to: this.i_was_invited_to,
+        send_request_to: this.send_request_to
       });
     popover.onDidDismiss(group => {
       if(group){
         this.group = new GroupModel(group);
       }
+      this.checkMemberShip();
       this.loadMembers(this.group);
     });
     popover.present({ ev: event });
@@ -106,8 +120,6 @@ export class GroupPagePage {
     this.pending_by_user(group);
     this.pending_by_admin(group);
     this.confirmed_members(group);
-    this.all_members(group);
-    this.refused_members(group);
     this.userFriends(group);
   }
 
@@ -163,25 +175,28 @@ export class GroupPagePage {
     console.log(this.showMemberActions);
   }
 
-  verifyInvitedGroupMember(list){
-    var members_id = [];
-    for(let user of list) members_id.push(user.id);
-    if(members_id.indexOf(this.user.id) > -1 ){
-      this.showInvitedMemberActions = true;
-      this.verifyGroupAdmin();
+  verifyPendingByUser(list){
+    if(list){
+      var members_id = [];
+      for(let user of list) members_id.push(user.id);
+      if(members_id.indexOf(this.user.id) > -1 ){
+        this.showPendingByUserActions = true;
+        this.verifyGroupAdmin();
+      }
     }
   }
 
-  all_members(group){
-    this.groupProvider.all_members(group)
-      .subscribe(response =>{
-        this.allMembers = response;
-        this.l_allMembers = response.length;
-        this.verifyInvitedGroupMember(this.allMembers);
-      }, error =>{
-        console.log("Erro ao exibir os membros: " + error.json());
-      });
+  verifyPendingByAdmin(list){
+    if(list){
+      var members_id = [];
+      for(let user of list) members_id.push(user.id);
+      if(members_id.indexOf(this.user.id) > -1 ){
+        this.showPendingByAdminActions = true;
+        this.verifyGroupAdmin();
+      }
+    }
   }
+
 
   confirmed_members(group){
     this.groupProvider.confirmed_members(group)
@@ -199,6 +214,7 @@ export class GroupPagePage {
       .subscribe(response =>{
         this.pendingByUser= response;
         this.l_pendingByUser = response.length;
+        this.verifyPendingByUser(this.pendingByUser);
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
       });
@@ -209,18 +225,9 @@ export class GroupPagePage {
       .subscribe(response =>{
         this.pendingByAdmin= response;
         this.l_pendingByAdmin = response.length;
+        this.verifyPendingByAdmin(this.pendingByAdmin);
       }, error =>{
         console.log("Erro ao exibir os membros: " + error.json());
-      });
-  }
-
-  refused_members(group){
-    this.groupProvider.refused_members(group)
-      .subscribe(response =>{
-        this.refusedMembers = response;
-        this.l_refusedMembers = response.length;
-      }, error =>{
-        console.log("Erro ao exibir os convidados: " + error.json());
       });
   }
 
@@ -251,6 +258,33 @@ export class GroupPagePage {
       this.presentToast(response.sucess);
     }, error =>{
       this.presentToast(error.json());
+      console.log(error.json());
+    });
+  }
+
+  is_memberOf(){
+    this.userProvider.is_member_of(this.group).
+    subscribe(response =>{
+      this.is_member_of = response.response;
+    }, error =>{
+      console.log(error.json());
+    });
+  }
+
+  send_requestTo(){
+    this.userProvider.send_request_to(this.group).
+    subscribe(response =>{
+      this.send_request_to = response.response;
+    }, error =>{
+      console.log(error.json());
+    });
+  }
+
+  i_was_invitedTo(){
+    this.userProvider.i_was_invited_to(this.group).
+    subscribe(response =>{
+       this.i_was_invited_to = response.response;
+    }, error =>{
       console.log(error.json());
     });
   }

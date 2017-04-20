@@ -41,14 +41,23 @@
       </ion-item>
       <div class="profile-description">
         <ion-row class="actions-row">
-          <ion-col width-25 (click)="showProfileInformation()">
+          <ion-col width-33 (click)="showProfileInformation()">
             <ion-icon name="person" class="icon-button"></ion-icon>
+            <p class="icon-word">
+              Perfil
+            </p>
           </ion-col>
-          <ion-col width-25 (click)="openPage(friendsPage)">
+          <ion-col width-33 (click)="openPage(friendsPage)">
             <ion-icon name="people" class="icon-button"></ion-icon>
+            <p class="icon-word">
+              Amigos
+            </p>
           </ion-col>
-          <ion-col width-25 (click)="openPage(albumListPage)">
+          <ion-col width-33 (click)="openPage(albumListPage)">
             <ion-icon name="images" class="icon-button"></ion-icon>
+            <p class="icon-word">
+              Album
+            </p>
           </ion-col>
         </ion-row>
       <div [hidden]="!profileInformation">

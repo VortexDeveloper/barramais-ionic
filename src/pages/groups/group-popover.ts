@@ -4,7 +4,7 @@ import { ViewController, NavController, App, ModalController, NavParams } from '
 import { UserModel } from "../../models/user.model";
 import { GroupModel } from "../../models/group.model";
 import { User } from '../../providers/user';
-import { Posts } from '../../providers/posts';
+import { Groups } from '../../providers/groups';
 import { GroupModalPage } from '../groups/group-modal';
 import { GroupPagePage } from '../groups/group-page';
 import { ToastController } from 'ionic-angular';
@@ -14,9 +14,10 @@ import { ToastController } from 'ionic-angular';
 @Component({
   template: `
     <ion-list no-lines>
-      <button ion-item (click)="openPage('')">Participar</button>
-      <button ion-item (click)="accept_group()">Aceitar</button>
-      <button ion-item (click)="refuse_group()">Recusar</button>
+      <button ion-item (click)="apply_group()" *ngIf="!is_member_of">Participar</button>
+      <button ion-item (click)="accept_group()" *ngIf="i_was_invited_to">Aceitar</button>
+      <button ion-item (click)="refuse_group()" *ngIf="i_was_invited_to">Recusar</button>
+      <button ion-item (click)="refuse_group()" *ngIf="is_member_of">Sair</button>
       <button ion-item (click)="openEditModal(groupModal, group)" *ngIf="showAdminActions">Editar</button>
     </ion-list>
   `
@@ -24,16 +25,19 @@ import { ToastController } from 'ionic-angular';
 export class PopoverPage {
 
   showAdminActions: boolean = false;
-  showMemberActions: boolean = false;
-  showInvitedMemberActions: boolean = false;
+  is_member_of: boolean = false;
+  i_was_invited_to: boolean = false;
+  send_request_to: boolean = false;
   groupModal: any = GroupModalPage;
   user: UserModel = new UserModel();
   group: GroupModel = new GroupModel();
+  invite: string = "";
 
   constructor(
     public viewCtrl: ViewController,
     params: NavParams,
     private userProvider: User,
+    private groupProvider: Groups,
     public navCtrl: NavController,
     // public app: App,
     public toastCtrl: ToastController,
@@ -42,8 +46,9 @@ export class PopoverPage {
       this.user = params.data.user;
       this.group = params.data.group;
       this.showAdminActions = params.data.showAdminActions;
-      this.showMemberActions = params.data.showMemberActions;
-      this.showInvitedMemberActions = params.data.showInvitedMemberActions;
+      this.is_member_of = params.data.is_member_of;
+      this.i_was_invited_to = params.data.i_was_invited_to;
+      this.send_request_to = params.data.send_request_to;
   }
 
   openPage(page, group) {
@@ -62,10 +67,10 @@ export class PopoverPage {
     this.userProvider.refuse_group(this.user, this.group).
     subscribe(response =>{
       this.presentToast(response.sucess);
+      this.is_member_of = false;
       this.viewCtrl.dismiss(this.group);
     }, error =>{
       this.presentToast(error.json());
-      this.viewCtrl.dismiss();
       console.log(error.json());
     });
   }
@@ -74,10 +79,22 @@ export class PopoverPage {
     this.userProvider.accept_group(this.user, this.group).
     subscribe(response =>{
       this.presentToast(response.sucess);
+      this.is_member_of = true;
       this.viewCtrl.dismiss(this.group);
     }, error =>{
       this.presentToast(error.json());
-      this.viewCtrl.dismiss();
+      console.log(error.json());
+    });
+  }
+
+  apply_group(){
+    this.groupProvider.apply_group(this.group).
+    subscribe(response => {
+      this.presentToast(response.sucess);
+      this.send_request_to = true;
+      this.viewCtrl.dismiss(this.group);
+    }, error => {
+      this.presentToast(error.json());
       console.log(error.json());
     });
   }
@@ -93,13 +110,4 @@ export class PopoverPage {
     modal.present();
   }
 
-  // support() {
-  //   this.app.getRootNav().push(SupportPage);
-  //   this.viewCtrl.dismiss();
-  // }
-
-  // close(url: string) {
-  //   window.open(url, '_blank');
-  //   this.viewCtrl.dismiss();
-  // }
 }

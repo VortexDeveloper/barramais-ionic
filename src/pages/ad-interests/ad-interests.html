@@ -27,10 +27,10 @@
         <div class="interest-list">
           <ion-item class="interest-list-items" *ngFor="let interest_area of interestList" (click)="toggleUserSelectedArea(interest_area)" no-lines>
             <div class="image-notSelected" *ngIf="checkSelectedAreas(interest_area)">
-              <img class="image-list" src="assets/images/interest_icon1.png">
+              <img class="image-list" src="{{interest_area.photo_url}}">
             </div>
             <div class="image-selected" *ngIf="!checkSelectedAreas(interest_area)">
-              <img class="image-list" src="assets/images/interest_icon1.png">
+              <img class="image-list" src="{{interest_area.photo_url}}">
             </div>
           </ion-item>
         </div>
