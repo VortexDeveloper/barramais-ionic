@@ -19,11 +19,14 @@
         <ion-item class="interest-list-items" *ngFor="let interest of interests" (click)="toggleUserInterests(interest)" no-lines>
           <div class="image-notSelected" *ngIf="checkUserInterests(interest)">
             <!-- interest.photo_url -->
-            <img class="image-list" src="assets/images/interest_icon1.png">
+            <img class="image-list" src="{{interest.photo_url}}">
           </div>
           <div class="image-selected" *ngIf="!checkUserInterests(interest)">
             <!-- interest.photo_url -->
-            <img class="image-list" src="assets/images/interest_icon1.png">
+            <img class="image-list" src="{{interest.photo_url}}">
+          </div>
+          <div class="textToBeAligned">
+            {{interest.name}}
           </div>
         </ion-item>
       </div>

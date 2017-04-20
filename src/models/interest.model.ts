@@ -1,4 +1,4 @@
-export class InterestAreaModel {
+export class InterestModel {
   id: number;
   createdAt: Date;
   updatedAt: Date;
