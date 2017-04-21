@@ -123,9 +123,9 @@ export class UsersPage {
   }
 
   getResults(ev: any) {
-    this.results = null;
     let query_param = ev.target.value;
     if(query_param && query_param.trim() != '' && query_param.trim() != this.last_query_param) {
+      this.results = null;
       this.searchProvider.look_for(query_param).subscribe(
         (results) => {
           this.results = results
