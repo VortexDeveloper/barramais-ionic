@@ -220,6 +220,11 @@ export class MyApp {
     this.nav.push(page);
   }
 
+  openRoot(page) {
+    this.nativePageTransitions.slide(this.options);
+    this.nav.setRoot(page);
+  }
+
   inviteFacebookFriends() {
     let options = {
       url: "https://fb.me/202248836944012",

@@ -80,7 +80,7 @@ export class RegistrationPage {
   }
 
   openPage(page){
-    this.navCtrl.push(page);
+    this.navCtrl.setRoot(page);
   }
 
   login(user) {

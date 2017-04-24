@@ -17,6 +17,7 @@ export class FeedsPage {
   user_token: any = localStorage.getItem('user');
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
+  isPostsFull: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -57,6 +58,9 @@ export class FeedsPage {
       },
       (error) => console.log(error)
     );
+    if(this.posts.length > 0){
+      this.isPostsFull = true;
+    }
   }
 
 }
