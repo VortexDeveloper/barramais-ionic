@@ -93,7 +93,7 @@ page-user {
 
   .image-list {
     border: 0;
-    min-width: 100%;
+    width: 40px;
   }
 
   .image-selected{
@@ -107,6 +107,7 @@ page-user {
      justify-content: center;
      align-items: stretch;
      align-content: stretch;
+     padding-left: 35px;
  }
 
  .interest-list-items{
@@ -185,7 +186,11 @@ page-user {
   }
 
   .textToBeAligned{
+    // text-align: center;
+    font-size: 65%;
+  }
+
+  .areaText{
     text-align: center;
-    font-size: 75%;
   }
 }
