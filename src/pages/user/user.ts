@@ -76,15 +76,15 @@ export class UserPage {
   }
 
   save(user) {
-    this.updateUserInterests();
-    this.updateUserNauticalSports();
-
     // MANTER A VALIDAÇÃO, ELA ESTÁ COMENTADA APENAS PARA ADIANTAR NOS TESTES
     if(this.userEmailConfirmation != this.user.email){
       this.presentToast("A confirmação do email deve ser igual ao email!");
-    }else if(this.userPasswordConfirmation != this.user.current_password){
-      this.presentToast("A confirmação da senha deve ser igual à senha!");
+    // }else if(this.userPasswordConfirmation != this.user.current_password){
+    //   this.presentToast("A confirmação da senha deve ser igual à senha!");
     }else{
+      this.updateUserInterests();
+      this.updateUserNauticalSports();
+
       this.userProvider.update(user)
       .subscribe(response => {
           localStorage.setItem("user", response.user);

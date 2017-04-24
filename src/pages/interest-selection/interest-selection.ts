@@ -62,6 +62,8 @@ export class InterestSelectionPage {
     if(!found){
       this.userInterests.push(interest);
     }
+
+    // console.log(this.userInterests);
   }
 
   checkUserInterests(interest){
@@ -88,6 +90,9 @@ export class InterestSelectionPage {
   }
 
   updateUserInterests(){
+    if(this.userInterests.length < 3){
+      this.presentToast("Escolha o mínimo de três interesses")
+    }else{
     this.userProvider.update_user_interests(this.user.id, this.userInterests)
       .subscribe(response =>{
         localStorage.setItem("user", response.user);
@@ -96,5 +101,6 @@ export class InterestSelectionPage {
       }, error => {
         console.log("Erro ao atualizar os interesses do usuário" + error.json());
       });
+    }
   }
 }

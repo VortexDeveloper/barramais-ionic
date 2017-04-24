@@ -24,6 +24,7 @@ export class AlbumListPage {
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;
   user_token: any = localStorage.getItem('user');
+  user: UserModel = new UserModel();
   album: any[] = [];
   isAlbumEmpty: boolean = false;
   profilePage: any = ProfilePage;
@@ -41,6 +42,7 @@ export class AlbumListPage {
 
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.user = new UserModel(navParams.data.user);
       this.getUserAlbum();
   }
 
@@ -49,7 +51,7 @@ export class AlbumListPage {
   }
 
   save(albumPhoto){
-    this.userProvider.create_album_photo(albumPhoto, this.current_user.id)
+    this.userProvider.create_album_photo(albumPhoto, this.user.id)
       .subscribe(response => {
         // this.redirectPage(this.albumListPage);
         this.album.push(response);
@@ -61,7 +63,8 @@ export class AlbumListPage {
   }
 
   getUserAlbum(){
-    this.userProvider.get_user_album(this.current_user.id)
+    // console.log(this.user);
+    this.userProvider.get_user_album(this.user.id)
       .subscribe(response =>{
         console.log(response);
         this.album = response;
