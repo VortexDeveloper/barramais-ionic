@@ -44,7 +44,6 @@ export class EventsPage {
     {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.loadEvents(this.current_user);
-      this.presentLoading();
     }
 
   ionViewDidLoad() {
@@ -53,8 +52,7 @@ export class EventsPage {
 
   presentLoading() {
     let loader = this.loadingCtrl.create({
-      content: "Carregando Eventos...",
-      duration: 2000
+      content: "Carregando Eventos..."
     });
     loader.present();
   }
@@ -66,10 +64,17 @@ export class EventsPage {
   }
 
   myEvents(current_user){
+    let loader = this.loadingCtrl.create({
+      content: "Carregando Eventos..."
+    });
+
+    loader.present();
+
     this.userProvider.myEvents(current_user)
       .subscribe(response =>{
         console.log(response.my_events);
         this.my_events = response.my_events;
+        loader.dismiss();
       }, error =>{
         console.log("Erro ao exibir meus eventos: " + error.json());
       });

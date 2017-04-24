@@ -47,7 +47,6 @@ export class GroupsPage {
     {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.loadGroups(this.current_user);
-      this.presentLoading();
     }
 
   ionViewDidLoad() {
@@ -74,15 +73,23 @@ export class GroupsPage {
       .subscribe(response =>{
         // console.log(response.my_groups);
         this.my_groups = response.my_groups;
+
       }, error =>{
         console.log("Erro ao exibir meus eventos: " + error.json());
       });
   }
 
   allGroups(){
+    let loader = this.loadingCtrl.create({
+      content: "Carregando Eventos..."
+    });
+
+    loader.present();
+
     this.userProvider.allGroups()
       .subscribe(response =>{
         this.all_groups = response.all_groups;
+        loader.dismiss();
       }, error =>{
         console.log("Erro ao exibir todos os eventos: " + error.json());
       });
