@@ -32,6 +32,9 @@
             <div class="image-selected" *ngIf="!checkSelectedAreas(interest_area)">
               <img class="image-list" src="{{interest_area.photo_url}}">
             </div>
+            <div class="textToBeAligned">
+              {{interest_area.name}}
+            </div>
           </ion-item>
         </div>
   </ion-list>
