@@ -227,7 +227,10 @@ export class MyApp {
     }
     this.fb.appInvite(options).then(
       (obj) => console.log(obj),
-      (error) => console.log(error)
+      (error) => {
+        alert(error);
+        console.log(error)
+      }
     );
   }
 

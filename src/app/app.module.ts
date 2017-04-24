@@ -76,6 +76,7 @@ import { InterestSelectionPage } from '../pages/interest-selection/interest-sele
 import { Facebook } from '@ionic-native/facebook';
 import { NotificationsPage } from "../pages/notifications/notifications";
 import { NotificationViewPage } from '../pages/notification-view/notification-view';
+import { Search } from '../providers/search';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -229,6 +230,7 @@ export function getAuthHttp(http) {
     PhotoViewer,
     NativePageTransitions,
     Facebook,
+    Search,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })
