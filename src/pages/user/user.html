@@ -398,7 +398,9 @@
         </div>
         <div  class="session-content" [hidden]="!interestInformations">
           <ion-list>
-            <ion-item-divider color="light">Áreas de interesse</ion-item-divider>
+            <div class="areaText">
+              <ion-item-divider color="light">Áreas de interesse</ion-item-divider>
+            </div>
             <div class="interest-list">
               <ion-item class="interest-list-items" *ngFor="let interest of interests" (click)="toggleUserInterests(interest)" no-lines>
                 <div class="image-notSelected" *ngIf="checkUserInterests(interest)">
