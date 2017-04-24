@@ -12,7 +12,7 @@ import { JwtHelper } from 'angular2-jwt';
 })
 export class FeedsPage {
 
-  posts: Array<any>;
+  posts: Array<any> = [];
   profilePage: any = ProfilePage;
   user_token: any = localStorage.getItem('user');
   user: UserModel = new UserModel();
@@ -44,6 +44,9 @@ export class FeedsPage {
     modal.onDidDismiss(newPost => {
       if(newPost) this.posts.unshift(newPost);
     });
+    // if(this.posts.length > 0){
+    //   this.isPostsFull = true;
+    // }
     modal.present();
   }
 
