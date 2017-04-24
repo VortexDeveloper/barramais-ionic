@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { ProfilePage } from "../profile/profile";
 import { Posts } from '../../providers/posts';
@@ -22,7 +22,8 @@ export class FeedsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public postsProvider: Posts
+    public postsProvider: Posts,
+    public loadingCtrl: LoadingController
   ) {
 
   }
@@ -50,10 +51,17 @@ export class FeedsPage {
   }
 
   loadPosts() {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando Eventos..."
+    });
+
+    loader.present();
+
     this.postsProvider.index().subscribe(
       (posts) => {
         this.posts = posts;
         console.log(this.posts);
+        loader.dismiss();
       },
       (error) => console.log(error)
     );
