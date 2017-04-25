@@ -70,7 +70,7 @@ export class RegistrationPage {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 5000
+      duration: 3000
     });
     toast.present();
   }
