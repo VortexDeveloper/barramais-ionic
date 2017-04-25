@@ -262,7 +262,7 @@ export class User {
   }
 
   refuse_event(current_user, event){
-    return this.authHttp.put(this.refuse_event_url + current_user.id + ".json", {'event': event.id})
+    return this.authHttp.put(this.refuse_event_url + event.id + ".json", {'event': event.id})
     .map(res => res.json());
   }
 
