@@ -250,8 +250,9 @@ export class UserPage {
       let image_tag = document.getElementsByTagName('img')[0];
       image_tag.src = this.user.avatar_url;
       loader.dismiss();
+      this.presentToast("Avatar salvo com sucesso!");
     }, error => {
-        alert(error.json());
+        this.presentToast(error.json());
         console.log(JSON.stringify(error.json()));
     });
   }
