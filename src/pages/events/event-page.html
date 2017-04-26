@@ -48,7 +48,7 @@
         </button>
       </ion-col>
       <ion-col width-50>
-        <button ion-button outline block color="light" (click)="accept_event()" icon-left>
+        <button ion-button outline block color="light" *ngIf="!decided" (click)="accept_event()" icon-left>
           Vou
         </button>
       </ion-col>
@@ -81,4 +81,5 @@
     </ion-row>
     <bm-post [posts]="posts"></bm-post>
   </div>
+  <button class="form-buttons" ion-button type="button" block name="button" *ngIf="showAdminActions" (click)="delete(event)">Remover</button>
 </ion-content>

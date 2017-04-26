@@ -170,4 +170,13 @@ export class EventModalPage {
     this.platform.is('android')
   }
 
+  delete(event){
+    this.eventProvider.delete(event.id)
+      .subscribe(response => {
+        this.presentToast("Evento removido com sucesso!");
+      }, error => {
+        console.log("Não foi possível deletar o evento" + error.json());
+      })
+  }
+
 }

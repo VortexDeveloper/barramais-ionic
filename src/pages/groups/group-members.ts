@@ -138,6 +138,17 @@ export class GroupMembersPage {
     this.clearInvitedMembers();
   }
 
+  accept_member(member){
+    this.groupProvider.accept_member(this.group, member)
+    .subscribe(response => {
+        this.members.splice(this.members.indexOf(member), 1);
+        this.presentToast(response.response);
+    }, error => {
+        console.log(error.json().error);
+        this.presentToast(error.json().error);
+    });
+  }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
