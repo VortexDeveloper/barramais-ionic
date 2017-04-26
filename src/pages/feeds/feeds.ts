@@ -52,7 +52,7 @@ export class FeedsPage {
 
   loadPosts() {
     let loader = this.loadingCtrl.create({
-      content: "Carregando Eventos..."
+      content: "Carregando Feed..."
     });
 
     loader.present();

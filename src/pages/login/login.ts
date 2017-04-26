@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, MenuController, LoadingController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { UserModel } from "../../models/user.model";
 import { ToastController } from 'ionic-angular';
@@ -26,6 +26,7 @@ export class LoginPage {
     public viewCtrl: ViewController,
     private userProvider: User,
     public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
     public events: Events,
     public menu: MenuController
   ) {
@@ -42,6 +43,12 @@ export class LoginPage {
   }
 
   login(user) {
+    let loader = this.loadingCtrl.create({
+      content: "Entrando, aguarde..."
+    });
+
+    loader.present();
+
     this.userProvider.login(user)
     .subscribe(token_params => {
         localStorage.setItem("jwt", token_params.token);
@@ -49,6 +56,7 @@ export class LoginPage {
         localStorage.setItem('vessels_type', JSON.stringify(token_params.vessels_type));
         this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
         this.openPage(this.main);
+        loader.dismiss();
     }, error => {
         console.log(error.json() || 'Server error');
         this.presentToast(error.json().error);

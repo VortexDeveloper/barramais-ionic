@@ -228,10 +228,17 @@ export class UserPage {
   }
 
   save_avatar(user) {
+    let loader = this.loadingCtrl.create({
+      content: "Salvando avatar..."
+    });
+
+    loader.present();
+
     this.userProvider.save_avatar(user)
     .subscribe(user_params => {
       let image_tag = document.getElementsByTagName('img')[0];
-      image_tag.src = this.user.avatar;
+      image_tag.src = this.user.avatar_url;
+      loader.dismiss();
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));

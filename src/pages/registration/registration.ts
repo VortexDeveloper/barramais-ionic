@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { UserModel } from "../../models/user.model";
 import { MainPage } from "../main/main";
 import { User } from '../../providers/user';
@@ -32,6 +32,7 @@ export class RegistrationPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private userProvider: User,
+    public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public menu: MenuController,
     public events: Events,
@@ -48,11 +49,18 @@ export class RegistrationPage {
     if(this.userEmailConfirmation != this.user.email){
       this.presentToast("A confirmação do email deve ser igual ao email!");
     }else{
+      let loader = this.loadingCtrl.create({
+        content: "Salvando seus dados, aguarde..."
+      });
+
+      loader.present();
+
       this.userProvider.create(user)
       .subscribe(user_params => {
           this.user = new UserModel(user_params);
           console.log(user);
           this.login(user);
+          loader.dismiss();
       }, error => {
           console.log(error.json().errors);
           var errors = error.json().errors;

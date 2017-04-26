@@ -83,7 +83,7 @@ export class ProfilePage {
   }
 
   openFriends(){
-    this.navCtrl.push(this.friendsPage, {friends: this.friends});
+    this.navCtrl.push(this.friendsPage, {user: this.user});
   }
 
   openModal() {
@@ -293,10 +293,17 @@ export class ProfilePage {
   }
 
   save_cover_photo() {
+    let loader = this.loadingCtrl.create({
+      content: "Salvando seus dados, aguarde..."
+    });
+
+    loader.present();
+
     this.userProvider.save_cover_photo(this.user)
     .subscribe((user_params) => {
         this.current_user = new UserModel(this.jwtHelper.decodeToken(user_params.user));
         this.user = new UserModel(this.jwtHelper.decodeToken(user_params.user));
+        loader.dismiss();
     }, error => {
         alert(error.json());
         console.log(JSON.stringify(error.json()));

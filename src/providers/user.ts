@@ -300,7 +300,7 @@ export class User {
     let d = new Date;
     let new_name = user.id + d.getTime();
 
-    return this.http.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
+    return this.authHttp.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
       .map(res => {
         let user_token = res.json();
         localStorage.setItem("user", user_token.user);
@@ -312,7 +312,7 @@ export class User {
     let d = new Date;
     let new_name = user.id + d.getTime();
 
-    return this.http.put(this.url + "/" + user.id + "/" + "save_cover_photo.json", {'cover_photo': {'image': user.cover_photo, 'filename': new_name}})
+    return this.authHttp.put(this.url + "/" + user.id + "/" + "save_cover_photo.json", {'cover_photo': {'image': user.cover_photo, 'filename': new_name}})
       .map(res => {
         let user_token = res.json();
         localStorage.setItem("user", user_token.user);

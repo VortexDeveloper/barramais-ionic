@@ -81,7 +81,7 @@ export class GroupsPage {
 
   allGroups(){
     let loader = this.loadingCtrl.create({
-      content: "Carregando Eventos..."
+      content: "Carregando Grupos..."
     });
 
     loader.present();
