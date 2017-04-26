@@ -11,9 +11,9 @@ export class UserModel {
   avatar_url: string;
   cover_photo_url: string;
   email: string;
-  password: string;
-  password_confirmation: string;
-  current_password: string;
+  // password: string;
+  // password_confirmation: string;
+  // current_password: string;
   first_name: string;
   last_name: string;
   nickname: string;

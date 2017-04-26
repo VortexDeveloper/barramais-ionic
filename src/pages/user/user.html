@@ -46,13 +46,17 @@
             <ion-input type="text" [(ngModel)]="userEmailConfirmation" name="email_confirmation"></ion-input>
           </ion-item>
           <ion-item>
+            <button ion-button (click)='editPassword()'>
+              Alterar Senha
+            </button>
+          </ion-item>
+          <!-- <ion-item>
             <ion-label floating>Senha</ion-label>
             <ion-input type="password" [(ngModel)]="user.current_password" name="current_password"></ion-input>
-          </ion-item>
           <ion-item>
             <ion-label floating>Confirmar Senha</ion-label>
             <ion-input type="password" [(ngModel)]="userPasswordConfirmation" name="password_confirmation"></ion-input>
-          </ion-item>
+          </ion-item> -->
         </div>
         <br>
         <div class="session-divider" (click)="showPersonalInformations()">
@@ -396,7 +400,7 @@
             Informações de interesse
           </p>
         </div>
-        <div  class="session-content" [hidden]="!interestInformations">
+        <div  class="session-content session-interest" [hidden]="!interestInformations">
           <ion-list>
             <div class="areaText">
               <ion-item-divider color="light">Áreas de interesse</ion-item-divider>

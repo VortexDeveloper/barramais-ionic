@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { User } from '../../providers/user';
@@ -29,11 +29,14 @@ export class InterestSelectionPage {
     public navParams: NavParams,
     private userProvider: User,
     public events: Events,
+    private alertCtrl: AlertController,
     public toastCtrl: ToastController
   ) {
       this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
 
       this.getInterests();
+
+      this.presentConfirm();
   }
 
   ionViewDidLoad() {
@@ -102,5 +105,22 @@ export class InterestSelectionPage {
         console.log("Erro ao atualizar os interesses do usuário" + error.json());
       });
     }
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Bem vindo ao Barra Mais!',
+      message: 'Para continuar, escolha no mínimo três interesses.',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }
