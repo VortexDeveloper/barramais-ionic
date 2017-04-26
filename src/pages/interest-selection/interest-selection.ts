@@ -109,7 +109,7 @@ export class InterestSelectionPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Bem vindo ao Barra Mais!',
+      title: 'Bem vindo à Barra Mais!',
       message: 'Para continuar, escolha no mínimo três interesses.',
       buttons: [
         {

@@ -257,13 +257,14 @@ export class UserPage {
         this.user_token = token_params.user;
         this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
         this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
-        loader.dismiss();
         this.presentToast("Avatar salvo com sucesso!");
       }, error => {
-        loader.dismiss();
         this.presentToast(error.json());
         console.log(JSON.stringify(error.json()));
-      });
+      }, () => {
+        loader.dismiss();
+      }
+    );
 
     }
   }

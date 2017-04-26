@@ -99,7 +99,7 @@
           </ion-item>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage(eventsPage)">
+          <button menuClose ion-item (click)="openRoot(eventsPage)">
             <div class="menu-item-container">
               <i class="menu-item-icone eventos"></i>
               Eventos
@@ -214,11 +214,9 @@
             </a>
             <ul class="sub-menu-item" [hidden]="!showAjudaESuporte">
               <li>
-                <a href="mailto:suporte@barramais.com.br">
-                  <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
-                    Ajuda e Suporte
-                  </button>
-                </a>
+                <button class="item-sub" menuClose ion-item no-lines (click)="openPage(helpPage)">
+                  Ajuda e Suporte
+                </button>
               </li>
               <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage(privacyPage)">

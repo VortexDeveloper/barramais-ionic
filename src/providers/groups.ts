@@ -20,6 +20,7 @@ export class Groups {
   private invitation_url: string;
   private apply_group_url: string;
   private all_members_url: string;
+  private accept_member_url: string;
   private confirmed_members_url: string;
   private pending_by_user_url: string;
   private pending_by_admin_url: string;
@@ -44,6 +45,12 @@ export class Groups {
       this.pending_by_user_url = host + "groups/pending_by_user/";
       this.pending_by_admin_url = host + "groups/pending_by_admin/";
       this.refused_members_url = host + "groups/refused_members/";
+      this.accept_member_url = host + "groups/accept_member/";
+    }
+
+    delete(group_id){
+      return this.authHttp.delete(this.url + "/" + group_id + ".json")
+        .map(res => res.json());
     }
 
     create(group){
@@ -72,6 +79,11 @@ export class Groups {
 
     apply_group(group){
       return this.authHttp.get(this.apply_group_url + group.id + ".json")
+        .map(res => res.json());
+    }
+
+    accept_member(group, member){
+      return this.authHttp.put(this.accept_member_url + group.id + ".json", {'group': group, 'member': member.id})
         .map(res => res.json());
     }
 

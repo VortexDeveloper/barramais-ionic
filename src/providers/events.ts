@@ -24,6 +24,7 @@ export class EventProvider {
   private confirmed_guests_url: string;
   private pending_guests_url: string;
   private refused_guests_url: string;
+  private is_on_event_url: string;
 
   constructor(
     public http: Http,
@@ -45,6 +46,17 @@ export class EventProvider {
     this.confirmed_guests_url = this.host + "events/confirmed_guests/";
     this.pending_guests_url = this.host + "events/pending_guests/";
     this.refused_guests_url = this.host + "events/refused_guests/";
+    this.is_on_event_url = this.host + "events/is_on_event";
+  }
+
+  get_is_on_event(event_id){
+    return this.authHttp.get(this.is_on_event_url + "/" + event_id +  ".json")
+      .map(res => res.json());
+  }
+
+  delete(event_id){
+    return this.authHttp.delete(this.url + "/" + event_id + ".json")
+      .map(res => res.json());
   }
 
   create(event, address){

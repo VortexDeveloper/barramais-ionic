@@ -17,14 +17,13 @@
       <ion-thumbnail item-left (click)='openProfile(member)'>
         <img src="{{member.avatar_url}}">
       </ion-thumbnail>
-      <ion-label>
         <div class="friend-information-container">
           <div class="friend-information-text">
             <h2 (click)='openProfile(member)'>{{member.first_name}} {{member.last_name}}</h2>
             <p>{{member.birthday | date:'MMMM d, y'}}</p>
           </div>
         </div>
-      </ion-label>
+        <button (click)="accept_member(member)">Aceitar</button>
       <!-- <ion-checkbox [hidden]="!showAdminActions" item-right color="dark" checked="false" [(ngModel)]="member.invited" (ionChange)="getSelect(member.invited, member)"></ion-checkbox> -->
     </ion-item>
   </ion-list>

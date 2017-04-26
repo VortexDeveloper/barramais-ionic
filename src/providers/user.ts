@@ -60,6 +60,7 @@ export class User {
   private password_url: string;
   private devise_token_url: string;
   private update_password_url: string;
+  private support_url: string;
 
   constructor(
     public http: Http,
@@ -112,6 +113,7 @@ export class User {
     this.password_url = host + 'users/password';
     this.devise_token_url = host + 'devise_token';
     this.update_password_url = host + 'users/password';
+    this.support_url = host + '/users/send_support_email.json?message=';
   }
 
   is_member_of(group){
@@ -380,5 +382,10 @@ export class User {
   update_password(user) {
     return this.authHttp.put(this.update_password_url + ".json", user)
       .map(res => res.json());
+  }
+
+  send_support_email(message) {
+    this.support_url += message;
+    return this.authHttp.get(this.support_url).map(res => res.json());
   }
 }

@@ -47,6 +47,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { NotificationViewPage } from '../pages/notification-view/notification-view';
+import { HelpPage } from '../pages/help/help';
 
 @Component({
   selector: 'app-menu',
@@ -97,6 +98,7 @@ export class MyApp {
   interestSelectionPage: any = InterestSelectionPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
+  helpPage: any = HelpPage;
   friends: any;
   friendsCount: number;
 

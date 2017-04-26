@@ -5,10 +5,10 @@
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="groups">
       <ion-segment-button value="all-groups">
-        Grupos
+        Todos
       </ion-segment-button>
       <ion-segment-button value="my-groups">
-        Meus Grupos
+        Meus
       </ion-segment-button>
       <ion-segment-button value="confirmed-groups">
         Membro
@@ -27,7 +27,7 @@
       <div class="groups">
         <ion-card class="group" *ngFor="let group of all_groups">
           <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
-          <div class="card-title">{{group.name}}</div>
+          <div class="card-title" (click)="openPage(group)">{{group.name}}</div>
         </ion-card>
       </div>
     </ion-list>
@@ -36,7 +36,7 @@
       <div class="groups">
         <ion-card class="group" *ngFor="let group of my_groups">
           <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
-          <div class="card-title">{{group.name}}</div>
+          <div class="card-title" (click)="openPage(group)">{{group.name}}</div>
         </ion-card>
       </div>
     </ion-list>
@@ -45,7 +45,7 @@
       <div class="groups">
         <ion-card class="group" *ngFor="let group of confirmed_groups">
           <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
-          <div class="card-title">{{group.name}}</div>
+          <div class="card-title" (click)="openPage(group)">{{group.name}}</div>
         </ion-card>
       </div>
     </ion-list>
@@ -54,7 +54,7 @@
       <div class="groups">
         <ion-card class="group" *ngFor="let group of pending_groups">
           <img src="{{group.cover_photo_url}}" (click)="openPage(group)"/>
-          <div class="card-title">{{group.name}}</div>
+          <div class="card-title" (click)="openPage(group)">{{group.name}}</div>
         </ion-card>
       </div>
     </ion-list>
