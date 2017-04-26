@@ -78,6 +78,11 @@ export class UserPage {
   }
 
   save(user) {
+      let loader = this.loadingCtrl.create({
+        content: "Salvando seus dados..."
+      });
+
+      loader.present();
 
       this.updateUserInterests();
       this.updateUserNauticalSports();
@@ -90,6 +95,7 @@ export class UserPage {
           this.presentToast("Usuário atualizado com sucesso!");
           this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(response.user));
           this.redirectPage(this.mainPage);
+          loader.dismiss();
       }, error => {
           var errors = error.json().errors;
           var errorMessage;
@@ -98,6 +104,7 @@ export class UserPage {
                errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
              }
           }
+          loader.dismiss();
           this.presentToast(errorMessage);
       });
 
@@ -234,22 +241,31 @@ export class UserPage {
   }
 
   save_avatar(user) {
-    let loader = this.loadingCtrl.create({
-      content: "Salvando avatar..."
-    });
+    if(this.user.alternative_email == ""){
+      this.presentToast("Preencha o seu email alternativo para atualizar seu perfil.");
+    }else{
 
-    loader.present();
+      let loader = this.loadingCtrl.create({
+        content: "Salvando avatar..."
+      });
 
-    this.userProvider.save_avatar(user)
-    .subscribe(user_params => {
-      let image_tag = document.getElementsByTagName('img')[0];
-      image_tag.src = this.user.avatar_url;
-      loader.dismiss();
-      this.presentToast("Avatar salvo com sucesso!");
-    }, error => {
+      loader.present();
+
+      this.userProvider.save_avatar(user)
+      .subscribe(token_params => {
+        localStorage.setItem("user", token_params.user);
+        this.user_token = token_params.user;
+        this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+        this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
+        loader.dismiss();
+        this.presentToast("Avatar salvo com sucesso!");
+      }, error => {
+        loader.dismiss();
         this.presentToast(error.json());
         console.log(JSON.stringify(error.json()));
-    });
+      });
+
+    }
   }
 
   populateVesselsType() {
