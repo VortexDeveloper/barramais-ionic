@@ -84,11 +84,38 @@
           </ion-item>
         </ion-list>
         <ion-row class="skill-icons">
-          <ion-col width-17 *ngIf="user.naval_service_patent !== 0">
-            <img src="assets/images/{{user.naval_service_patent}}.png" alt="" />
+          <ion-col width-50 *ngIf="user.naval_service_patent !== 0">
+            <ion-row>
+              <ion-col width-20>
+                <img src="assets/images/{{user.naval_service_patent}}.png" />
+              </ion-col>
+              <ion-col width-80>
+                {{user.naval_service_patent}}
+              </ion-col>
+            </ion-row>
           </ion-col>
-          <ion-col width-17 *ngIf="user.nautical_license !== 0">
-            <img src="assets/images/{{user.nautical_license}}.png" alt="" />
+          <ion-col width-50 *ngIf="user.nautical_license !== 0">
+            <ion-row>
+              <ion-col width-20>
+                <img src="assets/images/{{user.nautical_license}}.png" />
+              </ion-col>
+              <ion-col width-80>
+                {{user.nautical_license}}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row class="skill-icons">
+          <ion-col width-10 *ngFor="let nautical_sport of nautical_sports">
+            <img src="{{nautical_sport.photo_url}}" />
+            <!-- <ion-row>
+              <ion-col width-20>
+                <img src="{{nautical_sport.photo_url}}" />
+              </ion-col>
+              <ion-col width-80>
+                {{nautical_sport.name}}
+              </ion-col>
+            </ion-row> -->
           </ion-col>
         </ion-row>
       </div>

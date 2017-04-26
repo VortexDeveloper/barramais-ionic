@@ -48,6 +48,7 @@ export class ProfilePage {
   current_user: UserModel = new UserModel();
   isFriend: any;
   posts: Array<any>;
+  nautical_sports: any[] = [];
   erro: string = "";
   albumListPage: any = AlbumListPage;
 
@@ -68,10 +69,21 @@ export class ProfilePage {
   ) {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.setUser(params.data.user);
+    this.getUserNauticalSports();
   }
 
   ionViewDidLoad() {
 
+  }
+
+  getUserNauticalSports(){
+    this.userProvider.get_nautical_sports_by_user(this.user.id)
+      .subscribe(response =>{
+        this.nautical_sports = response;
+        console.log(response);
+      }, error => {
+        console.log("Erro ao exibir os esportes nauticos do usuário do usuário" + error.json());
+      });
   }
 
   openPage(page) {
