@@ -78,12 +78,7 @@ export class UserPage {
   }
 
   save(user) {
-    // MANTER A VALIDAÇÃO, ELA ESTÁ COMENTADA APENAS PARA ADIANTAR NOS TESTES
-    if(this.userEmailConfirmation != this.user.email){
-      this.presentToast("A confirmação do email deve ser igual ao email!");
-    // }else if(this.userPasswordConfirmation != this.user.current_password){
-    //   this.presentToast("A confirmação da senha deve ser igual à senha!");
-    }else{
+
       this.updateUserInterests();
       this.updateUserNauticalSports();
 
@@ -105,7 +100,7 @@ export class UserPage {
           }
           this.presentToast(errorMessage);
       });
-    }
+
     this.userPasswordConfirmation = "";
   }
 
