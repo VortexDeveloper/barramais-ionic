@@ -50,16 +50,36 @@ export class EventModalPage {
   }
 
   create(event, address){
-    event.user_id = this.user.id;
-    this.eventProvider.create(event, address)
-    .subscribe(event_params => {
-        this.event = new EventModel(event_params);
-        this.viewCtrl.dismiss(this.event);
-        this.presentToast('Evento criado com sucesso!');
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error);
-    });
+    if(event.name == null || event.name == ""){
+      this.presentToast("Preencha o nome do evento!");
+    }else if(event.event_date == null || event.event_date == ""){
+      this.presentToast("Selecione uma data para o evento!");
+    }else if(event.about == null || event.about == ""){
+      this.presentToast("Preencha uma descrição para o evento!");
+    }else if(address.zip_code == ""){
+      this.presentToast("Prencha o CEP!");
+    }else if(address.street == ""){
+      this.presentToast("Preencha o endereço!");
+    }else if(address.complement == ""){
+      this.presentToast("Preencha o complemento!");
+    }else if(address.state_id == ""){
+      this.presentToast("Selecione o estado!");
+    }else if(address.city_id == ""){
+      this.presentToast("Selecione a cidade!");
+    }else if(address.neighborhood == ""){
+      this.presentToast("Preencha o bairro!");
+    }else{
+      event.user_id = this.user.id;
+      this.eventProvider.create(event, address)
+      .subscribe(event_params => {
+          this.event = new EventModel(event_params);
+          this.viewCtrl.dismiss(this.event);
+          this.presentToast('Evento criado com sucesso!');
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error);
+      });
+    }
   }
 
   presentToast(msg) {
