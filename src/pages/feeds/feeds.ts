@@ -67,7 +67,10 @@ export class FeedsPage {
         console.log(this.posts);
         loader.dismiss();
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error);
+        loader.dismiss();
+      }
     );
     if(this.posts.length > 0){
       this.isPostsFull = true;

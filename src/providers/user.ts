@@ -307,11 +307,7 @@ export class User {
     let new_name = user.id + d.getTime();
 
     return this.authHttp.put(this.url + "/" + user.id + "/" + "save_avatar.json", {'avatar': {'image': user.avatar, 'filename': new_name}})
-      .map(res => {
-        let user_token = res.json();
-        localStorage.setItem("user", user_token.user);
-        return user_token;
-      });
+      .map(res => res.json());
   }
 
   save_cover_photo(user){

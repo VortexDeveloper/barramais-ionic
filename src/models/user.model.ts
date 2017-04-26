@@ -69,7 +69,6 @@ export class UserModel {
     this.cover_photo = params.cover_photo || null;
     this.avatar_url = params.avatar_url || "";
     this.cover_photo_url = params.cover_photo_url || "";
-    this.email = params.email || null;
     this.first_name = params.first_name || null;
     this.last_name = params.last_name || null;
     this.nickname = params.nickname || null;
