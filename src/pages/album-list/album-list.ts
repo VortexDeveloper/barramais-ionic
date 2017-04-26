@@ -56,6 +56,7 @@ export class AlbumListPage {
         // this.redirectPage(this.albumListPage);
         this.album.push(response);
         this.presentToast("Foto cadastrada com sucesso!");
+        this.isAlbumEmpty = false;
     }, error => {
         console.log(error.json());
         this.presentToast(error.json());

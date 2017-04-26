@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
+import { FriendsPage } from '../pages/friends/friends';
 import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
@@ -57,6 +58,7 @@ export class MyApp {
   rootPage: any = HomePage;
   mainPage: any = MainPage;
   profilePage: any = ProfilePage;
+  friendsPage: any = FriendsPage;
   userPage: any = UserPage;
   advertiserPage: any = AdvertiserPage;
   adsPage: any = AdsPage;
@@ -95,6 +97,8 @@ export class MyApp {
   interestSelectionPage: any = InterestSelectionPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
+  friends: any;
+  friendsCount: number;
 
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
@@ -129,6 +133,21 @@ export class MyApp {
       this.initializeApp();
       this.setUser();
       events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });
+  }
+
+  openFriends(){
+    this.nav.push(this.friendsPage, {user: this.user});
+  }
+
+  loadFriends(user) {
+    this.userProvider.user_friends(user)
+    .subscribe(
+      (friends) => {
+        this.friends = friends;
+        this.friendsCount = friends.length;
+      },
+      (error) => console.log(error)
+    );
   }
 
   initializeApp() {

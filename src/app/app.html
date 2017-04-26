@@ -42,14 +42,14 @@
           </ion-item>
         </li>
         <li>
-          <button menuClose ion-item (click)="openPage(mainPage)">
+          <button menuClose ion-item (click)="openFriends()">
             <div class="menu-item-container">
               <i class="menu-item-icone amigos"></i>
               Amigos
             </div>
           </button>
         </li>
-        <li>
+        <!-- <li>
           <ion-item>
             <a (click)="showSubMenuPaginas()">
               <div class="menu-item-container">
@@ -75,7 +75,7 @@
               </li>
             </ul>
           </ion-item>
-        </li>
+        </li> -->
         <li>
           <ion-item>
             <a (click)="showSubMenuBlog()">
@@ -90,11 +90,11 @@
                   Acessar Blog
                 </button>
               </li>
-              <li>
+              <!-- <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
                   Enviar Matéria
                 </button>
-              </li>
+              </li> -->
             </ul>
           </ion-item>
         </li>
@@ -106,31 +106,31 @@
             </div>
           </button>
         </li>
-        <li>
+        <!-- <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
             <div class="menu-item-container">
               <i class="menu-item-icone viagens"></i>
               Viagens
             </div>
           </button>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
             <div class="menu-item-container">
               <i class="menu-item-icone pesca"></i>
               Pesca
             </div>
           </button>
-        </li>
+        </li> -->
         <li>
           <ion-item>
             <a (click)="showSubMenuClassificados()">
               <div class="menu-item-container">
                 <i class="menu-item-icone classificados"></i>
-                Classificados
+                Classificados ( Em breve)
               </div>
             </a>
-            <ul class="sub-menu-item" [hidden]="!showClassificados">
+            <!-- <ul class="sub-menu-item" [hidden]="!showClassificados">
               <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openRoot(interestSelectionPage)">
                   Seleções
@@ -156,7 +156,7 @@
                   Produtos Náuticos
                 </button>
               </li>
-            </ul>
+            </ul> -->
           </ion-item>
         </li>
         <li>
@@ -164,10 +164,10 @@
             <a (click)="showSubMenuAnuncios()">
               <div class="menu-item-container">
                 <i class="menu-item-icone publicidade"></i>
-                Gerenciador de Anúncios
+                Anúncios (Em breve)
               </div>
             </a>
-            <ul class="sub-menu-item" [hidden]="!showAnuncios">
+            <!-- <ul class="sub-menu-item" [hidden]="!showAnuncios">
               <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage(adBannersPage)">
                   Anunciar sua marca
@@ -183,7 +183,7 @@
                   Minha conta
                 </button>
               </li>
-            </ul>
+            </ul> -->
           </ion-item>
         </li>
       </ul>
@@ -194,12 +194,12 @@
             Configurações
           </button>
         </li>
-        <li>
+        <!-- <li>
           <button menuClose ion-item (click)="openPage()">
             <ion-icon name="megaphone" class="icon-itens"></ion-icon>
             Denúncias
           </button>
-        </li>
+        </li> -->
         <li>
           <button menuClose ion-item (click)="openPage()">
             <ion-icon name="information-circle" class="icon-itens"></ion-icon>
