@@ -315,4 +315,14 @@ export class GroupPagePage {
     this.showGroupInformation = !this.showGroupInformation;
   }
 
+  delete(group){
+    this.groupProvider.delete(group.id)
+      .subscribe(response => {
+        this.presentToast("O grupo foi removido com sucesso!");
+        this.navCtrl.setRoot(this.groupsPage);
+      }, error => {
+        console.log("Não foi possível remover o grupo" + error.json());
+      })
+  }
+
 }

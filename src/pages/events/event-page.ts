@@ -51,7 +51,7 @@ export class EventPagePage {
   showGuestActions: boolean = false;
   friends: any;
   posts: Array<any>;
-
+  decided: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -67,6 +67,7 @@ export class EventPagePage {
     this.verifyEventAdmin();
     this.loadGuests(this.event);
     this.loadPosts();
+    this.isOnEvent(this.event);
     }
 
   ionViewDidLoad() {
@@ -175,7 +176,7 @@ export class EventPagePage {
   refuse_event(){
     this.userProvider.refuse_event(this.user, this.event).
     subscribe(response =>{
-      this.openPage(EventPagePage, this.event);
+      this.navCtrl.setRoot(this.eventsPage);
       this.presentToast(response.sucess);
     }, error =>{
       this.presentToast(error.json());
@@ -212,6 +213,25 @@ export class EventPagePage {
       (posts) => this.posts = posts,
       (error) => console.log(error)
     );
+  }
+
+  delete(event){
+    this.eventProvider.delete(event.id)
+      .subscribe(response => {
+        this.presentToast("Evento removido com sucesso!");
+        this.navCtrl.setRoot(this.eventsPage);
+      }, error => {
+        console.log("Não foi possível deletar o evento" + error.json());
+      })
+  }
+
+  isOnEvent(event){
+    this.eventProvider.get_is_on_event(event.id)
+      .subscribe(response => {
+        this.decided = response.is_on_event;
+      }, error => {
+        console.log(error.json());
+      })
   }
 
 }

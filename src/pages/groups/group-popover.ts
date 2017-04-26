@@ -14,7 +14,7 @@ import { ToastController } from 'ionic-angular';
 @Component({
   template: `
     <ion-list no-lines>
-      <button ion-item (click)="apply_group()" *ngIf="!is_member_of">Participar</button>
+      <button ion-item (click)="apply_group()" *ngIf="!participateButton">Participar</button>
       <button ion-item (click)="accept_group()" *ngIf="i_was_invited_to">Aceitar</button>
       <button ion-item (click)="refuse_group()" *ngIf="i_was_invited_to">Recusar</button>
       <button ion-item (click)="refuse_group()" *ngIf="is_member_of">Sair</button>
@@ -32,6 +32,7 @@ export class PopoverPage {
   user: UserModel = new UserModel();
   group: GroupModel = new GroupModel();
   invite: string = "";
+  participateButton: boolean = false;
 
   constructor(
     public viewCtrl: ViewController,
@@ -49,6 +50,7 @@ export class PopoverPage {
       this.is_member_of = params.data.is_member_of;
       this.i_was_invited_to = params.data.i_was_invited_to;
       this.send_request_to = params.data.send_request_to;
+      this.checkParticipateButton();
   }
 
   openPage(page, group) {
@@ -108,6 +110,12 @@ export class PopoverPage {
       }
     });
     modal.present();
+  }
+
+  checkParticipateButton(){
+    if(this.is_member_of || this.i_was_invited_to || this.send_request_to){
+      this.participateButton = true;
+    }
   }
 
 }

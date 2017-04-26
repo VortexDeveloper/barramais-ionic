@@ -124,6 +124,7 @@ export class GroupsPage {
     modal.onDidDismiss(group => {
       if(group){
         this.my_groups.push(group);
+        this.all_groups.push(group);
         this.confirmed_groups.push(group);
       }
     });
