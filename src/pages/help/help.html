@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <bm-header></bm-header>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <form (ngSubmit)="sendSupportMail(message)">
+      <p>
+        Dúvida em alguma funcionalidade ou o sistema apresentou erro?
+      </p>
+      <ion-item>
+        <ion-label floating>Informe-nos.</ion-label>
+        <ion-textarea [(ngModel)]="message" rows='10' name="message"></ion-textarea>
+      </ion-item>
+      <button class="form-buttons" ion-button type="submit" block>Enviar</button>
+    </form>
+  </div>
+</ion-content>

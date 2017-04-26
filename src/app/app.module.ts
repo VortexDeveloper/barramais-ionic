@@ -46,6 +46,7 @@ import { Conversations } from '../providers/conversations';
 import { ConversationChannel } from '../providers/conversation-channel';
 import { MessagesPage } from '../pages/messages/messages';
 import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
+import { HelpPage } from '../pages/help/help';
 import { AlbumListPage } from '../pages/album-list/album-list';
 import { AlbumPhotoCreatePage } from '../pages/album-photo-create/album-photo-create';
 import { AdBannersPage } from '../pages/ad-banners/ad-banners';
@@ -109,6 +110,7 @@ export function getAuthHttp(http) {
     FriendsPage,
     FriendshipRequestPage,
     LoginPage,
+    HelpPage,
     ForgotPasswordPage,
     BmHeaderComponent,
     BmPostComponent,
@@ -175,6 +177,7 @@ export function getAuthHttp(http) {
     ProfilePage,
     FriendsPage,
     FriendshipRequestPage,
+    HelpPage,
     LoginPage,
     ForgotPasswordPage,
     BmHeaderComponent,
