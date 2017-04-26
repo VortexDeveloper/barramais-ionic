@@ -6,6 +6,7 @@ import { GroupsPage } from '../pages/groups/groups';
 import { PopoverPage } from '../pages/groups/group-popover';
 import { EventsPage } from '../pages/events/events';
 import { UserPage } from '../pages/user/user';
+import { EditPasswordPage } from '../pages/user/edit-password';
 import { User } from '../providers/user';
 import { Routes } from '../providers/routes';
 import { EventProvider } from '../providers/events';
@@ -29,6 +30,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { FriendsPage } from '../pages/friends/friends';
 import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request';
 import { LoginPage } from '../pages/login/login';
+import { ForgotPasswordPage } from '../pages/login/forgot-password';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
@@ -93,6 +95,7 @@ export function getAuthHttp(http) {
     GroupsPage,
     EventsPage,
     UserPage,
+    EditPasswordPage,
     RegistrationPage,
     HomePage,
     MainPage,
@@ -106,6 +109,7 @@ export function getAuthHttp(http) {
     FriendsPage,
     FriendshipRequestPage,
     LoginPage,
+    ForgotPasswordPage,
     BmHeaderComponent,
     BmPostComponent,
     AdvertiserPage,
@@ -159,6 +163,7 @@ export function getAuthHttp(http) {
     GroupsPage,
     EventsPage,
     UserPage,
+    EditPasswordPage,
     RegistrationPage,
     HomePage,
     MainPage,
@@ -171,6 +176,7 @@ export function getAuthHttp(http) {
     FriendsPage,
     FriendshipRequestPage,
     LoginPage,
+    ForgotPasswordPage,
     BmHeaderComponent,
     BmPostComponent,
     AdvertiserPage,

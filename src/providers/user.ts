@@ -57,6 +57,9 @@ export class User {
   private send_request_to_url: string;
   private i_was_invited_to_url: string;
   private comments_url: string;
+  private password_url: string;
+  private devise_token_url: string;
+  private update_password_url: string;
 
   constructor(
     public http: Http,
@@ -106,6 +109,9 @@ export class User {
     this.send_request_to_url = host + "users/send_request_to/";
     this.i_was_invited_to_url = host + "users/i_was_invited_to/";
     this.comments_url = host + "comments/";
+    this.password_url = host + 'users/password';
+    this.devise_token_url = host + 'devise_token';
+    this.update_password_url = host + 'users/password';
   }
 
   is_member_of(group){
@@ -365,4 +371,18 @@ export class User {
       .map(res => res.json());
   }
 
+  forgot_password(user) {
+    return this.authHttp.post(this.password_url + ".json", user)
+      .map(res => res.json());
+  }
+
+  get_devise_token() {
+    return this.authHttp.get(this.devise_token_url + ".json")
+      .map(res => res.json());
+  }
+
+  update_password(user) {
+    return this.authHttp.put(this.update_password_url + ".json", user)
+      .map(res => res.json());
+  }
 }

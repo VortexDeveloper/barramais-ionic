@@ -45,6 +45,9 @@
             <ion-label floating>Confirmar Email</ion-label>
             <ion-input type="text" [(ngModel)]="userEmailConfirmation" name="email_confirmation"></ion-input>
           </ion-item>
+          <button ion-button (click)='editPassword()'>
+            Alterar Senha
+          </button>
           <!-- <ion-item>
             <ion-label floating>Senha</ion-label>
             <ion-input type="password" [(ngModel)]="user.current_password" name="current_password"></ion-input>

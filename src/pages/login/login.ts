@@ -7,6 +7,7 @@ import { FeedsPage }from '../feeds/feeds';
 import { MainPage }from '../main/main';
 import { JwtHelper } from 'angular2-jwt';
 import { Events } from 'ionic-angular';
+import { ForgotPasswordPage } from './forgot-password';
 
 @Component({
   selector: 'page-login',
@@ -39,6 +40,10 @@ export class LoginPage {
 
   openPage(page) {
     this.navCtrl.push(page);
+  }
+
+  gotToForgotPassword() {
+    this.openPage(ForgotPasswordPage);
   }
 
   login(user) {

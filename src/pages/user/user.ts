@@ -11,6 +11,8 @@ import { ProfilePage } from '../profile/profile';
 import { JwtHelper } from 'angular2-jwt';
 import { Events } from 'ionic-angular';
 import { MainPage } from '../main/main';
+import { EditPasswordPage } from './edit-password';
+
 
 declare var cordova: any;
 
@@ -107,6 +109,15 @@ export class UserPage {
     this.userPasswordConfirmation = "";
   }
 
+  editPassword() {
+    this.userProvider.get_devise_token().subscribe(
+      (devise_token_jwt) => {
+        this.openPage(EditPasswordPage, {devise_token: devise_token_jwt});
+      },
+      (error) => console.log(error)
+    );
+  }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
@@ -119,8 +130,8 @@ export class UserPage {
     this.navCtrl.pop();
   }
 
-  openPage(page){
-    this.navCtrl.push(page);
+  openPage(page, options={}){
+    this.navCtrl.push(page, options);
   }
 
   hideNautical(){
