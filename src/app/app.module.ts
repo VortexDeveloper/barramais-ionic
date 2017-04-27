@@ -156,7 +156,9 @@ export function getAuthHttp(http) {
     NotificationViewPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      backButtonText: ''
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

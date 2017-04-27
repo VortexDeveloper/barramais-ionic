@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list class='chat-messages-list'>
     <ion-grid>
@@ -39,7 +38,7 @@
         <ion-textarea placeholder='Escreva aqui..' [(ngModel)]="message.body"></ion-textarea>
       </ion-col>
       <ion-col>
-        <button ion-button round small outline icon-only (click)="createMessage()">
+        <button class="send-button" ion-button round small outline icon-only (click)="createMessage()">
           <ion-icon name="send"></ion-icon>
         </button>
       </ion-col>

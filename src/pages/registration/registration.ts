@@ -106,7 +106,7 @@ export class RegistrationPage {
     this.navCtrl.setRoot(page);
   }
 
-  openTermsAdnPrivacy(page){
+  openTermsAndPrivacy(page){
     this.navCtrl.push(page);
   }
 
