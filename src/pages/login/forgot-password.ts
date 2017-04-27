@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../providers/user';
-import { ToastController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 
 /*
   Generated class for the ForgotPassword page.
@@ -19,6 +19,7 @@ export class ForgotPasswordPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public loadingCtrl: LoadingController,
     public userProvider: User,
     public toastCtrl: ToastController,
   ) {}
@@ -36,11 +37,20 @@ export class ForgotPasswordPage {
   }
 
   forgotPassword() {
+    let loader = this.loadingCtrl.create({
+      content: "Entrando, aguarde..."
+    });
+
+    loader.present();
     this.userProvider.forgot_password({user: this.user}).subscribe(
       (_) => {
         this.presentToast('Enviamos um link de recuperação de senha para o seu email!');
+        loader.dismiss();
       },
-      (error) => this.presentToast(error.json().error)
+      (error) => {
+        this.presentToast(error.json().error);
+        loader.dismiss();
+      }  
     );
   }
 }

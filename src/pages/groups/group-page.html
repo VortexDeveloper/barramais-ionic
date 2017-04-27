@@ -5,10 +5,14 @@
 </ion-header>
 <ion-content>
   <div class="background-image">
-    <button ion-button icon-only class="button-more" (click)="presentPopover($event)">
+    <button ion-button icon-only class="button-more" (click)="presentPopover($event)" *ngIf="!send_request_to || is_member_of">
       <ion-icon name="more"></ion-icon>
     </button>
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
+    <button icon-left class="perfil-actions" color="danger" ion-button *ngIf="showAdminActions" (click)="delete(group)">
+      <ion-icon name="close"></ion-icon>
+      Excluir
+    </button>
   </div>
   <div class="main-content">
     <ion-item>
@@ -17,7 +21,7 @@
     </ion-item>
     <div class="profile-description">
       <ion-row class="actions-row">
-        <ion-col width-25 (click)="openModal(groupMembers, confirmedMembers)">
+        <ion-col width-25 (click)="openModal(groupMembers, confirmedMembers, 'confirmados')">
           <h2 class="icon-button">{{l_confirmedMembers}}</h2>
           <p class="icon-word">
             Membros
@@ -29,7 +33,7 @@
             membros
           </p>
         </ion-col>
-        <ion-col width-25 (click)="openModal(groupMembers, pendingByAdmin)" *ngIf="showAdminActions">
+        <ion-col width-25 (click)="openModal(groupMembers, pendingByAdmin, 'pendentes')" *ngIf="showAdminActions">
           <ion-icon name="time" class="icon-button"></ion-icon>
           <p class="icon-word">
             Pendentes
@@ -51,5 +55,4 @@
   <ion-fab right bottom>
     <button ion-fab color="danger" (click)="openPostModal()"><ion-icon name="create"></ion-icon></button>
   </ion-fab>
-  <button class="form-buttons" ion-button type="button" block name="button" *ngIf="showAdminActions" (click)="delete(group)">Remover</button>
 </ion-content>

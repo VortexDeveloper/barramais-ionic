@@ -64,6 +64,7 @@ export class LoginPage {
         loader.dismiss();
     }, error => {
         console.log(error.json() || 'Server error');
+        loader.dismiss();
         this.presentToast(error.json().error);
     });
   }
