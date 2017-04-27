@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
@@ -21,6 +21,7 @@ export class EditPasswordPage {
 
   constructor(
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public navParams: NavParams,
     public toastCtrl: ToastController,
     private userProvider: User
@@ -30,10 +31,21 @@ export class EditPasswordPage {
   }
 
   updatePassword() {
+    let loader = this.loadingCtrl.create({
+      content: "Entrando, aguarde..."
+    });
+
+    loader.present();
     this.password_config.reset_password_token = this.reset_password_token.raw;
     this.userProvider.update_password({user: this.password_config}).subscribe(
-      (data) => this.presentToast('Senha atualizada com sucesso!'),
-      (error) => this.presentToast(error.json().error)
+      (data) => {
+        this.presentToast('Senha atualizada com sucesso!');
+        loader.dismiss();
+      },
+      (error) => {
+        this.presentToast(error.json().error);
+        loader.dismiss();
+      }
     );
   }
 

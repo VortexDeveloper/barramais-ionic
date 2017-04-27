@@ -70,6 +70,7 @@ export class RegistrationPage {
                errorMessage += "Erro no campo " + campo + ": " + campos + " \n";
              }
           }
+          loader.dismiss();
           this.presentToast(errorMessage);
       });
     }
@@ -89,6 +90,10 @@ export class RegistrationPage {
 
   openPage(page){
     this.navCtrl.setRoot(page);
+  }
+
+  openTermsAdnPrivacy(page){
+    this.navCtrl.push(page);
   }
 
   login(user) {

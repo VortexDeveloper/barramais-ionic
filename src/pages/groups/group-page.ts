@@ -127,8 +127,8 @@ export class GroupPagePage {
     this.navCtrl.push(page, {group: group});
   }
 
-  openModal(page, members) {
-    let modal = this.modalCtrl.create(page, {group: this.group, members: members});
+  openModal(page, members, page_type) {
+    let modal = this.modalCtrl.create(page, {group: this.group, members: members, page_type: page_type});
     modal.onDidDismiss(group => {
       this.loadMembers(this.group);
     });

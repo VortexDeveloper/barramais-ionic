@@ -186,10 +186,13 @@ page-group-page {
       }
 
       .button-more {
-          position: absolute !important;
-          z-index: 999 !important;
-          background: transparent !important;
-          background-color: transparent !important;
+        position: absolute !important;
+        z-index: 999 !important;
+        background: #faa35f !important;
+        background-color: #faa35f !important;
+        height: auto;
+        width: 30px;
+        margin: 10px;
       }
 
 }

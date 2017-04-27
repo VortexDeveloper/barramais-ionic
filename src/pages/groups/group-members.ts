@@ -30,6 +30,7 @@ export class GroupMembersPage {
   all_members: any;
   showAdminActions: boolean = false;
   profilePage: any = ProfilePage;
+  page_type: string = "";
 
   constructor(
     public platform: Platform,
@@ -46,6 +47,7 @@ export class GroupMembersPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.group = params.data.group;
       this.members = params.data.members;
+      this.page_type = params.data.page_type;
       console.log(this.members);
       this.verifyGroupAdmin();
     }

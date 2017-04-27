@@ -23,7 +23,7 @@
             <p>{{member.birthday | date:'MMMM d, y'}}</p>
           </div>
         </div>
-        <button (click)="accept_member(member)">Aceitar</button>
+        <button ion-button item-right (click)="accept_member(member)" *ngIf="showAdminActions && page_type == 'pendentes'">Aceitar</button>
       <!-- <ion-checkbox [hidden]="!showAdminActions" item-right color="dark" checked="false" [(ngModel)]="member.invited" (ionChange)="getSelect(member.invited, member)"></ion-checkbox> -->
     </ion-item>
   </ion-list>
