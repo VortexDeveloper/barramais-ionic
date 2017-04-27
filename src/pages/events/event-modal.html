@@ -13,13 +13,18 @@
 </ion-header>
 
 <ion-content>
+  <div class="background-image">
+    <img src="assets/images/evento_cover.jpg" [hidden]="event.cover_photo != null" />
+    <img src="{{user.cover_photo_url}}" id='user_cover_photo' [hidden]="event.cover_photo == null" />
+    <ion-icon class="cover-camera-icon" name="camera" (click)="presentActionSheet()"></ion-icon>
+  </div>
   <div class="container">
     <ion-list>
-      <ion-item>
+      <!-- <ion-item>
         <ion-thumbnail item-left>
           <img src="{{event.cover_photo}}" id='event_cover_photo' [hidden]="event.cover_photo === null">
         </ion-thumbnail>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
         <ion-label floating>Nome do Evento</ion-label>
         <ion-input type="text" [(ngModel)]="event.name" name="name"></ion-input>
@@ -64,11 +69,11 @@
     <button class="form-buttons" ion-button type="button" block name="button" (click)="create(event, address)">Salvar</button>
   </div>
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <button ion-button color="light" clear (click)="presentActionSheet()" icon-left>
       <ion-icon ios="ios-open" md="md-open"></ion-icon>
       Selecionar midia
     </button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

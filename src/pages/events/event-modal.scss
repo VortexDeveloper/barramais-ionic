@@ -109,4 +109,29 @@ page-event-modal {
     padding: 10px;
   }
 
+  .background-image {
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+      overflow: hidden;
+  }
+
+  .background-image img{
+    min-width: 100%;
+    max-width: 110%;
+    position: relative;
+    left: -5%;
+    top: -5%;
+  }
+
+  .cover-camera-icon{
+      position: absolute !important;
+      top: 2px !important;
+      right: 6px !important;
+      z-index: 999 !important;
+      opacity: 0.5 !important;
+      color: #f5f5f5 !important;
+      font-size: 35px;
+  }
+
 }
