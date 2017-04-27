@@ -226,4 +226,12 @@ page-profile {
         font-size: 1.5em !important;
       }
 
+      ion-col[width-80] {
+        -webkit-flex: 0 0 80%;
+        -ms-flex: 0 0 80%;
+        flex: 0 0 80%;
+        max-width: 80%;
+        color: #8e9093;
+      }
+
 }

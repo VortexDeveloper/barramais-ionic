@@ -14,6 +14,7 @@ import { User } from '../../providers/user';
 import { ToastController } from 'ionic-angular';
 import { EventProvider } from '../../providers/events';
 import { Posts } from '../../providers/posts';
+import { EventModalPage } from "../events/event-modal";
 
 /*
   Generated class for the Profile page.
@@ -52,6 +53,7 @@ export class EventPagePage {
   friends: any;
   posts: Array<any>;
   decided: boolean = false;
+  eventModalPage: any = EventModalPage;
 
   constructor(
     public navCtrl: NavController,
@@ -84,6 +86,10 @@ export class EventPagePage {
 
   openPage(page, event) {
     this.navCtrl.push(page, {event: event});
+  }
+
+  openEditPage(page, event, address){
+    this.navCtrl.push(page, {event: event, address: address});
   }
 
   openPostModal() {

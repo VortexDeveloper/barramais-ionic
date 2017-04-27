@@ -129,4 +129,14 @@ page-event-page {
           border-radius: 50%;
       }
 
+      .perfil-actions{
+        position: relative !important;
+        top: -58px !important;
+        float: right;
+        right: 6px !important;
+        z-index: 999 !important;
+        font-size: .7em;
+        height: 28px;
+      }
+
 }

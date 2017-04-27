@@ -49,6 +49,13 @@ export class EventProvider {
     this.is_on_event_url = this.host + "events/is_on_event";
   }
 
+  update(event, address){
+    let d = new Date;
+    let new_name = event.id + d.getTime();
+    return this.authHttp.put(this.url + "/" + event.id + ".json", {'event': event, 'address': address, 'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
+      .map(res => res.json());
+  }
+
   get_is_on_event(event_id){
     return this.authHttp.get(this.is_on_event_url + "/" + event_id +  ".json")
       .map(res => res.json());
@@ -106,6 +113,12 @@ export class EventProvider {
       .map(res => res.json());
   }
 
+  save_cover_photo(event){
+    let d = new Date;
+    let new_name = event.id + d.getTime();
+    return this.http.put(this.url + "/save_cover_photo/" + event.id + ".json", {'cover_photo': {'image': event.cover_photo, 'filename': new_name}})
+      .map(res => res.json());
+  }
 
 
 }
