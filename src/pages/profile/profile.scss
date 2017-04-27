@@ -1,17 +1,22 @@
 page-profile {
     .background-image {
-        background-size: cover;
-        background-position: center;
-        height: 200px;
-        overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      align-content: stretch;
+      justify-content: center;
+      flex-direction: column;
+      flex-wrap: wrap;
+
     }
 
     .background-image img{
       min-width: 100%;
       max-width: 110%;
       position: relative;
-      left: -5%;
-      top: -5%;
     }
 
     .main-content {
@@ -166,12 +171,12 @@ page-profile {
       }
 
       .cover-camera-icon{
-          position: absolute !important;
-          top: 2px !important;
-          right: 6px !important;
-          z-index: 999 !important;
-          opacity: 0.5 !important;
-          color: #f5f5f5 !important;
+        position: absolute !important;
+        top: 2px !important;
+        right: 6px !important;
+        z-index: 999 !important;
+        opacity: 0.7 !important;
+        color: #faa35f !important;
       }
 
       .perfil-actions{

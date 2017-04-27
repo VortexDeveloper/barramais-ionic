@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, AlertController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, AlertController, ModalController, LoadingController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 import { User } from '../../providers/user';
@@ -35,6 +35,7 @@ export class AlbumListPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
+    public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     private userProvider: User,
@@ -51,33 +52,55 @@ export class AlbumListPage {
   }
 
   save(albumPhoto){
+    let loader = this.loadingCtrl.create({
+      content: "Salvando foto na galeria, aguarde..."
+    });
+
+    loader.present();
+
     this.userProvider.create_album_photo(albumPhoto, this.user.id)
       .subscribe(response => {
         // this.redirectPage(this.albumListPage);
         this.album.push(response);
-        this.presentToast("Foto cadastrada com sucesso!");
         this.isAlbumEmpty = false;
+        loader.dismiss();
+        this.presentToast("Foto cadastrada com sucesso!");
     }, error => {
+        loader.dismiss();
         console.log(error.json());
         this.presentToast(error.json());
     });
   }
 
   getUserAlbum(){
-    // console.log(this.user);
+    let loader = this.loadingCtrl.create({
+      content: "Carregando galeria, aguarde..."
+    });
+
+    loader.present();
+
     this.userProvider.get_user_album(this.user.id)
       .subscribe(response =>{
         console.log(response);
         this.album = response;
         this.checkIfAlbumIsEmpty();
+        loader.dismiss();
       }, error => {
+        loader.dismiss();
         console.log("Erro ao carregar a lista de classificados" + error.json())
       });
   }
 
   destroy(photo){
+    let loader = this.loadingCtrl.create({
+      content: "Excluindo foto, aguarde..."
+    });
+
+    loader.present();
+
     this.userProvider.destroy_user_album_photo(photo.id)
     .subscribe(response => {
+      loader.dismiss();
     });
     this.clearRemovedPhoto(photo);
     this.checkIfAlbumIsEmpty();

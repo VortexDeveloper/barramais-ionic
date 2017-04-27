@@ -39,5 +39,17 @@ ion-title {
 
 .formgrid { background: #f5f5f5; }
 
+.send-button{
+  background: rgb(25, 45, 82) !important;
+  border: none !important;
+  border-radius: 3px !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.scroll-content {
+  background: url(assets/images/bg_chat.png) !important;
+  background-size: 100% !important;
+  background-position: center !important;
+}
 
 }
