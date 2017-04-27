@@ -132,7 +132,7 @@ export class GroupsPage {
   }
 
   doRefresh(refresher) {
-    this.myGroups(this.current_user);
+    this.loadGroups(this.current_user);
     refresher.complete();
   }
 

@@ -5,6 +5,8 @@ import { ProfilePage } from "../profile/profile";
 import { Posts } from '../../providers/posts';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
+import { User } from '../../providers/user';
+import { InterestSelectionPage } from '../interest-selection/interest-selection';
 
 @Component({
   selector: 'page-feeds',
@@ -18,12 +20,15 @@ export class FeedsPage {
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
   isPostsFull: boolean = false;
+  userInterests: any[] = [];
+  interestSelectionPage: any = InterestSelectionPage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public postsProvider: Posts,
+    public userProvider: User,
     public loadingCtrl: LoadingController
   ) {
 
@@ -32,6 +37,7 @@ export class FeedsPage {
   ionViewDidLoad() {
     this.loadPosts();
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+    this.load_interests(this.user);
   }
 
   openModal() {
@@ -52,6 +58,10 @@ export class FeedsPage {
 
   openPage(page){
     this.navCtrl.push(page);
+  }
+
+  openRoot(page){
+    this.navCtrl.setRoot(page);
   }
 
   loadPosts() {
@@ -75,6 +85,23 @@ export class FeedsPage {
     if(this.posts.length > 0){
       this.isPostsFull = true;
     }
+  }
+
+  load_interests(user){
+    this.userProvider.load_interests(user.id)
+      .subscribe(response => {
+        this.userInterests = response;
+        if(this.userInterests.length < 3){
+          this.openRoot(this.interestSelectionPage);
+        }
+      }, error => {
+        console.log(error.json());
+      })
+  }
+
+  doRefresh(refresher) {
+    this.loadPosts();
+    refresher.complete();
   }
 
 }

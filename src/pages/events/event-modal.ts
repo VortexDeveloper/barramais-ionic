@@ -50,13 +50,15 @@ export class EventModalPage {
   }
 
   create(event, address){
+    var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+
     if(event.name == null || event.name == ""){
       this.presentToast("Preencha o nome do evento!");
     }else if(event.event_date == null || event.event_date == ""){
       this.presentToast("Selecione uma data para o evento!");
     }else if(event.about == null || event.about == ""){
       this.presentToast("Preencha uma descrição para o evento!");
-    }else if(address.zip_code == ""){
+    }else if(address.zip_code == "" || !address.zip_code.match(cepRule)){
       this.presentToast("Prencha o CEP!");
     }else if(address.street == ""){
       this.presentToast("Preencha o endereço!");

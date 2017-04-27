@@ -61,6 +61,7 @@ export class User {
   private devise_token_url: string;
   private update_password_url: string;
   private support_url: string;
+  private load_interests_url: string;
 
   constructor(
     public http: Http,
@@ -114,6 +115,12 @@ export class User {
     this.devise_token_url = host + 'devise_token';
     this.update_password_url = host + 'users/password';
     this.support_url = host + '/users/send_support_email.json?message=';
+    this.load_interests_url = host + '/users/load_interests/'
+  }
+
+  load_interests(user_id){
+    return this.authHttp.get(this.load_interests_url + user_id + ".json")
+      .map(res => res.json());
   }
 
   is_member_of(group){
