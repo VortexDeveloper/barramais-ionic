@@ -4,6 +4,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" [pullMin]=90>
+   <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+   </ion-refresher-content>
+  </ion-refresher>
   <!-- <ion-item-divider color="light" *ngIf="!isPostsFull">Não há posts no seu feed de notícias</ion-item-divider> -->
   <bm-post [posts]="posts"></bm-post>
   <ion-fab right bottom>
