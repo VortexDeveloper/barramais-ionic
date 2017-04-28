@@ -84,7 +84,7 @@
           </ion-item>
         </ion-list>
         <ion-row class="skill-icons">
-          <ion-col width-50 *ngIf="user.naval_service_patent !== 0">
+          <ion-col width-50 *ngIf="user.naval_service_patent !== null">
             <ion-row>
               <ion-col width-20>
                 <img src="assets/images/{{user.naval_service_patent}}.png" />
@@ -94,7 +94,7 @@
               </ion-col>
             </ion-row>
           </ion-col>
-          <ion-col width-50 *ngIf="user.nautical_license !== 0">
+          <ion-col width-50 *ngIf="user.nautical_license !== null">
             <ion-row>
               <ion-col width-20>
                 <img src="assets/images/{{user.nautical_license}}.png" />

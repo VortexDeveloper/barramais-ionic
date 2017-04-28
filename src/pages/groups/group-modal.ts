@@ -51,27 +51,35 @@ export class GroupModalPage {
   }
 
   create(group){
-    this.groupProvider.create(group)
-    .subscribe(group_params => {
-        this.group = new GroupModel(group_params);
-        this.viewCtrl.dismiss(group_params);
-        this.presentToast('Grupo criado com sucesso!');
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error);
-    });
+    if(group.name == null || group.name == ""){
+      this.presentToast("Preencha o nome do grupo!")
+    }else{
+      this.groupProvider.create(group)
+      .subscribe(group_params => {
+          this.group = new GroupModel(group_params);
+          this.viewCtrl.dismiss(group_params);
+          this.presentToast('Grupo criado com sucesso!');
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error);
+      });
+    }
   }
 
   update(group){
-    this.groupProvider.update(group)
-    .subscribe(group_params => {
-        this.group = new GroupModel(group_params);
-        this.viewCtrl.dismiss(group_params);
-        this.presentToast('Grupo atualizado com sucesso!');
-    }, error => {
-        console.log(error.json());
-        this.presentToast(error);
-    });
+    if(group.name == null || group.name == ""){
+      this.presentToast("Preencha o nome do grupo!")
+    }else{
+      this.groupProvider.update(group)
+      .subscribe(group_params => {
+          this.group = new GroupModel(group_params);
+          this.viewCtrl.dismiss(group_params);
+          this.presentToast('Grupo atualizado com sucesso!');
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error);
+      });
+    }
   }
 
   presentToast(msg) {

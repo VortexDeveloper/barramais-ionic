@@ -82,9 +82,9 @@ export class UserModel {
     this.nautical_professional = params.nautical_professional || false;
     this.nautical_profession_description = params.nautical_profession_description || "";
     this.naval_service = params.naval_service || false;
-    this.naval_service_patent = params.naval_service_patent || 0;
+    this.naval_service_patent = params.naval_service_patent || null;
     this.advertiser = params.advertiser || null;
-    this.nautical_license = params.nautical_license || 0;
+    this.nautical_license = params.nautical_license || null;
     this.has_nautical_license = params.has_nautical_license || false;
     this.work = params.work || "";
     this.nautical_tour = params.nautical_tour || false;

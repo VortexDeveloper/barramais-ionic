@@ -6,9 +6,17 @@
 <ion-content>
   <div class="background-image">
     <img src="{{event.cover_photo_url}}" alt="Perfil Header"/>
+    <button icon-left class="perfil-actions" color="danger" ion-button *ngIf="showAdminActions" (click)="delete(event)">
+      <ion-icon name="close"></ion-icon>
+      Excluir
+    </button>
+    <button icon-left class="perfil-actions" color="primary" ion-button (click)="openEditPage(eventModalPage, event, event.address)" *ngIf="showAdminActions">
+      <ion-icon name="create"></ion-icon>
+      Editar
+    </button>
   </div>
   <div class="main-content">
-    <ion-item>
+    <ion-item no-lines>
       <ion-avatar item-left class="ion-avatar-event">
         <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
         <h3 class="h3-events-avatar">{{ event.event_date | date:'MMM'}}</h3>
@@ -81,5 +89,4 @@
     </ion-row>
     <bm-post [posts]="posts"></bm-post>
   </div>
-  <button class="form-buttons" ion-button type="button" block name="button" *ngIf="showAdminActions" (click)="delete(event)">Remover</button>
 </ion-content>
