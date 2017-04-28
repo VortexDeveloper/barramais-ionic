@@ -57,7 +57,8 @@ export class EventModalPage {
   }
 
   create(event, address){
-    var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+    // var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+    var cepRule = /^[0-9]{8}$/;
 
     if(event.name == null || event.name == ""){
       this.presentToast("Preencha o nome do evento!");
@@ -82,8 +83,10 @@ export class EventModalPage {
       this.eventProvider.create(event, address)
       .subscribe(event_params => {
           this.event = new EventModel(event_params);
+          console.log(this.event);
           this.viewCtrl.dismiss(this.event);
           this.presentToast('Evento criado com sucesso!');
+          // this.navCtrl.setRoot(this.eventsPage);
       }, error => {
           console.log(error.json());
           this.presentToast(error);
@@ -92,7 +95,8 @@ export class EventModalPage {
   }
 
   update(event, address){
-    var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+    // var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+    var cepRule = /^[0-9]{8}$/;
 
     if(event.name == null || event.name == ""){
       this.presentToast("Preencha o nome do evento!");

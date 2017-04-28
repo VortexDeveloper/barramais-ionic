@@ -7,6 +7,9 @@ import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
+
+import { UserModel } from "../../models/user.model";
+import { JwtHelper } from 'angular2-jwt';
 /*
   Generated class for the FriendshipRequest page.
 
@@ -18,6 +21,11 @@ import { MessagesPage } from '../messages/messages';
   templateUrl: 'friendship-request.html'
 })
 export class FriendshipRequestPage {
+
+  user_token: any = localStorage.getItem('user');
+  jwtHelper: JwtHelper = new JwtHelper();
+  current_user: UserModel;
+  user: UserModel = new UserModel();
 
   profilePage: any = ProfilePage;
   feeds: any = FeedsPage;
@@ -32,6 +40,8 @@ export class FriendshipRequestPage {
     public toastCtrl: ToastController,
     public userProvider: User
   ) {
+      this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+      this.user = new UserModel(navParams.data.user);
       this.pending_friendships();
   }
 
@@ -40,7 +50,7 @@ export class FriendshipRequestPage {
   }
 
   openPage(page){
-    this.navCtrl.push(page);
+    this.navCtrl.setRoot(page, {user: this.user});
   }
 
   pending_friendships(){
