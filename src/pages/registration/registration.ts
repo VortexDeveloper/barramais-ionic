@@ -58,7 +58,6 @@ export class RegistrationPage {
       this.userProvider.create(user)
       .subscribe(user_params => {
           this.user = new UserModel(user_params);
-          console.log(user);
           this.login(user);
           loader.dismiss();
       }, error => {

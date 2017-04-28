@@ -62,6 +62,7 @@ export class User {
   private update_password_url: string;
   private support_url: string;
   private load_interests_url: string;
+  private omniauth_callback_url: string;
 
   constructor(
     public http: Http,
@@ -115,7 +116,8 @@ export class User {
     this.devise_token_url = host + 'devise_token';
     this.update_password_url = host + 'users/password';
     this.support_url = host + '/users/send_support_email.json?message=';
-    this.load_interests_url = host + '/users/load_interests/'
+    this.load_interests_url = host + '/users/load_interests/';
+    this.omniauth_callback_url = host + '/users/auth/facebook/callback.json';
   }
 
   load_interests(user_id){
@@ -394,5 +396,9 @@ export class User {
   send_support_email(message) {
     this.support_url += message;
     return this.authHttp.get(this.support_url).map(res => res.json());
+  }
+
+  register_or_login_with_facebook(auth) {
+    return this.http.post(this.omniauth_callback_url, {cordova: btoa(JSON.stringify(auth))}).map(res => res.json());
   }
 }
