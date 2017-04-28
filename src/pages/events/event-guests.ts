@@ -4,6 +4,7 @@ import { EventProvider } from "../../providers/events";
 import { User } from "../../providers/user";
 import { EventModel } from "../../models/event.model";
 import { ToastController } from 'ionic-angular';
+import { ProfilePage } from '../profile/profile';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
 
@@ -26,6 +27,7 @@ export class EventGuestsPage {
   current_user: UserModel;
   selectedGuests: any[] = [];
   all_guests: any;
+  profilePage: any = ProfilePage;
   showAdminActions: boolean = false;
 
   constructor(
@@ -56,6 +58,10 @@ export class EventGuestsPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  openProfile(user) {
+    this.navCtrl.push(this.profilePage, {user: user.id})
   }
 
   getSelect(isChecked, guest) {

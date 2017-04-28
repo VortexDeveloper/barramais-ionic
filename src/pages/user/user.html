@@ -90,6 +90,7 @@
             <ion-label floating>Site</ion-label>
             <ion-input type="text" [(ngModel)]="user.website" name="website"></ion-input>
           </ion-item>
+          <div class="divider-items"></div>
           <ion-item>
             <ion-label>Educação</ion-label>
             <ion-select [(ngModel)]="user.academic_profile" name="academic_profile">
@@ -115,6 +116,7 @@
             <ion-label floating>Data de nascimento</ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birthday" name="birthday"></ion-datetime>
           </ion-item>
+          <div class="divider-items"></div>
           <ion-list radio-group [(ngModel)]="user.sex" name="sex">
             <ion-list-header>
               Gênero
@@ -128,6 +130,7 @@
               <ion-radio value="F"></ion-radio>
             </ion-item>
           </ion-list>
+          <div class="divider-items"></div>
           <ion-list radio-group no-lines [(ngModel)]="user.relationship" name="relationship">
             <ion-list-header>
               Relacionamento

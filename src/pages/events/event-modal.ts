@@ -6,8 +6,10 @@ import { AddressModel } from "../../models/address.model";
 import { ToastController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
-import { Camera } from 'ionic-native';
+import { EventsPage } from '../events/events'
+import { Camera } from '@ionic-native/camera';
 
+declare var cordova: any;
 /*
   Generated class for the PostModal page.
 
@@ -27,9 +29,12 @@ export class EventModalPage {
   user: UserModel;
   cities: any;
   states: any;
+  eventsPage: any = EventsPage;
+  erro: string = "";
 
   constructor(
     public platform: Platform,
+    private camera: Camera,
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
@@ -39,6 +44,8 @@ export class EventModalPage {
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.getStates('1');
+    this.event = new EventModel(navParams.data.event);
+    this.address = new AddressModel(navParams.data.address);
   }
 
   ionViewDidLoad() {
@@ -84,6 +91,41 @@ export class EventModalPage {
     }
   }
 
+  update(event, address){
+    var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+
+    if(event.name == null || event.name == ""){
+      this.presentToast("Preencha o nome do evento!");
+    }else if(event.event_date == null || event.event_date == ""){
+      this.presentToast("Selecione uma data para o evento!");
+    }else if(event.about == null || event.about == ""){
+      this.presentToast("Preencha uma descrição para o evento!");
+    }else if(address.zip_code == "" || !address.zip_code.match(cepRule)){
+      this.presentToast("Prencha o CEP!");
+    }else if(address.street == ""){
+      this.presentToast("Preencha o endereço!");
+    }else if(address.complement == ""){
+      this.presentToast("Preencha o complemento!");
+    }else if(address.state_id == ""){
+      this.presentToast("Selecione o estado!");
+    }else if(address.city_id == ""){
+      this.presentToast("Selecione a cidade!");
+    }else if(address.neighborhood == ""){
+      this.presentToast("Preencha o bairro!");
+    }else{
+      event.user_id = this.user.id;
+      this.eventProvider.update(event, address)
+      .subscribe(event_params => {
+          this.event = new EventModel(event_params);
+          this.presentToast('Evento atualizado com sucesso!');
+          this.navCtrl.setRoot(this.eventsPage);
+      }, error => {
+          console.log(error.json());
+          this.presentToast(error);
+      });
+    }
+  }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
@@ -119,25 +161,32 @@ export class EventModalPage {
     });
   }
 
-  public presentActionSheet() {
+  public presentActionSheet(){
     let actionSheet = this.actionsheetCtrl.create({
-      title: 'Selecione a origem da imagem',
+      title: 'Carregar midia',
+      cssClass: 'page-post-modal',
       buttons: [
         {
           text: 'Carregar da Galeria',
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Camera',
+          text: 'Fotos',
+          icon: !this.platform.is('ios') ? 'videocam' : null,
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            console.log('Play clicked');
           }
         },
         {
           text: 'Cancelar',
-          role: 'cancel'
+          role: 'cancel', // will always sort to be on the bottom
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
         }
       ]
     });
@@ -147,29 +196,38 @@ export class EventModalPage {
   takePicture(sourceType) {
     var options = {
       quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      saveToPhotoAlbum: false,
+      saveToPhotoAlbum: true,
       correctOrientation: true,
-      allowEdit: true,
-      destinationType: Camera.DestinationType.DATA_URL,
-      targetWidth: 360,
-		  targetHeight: 232
+      allowEdit: true
     };
 
-    Camera.getPicture(options).then(image => {
-      this.event.cover_photo = "data:image/jpeg;base64," + image;
+    this.camera.getPicture(options).then(
+      image_url => {
+        let includeToNewMedia = (image) => {
+          this.event.cover_photo = 'data:image/jpeg;base64,' + image;
+          this.save_cover_photo();
+        };
+
+        includeToNewMedia(image_url);
+      },
+      error => {
+        this.erro = error;
+      }
+    );
+  }
+
+  save_cover_photo() {
+    this.eventProvider.save_cover_photo(this.event)
+    .subscribe((event_params) => {
+        this.event = new EventModel(event_params);
+    }, error => {
+        alert(error.json());
+        console.log(JSON.stringify(error.json()));
     });
-
-    var image_tag = document.getElementsByTagName('img')[0];
-    image_tag.src = this.event.cover_photo;
-  }
-
-  is_from_gallery(sourceType) {
-    sourceType === Camera.PictureSourceType.PHOTOLIBRARY
-  }
-
-  is_android() {
-    this.platform.is('android')
   }
 
   delete(event){

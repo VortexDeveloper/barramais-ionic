@@ -66,7 +66,8 @@
         <ion-input type="text" [(ngModel)]="address.neighborhood" name="neighborhood"></ion-input>
       </ion-item>
     </ion-list>
-    <button class="form-buttons" ion-button type="button" block name="button" (click)="create(event, address)">Salvar</button>
+    <button class="form-buttons" ion-button type="button" block name="button" (click)="create(event, address)" *ngIf="event.id == null">Salvar</button>
+    <button class="form-buttons" ion-button type="button" block name="button" (click)="update(event, address)" *ngIf="event.id != null">Atualizar</button>
   </div>
 </ion-content>
 <!-- <ion-footer>
