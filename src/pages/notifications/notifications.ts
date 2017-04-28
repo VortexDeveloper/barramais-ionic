@@ -53,7 +53,7 @@ export class NotificationsPage {
 
   generate_user_list(notifications){
     for(var i = 0; i < notifications.length; i++){
-      this.add_to_users(notifications[i].notifiable.user_id);
+        this.add_to_users(notifications[i].notifiable.user_id);
     }
   }
 

@@ -28,8 +28,7 @@
             <img src="{{user.avatar_url}}" alt="Sem foto">
           </ion-thumbnail>
         </div>
-
-        <div style="width=80%; float:center">
+        <div style="width=80%; float:center" *ngIf="user.id == notification.notifiable.user_id">
           <h2>{{user.first_name}}</h2>
           <p>Comentou em sua publicação</p>
         </div>
