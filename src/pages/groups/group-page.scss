@@ -31,8 +31,8 @@ page-group-page {
   }
 
   .perfil-actions{
-    position: relative !important;
-    top: -95px !important;
+    position: absolute !important;
+    top: 158px !important;
     float: right;
     right: 6px !important;
     z-index: 999 !important;
@@ -80,7 +80,6 @@ page-group-page {
     .background-image img{
       min-width: 100%;
       max-width: 125%;
-      position: relative;
       left: -12%;
       top: -5%;
     }

@@ -1,3 +1,7 @@
+import { AddressModel } from './address.model';
+import { StateModel } from './state.model';
+import { CityModel } from './city.model';
+
 export class EventModel {
   id: number;
   createdAt: Date;
@@ -10,9 +14,10 @@ export class EventModel {
   about: string;
   cover_photo: string;
   cover_photo_url: string;
-  address: any;
-  state: any;
-  city: any;
+  address: AddressModel;
+  state: StateModel;
+  city: CityModel;
+
 
   constructor(public params?:any) {
     params = params || {}
@@ -24,9 +29,9 @@ export class EventModel {
     this.event_date = params.event_date || null;
     this.name = params.name || null;
     this.cover_photo = params.cover_photo || null;
-    this.cover_photo_url = params.cover_photo_url || "/assets/images/EVENTO.jpg";
-    this.address = params.address || "Evento sem endereço cadastrado";
-    this.state = params.state || "Evento sem estado cadastrado";
-    this.city = params.city || "Evento sem cidade cadastrado";
+    this.cover_photo_url = params.cover_photo_url || null;
+    this.address = new AddressModel(params.address);
+    this.state = new StateModel(params.state);
+    this.city = new CityModel(params.city);
   }
 }

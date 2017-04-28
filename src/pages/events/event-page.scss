@@ -1,5 +1,25 @@
 page-event-page {
 
+  .background-image {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    align-content: stretch;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+  }
+
+  .background-image img{
+    min-width: 100%;
+    max-width: 110%;
+    position: relative;
+  }
+
   .ion-avatar-event{
     background: #faa35f;
     border-radius: 5%;
@@ -130,11 +150,11 @@ page-event-page {
       }
 
       .perfil-actions{
-        position: relative !important;
-        top: -58px !important;
-        float: right;
+        position: absolute !important;
+        top: 146px !important;
         right: 6px !important;
         z-index: 999 !important;
+        width: 66px;
         font-size: .7em;
         height: 28px;
       }

@@ -5,7 +5,7 @@ import { UserModel } from "../../models/user.model";
 import { GroupModel } from "../../models/group.model";
 import { User } from '../../providers/user';
 import { Groups } from '../../providers/groups';
-import { GroupModalPage } from '../groups/group-modal';
+import { GroupUpdatePage } from '../groups/group-update';
 import { GroupPagePage } from '../groups/group-page';
 import { ToastController } from 'ionic-angular';
 
@@ -18,7 +18,7 @@ import { ToastController } from 'ionic-angular';
       <button ion-item (click)="accept_group()" *ngIf="i_was_invited_to">Aceitar</button>
       <button ion-item (click)="refuse_group()" *ngIf="i_was_invited_to">Recusar</button>
       <button ion-item (click)="refuse_group()" *ngIf="is_member_of">Sair</button>
-      <button ion-item (click)="openEditModal(groupModal, group)" *ngIf="showAdminActions">Editar</button>
+      <button ion-item (click)="openEditModal(groupUpdate, group)" *ngIf="showAdminActions">Editar</button>
     </ion-list>
   `
 })
@@ -28,7 +28,7 @@ export class PopoverPage {
   is_member_of: boolean = false;
   i_was_invited_to: boolean = false;
   send_request_to: boolean = false;
-  groupModal: any = GroupModalPage;
+  groupUpdate: any = GroupUpdatePage;
   user: UserModel = new UserModel();
   group: GroupModel = new GroupModel();
   invite: string = "";

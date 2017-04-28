@@ -20,6 +20,7 @@ import { EventModalPage } from '../pages/events/event-modal';
 import { EventGuestsPage } from '../pages/events/event-guests';
 import { EventPagePage } from '../pages/events/event-page';
 import { GroupModalPage } from '../pages/groups/group-modal';
+import { GroupUpdatePage } from '../pages/groups/group-update';
 import { GroupMembersPage } from '../pages/groups/group-members';
 import { AddGroupMembersPage } from '../pages/groups/add-group-members';
 import { GalleryModalPage } from '../pages/gallery-modal/gallery-modal';
@@ -153,7 +154,8 @@ export function getAuthHttp(http) {
     AddGroupMembersPage,
     PopoverPage,
     PhotoModalPage,
-    NotificationViewPage
+    NotificationViewPage,
+    GroupUpdatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -223,7 +225,8 @@ export function getAuthHttp(http) {
     AddGroupMembersPage,
     PopoverPage,
     PhotoModalPage,
-    NotificationViewPage
+    NotificationViewPage,
+    GroupUpdatePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

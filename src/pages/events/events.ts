@@ -7,6 +7,7 @@ import { EventProvider } from '../../providers/events';
 import { User } from '../../providers/user';
 import { EventPagePage } from '../events/event-page';
 import { UserModel } from "../../models/user.model";
+import { EventModel } from "../../models/event.model";
 import { JwtHelper } from 'angular2-jwt';
 
 /*
@@ -108,6 +109,7 @@ export class EventsPage {
     let modal = this.modalCtrl.create(EventModalPage, { my_events: this.my_events });
     modal.onDidDismiss(event => {
       if(event){
+        let new_event: EventModel = new EventModel(event);
         this.my_events.push(event);
         this.confirmed_events.push(event);
       }

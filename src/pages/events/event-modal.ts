@@ -82,7 +82,7 @@ export class EventModalPage {
       this.eventProvider.create(event, address)
       .subscribe(event_params => {
           this.event = new EventModel(event_params);
-          this.viewCtrl.dismiss(this.event);
+          this.viewCtrl.dismiss(event_params);
           this.presentToast('Evento criado com sucesso!');
       }, error => {
           console.log(error.json());
@@ -118,7 +118,7 @@ export class EventModalPage {
       .subscribe(event_params => {
           this.event = new EventModel(event_params);
           this.presentToast('Evento atualizado com sucesso!');
-          this.navCtrl.setRoot(this.eventsPage);
+          this.viewCtrl.dismiss(event_params);
       }, error => {
           console.log(error.json());
           this.presentToast(error);
@@ -209,7 +209,6 @@ export class EventModalPage {
       image_url => {
         let includeToNewMedia = (image) => {
           this.event.cover_photo = 'data:image/jpeg;base64,' + image;
-          this.save_cover_photo();
         };
 
         includeToNewMedia(image_url);

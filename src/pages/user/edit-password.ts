@@ -32,7 +32,7 @@ export class EditPasswordPage {
 
   updatePassword() {
     let loader = this.loadingCtrl.create({
-      content: "Entrando, aguarde..."
+      content: "Atualizando senha, aguarde..."
     });
 
     loader.present();

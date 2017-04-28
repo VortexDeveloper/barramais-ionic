@@ -241,10 +241,6 @@ export class UserPage {
   }
 
   save_avatar(user) {
-    if(this.user.alternative_email == ""){
-      this.presentToast("Preencha o seu email alternativo para atualizar seu perfil.");
-    }else{
-
       let loader = this.loadingCtrl.create({
         content: "Salvando avatar..."
       });
@@ -265,8 +261,6 @@ export class UserPage {
         loader.dismiss();
       }
     );
-
-    }
   }
 
   populateVesselsType() {

@@ -61,7 +61,9 @@ export class Groups {
     }
 
     update(group){
-      return this.authHttp.put(this.url + "/" + group.id + ".json", {'group': group})
+      let d = new Date;
+      let new_name = group.id + d.getTime();
+      return this.authHttp.put(this.url + "/" + group.id + ".json", {'group': group, 'cover_photo': {'image': group.cover_photo, 'filename': new_name}})
         .map(res => res.json());
     }
 

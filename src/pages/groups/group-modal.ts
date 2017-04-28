@@ -138,9 +138,8 @@ export class GroupModalPage {
       image_url => {
         let includeToNewMedia = (image) => {
           this.group.cover_photo = 'data:image/jpeg;base64,' + image;
-          this.save_cover_photo();
         };
-
+        
         includeToNewMedia(image_url);
       },
       error => {
@@ -149,13 +148,5 @@ export class GroupModalPage {
     );
   }
 
-  save_cover_photo() {
-    this.groupProvider.save_cover_photo(this.group)
-    .subscribe((group_params) => {
-        this.group = new GroupModel(group_params);
-    }, error => {
-        alert(error.json());
-        console.log(JSON.stringify(error.json()));
-    });
-  }
+
 }

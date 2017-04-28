@@ -14,8 +14,8 @@
 
 <ion-content>
   <div class="background-image">
-    <img src="assets/images/evento_cover.jpg" [hidden]="group.cover_photo != null" />
-    <img src="{{user.cover_photo_url}}" id='user_cover_photo' [hidden]="group.cover_photo == null" />
+    <img src="{{group.cover_photo}}" *ngIf="group.cover_photo"/>
+    <img src="assets/images/evento_cover.jpg" *ngIf="!group.cover_photo" />
     <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()"></ion-icon>
   </div>
   <div class="container">
@@ -30,6 +30,5 @@
       </ion-item>
     </ion-list>
     <button class="form-buttons" ion-button type="button" block name="button" (click)="create(group)" *ngIf="group.id == null">Salvar</button>
-    <button class="form-buttons" ion-button type="button" block name="button" (click)="update(group)" *ngIf="group.id != null">Atualizar</button>
   </div>
 </ion-content>

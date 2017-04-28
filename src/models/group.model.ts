@@ -21,7 +21,7 @@ export class GroupModel {
     this.name = params.name || null;
     this.about = params.about || null;
     this.cover_photo = params.cover_photo || null;
-    this.cover_photo_url = params.cover_photo_url || "/assets/images/EVENTO.jpg";
+    this.cover_photo_url = params.cover_photo_url || null;
     this.admin = params.admin || {};
   }
 }
