@@ -26,7 +26,7 @@ export class EventModel {
     this.updatedAt = params.updated_at || 0;
     this.about = params.about || null;
     this.user_id = params.user_id || 0;
-    this.event_date = params.event_date || null;
+    this.event_date = params.event_date || new Date().toISOString();
     this.name = params.name || null;
     this.cover_photo = params.cover_photo || null;
     this.cover_photo_url = params.cover_photo_url || null;

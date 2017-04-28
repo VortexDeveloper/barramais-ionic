@@ -52,7 +52,7 @@ export class FriendsPage {
   }
 
   openPage(page){
-    this.navCtrl.push(page);
+    this.navCtrl.setRoot(page, {user: this.user});
   }
 
   openProfile(user) {

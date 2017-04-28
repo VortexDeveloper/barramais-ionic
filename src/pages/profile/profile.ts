@@ -90,6 +90,10 @@ export class ProfilePage {
     this.navCtrl.push(page, {user: this.user});
   }
 
+  openRoot(page){
+    this.navCtrl.setRoot(page, {user: this.user});
+  }
+
   openProfile(user_id) {
     this.navCtrl.push(this.profilePage, {user: user_id})
   }
