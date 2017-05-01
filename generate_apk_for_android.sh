@@ -6,6 +6,7 @@ APK_NAME="BarraMais"
 KEYSTORE_ALIAS="bmaisreleasekey"
 KEYSTORE_NAME="bmais-release-key"
 OPEN="N"
+PWD_FOR_KEYSTORE="vorteX20**"
 
 echo -e "Open folder for the new APK? [s/N]"
 read OPEN
@@ -28,7 +29,7 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $KEYSTORE_NAME.
 echo -e "jar signed\n"
 
 echo -e "Zipping APK...\n"
-~/android-sdk/build-tools/24.0.0/zipalign -f -v 4 $BUILDED_APK "$APK_DEST/$APK_NAME.apk"
+$ANDROID_HOME/build-tools/24.0.0/zipalign -f -v 4 $BUILDED_APK "$APK_DEST/$APK_NAME.apk"
 echo -e "\nAPK generated to $APK_DEST/$APK_NAME.apk"
 
 if [ test $OPEN ] && [ $OPEN == 'S' ] || [ $OPEN == 's' ]; then
