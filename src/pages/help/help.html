@@ -7,10 +7,11 @@
   <div class="container">
     <form (ngSubmit)="sendSupportMail(message)">
       <p>
-        Dúvida em alguma funcionalidade ou o sistema apresentou erro?
+        Bem vindo ao suporte da Barra Mais.<br><br>
+        Entre em contato com o suporte da Barra Mais e obtenha ajuda onde você estiver.
       </p>
       <ion-item>
-        <ion-label floating>Informe-nos.</ion-label>
+        <ion-label floating>Informe-nos...</ion-label>
         <ion-textarea [(ngModel)]="message" rows='10' name="message"></ion-textarea>
       </ion-item>
       <button class="form-buttons" ion-button type="submit" block>Enviar</button>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ActionSheetController, Platform, LoadingController } from 'ionic-angular';
 import { Groups } from "../../providers/groups";
 import { GroupModel } from "../../models/group.model";
 import { ToastController } from 'ionic-angular';
@@ -33,6 +33,7 @@ export class GroupModalPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
+    public loadingCtrl: LoadingController,
     private camera: Camera,
     public groupProvider: Groups,
     public actionsheetCtrl: ActionSheetController,
@@ -54,13 +55,20 @@ export class GroupModalPage {
     if(group.name == null || group.name == ""){
       this.presentToast("Preencha o nome do grupo!")
     }else{
+      let loader = this.loadingCtrl.create({
+        content: "Salvando grupo..."
+      });
+
+      loader.present();
       this.groupProvider.create(group)
       .subscribe(group_params => {
           this.group = new GroupModel(group_params);
+          loader.dismiss();
           this.viewCtrl.dismiss(group_params);
           this.presentToast('Grupo criado com sucesso!');
       }, error => {
           console.log(error.json());
+          loader.dismiss();
           this.presentToast(error);
       });
     }
@@ -70,13 +78,20 @@ export class GroupModalPage {
     if(group.name == null || group.name == ""){
       this.presentToast("Preencha o nome do grupo!")
     }else{
+      let loader = this.loadingCtrl.create({
+        content: "Atualizando evento..."
+      });
+
+      loader.present();
       this.groupProvider.update(group)
       .subscribe(group_params => {
           this.group = new GroupModel(group_params);
+          loader.dismiss();
           this.viewCtrl.dismiss(group_params);
           this.presentToast('Grupo atualizado com sucesso!');
       }, error => {
           console.log(error.json());
+          loader.dismiss();
           this.presentToast(error);
       });
     }
@@ -139,7 +154,7 @@ export class GroupModalPage {
         let includeToNewMedia = (image) => {
           this.group.cover_photo = 'data:image/jpeg;base64,' + image;
         };
-        
+
         includeToNewMedia(image_url);
       },
       error => {

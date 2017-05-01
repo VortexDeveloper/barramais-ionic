@@ -17,8 +17,11 @@
   <ion-item-divider [hidden]="!isAlbumEmpty" color="light">Não há fotos no álbum</ion-item-divider>
 
   <div class="photos">
-      <div class="photo" *ngFor="let photo of album" (click)="openPhoto(photo)">
-          <img src="{{photo.url}}">
+      <div class="photo" *ngFor="let photo of album">
+          <img src="{{photo.url}}" (click)="openPhoto(photo)" />
+          <button ion-button icon-only (click)="presentConfirmDestroy(photo)" *ngIf="isMyAlbum">
+            <ion-icon name="close" ></ion-icon>
+          </button>
       </div>
   </div>
 
@@ -41,8 +44,8 @@
     </ion-item>
   </ion-list> -->
 
-  <ion-fab right bottom>
-    <button ion-fab color="danger" (click)="presentActionSheet()"><ion-icon name="add"></ion-icon></button>
+  <ion-fab right bottom *ngIf="isMyAlbum">
+    <button ion-fab mini color="danger" (click)="presentActionSheet()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
   <!-- <button class="form-buttonsBack" ion-button type="button" (click)="goBack()" block>Voltar</button> -->

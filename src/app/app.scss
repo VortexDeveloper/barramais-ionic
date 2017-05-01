@@ -303,7 +303,7 @@ app-menu {
   }
 
   textarea{
-    overflow: auto;
+    overflow: hidden;
     height: auto;
     font: inherit;
     color: inherit;
@@ -407,6 +407,10 @@ app-menu {
   .fab-wp-danger.activated {
     color: #fff;
     background-color: #faa35f;
+  }
+
+  ion-fab[bottom] {
+    bottom: 45px;
   }
 
   .item-friends{

@@ -14,16 +14,17 @@
 <ion-content padding>
   <div class="areaText">
     <ion-item-divider color="light">Selecione seus interesses</ion-item-divider>
+    <p>
+      Favor selecionar de três(3) a seis(6) interesses na rede. A seleção pode ser alterada a qualquer momento.
+    </p>
   </div>
   <ion-list>
       <div class="interest-list">
         <ion-item class="interest-list-items" *ngFor="let interest of interests" (click)="toggleUserInterests(interest)" no-lines>
-          <div class="image-notSelected" *ngIf="checkUserInterests(interest)">
-            <!-- interest.photo_url -->
+          <div class="image-selected" *ngIf="checkUserInterests(interest)">
             <img class="image-list" src="{{interest.photo_url}}">
           </div>
-          <div class="image-selected" *ngIf="!checkUserInterests(interest)">
-            <!-- interest.photo_url -->
+          <div class="image-notSelected" *ngIf="!checkUserInterests(interest)">
             <img class="image-list" src="{{interest.photo_url}}">
           </div>
           <div class="textToBeAligned">
@@ -34,6 +35,6 @@
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab color="danger" (click)="updateUserInterests()"><ion-icon name="done-all"></ion-icon></button>
+    <button ion-fab mini color="danger" (click)="updateUserInterests()"><ion-icon name="done-all"></ion-icon></button>
   </ion-fab>
 </ion-content>

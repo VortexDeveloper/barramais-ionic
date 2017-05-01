@@ -30,6 +30,7 @@ export class AlbumListPage {
   profilePage: any = ProfilePage;
   albumPhotoCreatePage: any = AlbumPhotoCreatePage;
   albumPhoto: AlbumPhotoModel = new AlbumPhotoModel();
+  isMyAlbum: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -45,10 +46,17 @@ export class AlbumListPage {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.user = new UserModel(navParams.data.user);
       this.getUserAlbum();
+      this.is_my_album();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlbumListPage');
+  }
+
+  is_my_album(){
+    if(this.current_user.id == this.user.id){
+      this.isMyAlbum = true;
+    }
   }
 
   save(albumPhoto){
@@ -90,6 +98,30 @@ export class AlbumListPage {
         console.log("Erro ao carregar a lista de classificados" + error.json())
       });
   }
+
+  presentConfirmDestroy(photo) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir Foto',
+      message: 'Tem certeza que deseja  excluir essa foto?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.destroy(photo);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 
   destroy(photo){
     let loader = this.loadingCtrl.create({

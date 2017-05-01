@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ActionSheetController, Platform, LoadingController } from 'ionic-angular';
 import { EventProvider } from "../../providers/events";
 import { EventModel } from "../../models/event.model";
 import { AddressModel } from "../../models/address.model";
@@ -36,6 +36,7 @@ export class EventModalPage {
     public platform: Platform,
     private camera: Camera,
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public eventProvider: EventProvider,
@@ -79,16 +80,22 @@ export class EventModalPage {
     }else if(address.neighborhood == ""){
       this.presentToast("Preencha o bairro!");
     }else{
+      let loader = this.loadingCtrl.create({
+        content: "Salvando evento..."
+      });
+
+      loader.present();
       event.user_id = this.user.id;
       this.eventProvider.create(event, address)
       .subscribe(event_params => {
           this.event = new EventModel(event_params);
+          loader.dismiss();
           this.viewCtrl.dismiss(event_params);
           this.presentToast('Evento criado com sucesso!');
-          // this.navCtrl.setRoot(this.eventsPage);
       }, error => {
           console.log(error.json());
           this.presentToast(error);
+          loader.dismiss();
       });
     }
   }
@@ -116,11 +123,17 @@ export class EventModalPage {
     }else if(address.neighborhood == ""){
       this.presentToast("Preencha o bairro!");
     }else{
+      let loader = this.loadingCtrl.create({
+        content: "Atualizando evento..."
+      });
+
+      loader.present();
       event.user_id = this.user.id;
       this.eventProvider.update(event, address)
       .subscribe(event_params => {
           this.event = new EventModel(event_params);
           this.presentToast('Evento atualizado com sucesso!');
+          loader.dismiss();
           this.viewCtrl.dismiss(event_params);
       }, error => {
           console.log(error.json());

@@ -72,7 +72,7 @@ page-album-list {
   }
 
   .photo {
-      width: 80px;
+      width: 24.2%;
       height: 80px;
       background: #ccc;
       overflow: hidden;
@@ -86,6 +86,15 @@ page-album-list {
     max-width: 140%;
     width: auto;
     height: auto;
+  }
+
+  .photo button {
+    position: relative;
+    top: -30px;
+    left: -30%;
+    height: 15px;
+    color: #faa35f;
+    background: transparent;
   }
 
 }

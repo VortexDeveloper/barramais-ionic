@@ -159,6 +159,30 @@ export class ProfilePage {
     );
   }
 
+  presentConfirmUnfriend(user) {
+    let alert = this.alertCtrl.create({
+      title: 'Desfazer amizade',
+      message: 'Tem certeza que deseja desfazer amizade com ' + this.user.first_name + '?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.unfriend(user);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+
   accept_friendship(user){
     this.userProvider.accept_friendship(user)
     .subscribe(
