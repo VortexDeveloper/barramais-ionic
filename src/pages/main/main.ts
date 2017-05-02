@@ -82,6 +82,7 @@ export class MainPage {
             this.uncheckedNotifications.push(this.allNotifications[i]);
           }
         }
+        console.log(this.allNotifications);
       }, error =>{
           console.log("Erro ao exibir os países" + error.json());
       });

@@ -63,6 +63,8 @@ export class User {
   private support_url: string;
   private load_interests_url: string;
   private omniauth_callback_url: string;
+  private my_notifications_url: string;
+  private open_my_notifications_url: string;
 
   constructor(
     public http: Http,
@@ -118,6 +120,13 @@ export class User {
     this.support_url = host + '/users/send_support_email.json?message=';
     this.load_interests_url = host + '/users/load_interests/';
     this.omniauth_callback_url = host + '/users/auth/facebook/callback.json';
+    this.my_notifications_url = host + '/users/my_notifications';
+    this.open_my_notifications_url = host + '/users/open_my_notifications';
+  }
+
+  open_my_notifications(user_id){
+    return this.authHttp.get(this.open_my_notifications_url + ".json")
+      .map(res => res.json());
   }
 
   load_interests(user_id){
@@ -151,8 +160,13 @@ export class User {
       .map(res => res.json());
   }
 
+  // get_all_notifications(user_id){
+  //   return this.authHttp.get(this.url + "/" + user_id + "/notifications" + ".json")
+  //     .map(res => res.json());
+  // }
+
   get_all_notifications(user_id){
-    return this.authHttp.get(this.url + "/" + user_id + "/notifications" + ".json")
+    return this.authHttp.get(this.my_notifications_url + ".json")
       .map(res => res.json());
   }
 
