@@ -56,9 +56,9 @@ export class FriendshipRequestPage {
   pending_friendships(){
     this.userProvider.pending_friendships()
     .subscribe(
-      (response) => {
-        this.pendingFriendships = response.pending_friendships;
-        console.log(response.pending_friendships);
+      (pending_friendships) => {
+        this.pendingFriendships = pending_friendships;
+        console.log(pending_friendships);
       },
       (error) => {
         console.log(error.json());
