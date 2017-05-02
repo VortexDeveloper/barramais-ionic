@@ -33,6 +33,7 @@ export class NotificationsPage {
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.get_notifications();
+      this.open_my_notifications();
   }
 
   ionViewDidLoad() {
@@ -43,54 +44,77 @@ export class NotificationsPage {
     this.userProvider.get_all_notifications(this.current_user.id)
       .subscribe(response =>{
         this.notifications = response;
-        this.generate_user_list(this.notifications);
-        this.check_notifications(this.current_user.id);
+        // this.remove_unused_notifications();
+        // this.generate_user_list(this.notifications);
+        // this.check_notifications(this.current_user.id);
         console.log(this.notifications);
       }, error =>{
         console.log("Erro ao exibir as notificações" + error.json());
       });
   }
 
-  generate_user_list(notifications){
-    for(var i = 0; i < notifications.length; i++){
-        this.add_to_users(notifications[i].notifiable.user_id);
-    }
-  }
+  open_my_notifications(){
+    this.userProvider.open_my_notifications(this.current_user.id)
+      .subscribe(response => {
 
-  add_to_users(user_id){
-    this.userProvider.getUser(user_id)
-      .subscribe(response =>{
-        var repeated_input = false;
-        repeated_input = this.check_repeated_input(user_id);
-
-        if(!repeated_input){
-          this.users.push(response);
-        }
       }, error => {
-        console.log("Erro ao exibir o usuário" + error.json());
+        console.log(error.json());
       });
   }
 
-  check_repeated_input(user_id){
-    var found_repeated_input = false;
-
-    for(var i = 0; i < this.users.length; i ++){
-      if(this.users[i].id == user_id){
-        found_repeated_input = true;
+  remove_unused_notifications(){
+    var notifications_length = this.notifications.length
+    console.log(notifications_length);
+    for(var i = 0; i < notifications_length;){
+      if(this.notifications[i].notifiable == null){
+        console.log(i);
+        this.notifications.splice(this.notifications.indexOf(this.notifications[i]), 1);
+      }else{
+        i++;
       }
     }
-
-    return found_repeated_input;
   }
 
-  check_notifications(user_id){
-    this.userProvider.open_all_user_notifications(user_id)
-      .subscribe(response =>{
+  // generate_user_list(notifications){
+  //   for(var i = 0; i < notifications.length; i++){
+  //       this.add_to_users(notifications[i].notifiable.user_id);
+  //   }
+  // }
 
-      }, error =>{
-        console.log("Não foi possível abrir as notificações" + error.json());
-      });
-  }
+  // add_to_users(user_id){
+  //   this.userProvider.getUser(user_id)
+  //     .subscribe(response =>{
+  //       var repeated_input = false;
+  //       repeated_input = this.check_repeated_input(user_id);
+  //
+  //       if(!repeated_input){
+  //         this.users.push(response);
+  //       }
+  //     }, error => {
+  //       console.log("Erro ao exibir o usuário" + error.json());
+  //     });
+  // }
+
+  // check_repeated_input(user_id){
+  //   var found_repeated_input = false;
+  //
+  //   for(var i = 0; i < this.users.length; i ++){
+  //     if(this.users[i].id == user_id){
+  //       found_repeated_input = true;
+  //     }
+  //   }
+  //
+  //   return found_repeated_input;
+  // }
+
+  // check_notifications(user_id){
+  //   this.userProvider.open_all_user_notifications(user_id)
+  //     .subscribe(response =>{
+  //
+  //     }, error =>{
+  //       console.log("Não foi possível abrir as notificações" + error.json());
+  //     });
+  // }
 
   dismiss() {
     this.viewCtrl.dismiss();
