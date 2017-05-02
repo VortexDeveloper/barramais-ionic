@@ -17,9 +17,9 @@
     </ion-col>
   </ion-row>
   <ion-list>
-    <ion-item *ngFor="let user of pendingFriendships">
+    <ion-item class="item-friends" *ngFor="let user of pendingFriendships">
       <ion-thumbnail item-left (click)='openProfile(user)'>
-        <img src="{{user.avatar_url}}">
+        <img src="{{user.avatar_url}}" />
       </ion-thumbnail>
       <div class="friend-information-container">
         <div class="friend-information-text">

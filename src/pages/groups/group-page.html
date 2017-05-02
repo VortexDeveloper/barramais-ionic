@@ -9,7 +9,7 @@
       <ion-icon name="more"></ion-icon>
     </button>
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
-    <button icon-left class="perfil-actions" color="danger" ion-button *ngIf="showAdminActions" (click)="delete(group)">
+    <button icon-left class="perfil-actions" color="danger" ion-button *ngIf="showAdminActions" (click)="presentConfirmDelete(group)">
       <ion-icon name="close"></ion-icon>
       Excluir
     </button>
@@ -30,7 +30,7 @@
         <ion-col width-25 (click)="openModal(addGroupMembers, friends)" *ngIf="is_member_of || showAdminActions">
           <ion-icon name="person-add" class="icon-button"></ion-icon>
           <p class="icon-word">
-            membros
+            Convidar
           </p>
         </ion-col>
         <ion-col width-25 (click)="openModal(groupMembers, pendingByAdmin, 'pendentes')" *ngIf="showAdminActions">

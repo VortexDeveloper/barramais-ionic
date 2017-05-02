@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
@@ -72,6 +72,7 @@ export class GroupPagePage {
     public navCtrl: NavController,
     params: NavParams,
     public groupProvider: Groups,
+    public alertCtrl: AlertController,
     private userProvider: User,
     private postsProvider: Posts,
     public modalCtrl: ModalController,
@@ -313,6 +314,29 @@ export class GroupPagePage {
 
   groupInformation(){
     this.showGroupInformation = !this.showGroupInformation;
+  }
+
+  presentConfirmDelete(group) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir Grupo',
+      message: 'Tem certeza que deseja excuir este Grupo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.delete(group);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   delete(group){
