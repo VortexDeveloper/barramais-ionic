@@ -220,9 +220,9 @@ export class MyApp {
           handler: () => {
             this.userProvider.logout().subscribe(
               (response) => {
-                localStorage.removeItem("jwt");
-                localStorage.removeItem("user");
-                localStorage.removeItem("vessels_type");
+                window.localStorage.removeItem("jwt");
+                window.localStorage.removeItem("user");
+                window.localStorage.removeItem("vessels_type");
                 this.nav.setRoot(HomePage);
               },
               (error) => console.log(error)

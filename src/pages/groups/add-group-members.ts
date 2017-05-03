@@ -130,6 +130,7 @@ export class AddGroupMembersPage {
     this.groupProvider.invitation(this.group, members)
     .subscribe(response => {
         console.log(response.members);
+        this.viewCtrl.dismiss();
         this.presentToast("Usuário(s) convidado(s) com sucesso!");
     }, error => {
         console.log(error.json().error);

@@ -28,7 +28,7 @@
       <ion-checkbox item-right *ngIf="showAdminActions" color="dark" checked="false" [(ngModel)]="guest.invited" (ionChange)="getSelect(guest.invited, guest)"></ion-checkbox>
     </ion-item>
   </ion-list>
-  <ion-fab right bottom [hidden]="!showAdminActions">
+  <ion-fab right bottom *ngIf="showAdminActions && this.selectedGuests.length > 0" >
     <button ion-fab mini color="danger" (click)="invitation(selectedGuests)"><ion-icon name="mail"></ion-icon></button>
   </ion-fab>
 </ion-content>
