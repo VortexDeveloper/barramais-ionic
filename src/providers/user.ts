@@ -251,6 +251,11 @@ export class User {
       });
   }
 
+  delete(){
+    return this.http.delete(this.url + ".json")
+      .map(res => res.json());
+  }
+
   // Session sign_up : (post)users.json
   login(user){
     return this.http.post(this.url + "/sign_in.json", {'user': user})

@@ -120,6 +120,15 @@ export class UserPage {
     );
   }
 
+  deleteAccount() {
+    this.userProvider.delete()
+      .subscribe(response => {
+        this.presentToast("Conta deletada!");
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
