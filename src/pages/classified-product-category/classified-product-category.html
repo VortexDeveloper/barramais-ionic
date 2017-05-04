@@ -13,5 +13,23 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-item-divider color="light">Categoria do classificado</ion-item-divider>
 
+  <ion-item>
+    <ion-label>Categoria</ion-label>
+    <ion-select [(ngModel)]="product.product_category_id" (ionChange)="getProductSubCategories()" name="product_category">
+      <ion-option *ngFor="let productCategory of productCategories" [value]="productCategory.id">{{productCategory.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item [hidden]="isSubCategoryEmpty">
+    <ion-label>Sub Categoria</ion-label>
+    <ion-select [(ngModel)]="product.product_sub_category_id" name="product_sub_category">
+      <ion-option *ngFor="let productSubCategory of productSubCategories" [value]="productSubCategory.id">{{productSubCategory.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <button class="form-buttons" ion-button type="button" (click)="openNextPage(classifiedProductStatusPage, product)" block>Próximo</button>
+
+  <button class="form-buttons" ion-button type="button" (click)="goBack()" block>Voltar</button>
 </ion-content>

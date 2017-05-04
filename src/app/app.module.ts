@@ -71,6 +71,9 @@ import { ClassifiedFishingStatusPage } from '../pages/classified-fishing-status/
 import { ClassifiedFishingDescriptionPage } from '../pages/classified-fishing-description/classified-fishing-description';
 import { ClassifiedFishingPreviewPage } from '../pages/classified-fishing-preview/classified-fishing-preview';
 import { ClassifiedProductCategoryPage } from '../pages/classified-product-category/classified-product-category';
+import { ClassifiedProductStatusPage } from '../pages/classified-product-status/classified-product-status';
+import { ClassifiedProductDescriptionPage } from '../pages/classified-product-description/classified-product-description';
+import { ClassifiedProductPreviewPage } from '../pages/classified-product-preview/classified-product-preview';
 import { UsersPage } from '../pages/users/users';
 import { Posts } from '../providers/posts';
 import { Camera } from '@ionic-native/camera';
@@ -144,6 +147,9 @@ export function getAuthHttp(http) {
     ClassifiedFishingDescriptionPage,
     ClassifiedFishingPreviewPage,
     ClassifiedProductCategoryPage,
+    ClassifiedProductStatusPage,
+    ClassifiedProductDescriptionPage,
+    ClassifiedProductPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,
@@ -215,6 +221,9 @@ export function getAuthHttp(http) {
     ClassifiedFishingDescriptionPage,
     ClassifiedFishingPreviewPage,
     ClassifiedProductCategoryPage,
+    ClassifiedProductStatusPage,
+    ClassifiedProductDescriptionPage,
+    ClassifiedProductPreviewPage,
     UsersPage,
     GroupModalPage,
     GroupMembersPage,

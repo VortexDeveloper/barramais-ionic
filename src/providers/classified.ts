@@ -31,6 +31,10 @@ export class Classified {
   private create_fishing_url: string;
   private fishing_category_url: string;
   private fishing_sub_category_url: string;
+  private product_category_url: string;
+  private product_sub_category_url: string;
+  private product_category_by_id_url: string;
+  private product_sub_category_by_id_url: string;
 
 
   constructor(
@@ -59,6 +63,10 @@ export class Classified {
     this.create_fishing_url = host + "classifieds/create_fishing";
     this.fishing_category_url = host + "classifieds/get_fishing_category_by_id/";
     this.fishing_sub_category_url = host + "classifieds/get_fishing_sub_category_by_id/";
+    this.product_category_url = host + "classifieds/product_categories_for_select"
+    this.product_sub_category_url = host + "classifieds/product_sub_categories_for_select/"
+    this.product_category_by_id_url = host + 'classifieds/get_product_category_by_id/';
+    this.product_sub_category_by_id_url = host + 'classifieds/get_product_sub_category_by_id/';
   }
 
   createVessel(classified, vessel, accessories){
@@ -133,6 +141,26 @@ export class Classified {
 
   getFishingSubCategories(fishing_category){
     return this.authHttp.get(this.fishing_sub_categories_url + fishing_category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductCategories(){
+    return this.authHttp.get(this.product_category_url + ".json")
+      .map(res => res.json());
+  }
+
+  getProductSubCategories(product_category){
+    return this.authHttp.get(this.product_sub_category_url + product_category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductCategoryById(category){
+    return this.authHttp.get(this.product_category_by_id_url + category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductSubCategoryById(sub_category){
+    return this.authHttp.get(this.product_sub_category_by_id_url + sub_category + ".json")
       .map(res => res.json());
   }
 }
