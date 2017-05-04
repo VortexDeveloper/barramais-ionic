@@ -94,6 +94,7 @@ export class UserModel {
     this.profession = params.profession || "";
     this.language = params.language || "";
     this.mobile_operator = params.mobile_operator || "";
+    this.email = params.email || "";
     this.alternative_email = params.alternative_email || "";
     this.facebook = params.facebook || "";
     this.instagram = params.instagram || "";

@@ -31,6 +31,13 @@ export class Classified {
   private create_fishing_url: string;
   private fishing_category_url: string;
   private fishing_sub_category_url: string;
+  private product_category_url: string;
+  private product_sub_category_url: string;
+  private product_category_by_id_url: string;
+  private product_sub_category_by_id_url: string;
+  private create_product_url: string;
+  private product_sub_category_2_url: string;
+  private product_sub_category_2_by_id_url: string;
 
 
   constructor(
@@ -59,6 +66,18 @@ export class Classified {
     this.create_fishing_url = host + "classifieds/create_fishing";
     this.fishing_category_url = host + "classifieds/get_fishing_category_by_id/";
     this.fishing_sub_category_url = host + "classifieds/get_fishing_sub_category_by_id/";
+    this.product_category_url = host + "classifieds/product_categories_for_select"
+    this.product_sub_category_url = host + "classifieds/product_sub_categories_for_select/"
+    this.product_category_by_id_url = host + 'classifieds/get_product_category_by_id/';
+    this.product_sub_category_by_id_url = host + 'classifieds/get_product_sub_category_by_id/';
+    this.create_product_url = host + 'classifieds/create_product';
+    this.product_sub_category_2_url = host + 'classifieds/product_sub_categories_2_for_select/'
+    this.product_sub_category_2_by_id_url = host + 'classifieds/get_product_sub_category_2_by_id/';
+  }
+
+  createProduct(classified, product){
+    return this.authHttp.post(this.create_product_url + ".json", {'classified': classified, 'product': product})
+      .map(res => res.json());
   }
 
   createVessel(classified, vessel, accessories){
@@ -133,6 +152,36 @@ export class Classified {
 
   getFishingSubCategories(fishing_category){
     return this.authHttp.get(this.fishing_sub_categories_url + fishing_category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductCategories(){
+    return this.authHttp.get(this.product_category_url + ".json")
+      .map(res => res.json());
+  }
+
+  getProductSubCategories(product_category){
+    return this.authHttp.get(this.product_sub_category_url + product_category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductSubCategories2(product_sub_category_2){
+    return this.authHttp.get(this.product_sub_category_2_url + product_sub_category_2 + ".json")
+      .map(res => res.json());
+  }
+
+  getProductCategoryById(category){
+    return this.authHttp.get(this.product_category_by_id_url + category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductSubCategoryById(sub_category){
+    return this.authHttp.get(this.product_sub_category_by_id_url + sub_category + ".json")
+      .map(res => res.json());
+  }
+
+  getProductSubCategory2ById(sub_category_2){
+    return this.authHttp.get(this.product_sub_category_2_by_id_url + sub_category_2 + ".json")
       .map(res => res.json());
   }
 }
