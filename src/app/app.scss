@@ -2,6 +2,11 @@ app-menu {
 
     @import url('https://fonts.googleapis.com/css?family=Lato|Montserrat');
 
+    .comming {
+      max-width: 54px !important;
+      margin-left: 20px !important;
+    }
+
     .preloader {
     	position: fixed;
     	z-index: 9999;
@@ -17,7 +22,7 @@ app-menu {
     }
 
     .background-image {
-      background: #7e7e7e !important;
+      background: #4e6692 !important;
     }
 
 
@@ -52,6 +57,7 @@ app-menu {
     display: block;
     margin: 0 auto;
     border-radius: 5px;
+    background: #4e6692;
   }
 
   ion-thumbnail img {
