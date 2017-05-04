@@ -72,16 +72,22 @@ page-group-page {
   }
 
     .background-image {
-        background-size: cover;
-        background-position: center;
-        height: 200px;
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      align-content: stretch;
+      justify-content: center;
+      flex-direction: column;
+      flex-wrap: wrap;
     }
 
     .background-image img{
       min-width: 100%;
-      max-width: 125%;
-      left: -12%;
-      top: -5%;
+      max-width: 110%;
+      position: relative;
     }
 
     .main-content {
@@ -187,11 +193,13 @@ page-group-page {
       .button-more {
         position: absolute !important;
         z-index: 999 !important;
-        background: #faa35f !important;
-        background-color: #faa35f !important;
+        background: transparent !important;
+        color: #faa35f !important;
         height: auto;
         width: 30px;
         margin: 10px;
+        top: 0;
+        left: 0;
       }
 
 }

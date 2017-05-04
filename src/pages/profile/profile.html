@@ -60,44 +60,113 @@
             </p>
           </ion-col>
         </ion-row>
-      <div [hidden]="!profileInformation">
-        <ion-list class="profile-information">
-          <ion-item *ngIf="user.academic_profile!==''">
+      </div>
+      <div class="profile-description" [hidden]="!profileInformation">
+        <div class="section-title">
+          <h2>Informações pessoais</h2>
+        </div>
+        <div class="socials">
+          <p>
+            {{user.about}}
+          </p>
+          <div class="social" *ngIf="user.academic_profile!==''">
             <ion-icon name="school"></ion-icon>
-            <p>{{user.academic_profile}}</p>
-          </ion-item>
-          <ion-item *ngIf="user.work!==''">
+            {{user.academic_profile}}
+          </div>
+          <div class="social" *ngIf="user.profession!==''">
             <ion-icon name="briefcase"></ion-icon>
-            <p>{{user.work}}</p>
-          </ion-item>
-          <ion-item *ngIf="user.birthday!==null">
-            <ion-icon name="calendar"></ion-icon>
-            <p>{{user.birthday | date:'MMMM d, y'}}</p>
-          </ion-item>
-          <ion-item *ngIf="user.sex=='M'">
-            <ion-icon name="male"></ion-icon>
-            <p>Masculino</p>
-          </ion-item>
-          <ion-item *ngIf="user.sex=='F'">
+            {{user.profession}}
+          </div>
+          <div class="social" *ngIf="user.work!==''">
+            <ion-icon name="briefcase"></ion-icon>
+            {{user.work}}
+          </div>
+          <div class="social" *ngIf="user.relationship!==null">
+            <ion-icon name="heart"></ion-icon>
+            {{user.relationship}}
+          </div>
+          <div class="social" *ngIf="user.sex=='F'">
             <ion-icon name="female"></ion-icon>
-            <p>Feminino</p>
-          </ion-item>
-        </ion-list>
-        <div class="sports">
-          <div class="sport" *ngIf="user.naval_service_patent !== null">
+            Feminino
+          </div>
+          <div class="social" *ngIf="user.sex=='M'">
+            <ion-icon name="male"></ion-icon>
+            Masculino
+          </div>
+          <div class="social" *ngIf="user.naval_service_patent !== null">
             <img src="assets/images/{{user.naval_service_patent}}.png" />
             {{user.naval_service_patent}}
           </div>
-          <div class="sport" *ngIf="user.nautical_license !== null">
+          <div class="social" *ngIf="user.nautical_license !== null">
             <img src="assets/images/{{user.nautical_license}}.png" />
             {{user.nautical_license}}
           </div>
+        </div>
+      </div>
+      <div class="profile-description" [hidden]="!profileInformation">
+        <div class="section-title">
+          <h2>Mídias sociais</h2>
+        </div>
+        <div class="socials">
+          <div class="social" *ngIf="user.facebook != ''">
+            <img src="assets/images/facebook_.png"/>
+            {{user.facebook}}
+          </div>
+          <div class="social" *ngIf="user.instagram != ''">
+            <img src="assets/images/instagram_.png"/>
+            {{user.instagram}}
+          </div>
+          <div class="social" *ngIf="user.twitter != ''">
+            <img src="assets/images/twitter_.png"/>
+            {{user.twitter}}
+          </div>
+          <div class="social" *ngIf="user.linkedin != ''">
+            <img src="assets/images/linkedin_.png"/>
+            {{user.linkedin}}
+          </div>
+          <div class="social" *ngIf="user.website != ''">
+            <img src="assets/images/browser_.png"/>
+            {{user.website}}
+          </div>
+        </div>
+      </div>
+      <div class="profile-description" [hidden]="!profileInformation">
+        <div class="section-title">
+          <h2>Esportes náuticos</h2>
+        </div>
+        <div class="sports">
           <div class="sport" *ngFor="let nautical_sport of nautical_sports">
             <img src="{{nautical_sport.photo_url}}" />
             {{nautical_sport.name}}
           </div>
         </div>
       </div>
+      <div class="profile-description" [hidden]="!profileInformation">
+        <div class="section-title">
+          <h2>Informações náuticas</h2>
+        </div>
+        <div class="socials">
+          <div class="social" *ngIf="user.national_trips != ''">
+            <img src="assets/images/turismo.png"/>
+            {{user.national_trips}}
+          </div>
+          <div class="social" *ngIf="user.international_trips != ''">
+            <img src="assets/images/turismo.png"/>
+            {{user.international_trips}}
+          </div>
+          <div class="social" *ngIf="user.cruise_trips != ''">
+            <img src="assets/images/cruzeiro.png"/>
+            {{user.cruise_trips}}
+          </div>
+          <div class="social" *ngIf="user.nautical_literature != ''">
+            <img src="assets/images/literature.png"/>
+            {{user.nautical_literature}}
+          </div>
+          <div class="social" *ngIf="user.nautical_application != ''">
+            <img src="assets/images/app.png"/>
+            {{user.nautical_application}}
+          </div>
+        </div>
       </div>
       <bm-post [posts]="posts"></bm-post>
     </div>
