@@ -6,7 +6,7 @@
 <ion-content>
   <div class="container">
     <div class="background-image">
-      <img src="{{user.cover_photo_url}}" id='user_cover_photo' />
+      <img class="img-standard" src="{{user.cover_photo_url}}" id='user_cover_photo' />
       <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()" [hidden]="visitorActions"></ion-icon>
       <button
       icon-left
@@ -83,41 +83,20 @@
             <p>Feminino</p>
           </ion-item>
         </ion-list>
-        <ion-row class="skill-icons">
-          <ion-col width-50 *ngIf="user.naval_service_patent !== null">
-            <ion-row>
-              <ion-col width-20>
-                <img src="assets/images/{{user.naval_service_patent}}.png" />
-              </ion-col>
-              <ion-col width-80>
-                {{user.naval_service_patent}}
-              </ion-col>
-            </ion-row>
-          </ion-col>
-          <ion-col width-50 *ngIf="user.nautical_license !== null">
-            <ion-row>
-              <ion-col width-20>
-                <img src="assets/images/{{user.nautical_license}}.png" />
-              </ion-col>
-              <ion-col width-80>
-                {{user.nautical_license}}
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-        <ion-row class="skill-icons">
-          <ion-col width-10 *ngFor="let nautical_sport of nautical_sports">
+        <div class="sports">
+          <div class="sport" *ngIf="user.naval_service_patent !== null">
+            <img src="assets/images/{{user.naval_service_patent}}.png" />
+            {{user.naval_service_patent}}
+          </div>
+          <div class="sport" *ngIf="user.nautical_license !== null">
+            <img src="assets/images/{{user.nautical_license}}.png" />
+            {{user.nautical_license}}
+          </div>
+          <div class="sport" *ngFor="let nautical_sport of nautical_sports">
             <img src="{{nautical_sport.photo_url}}" />
-            <!-- <ion-row>
-              <ion-col width-20>
-                <img src="{{nautical_sport.photo_url}}" />
-              </ion-col>
-              <ion-col width-80>
-                {{nautical_sport.name}}
-              </ion-col>
-            </ion-row> -->
-          </ion-col>
-        </ion-row>
+            {{nautical_sport.name}}
+          </div>
+        </div>
       </div>
       </div>
       <bm-post [posts]="posts"></bm-post>

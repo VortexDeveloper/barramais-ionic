@@ -239,4 +239,32 @@ page-profile {
         color: #8e9093;
       }
 
+      .sports{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+        font-size: 0.8em !important;
+        color: #666;
+      }
+
+      .sport{
+        width: 49%;
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+      }
+
+      .sport img{
+        width: 15%;
+        margin: 5px;
+      }
+
 }

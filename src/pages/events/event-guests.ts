@@ -76,6 +76,7 @@ export class EventGuestsPage {
     this.eventProvider.invitation(this.event, guests)
     .subscribe(response => {
         console.log(response.guests);
+        this.viewCtrl.dismiss();
         this.presentToast("Usuário(s) convidado(s) com sucesso!");
     }, error => {
         console.log(error.json().error);

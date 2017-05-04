@@ -44,13 +44,16 @@ import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../providers/user';
-import { MenuController } from 'ionic-angular';
-import { Events } from 'ionic-angular';
+import { MenuController, ActionSheetController, ToastController, LoadingController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { NotificationViewPage } from '../pages/notification-view/notification-view';
 import { HelpPage } from '../pages/help/help';
+import { Events } from 'ionic-angular';
+import { Camera } from 'ionic-native';
+
+declare var cordova: any;
 
 @Component({
   selector: 'app-menu',
@@ -132,6 +135,9 @@ export class MyApp {
     public platform: Platform,
     private alertCtrl: AlertController,
     private userProvider: User,
+    public toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController,
+    public loadingCtrl: LoadingController,
     private menuCtrl: MenuController,
     public events: Events,
     private nativePageTransitions: NativePageTransitions,
@@ -226,9 +232,9 @@ export class MyApp {
           handler: () => {
             this.userProvider.logout().subscribe(
               (response) => {
-                localStorage.removeItem("jwt");
-                localStorage.removeItem("user");
-                localStorage.removeItem("vessels_type");
+                window.localStorage.removeItem("jwt");
+                window.localStorage.removeItem("user");
+                window.localStorage.removeItem("vessels_type");
                 this.nav.setRoot(HomePage);
               },
               (error) => console.log(error)
@@ -264,6 +270,96 @@ export class MyApp {
         console.log(error)
       }
     );
+  }
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Selecione a origem da imagem',
+      buttons: [
+        {
+          text: 'Carregar da Galeria',
+          handler: () => {
+            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Camera',
+          handler: () => {
+            this.takePicture(Camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takePicture(sourceType) {
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      allowEdit: true,
+      //mediaType: Camera.MediaType.ALLMEDIA,
+      destinationType: Camera.DestinationType.DATA_URL
+    };
+
+    Camera.getPicture(options).then(image => {
+      let prompt = this.alertCtrl.create({
+        title: 'Usar foto',
+        message: 'Deseja usar esta foto como foto de perfil?',
+        buttons: [
+          {
+            text: 'Não',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: data => {
+              this.user.avatar = "data:image/jpeg;base64," + image;
+              this.save_avatar(this.user);
+            }
+          }
+        ]
+      });
+      prompt.present();
+    });
+  }
+
+  save_avatar(user) {
+      let loader = this.loadingCtrl.create({
+        content: "Salvando avatar..."
+      });
+
+      loader.present();
+
+      this.userProvider.save_avatar(user)
+      .subscribe(token_params => {
+        localStorage.setItem("user", token_params.user);
+        this.user_token = token_params.user;
+        this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
+        this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
+        this.presentToast("Avatar salvo com sucesso!");
+      }, error => {
+        this.presentToast(error.json());
+        console.log(JSON.stringify(error.json()));
+      }, () => {
+        loader.dismiss();
+      }
+    );
+  }
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 
 }

@@ -32,7 +32,7 @@
     <p>
       {{event.address.street + " " + event.address.complement + ", " + event.address.neighborhood + ", " + event.city.name + " - " + event.state.name}}
     </p>
-    <ion-card>
+    <ion-card *ngIf="showConfirmedGuestActions">
       <a ion-item (click)="openPostModal()">
         <ion-avatar item-left>
           <img src="{{user.avatar_url}}" id='user_avatar'>

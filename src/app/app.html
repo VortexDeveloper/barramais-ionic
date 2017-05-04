@@ -2,12 +2,14 @@
   <ion-content>
     <ion-list>
       <ul class="photo-menu">
-        <li (click)="openPage(profilePage)" menuClose>
+        <li menuClose>
           <ion-item no-lines class="avatar">
-            <ion-thumbnail item-left>
+            <ion-thumbnail item-left (click)="presentActionSheet()">
               <img src="{{user.avatar_url}}" id='user_avatar' *ngIf="user" >
             </ion-thumbnail>
-            {{user.first_name}} {{user.last_name}}
+            <a (click)="openPage(profilePage)">
+              {{user.first_name}} {{user.last_name}}
+            </a>
           </ion-item>
         </li>
       </ul>

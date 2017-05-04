@@ -38,7 +38,7 @@ export class ForgotPasswordPage {
 
   forgotPassword() {
     let loader = this.loadingCtrl.create({
-      content: "Entrando, aguarde..."
+      content: "Enviando requisição, aguarde..."
     });
 
     loader.present();
@@ -50,7 +50,7 @@ export class ForgotPasswordPage {
       (error) => {
         this.presentToast(error.json().error);
         loader.dismiss();
-      }  
+      }
     );
   }
 }

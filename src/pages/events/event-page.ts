@@ -54,6 +54,7 @@ export class EventPagePage {
   posts: Array<any>;
   decided: boolean = false;
   eventModalPage: any = EventModalPage;
+  showConfirmedGuestActions: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -129,6 +130,15 @@ export class EventPagePage {
     }
   }
 
+  verifyConfirmedGuest(list){
+    var guests_id = [];
+    for(let user of list) guests_id.push(user.id);
+    if(guests_id.indexOf(this.user.id) > -1 ){
+      this.showConfirmedGuestActions = true;
+      this.verifyEventAdmin();
+    }
+  }
+
   all_guests(event){
     this.eventProvider.all_guests(event)
       .subscribe(response =>{
@@ -145,6 +155,7 @@ export class EventPagePage {
       .subscribe(response =>{
         this.confirmedGuests = response.confirmed_guests;
         this.l_confirmedGuests = response.confirmed_guests.length;
+        this.verifyConfirmedGuest(this.confirmedGuests);
       }, error =>{
         console.log("Erro ao exibir os convidados: " + error.json());
       });
