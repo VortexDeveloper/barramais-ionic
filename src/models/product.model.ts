@@ -5,6 +5,7 @@ export class ProductModel {
   status: number;
   product_category_id: number;
   product_sub_category_id: number;
+  product_sub_category_2_id: number;
 
   constructor(public params?:any){
     params = params || {}
@@ -14,5 +15,6 @@ export class ProductModel {
     this.status = params.status || 0;
     this.product_category_id = params.product_category_id || 1;
     this.product_sub_category_id = params.product_sub_category_id || 1;
+    this.product_sub_category_2_id = params.product_sub_category_2_id || 1;
   }
 }

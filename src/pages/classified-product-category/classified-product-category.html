@@ -29,6 +29,13 @@
     </ion-select>
   </ion-item>
 
+  <ion-item [hidden]="isSubCategory2Empty">
+    <ion-label>Sub Categoria</ion-label>
+    <ion-select [(ngModel)]="product.product_sub_category_2_id" name="product_sub_category_2">
+      <ion-option *ngFor="let productSubCategory2 of productSubCategories2" [value]="productSubCategory2.id">{{productSubCategory2.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
   <button class="form-buttons" ion-button type="button" (click)="openNextPage(classifiedProductStatusPage, product)" block>Próximo</button>
 
   <button class="form-buttons" ion-button type="button" (click)="goBack()" block>Voltar</button>

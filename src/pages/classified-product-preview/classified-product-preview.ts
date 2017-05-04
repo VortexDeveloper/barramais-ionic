@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ClassifiedModel } from "../../models/classified.model";
 import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
+import { MainPage } from '../main/main';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedProductPreview page.
@@ -20,25 +22,33 @@ export class ClassifiedProductPreviewPage {
   classifiedInformation: boolean = false;
   productCategory: any = {};
   productSubCategory: any = {};
+  mainPage: any = MainPage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private classifiedProvider: Classified
+    private classifiedProvider: Classified,
+    public toastCtrl: ToastController
   ) {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.product = new ProductModel(navParams.data.product);
 
       this.getProductCategoryById();
       this.getProductSubCategoryById();
-      console.log(this.product);
-      console.log("this.product");
-      console.log(this.product.product_sub_category_id);
-      console.log("this.product.product_sub_category_id");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassifiedProductPreviewPage');
+  }
+
+  save(){
+    this.classifiedProvider.createProduct(this.classified, this.product)
+      .subscribe(response => {
+        this.redirectPage(this.mainPage);
+        this.presentToast("Classificado criado com sucesso!");
+      }, error => {
+        console.log(error.json());
+      });
   }
 
   getProductCategoryById(){
@@ -73,5 +83,13 @@ export class ClassifiedProductPreviewPage {
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 }

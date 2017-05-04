@@ -25,8 +25,10 @@ export class ClassifiedProductCategoryPage {
   product: ProductModel;
   productCategories: any;
   productSubCategories: any;
+  productSubCategories2: any;
   isSubCategoryEmpty: boolean = false;
   classifiedProductStatusPage: any = ClassifiedProductStatusPage;
+  isSubCategory2Empty: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -51,6 +53,7 @@ export class ClassifiedProductCategoryPage {
       this.product = new ProductModel();
 
       this.getProductSubCategories();
+      this.getProductSubCategories2();
   }
 
   ionViewDidLoad() {
@@ -74,6 +77,20 @@ export class ClassifiedProductCategoryPage {
       this.isSubCategoryEmpty = true;
     }else{
       this.isSubCategoryEmpty = false;
+    }
+    }, error => {
+    console.log(error.json());
+    });
+  }
+
+  getProductSubCategories2(){
+    this.classifiedProvider.getProductSubCategories2(this.product.product_sub_category_2_id)
+    .subscribe(response => {
+    this.productSubCategories2 = response;
+    if(this.productSubCategories2.length <= 0){
+      this.isSubCategory2Empty = true;
+    }else{
+      this.isSubCategory2Empty = false;
     }
     }, error => {
     console.log(error.json());
