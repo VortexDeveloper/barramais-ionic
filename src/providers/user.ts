@@ -252,7 +252,7 @@ export class User {
   }
 
   delete(){
-    return this.http.delete(this.url + ".json")
+    return this.authHttp.delete(this.url + ".json")
       .map(res => res.json());
   }
 

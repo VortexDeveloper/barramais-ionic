@@ -121,12 +121,56 @@ export class UserPage {
   }
 
   deleteAccount() {
-    this.userProvider.delete()
-      .subscribe(response => {
-        this.presentToast("Conta deletada!");
-      }, error => {
-        console.log(error.json());
-      });
+    let alert = this.alertCtrl.create({
+      title: 'Deletar Conta',
+      message: 'Tem certeza que deseja remover sua conta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            let loader = this.loadingCtrl.create({
+              content: "Removendo sua conta, aguarde..."
+            });
+
+            loader.present();
+
+            this.userProvider.delete().subscribe(
+              (response) => {
+                window.localStorage.removeItem("jwt");
+                window.localStorage.removeItem("user");
+                window.localStorage.removeItem("vessels_type");
+                this.navCtrl.setRoot(HomePage);
+                this.presentToast("Sua conta foi removida com sucesso!");
+                loader.dismiss();
+              },
+              (error) => {console.log(error);
+                           loader.dismiss();
+                         }
+            );
+          }
+        }
+      ]
+    });
+
+    alert.present();
+
+    // this.userProvider.delete()
+    //   .subscribe(response => {
+    //     window.localStorage.removeItem("user");
+    //     window.localStorage.removeItem("jwt");
+    //     window.localStorage.removeItem("vessels_type");
+    //     this.navCtrl.setRoot(HomePage);
+    //     this.presentToast("Sua conta foi removida com sucesso!");
+    //   }, error => {
+    //     console.log(error.json());
+    //   });
   }
 
   presentToast(msg) {
