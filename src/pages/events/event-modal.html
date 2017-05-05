@@ -14,7 +14,7 @@
 
 <ion-content>
   <div class="background-image">
-    <img src="assets/images/evento_cover.jpg" *ngIf="!event.cover_photo && !event.cover_photo_url" />
+    <img src="http://localhost:3000/images/eventos.png" *ngIf="!event.cover_photo && !event.cover_photo_url" />
     <img src="{{event.cover_photo_url}}" [hidden]="!event.cover_photo_url" />
     <img src="{{event.cover_photo}}" [hidden]="!event.cover_photo" />
     <ion-icon class="cover-camera-icon" name="camera" (click)="presentActionSheet()"></ion-icon>

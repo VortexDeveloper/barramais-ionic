@@ -38,12 +38,15 @@ export class UserModel {
   //Nautical Information
   nautical_professional: boolean;
   relationship: number;
+  relationship_name: number;
   has_embarcation: number;
   nautical_profession_description: string;
   naval_service: number;
   naval_service_patent: number;
+  naval_service_patent_name: number;
   advertiser: AdvertiserModel;
   nautical_license: number;
+  nautical_license_name: number;
   has_nautical_license: number;
   nautical_tour: boolean;
   fishing: boolean;
@@ -78,13 +81,16 @@ export class UserModel {
     this.about = params.about || "";
     this.academic_profile = params.academic_profile || "";
     this.relationship = params.relationship || 0;
+    this.relationship_name = params.relationship_name || 0;
     this.has_embarcation = params.has_embarcation || false;
     this.nautical_professional = params.nautical_professional || false;
     this.nautical_profession_description = params.nautical_profession_description || "";
     this.naval_service = params.naval_service || false;
     this.naval_service_patent = params.naval_service_patent || null;
+    this.naval_service_patent_name = params.naval_service_patent_name || null;
     this.advertiser = params.advertiser || null;
     this.nautical_license = params.nautical_license || null;
+    this.nautical_license_name = params.nautical_license_name || null;
     this.has_nautical_license = params.has_nautical_license || false;
     this.work = params.work || "";
     this.nautical_tour = params.nautical_tour || false;

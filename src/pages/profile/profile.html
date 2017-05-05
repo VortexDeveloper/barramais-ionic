@@ -62,10 +62,10 @@
         </ion-row>
       </div>
       <div class="profile-description" [hidden]="!profileInformation">
-        <div class="section-title">
+        <div class="section-title" (click)="showPersonalInformation()">
           <h2>Informações pessoais</h2>
         </div>
-        <div class="socials">
+        <div class="socials" [hidden]="!personalInformation">
           <p>
             {{user.about}}
           </p>
@@ -83,7 +83,7 @@
           </div>
           <div class="social" *ngIf="user.relationship!==null">
             <ion-icon name="heart"></ion-icon>
-            {{user.relationship}}
+            {{user.relationship_name}}
           </div>
           <div class="social" *ngIf="user.sex=='F'">
             <ion-icon name="female"></ion-icon>
@@ -95,19 +95,19 @@
           </div>
           <div class="social" *ngIf="user.naval_service_patent !== null">
             <img src="assets/images/{{user.naval_service_patent}}.png" />
-            {{user.naval_service_patent}}
+            {{user.naval_service_patent_name}}
           </div>
           <div class="social" *ngIf="user.nautical_license !== null">
             <img src="assets/images/{{user.nautical_license}}.png" />
-            {{user.nautical_license}}
+            {{user.nautical_license_name}}
           </div>
         </div>
       </div>
       <div class="profile-description" [hidden]="!profileInformation">
-        <div class="section-title">
+        <div class="section-title" (click)="showSocialsInformation()">
           <h2>Mídias sociais</h2>
         </div>
-        <div class="socials">
+        <div class="socials" [hidden]="!socialsInformation">
           <div class="social" *ngIf="user.facebook != ''">
             <img src="assets/images/facebook_.png"/>
             {{user.facebook}}
@@ -131,10 +131,10 @@
         </div>
       </div>
       <div class="profile-description" [hidden]="!profileInformation">
-        <div class="section-title">
+        <div class="section-title" (click)="showSportsInformation()">
           <h2>Esportes náuticos</h2>
         </div>
-        <div class="sports">
+        <div class="sports" [hidden]="!sportsInformation">
           <div class="sport" *ngFor="let nautical_sport of nautical_sports">
             <img src="{{nautical_sport.photo_url}}" />
             {{nautical_sport.name}}
@@ -142,10 +142,21 @@
         </div>
       </div>
       <div class="profile-description" [hidden]="!profileInformation">
-        <div class="section-title">
+        <div class="section-title" (click)="showEmbarcationInformation()">
+          <h2>Embarcações</h2>
+        </div>
+        <div class="sports" [hidden]="!embarcationInformation">
+          <div class="sport" *ngFor="let own_vessel of user.own_vessels">
+            <img src="{{own_vessel.vessel_type_photo_url}}" />
+            {{own_vessel.vessel_type_name}}
+          </div>
+        </div>
+      </div>
+      <div class="profile-description" [hidden]="!profileInformation">
+        <div class="section-title" (click)="showNauticalInformation()">
           <h2>Informações náuticas</h2>
         </div>
-        <div class="socials">
+        <div class="socials" [hidden]="!nauticalInformation">
           <div class="social" *ngIf="user.national_trips != ''">
             <img src="assets/images/turismo.png"/>
             {{user.national_trips}}

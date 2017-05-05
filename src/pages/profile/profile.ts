@@ -51,6 +51,11 @@ export class ProfilePage {
   nautical_sports: any[] = [];
   erro: string = "";
   albumListPage: any = AlbumListPage;
+  personalInformation: boolean = false;
+  socialsInformation: boolean = false;
+  sportsInformation: boolean = false;
+  embarcationInformation: boolean = false;
+  nauticalInformation: boolean = false;
 
 
   constructor(
@@ -73,7 +78,6 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-
   }
 
   getUserNauticalSports(){
@@ -348,6 +352,27 @@ export class ProfilePage {
         alert(error.json());
         console.log(JSON.stringify(error.json()));
     });
+  }
+
+
+  showNauticalInformation(){
+    this.nauticalInformation = !this.nauticalInformation;
+  }
+
+  showEmbarcationInformation(){
+    this.embarcationInformation = !this.embarcationInformation;
+  }
+
+  showSportsInformation(){
+    this.sportsInformation = !this.sportsInformation;
+  }
+
+  showSocialsInformation(){
+    this.socialsInformation = !this.socialsInformation;
+  }
+
+  showPersonalInformation(){
+    this.personalInformation = !this.personalInformation;
   }
 
 }
