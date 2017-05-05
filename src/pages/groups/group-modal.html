@@ -15,7 +15,7 @@
 <ion-content>
   <div class="background-image">
     <img src="{{group.cover_photo}}" *ngIf="group.cover_photo"/>
-    <img src="assets/images/evento_cover.jpg" *ngIf="!group.cover_photo" />
+    <img src="http://localhost:3000/images/grupo.png" *ngIf="!group.cover_photo" />
     <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()"></ion-icon>
   </div>
   <div class="container">
