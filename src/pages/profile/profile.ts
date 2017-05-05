@@ -78,7 +78,6 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    console.log(this.user);
   }
 
   getUserNauticalSports(){

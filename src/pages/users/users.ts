@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FeedsPage } from '../feeds/feeds';
 import { ToastController } from 'ionic-angular';
 import { User } from '../../providers/user';
@@ -38,6 +38,7 @@ export class UsersPage {
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     params: NavParams,
     public conversationProvider: Conversations,
     public userProvider: User,
@@ -126,12 +127,21 @@ export class UsersPage {
     let query_param = ev.target.value;
     if(query_param && query_param.trim() != '' && query_param.trim() != this.last_query_param) {
       this.results = null;
+      let loader = this.loadingCtrl.create({
+        content: "Pesquisando..."
+      });
+
+      loader.present();
       this.searchProvider.look_for(query_param).subscribe(
         (results) => {
           this.results = results
           this.last_query_param = query_param;
+          loader.dismiss();
         },
-        (error) => console.log(error)
+        (error) => {
+          console.log(error);
+          loader.dismiss();
+        }
       );
     }
   }
