@@ -4,6 +4,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { VesselModel } from "../../models/vessel.model";
 import { Classified } from '../../providers/classified';
 import { ClassifiedVesselAccessoriesPage } from '../classified-vessel-accessories/classified-vessel-accessories';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedVesselManufacturer page.
@@ -25,7 +26,8 @@ export class ClassifiedVesselManufacturerPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private classifiedProvider: Classified
+    private classifiedProvider: Classified,
+    public toastCtrl: ToastController
   ) {
       this.getBrands();
 
@@ -38,7 +40,11 @@ export class ClassifiedVesselManufacturerPage {
   }
 
   openNextPage(page, vessel){
-    this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+    if(this.vessel.chassis_number == null || this.vessel.chassis_number == ""){
+      this.presentToast("Preencha o número do chassi!");
+    }else{
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+    }
   }
 
   goBack(){
@@ -61,5 +67,13 @@ export class ClassifiedVesselManufacturerPage {
     }, error => {
         console.log(error.json());
     });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

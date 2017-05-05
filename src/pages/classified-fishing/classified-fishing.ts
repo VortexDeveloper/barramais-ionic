@@ -6,6 +6,7 @@ import { UserModel } from "../../models/user.model";
 import { FishingModel } from "../../models/fishing.model";
 import { Classified } from '../../providers/classified';
 import { ClassifiedFishingStatusPage } from '../classified-fishing-status/classified-fishing-status';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedFishing page.
@@ -31,7 +32,8 @@ export class ClassifiedFishingPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private classifiedProvider: Classified
+    private classifiedProvider: Classified,
+    public toastCtrl: ToastController
   ) {
       this.getFishingCategories();
 
@@ -74,10 +76,22 @@ export class ClassifiedFishingPage {
   }
 
   openNextPage(page, provisionalCategory, fishing){
-    this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified});
+    if(provisionalCategory && (fishing.provisional_category == null || fishing.provisional_category == "")){
+      this.presentToast("Preencha o campo de categoria provisória!");
+    }else{
+      this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

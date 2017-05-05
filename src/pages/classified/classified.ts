@@ -6,6 +6,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { ClassifiedVesselTypePage } from '../classified-vessel-type/classified-vessel-type';
 import { ClassifiedFishingPage } from '../classified-fishing/classified-fishing';
 import { ClassifiedProductCategoryPage } from '../classified-product-category/classified-product-category';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the Classified page.
@@ -29,7 +30,8 @@ export class ClassifiedPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public toastCtrl: ToastController
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel();
@@ -43,10 +45,40 @@ export class ClassifiedPage {
   }
 
   openNextPage(page, classified){
-    this.navCtrl.push(page, {'classified': classified});
+    var emailRule = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
+    var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
+    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    var documentRule = (classified.document_type == 0 && classified.document_number.match(documentCPFRule)) || (classified.document_type == 1 && classified.document_number.match(documentCNPJRule)) ? true : false;
+
+    if((!classified.bonded && (classified.seller_name == null || classified.seller_name == "")) || (classified.bonded && classified.document_type == 1 && (classified.seller_name == null || classified.seller_name == ""))){
+      if(classified.document_type == 1){
+        this.presentToast("Preencha a razão social corretamente!");
+      }else{
+        this.presentToast("Preencha o nome corretamente!");
+      }
+    }else if(!documentRule){
+      this.presentToast("Preencha o número do documento corretamente!");
+    }else if(!classified.bonded && !classified.email.match(emailRule)){
+      this.presentToast("Preencha o campo email corretamente!");
+    }else if(!classified.bonded && !classified.cell_phone.match(phoneRule)){
+      this.presentToast("Preencha o celular corretamente!");
+    }else if(!classified.landline.match(phoneRule)){
+      this.presentToast("Preencha o telefone corretamente!");
+    }else{
+      this.navCtrl.push(page, {'classified': classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

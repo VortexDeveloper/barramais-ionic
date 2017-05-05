@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ClassifiedModel } from "../../models/classified.model";
 import { VesselModel } from "../../models/vessel.model";
 import { ClassifiedVesselManufacturerPage } from '../classified-vessel-manufacturer/classified-vessel-manufacturer';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedVesselStatus page.
@@ -21,7 +22,8 @@ export class ClassifiedVesselStatusPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public toastCtrl: ToastController
   ) {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
@@ -32,10 +34,26 @@ export class ClassifiedVesselStatusPage {
   }
 
   openNextPage(page, vessel, classified){
-    this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
+    if(this.vessel.manufacturation_year == null || this.vessel.manufacturation_year == ""){
+      this.presentToast("Selecione a data de fabricação da embarcação!");
+    }else if(this.classified.price <= 0){
+      this.presentToast("Insira um valor válido!");
+    }else if(this.vessel.activation_year == null || this.vessel.activation_year == ""){
+      this.presentToast("Selecione a data de ativação da embarcação!");
+    }else{
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

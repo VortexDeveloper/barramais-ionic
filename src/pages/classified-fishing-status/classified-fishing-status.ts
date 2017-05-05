@@ -5,6 +5,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { UserModel } from "../../models/user.model";
 import { FishingModel } from "../../models/fishing.model";
 import { ClassifiedFishingDescriptionPage } from '../classified-fishing-description/classified-fishing-description';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedFishingStatus page.
@@ -27,7 +28,8 @@ export class ClassifiedFishingStatusPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public toastCtrl: ToastController
   ) {
       this.provisionalCategory = navParams.data.provisionalCategory;
       this.classified = new ClassifiedModel(navParams.data.classified);
@@ -45,10 +47,22 @@ export class ClassifiedFishingStatusPage {
   }
 
   openNextPage(page, fishing, classified){
-    this.navCtrl.push(page, {'fishing': fishing, 'classified': classified});
+    if(classified.price <= 0){
+      this.presentToast("Insira um valor válido!");
+    }else{
+      this.navCtrl.push(page, {'fishing': fishing, 'classified': classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

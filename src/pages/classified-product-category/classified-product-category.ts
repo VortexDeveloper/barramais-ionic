@@ -78,6 +78,7 @@ export class ClassifiedProductCategoryPage {
     }else{
       this.isSubCategoryEmpty = false;
     }
+    this.getProductSubCategories2();
     }, error => {
     console.log(error.json());
     });

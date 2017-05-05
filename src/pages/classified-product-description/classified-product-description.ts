@@ -5,6 +5,7 @@ import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
 import { Camera } from 'ionic-native';
 import { ClassifiedProductPreviewPage } from '../classified-product-preview/classified-product-preview';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedProductDescription page.
@@ -24,7 +25,8 @@ export class ClassifiedProductDescriptionPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl: ToastController
   ) {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.product = new ProductModel(navParams.data.product)
@@ -78,10 +80,24 @@ export class ClassifiedProductDescriptionPage {
   }
 
   openNextPage(page, classified){
-    this.navCtrl.push(page, {'product': this.product, 'classified': classified});
+    if(classified.title == null || classified.title == ""){
+      this.presentToast("Preencha o título do classificado!");
+    }else if(classified.description == null || classified.description == ""){
+      this.presentToast("Preencha a descrição do classificado!");
+    }else{
+      this.navCtrl.push(page, {'product': this.product, 'classified': classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

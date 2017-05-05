@@ -4,6 +4,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
 import { ClassifiedProductDescriptionPage } from '../classified-product-description/classified-product-description';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedProductStatus page.
@@ -22,7 +23,8 @@ export class ClassifiedProductStatusPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public toastCtrl: ToastController
   ) {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.product = new ProductModel(navParams.data.product);
@@ -33,10 +35,22 @@ export class ClassifiedProductStatusPage {
   }
 
   openNextPage(page, product, classified){
-    this.navCtrl.push(page, {'product': product, 'classified': classified});
+    if(classified.price <= 0){
+      this.presentToast("Insira um valor válido!");
+    }else{
+      this.navCtrl.push(page, {'product': product, 'classified': classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }
