@@ -13,8 +13,8 @@ export class ProductModel {
     this.createdAt = params.createdAt || "";
     this.updatedAt = params.updatedAt || "";
     this.status = params.status || 0;
-    this.product_category_id = params.product_category_id || 1;
-    this.product_sub_category_id = params.product_sub_category_id || 1;
-    this.product_sub_category_2_id = params.product_sub_category_2_id || 1;
+    this.product_category_id = params.product_category_id || null;
+    this.product_sub_category_id = params.product_sub_category_id || null;
+    this.product_sub_category_2_id = params.product_sub_category_2_id || null;
   }
 }

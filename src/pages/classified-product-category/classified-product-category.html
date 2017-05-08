@@ -30,7 +30,7 @@
   </ion-item>
 
   <ion-item [hidden]="isSubCategory2Empty">
-    <ion-label>Sub Categoria</ion-label>
+    <ion-label>Segunda Sub Categoria</ion-label>
     <ion-select [(ngModel)]="product.product_sub_category_2_id" name="product_sub_category_2">
       <ion-option *ngFor="let productSubCategory2 of productSubCategories2" [value]="productSubCategory2.id">{{productSubCategory2.name}}</ion-option>
     </ion-select>

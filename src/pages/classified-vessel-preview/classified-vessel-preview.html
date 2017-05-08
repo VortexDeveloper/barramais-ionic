@@ -44,12 +44,10 @@
       <ion-label>{{classified.description}}</ion-label>
     </ion-item>
 
-    <ion-item-divider color="light">Categoria da embarcação</ion-item-divider>
-
-    <ion-item *ngIf="vessel.vessel_type==0">Barco de pesca</ion-item>
-    <ion-item *ngIf="vessel.vessel_type==1">Lancha</ion-item>
-    <ion-item *ngIf="vessel.vessel_type==2">Veleiro</ion-item>
-    <ion-item *ngIf="vessel.vessel_type==3">Jetski</ion-item>
+    <ion-item>
+      <ion-label>Tipo de embarcação</ion-label>
+      <ion-label>{{vesselType.name}}</ion-label>
+    </ion-item>
 
     <ion-item-divider color="light">Estado da embarcação</ion-item-divider>
 
@@ -75,7 +73,7 @@
       <ion-label>{{brand.name}}</ion-label>
     </ion-item>
 
-    <ion-item>
+    <ion-item [hidden]="vessel.mold_id==null">
       <ion-label>Modelo</ion-label>
       <ion-label>{{mold.name}}</ion-label>
     </ion-item>

@@ -28,6 +28,8 @@ export class ClassifiedFishingPage {
   fishingSubCategories: any;
   provisionalCategory: boolean = false;
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
+  fishingCategory: any;
+  fishingSubCategory: any;
 
   constructor(
     public navCtrl: NavController,
@@ -67,6 +69,8 @@ export class ClassifiedFishingPage {
   }
 
   getFishingSubCategories() {
+    this.fishing.fishing_sub_category_id = null;
+    console.log(this.fishing.fishing_category_id);
     this.classifiedProvider.getFishingSubCategories(this.fishing.fishing_category_id)
     .subscribe(response => {
       this.fishingSubCategories = response.fishing_sub_categories;
@@ -76,7 +80,9 @@ export class ClassifiedFishingPage {
   }
 
   openNextPage(page, provisionalCategory, fishing){
-    if(provisionalCategory && (fishing.provisional_category == null || fishing.provisional_category == "")){
+    if((this.fishing.fishing_category_id == null || this.fishing.fishing_sub_category_id == null) && !provisionalCategory){
+      this.presentToast("Escolha uma categoria e sub categoria!");
+    }else if(provisionalCategory && (fishing.provisional_category == null || fishing.provisional_category == "")){
       this.presentToast("Preencha o campo de categoria provisória!");
     }else{
       this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified});

@@ -34,15 +34,21 @@ export class ClassifiedVesselStatusPage {
   }
 
   openNextPage(page, vessel, classified){
-    if(this.vessel.manufacturation_year == null || this.vessel.manufacturation_year == ""){
-      this.presentToast("Selecione a data de fabricação da embarcação!");
-    }else if(this.classified.price <= 0){
-      this.presentToast("Insira um valor válido!");
-    }else if(this.vessel.activation_year == null || this.vessel.activation_year == ""){
-      this.presentToast("Selecione a data de ativação da embarcação!");
-    }else{
-      this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
-    }
+    var manufacturation_year = this.vessel.manufacturation_year.replace(/-/g, "");
+    var activation_year = this.vessel.activation_year.replace(/-/g, "");
+
+    console.log(manufacturation_year);
+    console.log(activation_year);
+
+    // if(this.vessel.manufacturation_year == null || this.vessel.manufacturation_year == ""){
+    //   this.presentToast("Selecione a data de fabricação da embarcação!");
+    // }else if(this.classified.price <= 0){
+    //   this.presentToast("Insira um valor válido!");
+    // }else if(this.vessel.activation_year == null || this.vessel.activation_year == ""){
+    //   this.presentToast("Selecione a data de ativação da embarcação!");
+    // }else{
+    //   this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
+    // }
   }
 
   goBack(){

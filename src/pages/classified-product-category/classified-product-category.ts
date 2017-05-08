@@ -6,6 +6,7 @@ import { UserModel } from "../../models/user.model";
 import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
 import { ClassifiedProductStatusPage } from '../classified-product-status/classified-product-status';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedProductCategory page.
@@ -33,7 +34,8 @@ export class ClassifiedProductCategoryPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public classifiedProvider: Classified
+    public classifiedProvider: Classified,
+    public toastCtrl: ToastController
   ) {
       this.getProductCategories();
 
@@ -51,9 +53,6 @@ export class ClassifiedProductCategoryPage {
       console.log(this.classified);
 
       this.product = new ProductModel();
-
-      this.getProductSubCategories();
-      this.getProductSubCategories2();
   }
 
   ionViewDidLoad() {
@@ -70,6 +69,9 @@ export class ClassifiedProductCategoryPage {
   }
 
   getProductSubCategories(){
+    this.product.product_sub_category_id = null;
+    this.product.product_sub_category_2_id = null;
+    this.productSubCategories2 = [];
     this.classifiedProvider.getProductSubCategories(this.product.product_category_id)
     .subscribe(response => {
     this.productSubCategories = response;
@@ -78,16 +80,18 @@ export class ClassifiedProductCategoryPage {
     }else{
       this.isSubCategoryEmpty = false;
     }
-    this.getProductSubCategories2();
     }, error => {
     console.log(error.json());
     });
   }
 
   getProductSubCategories2(){
-    this.classifiedProvider.getProductSubCategories2(this.product.product_sub_category_2_id)
+    this.product.product_sub_category_2_id = null;
+    console.log(this.product.product_sub_category_id);
+    this.classifiedProvider.getProductSubCategories2(this.product.product_sub_category_id)
     .subscribe(response => {
     this.productSubCategories2 = response;
+    console.log(this.productSubCategories2);
     if(this.productSubCategories2.length <= 0){
       this.isSubCategory2Empty = true;
     }else{
@@ -99,10 +103,24 @@ export class ClassifiedProductCategoryPage {
   }
 
   openNextPage(page, product){
-    this.navCtrl.push(page, {'product': product, 'classified': this.classified});
+    if(this.product.product_category_id == null || this.product.product_sub_category_id == null){
+        this.presentToast("Escolha uma categoria e sub categoria!");
+    }else if(this.productSubCategories2.length > 0 && this.product.product_sub_category_2_id == null){
+        this.presentToast("Escolha uma segunda sub categoria!")
+    }else{
+      this.navCtrl.push(page, {'product': product, 'classified': this.classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

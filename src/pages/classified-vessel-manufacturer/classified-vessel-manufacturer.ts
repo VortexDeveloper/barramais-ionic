@@ -29,10 +29,10 @@ export class ClassifiedVesselManufacturerPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
-      this.getBrands();
-
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
+
+      this.getBrands();
   }
 
   ionViewDidLoad() {
@@ -40,7 +40,9 @@ export class ClassifiedVesselManufacturerPage {
   }
 
   openNextPage(page, vessel){
-    if(this.vessel.chassis_number == null || this.vessel.chassis_number == ""){
+    if(this.vessel.brand_id == null){
+      this.presentToast("Escolha um fabricante!");
+    }else if(this.vessel.chassis_number == null || this.vessel.chassis_number == ""){
       this.presentToast("Preencha o número do chassi!");
     }else{
       this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
@@ -52,7 +54,7 @@ export class ClassifiedVesselManufacturerPage {
   }
 
   getBrands() {
-    this.classifiedProvider.getBrands()
+    this.classifiedProvider.getBrands(this.vessel.vessel_type_id)
     .subscribe(response => {
       this.brands = response.brands;
     }, error => {
