@@ -30,6 +30,7 @@ export class ClassifiedFishingPage {
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
   fishingCategory: any;
   fishingSubCategory: any;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -38,6 +39,7 @@ export class ClassifiedFishingPage {
     public toastCtrl: ToastController
   ) {
       this.getFishingCategories();
+      this.isEditing = navParams.data.isEditing;
 
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel(navParams.data.classified);
@@ -52,7 +54,12 @@ export class ClassifiedFishingPage {
 
       console.log(this.classified);
 
-      this.fishing = new FishingModel();
+      if(this.isEditing){
+        this.fishing = new FishingModel();
+        this.getFishingByClassified();
+      }else{
+        this.fishing = new FishingModel();
+      }
   }
 
   ionViewDidLoad() {
@@ -70,7 +77,6 @@ export class ClassifiedFishingPage {
 
   getFishingSubCategories() {
     this.fishing.fishing_sub_category_id = null;
-    console.log(this.fishing.fishing_category_id);
     this.classifiedProvider.getFishingSubCategories(this.fishing.fishing_category_id)
     .subscribe(response => {
       this.fishingSubCategories = response.fishing_sub_categories;
@@ -79,13 +85,23 @@ export class ClassifiedFishingPage {
     });
   }
 
+  getFishingByClassified(){
+    this.classifiedProvider.getFishingByClassified(this.classified.id)
+      .subscribe(response => {
+        this.fishing = response
+        console.log(this.fishing);
+      }, error => {
+          console.log(error.json());
+      });
+  }
+
   openNextPage(page, provisionalCategory, fishing){
     if((this.fishing.fishing_category_id == null || this.fishing.fishing_sub_category_id == null) && !provisionalCategory){
       this.presentToast("Escolha uma categoria e sub categoria!");
     }else if(provisionalCategory && (fishing.provisional_category == null || fishing.provisional_category == "")){
       this.presentToast("Preencha o campo de categoria provisória!");
     }else{
-      this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified});
+      this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified, 'isEditing': this.isEditing});
     }
   }
 

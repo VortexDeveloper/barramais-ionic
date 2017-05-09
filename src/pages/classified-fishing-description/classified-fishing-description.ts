@@ -25,6 +25,7 @@ export class ClassifiedFishingDescriptionPage {
   classified: ClassifiedModel;
   fishing: FishingModel;
   classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +33,8 @@ export class ClassifiedFishingDescriptionPage {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
   }
@@ -89,7 +92,7 @@ export class ClassifiedFishingDescriptionPage {
     }else if(classified.description == null || classified.description == ""){
       this.presentToast("Preencha a descrição do classificado!");
     }else{
-      this.navCtrl.push(page, {'fishing': this.fishing, 'classified': classified});
+      this.navCtrl.push(page, {'fishing': this.fishing, 'classified': classified, 'isEditing': this.isEditing});
     }
   }
 

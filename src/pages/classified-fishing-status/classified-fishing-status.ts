@@ -25,12 +25,15 @@ export class ClassifiedFishingStatusPage {
   fishing: FishingModel;
   provisionalCategory: boolean = false;
   classifiedFishingDescriptionPage: any = ClassifiedFishingDescriptionPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.provisionalCategory = navParams.data.provisionalCategory;
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
@@ -47,10 +50,13 @@ export class ClassifiedFishingStatusPage {
   }
 
   openNextPage(page, fishing, classified){
-    if(classified.price <= 0){
+    var price = this.classified.price.toString();
+    var priceRule = /^([0-9]+[\.]?[0-9]{2}?)$/
+
+    if(classified.price <= 0 || !price.match(priceRule)){
       this.presentToast("Insira um valor válido!");
     }else{
-      this.navCtrl.push(page, {'fishing': fishing, 'classified': classified});
+      this.navCtrl.push(page, {'fishing': fishing, 'classified': classified, 'isEditing': this.isEditing});
     }
   }
 

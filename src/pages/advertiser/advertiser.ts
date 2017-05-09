@@ -68,6 +68,8 @@ export class AdvertiserPage {
   }
 
   save(advertiser, address){
+    //Falta resetar a cidade quando alterar estado e acertar na validação
+
     var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
     var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
     var documentRule = (advertiser.document_type == "cpf" && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == "cnpj" && advertiser.document_number.match(documentCNPJRule)) ? true : false;

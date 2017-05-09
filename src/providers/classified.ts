@@ -40,7 +40,9 @@ export class Classified {
   private product_sub_category_2_by_id_url: string;
   private vessel_type_url: string;
   private vessel_types_url: string;
-
+  private get_vessel_by_classified_url: string;
+  private get_fishing_by_classified_url: string;
+  private get_product_by_classified_url: string;
 
   constructor(
     public http: Http,
@@ -77,6 +79,24 @@ export class Classified {
     this.create_product_url = host + 'classifieds/create_product';
     this.product_sub_category_2_url = host + 'classifieds/product_sub_categories_2_for_select/'
     this.product_sub_category_2_by_id_url = host + 'classifieds/get_product_sub_category_2_by_id/';
+    this.get_vessel_by_classified_url = host + 'classifieds/get_vessel_by_classified/';
+    this.get_fishing_by_classified_url = host + 'classifieds/get_fishing_by_classified/';
+    this.get_product_by_classified_url = host + 'classifieds/get_product_by_classified/';
+  }
+
+  getVesselByClassified(classified_id){
+    return this.authHttp.get(this.get_vessel_by_classified_url + classified_id + ".json")
+      .map(res => res.json());
+  }
+
+  getFishingByClassified(classified_id){
+    return this.authHttp.get(this.get_fishing_by_classified_url + classified_id + ".json")
+      .map(res => res.json());
+  }
+
+  getProductByClassified(classified_id){
+    return this.authHttp.get(this.get_product_by_classified_url + classified_id + ".json")
+      .map(res => res.json());
   }
 
   createProduct(classified, product){

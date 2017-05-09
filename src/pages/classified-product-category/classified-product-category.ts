@@ -30,6 +30,7 @@ export class ClassifiedProductCategoryPage {
   isSubCategoryEmpty: boolean = false;
   classifiedProductStatusPage: any = ClassifiedProductStatusPage;
   isSubCategory2Empty: boolean = false;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -38,6 +39,7 @@ export class ClassifiedProductCategoryPage {
     public toastCtrl: ToastController
   ) {
       this.getProductCategories();
+      this.isEditing = navParams.data.isEditing;
 
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel(navParams.data.classified);
@@ -49,8 +51,6 @@ export class ClassifiedProductCategoryPage {
         this.classified.email = this.current_user.email;
         this.classified.cell_phone = this.current_user.cellphone;
       }
-
-      console.log(this.classified);
 
       this.product = new ProductModel();
   }

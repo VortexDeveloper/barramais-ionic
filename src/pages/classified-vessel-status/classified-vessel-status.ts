@@ -36,19 +36,20 @@ export class ClassifiedVesselStatusPage {
   openNextPage(page, vessel, classified){
     var manufacturation_year = this.vessel.manufacturation_year.replace(/-/g, "");
     var activation_year = this.vessel.activation_year.replace(/-/g, "");
+    var price = this.classified.price.toString();
+    var priceRule = /^([0-9]+[\.]?[0-9]{2}?)$/
 
-    console.log(manufacturation_year);
-    console.log(activation_year);
-
-    // if(this.vessel.manufacturation_year == null || this.vessel.manufacturation_year == ""){
-    //   this.presentToast("Selecione a data de fabricação da embarcação!");
-    // }else if(this.classified.price <= 0){
-    //   this.presentToast("Insira um valor válido!");
-    // }else if(this.vessel.activation_year == null || this.vessel.activation_year == ""){
-    //   this.presentToast("Selecione a data de ativação da embarcação!");
-    // }else{
-    //   this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
-    // }
+    if(this.vessel.manufacturation_year == null || this.vessel.manufacturation_year == ""){
+      this.presentToast("Selecione a data de fabricação da embarcação!");
+    }else if(this.classified.price <= 0 || !price.match(priceRule)){
+      this.presentToast("Insira um valor válido!");
+    }else if(this.vessel.activation_year == null || this.vessel.activation_year == ""){
+      this.presentToast("Selecione a data de ativação da embarcação!");
+    }else if(parseInt(manufacturation_year) > parseInt(activation_year)){
+      this.presentToast("A data de fabricação não pode ser maior do que a de ativação!");
+    }else{
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
+    }
   }
 
   goBack(){

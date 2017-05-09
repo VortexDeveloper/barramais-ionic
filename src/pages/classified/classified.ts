@@ -27,17 +27,25 @@ export class ClassifiedPage {
   classifiedVesselTypePage: any = ClassifiedVesselTypePage;
   classifiedFishingPage: any = ClassifiedFishingPage;
   classifiedProductCategoryPage: any = ClassifiedProductCategoryPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing ? navParams.data.isEditing : false;
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
-      this.classified = new ClassifiedModel();
+      if(this.isEditing){
+        this.classified = new ClassifiedModel(navParams.data.classified);
+        console.log(this.classified);
+      }else{
+        this.classified = new ClassifiedModel();
+        this.classified.classified_conditional = navParams.data.classifiedConditional;
+      }
       this.classified.user_id = this.current_user.id;
 
-      this.classifiedConditional = navParams.data.classifiedConditional;
+      this.classifiedConditional = this.classified.classified_conditional;
   }
 
   ionViewDidLoad() {
@@ -51,23 +59,23 @@ export class ClassifiedPage {
     var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
     var documentRule = (classified.document_type == 0 && classified.document_number.match(documentCPFRule)) || (classified.document_type == 1 && classified.document_number.match(documentCNPJRule)) ? true : false;
 
-    // if((!classified.bonded && (classified.seller_name == null || classified.seller_name == "")) || (classified.bonded && classified.document_type == 1 && (classified.seller_name == null || classified.seller_name == ""))){
-    //   if(classified.document_type == 1){
-    //     this.presentToast("Preencha a razão social corretamente!");
-    //   }else{
-    //     this.presentToast("Preencha o nome corretamente!");
-    //   }
-    // }else if(!documentRule){
-    //   this.presentToast("Preencha o número do documento corretamente!");
-    // }else if(!classified.bonded && !classified.email.match(emailRule)){
-    //   this.presentToast("Preencha o campo email corretamente!");
-    // }else if(!classified.bonded && !classified.cell_phone.match(phoneRule)){
-    //   this.presentToast("Preencha o celular corretamente!");
-    // }else if(!classified.landline.match(phoneRule)){
-    //   this.presentToast("Preencha o telefone corretamente!");
-    // }else{
-      this.navCtrl.push(page, {'classified': classified});
-    // }
+    if((!classified.bonded && (classified.seller_name == null || classified.seller_name == "")) || (classified.bonded && classified.document_type == 1 && (classified.seller_name == null || classified.seller_name == ""))){
+      if(classified.document_type == 1){
+        this.presentToast("Preencha a razão social corretamente!");
+      }else{
+        this.presentToast("Preencha o nome corretamente!");
+      }
+    }else if(!documentRule){
+      this.presentToast("Preencha o número do documento corretamente!");
+    }else if(!classified.bonded && !classified.email.match(emailRule)){
+      this.presentToast("Preencha o campo email corretamente!");
+    }else if(!classified.bonded && !classified.cell_phone.match(phoneRule)){
+      this.presentToast("Preencha o celular corretamente!");
+    }else if(!classified.landline.match(phoneRule)){
+      this.presentToast("Preencha o telefone corretamente!");
+    }else{
+      this.navCtrl.push(page, {'classified': classified, 'isEditing': this.isEditing});
+    }
   }
 
   goBack(){

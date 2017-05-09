@@ -35,7 +35,10 @@ export class ClassifiedProductStatusPage {
   }
 
   openNextPage(page, product, classified){
-    if(classified.price <= 0){
+    var price = this.classified.price.toString();
+    var priceRule = /^([0-9]+[\.]?[0-9]{2}?)$/
+
+    if(classified.price <= 0 || !price.match(priceRule)){
       this.presentToast("Insira um valor válido!");
     }else{
       this.navCtrl.push(page, {'product': product, 'classified': classified});

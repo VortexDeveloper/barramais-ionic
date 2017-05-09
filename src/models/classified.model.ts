@@ -15,6 +15,7 @@ export class ClassifiedModel {
   photo: string;
   photo_url: string;
   user_id: number;
+  classified_conditional: number;
 
   constructor(public params?:any){
     params = params || {}
@@ -34,5 +35,6 @@ export class ClassifiedModel {
     this.photo = params.photo || "";
     this.photo_url = params.photo_url || "";
     this.user_id = params.user_id || null;
+    this.classified_conditional = params.classified_conditional || null;
   }
 }
