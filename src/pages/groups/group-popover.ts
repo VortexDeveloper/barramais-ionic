@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
-import { ViewController, NavController, App, ModalController, NavParams, AlertController } from 'ionic-angular';
+import { ViewController, NavController, ModalController, NavParams, AlertController } from 'ionic-angular';
 import { UserModel } from "../../models/user.model";
 import { GroupModel } from "../../models/group.model";
 import { User } from '../../providers/user';
 import { Groups } from '../../providers/groups';
 import { GroupUpdatePage } from '../groups/group-update';
-import { GroupPagePage } from '../groups/group-page';
 import { ToastController } from 'ionic-angular';
 
 

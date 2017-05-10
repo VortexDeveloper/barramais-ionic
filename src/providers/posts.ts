@@ -70,6 +70,16 @@ export class Posts {
       .map(res => res.json());
   }
 
+  unlike(post) {
+    return this.authHttp.get(this.unlike_url(post))
+      .map(res => res.json());
+  }
+
+  get_likes(post) {
+    return this.authHttp.get(this.get_likes_url(post))
+      .map(res => res.json());
+  }
+
   comment(post, comment) {
     return this.authHttp.post(this.comment_url(post), {comment: {body: comment}})
       .map(res => res.json());
@@ -93,6 +103,14 @@ export class Posts {
 
   like_url(post) {
     return this.host_post + '/' + post.id + '/like.json';
+  }
+
+  unlike_url(post) {
+    return this.host_post + '/' + post.id + '/unlike.json';
+  }
+
+  get_likes_url(post) {
+    return this.host_post + '/' + post.id + '/get_likes.json';
   }
 
   enrich_link_url(post, url) {

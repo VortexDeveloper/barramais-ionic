@@ -1,35 +1,4 @@
-page-group-update {
-
-  .background-image {
-    background: #4e6692 !important;
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    align-content: stretch;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-  }
-
-  .background-image img{
-    min-width: 100%;
-    max-width: 110%;
-    position: relative;
-  }
-
-  .cover-camera-icon{
-    position: absolute !important;
-    top: 2px !important;
-    right: 6px !important;
-    z-index: 999 !important;
-    opacity: 0.7 !important;
-    color: #faa35f !important;
-    font-size: 35px;
-  }
+page-bm-post-likes {
 
   .ion-md-share {
     color: #ED4248;
@@ -43,10 +12,6 @@ page-group-update {
   .action-sheet-cancel ion-icon,
   .action-sheet-destructive ion-icon {
     color: #757575;
-  }
-
-  .item-md, .item-ios, .item-wp {
-     padding-left: 0;
   }
 
   .item-md ion-avatar ion-img, .item-md ion-avatar img {
@@ -136,8 +101,85 @@ page-group-update {
     background-color: #123f5f !important;
   }
 
-  .container{
-    padding: 10px;
+  ion-thumbnail img {
+    display: block;
+    border-radius: 4px;
+  }
+
+  .item-friends{
+    background: #fff !important;
+    border-bottom: solid 4px #dedede !important;
+    margin: 8px !important;
+    width: calc(100% - 16px) !important;
+    padding-left: 8px !important;
+    border-radius: 2px !important;
+  }
+
+  .item-friends .item-inner{
+    border-bottom: none !important;
+  }
+
+  .friend-information-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .friend-information-text{
+    display: flex;
+    order: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-start;
+    flex-direction: column;
+  }
+
+  .friend-information-buttons{
+    display: flex;
+    order: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-end;
+    flex-direction: end;
+  }
+
+  .fab{
+    border-radius: 25%;
+  }
+
+  .fab-md-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-ios-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-wp-danger {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-md-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-ios-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
+  }
+
+  .fab-wp-danger.activated {
+    color: #fff;
+    background-color: #faa35f;
   }
 
 }

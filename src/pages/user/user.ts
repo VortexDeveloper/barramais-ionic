@@ -518,6 +518,12 @@ export class UserPage {
       });
   }
 
+  show_save_button(){
+    if(this.accountInformations || this.personalInformations || this.nauticalInformations || this.interestInformations){
+      return true;
+    }
+  }
+
   redirectPage(page){
     this.navCtrl.setRoot(page);
   }
