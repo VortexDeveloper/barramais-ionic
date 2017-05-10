@@ -15,27 +15,12 @@
 <ion-content padding>
   <ion-item-divider color="light">Categoria do classificado</ion-item-divider>
 
-  <ion-list radio-group [(ngModel)]=vessel.vessel_type name=vessel_vessel_type>
-    <ion-item>
-      <ion-label>Barco de pesca</ion-label>
-      <ion-radio value=0></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Lancha</ion-label>
-      <ion-radio value=1></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Veleiro</ion-label>
-      <ion-radio value=2></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Jetski</ion-label>
-      <ion-radio value=3></ion-radio>
-    </ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-label floating>Tipo de Embarcação</ion-label>
+    <ion-select [(ngModel)]="vessel.vessel_type_id" name="vessel_type">
+      <ion-option *ngFor="let vesselType of vesselTypes" [value]="vesselType.id">{{vesselType.name}}</ion-option>
+    </ion-select>
+  </ion-item>
 
   <button class="form-buttons" ion-button type="button" (click)="openNextPage(classifiedVesselStatusPage, vessel)" block>Próximo</button>
 

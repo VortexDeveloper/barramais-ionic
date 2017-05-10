@@ -28,6 +28,7 @@ export class ClassifiedFishingPreviewPage {
   fishingSubCategory: any = {};
   classifiedInformation: boolean = false;
   mainPage: any = MainPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -35,11 +36,15 @@ export class ClassifiedFishingPreviewPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
 
       this.getFishingCategory();
       this.getFishingSubCategory();
+
+      console.log(this.isEditing);
   }
 
   ionViewDidLoad() {

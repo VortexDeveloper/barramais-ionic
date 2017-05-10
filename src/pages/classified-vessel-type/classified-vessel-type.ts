@@ -5,7 +5,8 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { UserModel } from "../../models/user.model";
 import { VesselModel } from "../../models/vessel.model";
 import { ClassifiedVesselStatusPage } from '../classified-vessel-status/classified-vessel-status';
-
+import { Classified } from '../../providers/classified';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedVesselType page.
@@ -24,10 +25,13 @@ export class ClassifiedVesselTypePage {
   classified: ClassifiedModel;
   vessel: VesselModel;
   classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
+  vesselTypes: any[] = [];
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private classifiedProvider: Classified,
+    public toastCtrl: ToastController
   ) {
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel(navParams.data.classified);
@@ -43,17 +47,41 @@ export class ClassifiedVesselTypePage {
       console.log(this.classified);
 
       this.vessel = new VesselModel();
+
+      this.getVesselTypes();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassifiedVesselTypePage');
   }
 
+  getVesselTypes() {
+    this.classifiedProvider.getVesselTypes()
+    .subscribe(response => {
+      this.vesselTypes = response.vessel_types;
+      console.log(this.vesselTypes);
+    }, error => {
+        console.log(error.json());
+    });
+  }
+
   openNextPage(page, vessel){
-    this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+    if(this.vessel.vessel_type_id == null){
+      this.presentToast("Escolha um tipo de embarcação!");
+    }else{
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

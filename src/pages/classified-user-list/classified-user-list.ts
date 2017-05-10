@@ -5,6 +5,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { Classified } from '../../providers/classified';
 import { ToastController } from 'ionic-angular';
 import { MainPage } from '../main/main';
+import { ClassifiedPage } from '../classified/classified';
 
 /*
   Generated class for the ClassifiedUserList page.
@@ -23,6 +24,7 @@ export class ClassifiedUserListPage {
   classifieds: any;
   isClassifiedsEmpty: boolean = true;
   mainPage: any = MainPage;
+  classifiedPage: any = ClassifiedPage;
 
   constructor(
     public navCtrl: NavController,
@@ -60,6 +62,7 @@ export class ClassifiedUserListPage {
     this.classifiedProvider.getClassifiedsByUser(this.current_user.id)
       .subscribe(response =>{
         this.classifieds = response.classifieds;
+        console.log(this.classifieds);
         this.checkClassifiedList();
       }, error => {
         console.log("Erro ao carregar a lista de classificados" + error.json())
@@ -76,6 +79,10 @@ export class ClassifiedUserListPage {
       duration: 5000
     });
     toast.present();
+  }
+
+  openEdit(isEditing, classified){
+    this.navCtrl.push(this.classifiedPage, {'isEditing': isEditing, 'classified': classified});
   }
 
   goBack(){
