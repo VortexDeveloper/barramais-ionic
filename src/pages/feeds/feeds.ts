@@ -19,7 +19,6 @@ export class FeedsPage {
   user_token: any = localStorage.getItem('user');
   user: UserModel = new UserModel();
   jwtHelper: JwtHelper = new JwtHelper();
-  isPostsFull: boolean = false;
   userInterests: any[] = [];
   interestSelectionPage: any = InterestSelectionPage;
 
@@ -48,11 +47,10 @@ export class FeedsPage {
 
     let modal = this.modalCtrl.create(PostModalPage, {'domain_config': domain});
     modal.onDidDismiss(newPost => {
-      if(newPost) this.posts.unshift(newPost);
+      if(newPost){
+        this.posts.unshift(newPost);
+      }
     });
-    // if(this.posts.length > 0){
-    //   this.isPostsFull = true;
-    // }
     modal.present();
   }
 
@@ -74,7 +72,6 @@ export class FeedsPage {
     this.postsProvider.index().subscribe(
       (posts) => {
         this.posts = posts;
-        console.log(this.posts);
         loader.dismiss();
       },
       (error) => {
@@ -82,9 +79,6 @@ export class FeedsPage {
         loader.dismiss();
       }
     );
-    if(this.posts.length > 0){
-      this.isPostsFull = true;
-    }
   }
 
   load_interests(user){

@@ -80,8 +80,8 @@ export class UserModel {
     this.cellphone = params.cellphone || "";
     this.about = params.about || "";
     this.academic_profile = params.academic_profile || "";
-    this.relationship = params.relationship || 0;
-    this.relationship_name = params.relationship_name || 0;
+    this.relationship = params.relationship || null;
+    this.relationship_name = params.relationship_name || null;
     this.has_embarcation = params.has_embarcation || false;
     this.nautical_professional = params.nautical_professional || false;
     this.nautical_profession_description = params.nautical_profession_description || "";

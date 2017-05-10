@@ -4,6 +4,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" [pullMin]=90>
+   <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+   </ion-refresher-content>
+  </ion-refresher>
   <div class="container">
     <div class="background-image">
       <img class="img-standard" src="{{user.cover_photo_url}}" id='user_cover_photo' />
@@ -97,10 +105,6 @@
             <img src="assets/images/{{user.naval_service_patent}}.png" />
             {{user.naval_service_patent_name}}
           </div>
-          <div class="social" *ngIf="user.nautical_license !== null">
-            <img src="assets/images/{{user.nautical_license}}.png" />
-            {{user.nautical_license_name}}
-          </div>
         </div>
       </div>
       <div class="profile-description" [hidden]="!profileInformation">
@@ -157,6 +161,10 @@
           <h2>Informações náuticas</h2>
         </div>
         <div class="socials" [hidden]="!nauticalInformation">
+          <div class="social" *ngIf="user.nautical_license !== null">
+            <img src="assets/images/{{user.nautical_license}}.png" />
+            {{user.nautical_license_name}}
+          </div>
           <div class="social" *ngIf="user.national_trips != ''">
             <img src="assets/images/turismo.png"/>
             {{user.national_trips}}

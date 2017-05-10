@@ -58,4 +58,12 @@ bm-post {
   .post-header-title .domain_title {
     margin-left: 5px;
   }
+
+  .button-clear-md img,
+  .button-clear-ios img,
+  .button-clear-wp img {
+    background: none;
+    width: 1.3em;
+  }
+
 }

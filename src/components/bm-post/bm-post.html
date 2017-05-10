@@ -1,3 +1,4 @@
+<!-- <ion-item-divider color="light" *ngIf="!hasPosts">Não há posts no seu feed de notícias</ion-item-divider> -->
 <ion-card *ngFor="let post of posts">
   <ion-item class='post-header'>
     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
@@ -42,11 +43,12 @@
   </ion-card-content>
   <ion-row>
     <ion-col width-25>
-      <div class="badges-container">
+      <div class="badges-container" (click)="openPage(likesPage, post)">
         <ion-badge item-left small *ngIf='post.likes.size > 0'>{{post.likes.size}}</ion-badge>
       </div>
-      <button class='like-action' ion-button icon-left clear small (click)='like(post)'>
-        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up" [color]="like_color_for(post)"></ion-icon>
+      <button class='like-action' ion-button icon-left clear small (click)='toogle_like(post)'>
+        <!-- <ion-icon name="star" [color]="like_color_for(post)"></ion-icon> -->
+        <img [src]="like_image_for(post)" />
       </button>
     </ion-col>
     <ion-col width-25>

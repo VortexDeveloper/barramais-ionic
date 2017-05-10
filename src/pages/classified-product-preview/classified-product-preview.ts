@@ -22,6 +22,7 @@ export class ClassifiedProductPreviewPage {
   classifiedInformation: boolean = false;
   productCategory: any = {};
   productSubCategory: any = {};
+  productSubCategory2: any = {};
   mainPage: any = MainPage;
 
   constructor(
@@ -35,6 +36,7 @@ export class ClassifiedProductPreviewPage {
 
       this.getProductCategoryById();
       this.getProductSubCategoryById();
+      this.getProductSubCategory2ById();
   }
 
   ionViewDidLoad() {
@@ -67,6 +69,17 @@ export class ClassifiedProductPreviewPage {
     }, error => {
         console.log(error.json());
     });
+  }
+
+  getProductSubCategory2ById(){
+    if(this.product.product_sub_category_2_id != null){
+      this.classifiedProvider.getProductSubCategory2ById(this.product.product_sub_category_2_id)
+        .subscribe(response => {
+          this.productSubCategory2 = response;
+        }, error => {
+          console.log(error.json());
+        });
+    }
   }
 
   toggleClassifiedInformation(){

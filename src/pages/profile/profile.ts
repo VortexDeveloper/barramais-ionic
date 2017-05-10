@@ -16,6 +16,7 @@ import { Camera } from '@ionic-native/camera';
 import { ActionSheetController }  from 'ionic-angular';
 import { ToastController, AlertController } from 'ionic-angular';
 import { Platform, LoadingController }  from 'ionic-angular';
+import { Events } from 'ionic-angular';
 import { AlbumListPage } from '../album-list/album-list';
 
 declare var cordova: any;
@@ -67,6 +68,7 @@ export class ProfilePage {
     public toastCtrl: ToastController,
     public postsProvider: Posts,
     public actionSheetCtrl: ActionSheetController,
+    public events: Events,
     public platform: Platform,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -75,6 +77,9 @@ export class ProfilePage {
     this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.setUser(params.data.user);
     this.getUserNauticalSports();
+    if (this.current_user.id == this.user.id){
+      events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });
+    }
   }
 
   ionViewDidLoad() {
@@ -127,10 +132,6 @@ export class ProfilePage {
       },
       (error) => console.log(error)
     );
-  }
-
-  showProfileInformation(){
-    this.profileInformation = !this.profileInformation;
   }
 
   createConversationWith(user) {
@@ -233,10 +234,21 @@ export class ProfilePage {
       domain: 'profiles',
       domain_id: this.user.id
     };
-    console.log(domain_config);
+    let loader = this.loadingCtrl.create({
+      content: "Carregando Feed..."
+    });
+
+    loader.present();
+
     this.postsProvider.posts_with_domain(domain_config).subscribe(
-      (posts) => this.posts = posts,
-      (error) => console.log(error)
+      (posts) => {
+        this.posts = posts;
+        loader.dismiss();
+      },
+      (error) => {
+        console.log(error);
+        loader.dismiss();
+      }
     );
   }
 
@@ -354,6 +366,21 @@ export class ProfilePage {
     });
   }
 
+  doRefresh(refresher) {
+    this.loadPosts();
+    refresher.complete();
+  }
+
+  showProfileInformation(){
+    if(this.profileInformation){
+      this.nauticalInformation = false;
+      this.embarcationInformation = false;
+      this.sportsInformation = false;
+      this.socialsInformation = false;
+      this.personalInformation = false;
+    }
+    this.profileInformation = !this.profileInformation;
+  }
 
   showNauticalInformation(){
     this.nauticalInformation = !this.nauticalInformation;

@@ -20,6 +20,7 @@ export class ClassifiedVesselPreviewPage {
   classified: ClassifiedModel;
   vessel: VesselModel;
   accessories: any;
+  vesselType: any = {};
   brand: any = {};
   mold: any = {};
   classifiedInformation: boolean = false;
@@ -35,6 +36,7 @@ export class ClassifiedVesselPreviewPage {
       this.vessel = new VesselModel(navParams.data.vessel);
       this.accessories = navParams.data.accessories;
 
+      this.getVesselType();
       this.getVesselBrand();
       this.getVesselMold();
 
@@ -55,6 +57,15 @@ export class ClassifiedVesselPreviewPage {
     });
   }
 
+  getVesselType() {
+    this.classifiedProvider.getVesselTypeById(this.vessel.vessel_type_id)
+      .subscribe(response => {
+        this.vesselType = response.vessel_type;
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   getVesselBrand() {
     this.classifiedProvider.getBrandById(this.vessel.brand_id)
     .subscribe(response => {
@@ -65,12 +76,14 @@ export class ClassifiedVesselPreviewPage {
   }
 
   getVesselMold() {
-    this.classifiedProvider.getMoldById(this.vessel.mold_id)
-    .subscribe(response => {
-      this.mold = response.mold;
-    }, error => {
-        console.log(error.json());
-    });
+    if(this.vessel.mold_id != null){
+      this.classifiedProvider.getMoldById(this.vessel.mold_id)
+      .subscribe(response => {
+        this.mold = response.mold;
+      }, error => {
+          console.log(error.json());
+      });
+    }
   }
 
   toggleClassifiedInformation(){

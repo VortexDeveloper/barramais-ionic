@@ -24,7 +24,7 @@
       <ion-label class="line-break">
         <h2><strong>{{classified.title}}</strong></h2>
 
-        <button class="form-buttons actionButton" ion-button icon-only>
+        <button class="form-buttons actionButton" ion-button icon-only (click)="openEdit(true, classified)">
           <ion-icon name="create"></ion-icon>
         </button>
 

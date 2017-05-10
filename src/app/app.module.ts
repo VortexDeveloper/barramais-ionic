@@ -54,6 +54,7 @@ import { AdBannersPage } from '../pages/ad-banners/ad-banners';
 import { AdInterestsPage } from '../pages/ad-interests/ad-interests';
 import { AdDescriptionsPage } from '../pages/ad-descriptions/ad-descriptions';
 import { AdPreviewPage } from '../pages/ad-preview/ad-preview';
+import { BmPostLikesPage } from '../pages/bm-post-likes/bm-post-likes';
 import { AdListPage } from '../pages/ad-list/ad-list';
 import { AdvertisersPage } from '../pages/advertisers/advertisers';
 import { AdvertiserPaymentPage } from '../pages/advertiser-payment/advertiser-payment';
@@ -161,7 +162,8 @@ export function getAuthHttp(http) {
     PopoverPage,
     PhotoModalPage,
     NotificationViewPage,
-    GroupUpdatePage
+    GroupUpdatePage,
+    BmPostLikesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -235,7 +237,8 @@ export function getAuthHttp(http) {
     PopoverPage,
     PhotoModalPage,
     NotificationViewPage,
-    GroupUpdatePage
+    GroupUpdatePage,
+    BmPostLikesPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

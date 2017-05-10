@@ -91,7 +91,6 @@ page-post-modal {
     width: 49%;
     padding: 2px;
     margin: 0 0 2px 2px;
-    height: 152px;
     position: relative;
     border-radius: 4px;
   }
@@ -100,7 +99,7 @@ page-post-modal {
 
   .post-image img {
     width: auto !important;
-    max-width: 278% !important;
+    max-width: 100% !important;
     display: inline !important;
     margin: 0 !important;
     border-radius: 0 !important;

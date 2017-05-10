@@ -5,6 +5,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { UserModel } from "../../models/user.model";
 import { FishingModel } from "../../models/fishing.model";
 import { ClassifiedFishingDescriptionPage } from '../classified-fishing-description/classified-fishing-description';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedFishingStatus page.
@@ -24,11 +25,15 @@ export class ClassifiedFishingStatusPage {
   fishing: FishingModel;
   provisionalCategory: boolean = false;
   classifiedFishingDescriptionPage: any = ClassifiedFishingDescriptionPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.provisionalCategory = navParams.data.provisionalCategory;
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
@@ -45,10 +50,25 @@ export class ClassifiedFishingStatusPage {
   }
 
   openNextPage(page, fishing, classified){
-    this.navCtrl.push(page, {'fishing': fishing, 'classified': classified});
+    var price = this.classified.price.toString();
+    var priceRule = /^([0-9]+[\.]?[0-9]{2}?)$/
+
+    if(classified.price <= 0 || !price.match(priceRule)){
+      this.presentToast("Insira um valor válido!");
+    }else{
+      this.navCtrl.push(page, {'fishing': fishing, 'classified': classified, 'isEditing': this.isEditing});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

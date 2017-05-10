@@ -6,6 +6,7 @@ import { UserModel } from "../../models/user.model";
 import { FishingModel } from "../../models/fishing.model";
 import { Classified } from '../../providers/classified';
 import { ClassifiedFishingStatusPage } from '../classified-fishing-status/classified-fishing-status';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedFishing page.
@@ -27,13 +28,18 @@ export class ClassifiedFishingPage {
   fishingSubCategories: any;
   provisionalCategory: boolean = false;
   classifiedFishingStatusPage: any = ClassifiedFishingStatusPage;
+  fishingCategory: any;
+  fishingSubCategory: any;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private classifiedProvider: Classified
+    private classifiedProvider: Classified,
+    public toastCtrl: ToastController
   ) {
       this.getFishingCategories();
+      this.isEditing = navParams.data.isEditing;
 
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel(navParams.data.classified);
@@ -48,7 +54,12 @@ export class ClassifiedFishingPage {
 
       console.log(this.classified);
 
-      this.fishing = new FishingModel();
+      if(this.isEditing){
+        this.fishing = new FishingModel();
+        this.getFishingByClassified();
+      }else{
+        this.fishing = new FishingModel();
+      }
   }
 
   ionViewDidLoad() {
@@ -65,6 +76,7 @@ export class ClassifiedFishingPage {
   }
 
   getFishingSubCategories() {
+    this.fishing.fishing_sub_category_id = null;
     this.classifiedProvider.getFishingSubCategories(this.fishing.fishing_category_id)
     .subscribe(response => {
       this.fishingSubCategories = response.fishing_sub_categories;
@@ -73,11 +85,35 @@ export class ClassifiedFishingPage {
     });
   }
 
+  getFishingByClassified(){
+    this.classifiedProvider.getFishingByClassified(this.classified.id)
+      .subscribe(response => {
+        this.fishing = response
+        console.log(this.fishing);
+      }, error => {
+          console.log(error.json());
+      });
+  }
+
   openNextPage(page, provisionalCategory, fishing){
-    this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified});
+    if((this.fishing.fishing_category_id == null || this.fishing.fishing_sub_category_id == null) && !provisionalCategory){
+      this.presentToast("Escolha uma categoria e sub categoria!");
+    }else if(provisionalCategory && (fishing.provisional_category == null || fishing.provisional_category == "")){
+      this.presentToast("Preencha o campo de categoria provisória!");
+    }else{
+      this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified, 'isEditing': this.isEditing});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

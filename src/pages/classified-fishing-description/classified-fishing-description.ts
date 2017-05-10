@@ -6,6 +6,7 @@ import { UserModel } from "../../models/user.model";
 import { FishingModel } from "../../models/fishing.model";
 import { Camera } from 'ionic-native';
 import { ClassifiedFishingPreviewPage } from '../classified-fishing-preview/classified-fishing-preview';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedFishingDescription page.
@@ -24,12 +25,16 @@ export class ClassifiedFishingDescriptionPage {
   classified: ClassifiedModel;
   fishing: FishingModel;
   classifiedFishingPreviewPage: any = ClassifiedFishingPreviewPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
   }
@@ -82,10 +87,24 @@ export class ClassifiedFishingDescriptionPage {
   }
 
   openNextPage(page, classified){
-    this.navCtrl.push(page, {'fishing': this.fishing, 'classified': classified});
+    if(classified.title == null || classified.title == ""){
+      this.presentToast("Preencha o título do classificado!");
+    }else if(classified.description == null || classified.description == ""){
+      this.presentToast("Preencha a descrição do classificado!");
+    }else{
+      this.navCtrl.push(page, {'fishing': this.fishing, 'classified': classified, 'isEditing': this.isEditing});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

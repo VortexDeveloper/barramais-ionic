@@ -4,6 +4,7 @@ import { ClassifiedModel } from "../../models/classified.model";
 import { VesselModel } from "../../models/vessel.model";
 import { Camera } from 'ionic-native';
 import { ClassifiedVesselPreviewPage } from '../classified-vessel-preview/classified-vessel-preview';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the ClassifiedVesselDescription page.
@@ -24,7 +25,8 @@ export class ClassifiedVesselDescriptionPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl: ToastController
   ) {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
@@ -81,10 +83,24 @@ export class ClassifiedVesselDescriptionPage {
   }
 
   openNextPage(page, classified){
-    this.navCtrl.push(page, {'vessel': this.vessel, 'classified': classified, 'accessories': this.accessories});
+    if(classified.title == null || classified.title == ""){
+      this.presentToast("Preencha o título do classificado!");
+    }else if(classified.description == null || classified.description == ""){
+      this.presentToast("Preencha a descrição do classificado!");
+    }else{
+      this.navCtrl.push(page, {'vessel': this.vessel, 'classified': classified, 'accessories': this.accessories});
+    }
   }
 
   goBack(){
     this.navCtrl.pop();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }
