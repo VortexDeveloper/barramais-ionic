@@ -16,9 +16,9 @@ export class Routes {
   }
 
   host(){
-    // return "http://10.0.2.2:3000/";
-    // return "https://barramais.herokuapp.com/";
-    return "http://localhost:3000/";
+    return "http://10.0.2.2:3000/";
+    // return "http://barramais.herokuapp.com/";
+    // return "http://localhost:3000/";
   }
 
 }

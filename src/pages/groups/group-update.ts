@@ -148,16 +148,22 @@ export class GroupUpdatePage {
       correctOrientation: true,
       allowEdit: true
     };
+    let loader = this.loadingCtrl.create({
+      content: "Atualizando grupo..."
+    });
 
+    loader.present();
     this.camera.getPicture(options).then(
       image_url => {
         let includeToNewMedia = (image) => {
           this.group.cover_photo = "data:image/jpeg;base64," + image;
         };
         includeToNewMedia(image_url);
+        loader.dismiss();
       },
       error => {
         this.erro = error;
+        loader.dismiss();
       }
     );
   }

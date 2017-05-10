@@ -148,6 +148,11 @@ export class GroupModalPage {
       correctOrientation: true,
       allowEdit: true
     };
+    let loader = this.loadingCtrl.create({
+      content: "Atualizando grupo..."
+    });
+
+    loader.present();
 
     this.camera.getPicture(options).then(
       image_url => {
@@ -156,9 +161,11 @@ export class GroupModalPage {
         };
 
         includeToNewMedia(image_url);
+        loader.dismiss();
       },
       error => {
         this.erro = error;
+        loader.dismiss();
       }
     );
   }
