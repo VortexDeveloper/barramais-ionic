@@ -122,6 +122,7 @@ export class AdvertisersPage {
   }
 
   getCities() {
+    this.address.city_id = null;
     this.advertiserProvider.getCities(this.address.state_id)
     .subscribe(response => {
       this.cities = response.cities;
@@ -148,9 +149,9 @@ export class AdvertisersPage {
     // }else
     if(documentRule == false){
       this.presentToast("Insira o número do documento do anunciante!");
-    }else if(address.state_id == ""){
+    }else if(address.state_id == null){
       this.presentToast("Selecione um estado!");
-    }else if(address.city_id == ""){
+    }else if(address.city_id == null){
       this.presentToast("Selecione uma cidade!");
     }else if(address.street.length < 3){
       this.presentToast("Insira o endereço do anunciante!");
