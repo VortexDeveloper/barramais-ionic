@@ -19,12 +19,15 @@ export class ClassifiedVesselStatusPage {
   classified: ClassifiedModel;
   vessel: VesselModel;
   classifiedVesselManufacturerPage: any = ClassifiedVesselManufacturerPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
   }
@@ -48,7 +51,7 @@ export class ClassifiedVesselStatusPage {
     }else if(parseInt(manufacturation_year) > parseInt(activation_year)){
       this.presentToast("A data de fabricação não pode ser maior do que a de ativação!");
     }else{
-      this.navCtrl.push(page, {'vessel': vessel, 'classified': classified});
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': classified, 'isEditing': this.isEditing});
     }
   }
 

@@ -42,6 +42,7 @@ export class ClassifiedPage {
       }else{
         this.classified = new ClassifiedModel();
         this.classified.classified_conditional = navParams.data.classifiedConditional;
+        console.log(this.classified);
       }
       this.classified.user_id = this.current_user.id;
 

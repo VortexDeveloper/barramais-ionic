@@ -21,6 +21,7 @@ export class ClassifiedVesselDescriptionPage {
   vessel: VesselModel;
   accessories: any;
   classifiedVesselPreviewPage: any = ClassifiedVesselPreviewPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -28,6 +29,8 @@ export class ClassifiedVesselDescriptionPage {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
       this.accessories = navParams.data.accessories;
@@ -88,7 +91,7 @@ export class ClassifiedVesselDescriptionPage {
     }else if(classified.description == null || classified.description == ""){
       this.presentToast("Preencha a descrição do classificado!");
     }else{
-      this.navCtrl.push(page, {'vessel': this.vessel, 'classified': classified, 'accessories': this.accessories});
+      this.navCtrl.push(page, {'vessel': this.vessel, 'classified': classified, 'accessories': this.accessories, 'isEditing': this.isEditing});
     }
   }
 

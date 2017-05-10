@@ -88,7 +88,7 @@ export class ClassifiedFishingPage {
   getFishingByClassified(){
     this.classifiedProvider.getFishingByClassified(this.classified.id)
       .subscribe(response => {
-        this.fishing = response
+        this.fishing = response;
         console.log(this.fishing);
       }, error => {
           console.log(error.json());

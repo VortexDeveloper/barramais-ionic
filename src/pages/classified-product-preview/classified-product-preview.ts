@@ -5,6 +5,7 @@ import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
 import { MainPage } from '../main/main';
 import { ToastController } from 'ionic-angular';
+import { ClassifiedUserListPage } from '../classified-user-list/classified-user-list'
 
 /*
   Generated class for the ClassifiedProductPreview page.
@@ -24,6 +25,8 @@ export class ClassifiedProductPreviewPage {
   productSubCategory: any = {};
   productSubCategory2: any = {};
   mainPage: any = MainPage;
+  isEditing: boolean = false;
+  classifiedUserListPage: any = ClassifiedUserListPage
 
   constructor(
     public navCtrl: NavController,
@@ -31,6 +34,8 @@ export class ClassifiedProductPreviewPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.product = new ProductModel(navParams.data.product);
 
@@ -51,6 +56,16 @@ export class ClassifiedProductPreviewPage {
       }, error => {
         console.log(error.json());
       });
+  }
+
+  update(){
+    this.classifiedProvider.updateProduct(this.classified, this.product)
+      .subscribe(response => {
+        this.redirectPage(this.classifiedUserListPage);
+        this.presentToast("Classificado atualizado com sucesso!");
+      }, error => {
+        console.log(error.json());
+      })
   }
 
   getProductCategoryById(){

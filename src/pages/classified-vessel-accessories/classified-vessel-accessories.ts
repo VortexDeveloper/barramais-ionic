@@ -26,12 +26,15 @@ export class ClassifiedVesselAccessoriesPage {
   eletronic_for_select: any;
   chosenAccessories: any[] = [];
   classifiedVesselDescriptionPage: any = ClassifiedVesselDescriptionPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private classifiedProvider: Classified
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.getAccessories();
       this.getCommunications();
       this.getEletronics();
@@ -107,7 +110,7 @@ export class ClassifiedVesselAccessoriesPage {
   }
 
   openNextPage(page){
-    this.navCtrl.push(page, {'vessel': this.vessel, 'classified': this.classified, 'accessories': this.chosenAccessories});
+    this.navCtrl.push(page, {'vessel': this.vessel, 'classified': this.classified, 'accessories': this.chosenAccessories, 'isEditing': this.isEditing});
   }
 
   goBack(){

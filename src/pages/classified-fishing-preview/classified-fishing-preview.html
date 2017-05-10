@@ -111,5 +111,7 @@
 
   <button class="form-buttons" ion-button type="button" [hidden]="isEditing" (click)="save()" block>Cadastrar Classificado</button>
 
+  <button class="form-buttons" ion-button type="button" [hidden]="!isEditing" (click)="update()" block>Atualizar Classificado</button>
+
   <button class="form-buttons" ion-button type="button" (click)="goBack()" block>Voltar</button>
 </ion-content>

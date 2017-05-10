@@ -52,7 +52,13 @@ export class ClassifiedProductCategoryPage {
         this.classified.cell_phone = this.current_user.cellphone;
       }
 
-      this.product = new ProductModel();
+      if(this.isEditing){
+        this.product = new ProductModel();
+        this.getProductByClassified();
+        this.getProductSubCategories();
+      }else{
+        this.product = new ProductModel();
+      }
   }
 
   ionViewDidLoad() {
@@ -102,13 +108,23 @@ export class ClassifiedProductCategoryPage {
     });
   }
 
+  getProductByClassified(){
+    this.classifiedProvider.getProductByClassified(this.classified.id)
+      .subscribe(response => {
+        this.product = response;
+        console.log(this.product);
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   openNextPage(page, product){
     if(this.product.product_category_id == null || this.product.product_sub_category_id == null){
         this.presentToast("Escolha uma categoria e sub categoria!");
     }else if(this.productSubCategories2.length > 0 && this.product.product_sub_category_2_id == null){
         this.presentToast("Escolha uma segunda sub categoria!")
     }else{
-      this.navCtrl.push(page, {'product': product, 'classified': this.classified});
+      this.navCtrl.push(page, {'product': product, 'classified': this.classified, 'isEditing': this.isEditing});
     }
   }
 

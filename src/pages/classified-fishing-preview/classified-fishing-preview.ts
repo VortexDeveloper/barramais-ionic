@@ -7,6 +7,7 @@ import { FishingModel } from "../../models/fishing.model";
 import { Classified } from '../../providers/classified';
 import { ToastController } from 'ionic-angular';
 import { MainPage } from '../main/main';
+import { ClassifiedUserListPage } from '../classified-user-list/classified-user-list'
 
 /*
   Generated class for the ClassifiedFishingPreview page.
@@ -29,6 +30,7 @@ export class ClassifiedFishingPreviewPage {
   classifiedInformation: boolean = false;
   mainPage: any = MainPage;
   isEditing: boolean = false;
+  classifiedUserListPage: any = ClassifiedUserListPage
 
   constructor(
     public navCtrl: NavController,
@@ -59,6 +61,16 @@ export class ClassifiedFishingPreviewPage {
     }, error => {
         console.log(error.json());
         this.presentToast(error.json());
+    });
+  }
+
+  update(){
+    this.classifiedProvider.updateFishing(this.classified, this.fishing)
+    .subscribe(response => {
+      this.redirectPage(this.classifiedUserListPage);
+      this.presentToast("Classificado atualizado com sucesso!");
+    }, error => {
+      console.log(error.json());
     });
   }
 
