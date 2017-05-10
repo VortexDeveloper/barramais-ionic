@@ -12,7 +12,7 @@ echo -e "Open folder for the new APK? [s/N]"
 read OPEN
 
 echo -e "Building cordova for an android release...\n"
-cordova build --release android
+cordova build --release android --prod
 echo -e "cordova build finished.\n"
 
 if [ ! -s bmais-release-key.keystore ]; then

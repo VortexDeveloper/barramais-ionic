@@ -8,7 +8,7 @@ import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { GalleryModalPage } from "../../pages/gallery-modal/gallery-modal";
 import 'rxjs/add/operator/debounceTime';
-import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeHtml} from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 /*
   Generated class for the PostModal page.

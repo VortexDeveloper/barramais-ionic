@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ClassifiedModel } from "../../models/classified.model";
-import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
 import { Camera } from 'ionic-native';
 import { ClassifiedProductPreviewPage } from '../classified-product-preview/classified-product-preview';

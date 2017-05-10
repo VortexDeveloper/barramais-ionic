@@ -47,8 +47,8 @@ import { User } from '../providers/user';
 import { MenuController, ActionSheetController, ToastController, LoadingController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { NotificationViewPage } from '../pages/notification-view/notification-view';
+import { Facebook } from '@ionic-native/facebook'; //removido do import, não usado FacebookLoginResponse
+// import { NotificationViewPage } from '../pages/notification-view/notification-view';
 import { HelpPage } from '../pages/help/help';
 import { Events } from 'ionic-angular';
 import { Camera } from 'ionic-native';

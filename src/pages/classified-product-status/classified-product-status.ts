@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ClassifiedModel } from "../../models/classified.model";
-import { Classified } from '../../providers/classified';
 import { ProductModel } from "../../models/product.model";
 import { ClassifiedProductDescriptionPage } from '../classified-product-description/classified-product-description';
 

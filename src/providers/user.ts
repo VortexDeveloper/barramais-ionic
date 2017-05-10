@@ -51,7 +51,7 @@ export class User {
   private update_user_interests_url: string;
   private update_user_nautical_sports_url: string;
   private get_nautical_sports_by_user_url: string;
-  private get_notifications: string;
+  // private get_notifications: string;
   private open_all_user_notifications_url: string;
   private is_member_of_url: string;
   private send_request_to_url: string;
