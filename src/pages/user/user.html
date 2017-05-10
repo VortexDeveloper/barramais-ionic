@@ -288,7 +288,7 @@
             <ion-item>
               <ion-radio value="almirante_de_esquadra"></ion-radio>
               <ion-label>Almirante de Esquadra</ion-label>
-              <ion-icon item-left><img class="nautical_license" src="assets/images/almirante_esquadra.png"/></ion-icon>
+              <ion-icon item-left><img class="nautical_license" src="assets/images/almirante_de_esquadra.png"/></ion-icon>
             </ion-item>
             <ion-item>
               <ion-radio value="vice_almirante"></ion-radio>
@@ -303,17 +303,17 @@
             <ion-item>
               <ion-radio value="capitao_de_mar_e_guerra"></ion-radio>
               <ion-label>Capitao de mar e guerra</ion-label>
-              <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_mar_guerra.png"/></ion-icon>
+              <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_de_mar_e_guerra.png"/></ion-icon>
             </ion-item>
             <ion-item>
               <ion-radio value="capitao_de_fragata"></ion-radio>
               <ion-label>Capitao de Fragata</ion-label>
-              <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_fragata.png"/></ion-icon>
+              <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_de_fragata.png"/></ion-icon>
             </ion-item>
             <ion-item>
               <ion-radio value="capitao_de_corveta"></ion-radio>
               <ion-label>Capitao de Corveta</ion-label>
-              <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_corveta.png"/></ion-icon>
+              <ion-icon item-left><img class="nautical_license" src="assets/images/capitao_de_corveta.png"/></ion-icon>
             </ion-item>
             <ion-item>
               <ion-radio value="capitao_tenente"></ion-radio>
@@ -431,7 +431,7 @@
         </div>
         <br>
   </div>
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="show_save_button()">
     <button ion-fab mini color="danger" (click)="save(user)"><ion-icon name="done-all"></ion-icon></button>
   </ion-fab>
 </ion-content>

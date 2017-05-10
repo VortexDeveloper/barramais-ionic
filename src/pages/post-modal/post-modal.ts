@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { NavController, NavParams, ViewController, ActionSheetController, Platform, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ActionSheetController, Platform, ModalController, LoadingController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 // import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { Posts } from '../../providers/posts';
@@ -35,6 +35,7 @@ export class PostModalPage {
   constructor(
     public platform: Platform,
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
@@ -53,12 +54,21 @@ export class PostModalPage {
     this.postController.valueChanges.debounceTime(1000).subscribe(e => {
       if(this.urlRegex.test(e)) {
         let link = this.urlRegex.exec(e);
+        let loader = this.loadingCtrl.create({
+          content: "Carregando dados da url, aguarde..."
+        });
+
+        loader.present();
         this.postsProvider.enrich_link(this.post, link[0]).subscribe(
           (link_data) => {
             this.link_preview = link_data;
             this.post.medias.rich_url.push(JSON.stringify(link_data));
+            loader.dismiss();
           },
-          (error) => console.log(error)
+          (error) => {
+            console.log(error)
+            loader.dismiss();
+          }
         );
       }
     });
@@ -112,12 +122,21 @@ export class PostModalPage {
   }
 
   createPost() {
+    let loader = this.loadingCtrl.create({
+      content: "Enviando postagem, aguarde..."
+    });
+
+    loader.present();
     this.postsProvider.create(this.post).subscribe(
       (post) => {
         this.post = post;
         this.dismiss(this.post);
+        loader.dismiss();
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error)
+        loader.dismiss();
+      }
     );
   }
 
@@ -132,7 +151,11 @@ export class PostModalPage {
       correctOrientation: true,
       allowEdit: true
     };
+    let loader = this.loadingCtrl.create({
+      content: "Carregando imagem, aguarde..."
+    });
 
+    loader.present();
     this.camera.getPicture(options).then(
       image_url => {
         let includeToNewMedia = (image) => {
@@ -143,9 +166,11 @@ export class PostModalPage {
         };
 
         includeToNewMedia(image_url);
+        loader.dismiss();
       },
       error => {
         this.erro = error;
+        loader.dismiss();
       }
     );
   }

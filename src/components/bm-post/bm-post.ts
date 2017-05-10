@@ -11,6 +11,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { Events } from 'ionic-angular';
 import { EventPagePage } from '../../pages/events/event-page';
 import { GroupPagePage } from '../../pages/groups/group-page';
+import { BmPostLikesPage } from '../../pages/bm-post-likes/bm-post-likes';
 
 /*
   Generated class for the BmPost component.
@@ -27,10 +28,12 @@ export class BmPostComponent {
   public comment: any;
   galleryModal: any = GalleryModalPage;
   profilePage: any = ProfilePage;
+  likesPage: any = BmPostLikesPage;
   jwtHelper: JwtHelper = new JwtHelper();
   token: any = localStorage.getItem('jwt');
   user_token: any = localStorage.getItem('user');
   current_user: any;
+  hasPosts: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -47,15 +50,20 @@ export class BmPostComponent {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedsPage');
+    // this.check_posts(this.posts);
   }
 
   openModal() {
     let modal = this.modalCtrl.create(PostModalPage);
     modal.onDidDismiss(newPost => {
-      if(newPost) this.posts.unshift(newPost);
+      if(newPost) {
+        this.posts.unshift(newPost);
+        // this.hasPosts = true;
+      }
     });
     modal.present();
   }
+
 
   openCommentsModal(post) {
     let modal = this.modalCtrl.create(CommentModalPage, {post: post});
@@ -90,9 +98,15 @@ export class BmPostComponent {
     }
   }
 
-
   like(post) {
     this.postsProvider.like(post).subscribe(
+      (updated_post) => post.likes = updated_post.likes,
+      (error) => console.log(error)
+    );
+  }
+
+  unlike(post) {
+    this.postsProvider.unlike(post).subscribe(
       (updated_post) => post.likes = updated_post.likes,
       (error) => console.log(error)
     );
@@ -115,6 +129,7 @@ export class BmPostComponent {
             this.postsProvider.delete(post).subscribe(
               (data) => {
                 this.posts = this.posts.filter(data => data.id < post.id || data.id > post.id);
+                // this.check_posts(this.posts);
               },
               (error) => console.log(error)
             );
@@ -191,6 +206,20 @@ export class BmPostComponent {
       return 'grayed'
   }
 
+  like_image_for(post) {
+    if(post.likes.didILiked)
+      return 'assets/images/star_blue.png';
+    else
+      return 'assets/images/star_gray.png'
+  }
+
+  toogle_like(post){
+    if(!post.likes.didILiked)
+      this.like(post)
+    else
+      this.unlike(post)
+  }
+
   createComment(post, comment) {
     this.postsProvider.comment(post, comment).subscribe(
       (comment) => {
@@ -209,4 +238,14 @@ export class BmPostComponent {
   bringsFourImages(post_images) {
     return post_images.filter((item, index) => { index < 4 })
   }
+
+  // check_posts(posts){
+  //   console.log(posts);
+  //   if(posts.length > 0){
+  //     this.hasPosts = true;
+  //   } else {
+  //     this.hasPosts = false;
+  //   }
+  // }
+
 }
