@@ -35,7 +35,7 @@ export class ClassifiedVesselManufacturerPage {
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
 
-      this.getBrands();
+      this.getBrands(true);
   }
 
   ionViewDidLoad() {
@@ -58,17 +58,18 @@ export class ClassifiedVesselManufacturerPage {
     this.navCtrl.pop();
   }
 
-  getBrands() {
+  getBrands(firstRun = false) {
     this.classifiedProvider.getBrands(this.vessel.vessel_type_id)
     .subscribe(response => {
       this.brands = response.brands;
+      if(firstRun) this.getMolds(true);
     }, error => {
         console.log(error.json());
     });
   }
 
-  getMolds() {
-    this.vessel.mold_id = null;
+  getMolds(firstRun = false) {
+    if(!firstRun) this.vessel.mold_id = null;
     this.classifiedProvider.getMolds(this.vessel.brand_id)
     .subscribe(response => {
       this.molds = response.molds;

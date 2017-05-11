@@ -38,7 +38,7 @@ export class ClassifiedFishingPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
-      this.getFishingCategories();
+      this.getFishingCategories(true);
       this.isEditing = navParams.data.isEditing;
 
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
@@ -60,23 +60,26 @@ export class ClassifiedFishingPage {
       }else{
         this.fishing = new FishingModel();
       }
+
+      console.log(this.fishing);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassifiedFishingPage');
   }
 
-  getFishingCategories() {
+  getFishingCategories(firstRun = false) {
     this.classifiedProvider.getFishingCategories()
     .subscribe(response => {
       this.fishingCategories = response.fishing_categories;
+      this.getFishingSubCategories(firstRun);
     }, error => {
         console.log(error.json());
     });
   }
 
-  getFishingSubCategories() {
-    this.fishing.fishing_sub_category_id = null;
+  getFishingSubCategories(firstRun = false) {
+    if(!firstRun) this.fishing.fishing_sub_category_id = null;
     this.classifiedProvider.getFishingSubCategories(this.fishing.fishing_category_id)
     .subscribe(response => {
       this.fishingSubCategories = response.fishing_sub_categories;

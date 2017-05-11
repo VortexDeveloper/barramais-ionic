@@ -74,6 +74,11 @@ export class ClassifiedVesselTypePage {
     });
   }
 
+  resetBrandAndMold(){
+    this.vessel.brand_id = null
+    this.vessel.mold_id = null
+  }
+
   getVesselByClassified(){
     this.classifiedProvider.getVesselByClassified(this.classified.id)
       .subscribe(response => {

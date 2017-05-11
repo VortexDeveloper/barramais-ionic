@@ -87,8 +87,8 @@ export class ClassifiedProductPreviewPage {
   }
 
   getProductSubCategory2ById(){
-    if(this.product.product_sub_category_2_id != null){
-      this.classifiedProvider.getProductSubCategory2ById(this.product.product_sub_category_2_id)
+    if(this.product.product_sub_category2_id != null){
+      this.classifiedProvider.getProductSubCategory2ById(this.product.product_sub_category2_id)
         .subscribe(response => {
           this.productSubCategory2 = response;
         }, error => {

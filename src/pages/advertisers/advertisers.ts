@@ -43,6 +43,7 @@ export class AdvertisersPage {
   adPreviewPage: any = AdPreviewPage;
   advertiserPaymentPage: any = AdvertiserPaymentPage;
   isEditing: boolean = false;
+  cityId: number = null;
 
   constructor(
     public navCtrl: NavController,
@@ -75,7 +76,9 @@ export class AdvertisersPage {
           this.advertiser = response.user_advertiser;
           this.ads = response.user_advertiser.ads;
           this.address = response.user_advertiser.address;
-          this.getCities();
+          console.log(this.address);
+          this.cityId = this.address.city_id;
+          this.getCities(true);
         }else{
           this.advertiser = new AdvertiserModel();
           this.ads = [];
@@ -121,8 +124,8 @@ export class AdvertisersPage {
     });
   }
 
-  getCities() {
-    this.address.city_id = null;
+  getCities(firstRun = false) {
+    if(!firstRun) this.address.city_id = null;
     this.advertiserProvider.getCities(this.address.state_id)
     .subscribe(response => {
       this.cities = response.cities;

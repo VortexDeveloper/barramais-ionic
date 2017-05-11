@@ -38,7 +38,7 @@ export class ClassifiedProductCategoryPage {
     public classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
-      this.getProductCategories();
+      this.getProductCategories(true);
       this.isEditing = navParams.data.isEditing;
 
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
@@ -55,7 +55,7 @@ export class ClassifiedProductCategoryPage {
       if(this.isEditing){
         this.product = new ProductModel();
         this.getProductByClassified();
-        this.getProductSubCategories();
+        this.getProductSubCategories(true);
       }else{
         this.product = new ProductModel();
       }
@@ -65,18 +65,19 @@ export class ClassifiedProductCategoryPage {
     console.log('ionViewDidLoad ClassifiedProductCategoryPage');
   }
 
-  getProductCategories(){
+  getProductCategories(firstRun = false){
     this.classifiedProvider.getProductCategories()
       .subscribe(response => {
         this.productCategories = response;
+        this.getProductSubCategories(firstRun);
       }, error => {
         console.log(error.json());
       });
   }
 
-  getProductSubCategories(){
-    this.product.product_sub_category_id = null;
-    this.product.product_sub_category_2_id = null;
+  getProductSubCategories(firstRun = false){
+    if(!firstRun) this.product.product_sub_category_id = null;
+    if(!firstRun) this.product.product_sub_category2_id = null;
     this.productSubCategories2 = [];
     this.classifiedProvider.getProductSubCategories(this.product.product_category_id)
     .subscribe(response => {
@@ -86,14 +87,17 @@ export class ClassifiedProductCategoryPage {
     }else{
       this.isSubCategoryEmpty = false;
     }
+    console.log(firstRun);
+    if(firstRun && this.product.product_sub_category2_id != null) this.getProductSubCategories2(true)
+    if(this.product.product_sub_category2_id == null && this.isEditing) this.isSubCategory2Empty = true;
     }, error => {
     console.log(error.json());
     });
   }
 
-  getProductSubCategories2(){
-    this.product.product_sub_category_2_id = null;
-    console.log(this.product.product_sub_category_id);
+  getProductSubCategories2(firstRun = false){
+    if(!firstRun) this.product.product_sub_category2_id = null;
+    console.log(this.product.product_sub_category2_id);
     this.classifiedProvider.getProductSubCategories2(this.product.product_sub_category_id)
     .subscribe(response => {
     this.productSubCategories2 = response;
@@ -121,7 +125,7 @@ export class ClassifiedProductCategoryPage {
   openNextPage(page, product){
     if(this.product.product_category_id == null || this.product.product_sub_category_id == null){
         this.presentToast("Escolha uma categoria e sub categoria!");
-    }else if(this.productSubCategories2.length > 0 && this.product.product_sub_category_2_id == null){
+    }else if(this.productSubCategories2.length > 0 && this.product.product_sub_category2_id == null){
         this.presentToast("Escolha uma segunda sub categoria!")
     }else{
       this.navCtrl.push(page, {'product': product, 'classified': this.classified, 'isEditing': this.isEditing});
