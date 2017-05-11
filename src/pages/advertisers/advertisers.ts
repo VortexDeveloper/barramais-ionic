@@ -143,7 +143,8 @@ export class AdvertisersPage {
     var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
     var documentRule = (advertiser.document_type == 0 && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == 1 && advertiser.document_number.match(documentCNPJRule)) ? true : false;
 
-    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    // var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    var phoneRule = /^[0-9]{10,11}$/
 
     // var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
 

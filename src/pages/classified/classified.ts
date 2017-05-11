@@ -57,7 +57,8 @@ export class ClassifiedPage {
     var emailRule = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var documentCPFRule = /^([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/
     var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
-    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    // var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    var phoneRule = /^[0-9]{10,11}$/
     var documentRule = (classified.document_type == 0 && classified.document_number.match(documentCPFRule)) || (classified.document_type == 1 && classified.document_number.match(documentCNPJRule)) ? true : false;
 
     if((!classified.bonded && (classified.seller_name == null || classified.seller_name == "")) || (classified.bonded && classified.document_type == 1 && (classified.seller_name == null || classified.seller_name == ""))){
