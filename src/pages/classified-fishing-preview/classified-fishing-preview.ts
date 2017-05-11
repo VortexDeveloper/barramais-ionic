@@ -31,6 +31,7 @@ export class ClassifiedFishingPreviewPage {
   mainPage: any = MainPage;
   isEditing: boolean = false;
   classifiedUserListPage: any = ClassifiedUserListPage
+  provisionalCategory: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -39,14 +40,17 @@ export class ClassifiedFishingPreviewPage {
     public toastCtrl: ToastController
   ) {
       this.isEditing = navParams.data.isEditing;
+      this.provisionalCategory = navParams.data.provisionalCategory;
+      console.log(this.provisionalCategory);
 
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.fishing = new FishingModel(navParams.data.fishing);
 
-      this.getFishingCategory();
-      this.getFishingSubCategory();
+      if(!this.provisionalCategory){
+        this.getFishingCategory();
+        this.getFishingSubCategory();
+      }
 
-      console.log(this.isEditing);
   }
 
   ionViewDidLoad() {
@@ -75,21 +79,25 @@ export class ClassifiedFishingPreviewPage {
   }
 
   getFishingCategory() {
-    this.classifiedProvider.getFishingCategoryById(this.fishing.fishing_category_id)
-    .subscribe(response => {
-      this.fishingCategory = response.fishing_category;
-    }, error => {
-        console.log(error.json());
-    });
+    if(this.fishing.fishing_category_id != null){
+      this.classifiedProvider.getFishingCategoryById(this.fishing.fishing_category_id)
+      .subscribe(response => {
+        this.fishingCategory = response.fishing_category;
+      }, error => {
+          console.log(error.json());
+      });
+    }
   }
 
   getFishingSubCategory() {
-    this.classifiedProvider.getFishingSubCategoryById(this.fishing.fishing_sub_category_id)
-    .subscribe(response => {
-      this.fishingSubCategory = response.fishing_sub_category;
-    }, error => {
-        console.log(error.json());
-    });
+    if(this.fishing.fishing_sub_category_id != null){
+      this.classifiedProvider.getFishingSubCategoryById(this.fishing.fishing_sub_category_id)
+      .subscribe(response => {
+        this.fishingSubCategory = response.fishing_sub_category;
+      }, error => {
+          console.log(error.json());
+      });
+    }
   }
 
   toggleClassifiedInformation(){
