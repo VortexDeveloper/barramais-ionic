@@ -20,6 +20,7 @@ export class ClassifiedProductDescriptionPage {
   classified: ClassifiedModel;
   product: ProductModel;
   classifiedProductPreviewPage: any = ClassifiedProductPreviewPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -27,6 +28,8 @@ export class ClassifiedProductDescriptionPage {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.product = new ProductModel(navParams.data.product)
   }
@@ -84,7 +87,7 @@ export class ClassifiedProductDescriptionPage {
     }else if(classified.description == null || classified.description == ""){
       this.presentToast("Preencha a descrição do classificado!");
     }else{
-      this.navCtrl.push(page, {'product': this.product, 'classified': classified});
+      this.navCtrl.push(page, {'product': this.product, 'classified': classified, 'isEditing': this.isEditing});
     }
   }
 

@@ -43,6 +43,12 @@ export class Classified {
   private get_vessel_by_classified_url: string;
   private get_fishing_by_classified_url: string;
   private get_product_by_classified_url: string;
+  private update_vessel_url: string;
+  private update_fishing_url: string;
+  private update_product_url: string;
+  private get_all_vessels_by_date_url: string;
+  private get_all_fishings_by_date_url: string;
+  private get_all_products_by_date_url: string;
 
   constructor(
     public http: Http,
@@ -82,6 +88,27 @@ export class Classified {
     this.get_vessel_by_classified_url = host + 'classifieds/get_vessel_by_classified/';
     this.get_fishing_by_classified_url = host + 'classifieds/get_fishing_by_classified/';
     this.get_product_by_classified_url = host + 'classifieds/get_product_by_classified/';
+    this.update_vessel_url = host + 'classifieds/update_vessel/';
+    this.update_fishing_url = host + 'classifieds/update_fishing/';
+    this.update_product_url = host + 'classifieds/update_product/';
+    this.get_all_vessels_by_date_url = host + 'classifieds/get_all_vessels_by_date';
+    this.get_all_fishings_by_date_url = host + 'classifieds/get_all_fishings_by_date';
+    this.get_all_products_by_date_url = host + 'classifieds/get_all_products_by_date';
+  }
+
+  getAllVesselsByDate(){
+    return this.authHttp.get(this.get_all_vessels_by_date_url + ".json")
+      .map(res => res.json());
+  }
+
+  getAllFishingsByDate(){
+    return this.authHttp.get(this.get_all_fishings_by_date_url + ".json")
+      .map(res => res.json());
+  }
+
+  getAllProductsByDate(){
+    return this.authHttp.get(this.get_all_products_by_date_url + ".json")
+      .map(res => res.json());
   }
 
   getVesselByClassified(classified_id){
@@ -104,13 +131,28 @@ export class Classified {
       .map(res => res.json());
   }
 
+  updateProduct(classified, product){
+    return this.authHttp.put(this.update_product_url + product.id + ".json", {'classified': classified, 'product': product})
+      .map(res => res.json());
+  }
+
   createVessel(classified, vessel, accessories){
     return this.authHttp.post(this.create_vessel_url + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
       .map(res => res.json());
   }
 
+  updateVessel(classified, vessel, accessories){
+    return this.authHttp.put(this.update_vessel_url + vessel.id + ".json", {'classified': classified, 'vessel': vessel, 'accessories': accessories})
+      .map(res => res.json());
+  }
+
   createFishing(classified, fishing){
     return this.authHttp.post(this.create_fishing_url + ".json", {'classified': classified, 'fishing': fishing})
+      .map(res => res.json());
+  }
+
+  updateFishing(classified, fishing){
+    return this.authHttp.put(this.update_fishing_url + fishing.id + ".json", {'classified': classified, 'fishing': fishing})
       .map(res => res.json());
   }
 
@@ -121,6 +163,11 @@ export class Classified {
 
   getClassifiedsByUser(user){
     return this.authHttp.get(this.classified_user_url + user + ".json")
+      .map(res => res.json());
+  }
+
+  getClassified(classified_id){
+    return this.authHttp.get(this.url + '/' + classified_id + ".json")
       .map(res => res.json());
   }
 

@@ -5,6 +5,7 @@ import { VesselModel } from "../../models/vessel.model";
 import { Classified } from '../../providers/classified';
 import { ToastController } from 'ionic-angular';
 import { MainPage } from '../main/main';
+import { ClassifiedUserListPage } from '../classified-user-list/classified-user-list'
 
 /*
   Generated class for the ClassifiedVesselPreview page.
@@ -25,6 +26,8 @@ export class ClassifiedVesselPreviewPage {
   mold: any = {};
   classifiedInformation: boolean = false;
   mainPage: any = MainPage;
+  isEditing: boolean = false;
+  classifiedUserListPage: any = ClassifiedUserListPage
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +35,8 @@ export class ClassifiedVesselPreviewPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
       this.accessories = navParams.data.accessories;
@@ -55,6 +60,16 @@ export class ClassifiedVesselPreviewPage {
         console.log(error.json());
         this.presentToast(error.json());
     });
+  }
+
+  update(){
+    this.classifiedProvider.updateVessel(this.classified, this.vessel, this.accessories)
+      .subscribe(response => {
+        this.redirectPage(this.classifiedUserListPage);
+        this.presentToast("Classificado atualizado com sucesso!");
+      }, error => {
+        console.log(error.json());
+      });
   }
 
   getVesselType() {

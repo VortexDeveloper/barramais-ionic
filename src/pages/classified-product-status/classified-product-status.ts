@@ -19,12 +19,15 @@ export class ClassifiedProductStatusPage {
   classified: ClassifiedModel;
   product: ProductModel;
   classifiedProductDescriptionPage: any = ClassifiedProductDescriptionPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.product = new ProductModel(navParams.data.product);
   }
@@ -40,7 +43,7 @@ export class ClassifiedProductStatusPage {
     if(classified.price <= 0 || !price.match(priceRule)){
       this.presentToast("Insira um valor válido!");
     }else{
-      this.navCtrl.push(page, {'product': product, 'classified': classified});
+      this.navCtrl.push(page, {'product': product, 'classified': classified, 'isEditing': this.isEditing});
     }
   }
 

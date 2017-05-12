@@ -43,6 +43,7 @@ export class AdvertisersPage {
   adPreviewPage: any = AdPreviewPage;
   advertiserPaymentPage: any = AdvertiserPaymentPage;
   isEditing: boolean = false;
+  cityId: number = null;
 
   constructor(
     public navCtrl: NavController,
@@ -75,7 +76,9 @@ export class AdvertisersPage {
           this.advertiser = response.user_advertiser;
           this.ads = response.user_advertiser.ads;
           this.address = response.user_advertiser.address;
-          this.getCities();
+          console.log(this.address);
+          this.cityId = this.address.city_id;
+          this.getCities(true);
         }else{
           this.advertiser = new AdvertiserModel();
           this.ads = [];
@@ -121,7 +124,8 @@ export class AdvertisersPage {
     });
   }
 
-  getCities() {
+  getCities(firstRun = false) {
+    if(!firstRun) this.address.city_id = null;
     this.advertiserProvider.getCities(this.address.state_id)
     .subscribe(response => {
       this.cities = response.cities;
@@ -139,7 +143,8 @@ export class AdvertisersPage {
     var documentCNPJRule = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})$/
     var documentRule = (advertiser.document_type == 0 && advertiser.document_number.match(documentCPFRule)) || (advertiser.document_type == 1 && advertiser.document_number.match(documentCNPJRule)) ? true : false;
 
-    var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    // var phoneRule = /^\(([0-9]{2}|0{1}((x|[0-9]){2}[0-9]{2}))\)\s*[0-9]{4,5}[- ]*[0-9]{4}$/
+    var phoneRule = /^[0-9]{10,11}$/
 
     // var emailRule = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/
 
@@ -148,9 +153,9 @@ export class AdvertisersPage {
     // }else
     if(documentRule == false){
       this.presentToast("Insira o número do documento do anunciante!");
-    }else if(address.state_id == ""){
+    }else if(address.state_id == null){
       this.presentToast("Selecione um estado!");
-    }else if(address.city_id == ""){
+    }else if(address.city_id == null){
       this.presentToast("Selecione uma cidade!");
     }else if(address.street.length < 3){
       this.presentToast("Insira o endereço do anunciante!");

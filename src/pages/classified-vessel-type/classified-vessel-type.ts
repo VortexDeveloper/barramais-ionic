@@ -26,6 +26,7 @@ export class ClassifiedVesselTypePage {
   vessel: VesselModel;
   classifiedVesselStatusPage: any = ClassifiedVesselStatusPage;
   vesselTypes: any[] = [];
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -33,8 +34,11 @@ export class ClassifiedVesselTypePage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
       this.classified = new ClassifiedModel(navParams.data.classified);
+      console.log(this.classified);
       if(this.classified.bonded == true){
         if(this.classified.document_type == 0){
           this.classified.seller_name = this.current_user.first_name;
@@ -46,7 +50,12 @@ export class ClassifiedVesselTypePage {
 
       console.log(this.classified);
 
-      this.vessel = new VesselModel();
+      if(this.isEditing){
+        this.vessel = new VesselModel();
+        this.getVesselByClassified();
+      }else{
+        this.vessel = new VesselModel();
+      }
 
       this.getVesselTypes();
   }
@@ -65,11 +74,26 @@ export class ClassifiedVesselTypePage {
     });
   }
 
+  resetBrandAndMold(){
+    this.vessel.brand_id = null
+    this.vessel.mold_id = null
+  }
+
+  getVesselByClassified(){
+    this.classifiedProvider.getVesselByClassified(this.classified.id)
+      .subscribe(response => {
+        this.vessel = response;
+        console.log(this.vessel);
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   openNextPage(page, vessel){
     if(this.vessel.vessel_type_id == null){
       this.presentToast("Escolha um tipo de embarcação!");
     }else{
-      this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified, 'isEditing': this.isEditing});
     }
   }
 

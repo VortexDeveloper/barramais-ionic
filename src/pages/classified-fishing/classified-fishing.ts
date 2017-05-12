@@ -38,7 +38,7 @@ export class ClassifiedFishingPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
-      this.getFishingCategories();
+      this.getFishingCategories(true);
       this.isEditing = navParams.data.isEditing;
 
       this.current_user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
@@ -60,23 +60,27 @@ export class ClassifiedFishingPage {
       }else{
         this.fishing = new FishingModel();
       }
+
+      console.log(this.fishing);
+      console.log(this.provisionalCategory);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassifiedFishingPage');
   }
 
-  getFishingCategories() {
+  getFishingCategories(firstRun = false) {
     this.classifiedProvider.getFishingCategories()
     .subscribe(response => {
       this.fishingCategories = response.fishing_categories;
+      this.getFishingSubCategories(firstRun);
     }, error => {
         console.log(error.json());
     });
   }
 
-  getFishingSubCategories() {
-    this.fishing.fishing_sub_category_id = null;
+  getFishingSubCategories(firstRun = false) {
+    if(!firstRun) this.fishing.fishing_sub_category_id = null;
     this.classifiedProvider.getFishingSubCategories(this.fishing.fishing_category_id)
     .subscribe(response => {
       this.fishingSubCategories = response.fishing_sub_categories;
@@ -88,8 +92,11 @@ export class ClassifiedFishingPage {
   getFishingByClassified(){
     this.classifiedProvider.getFishingByClassified(this.classified.id)
       .subscribe(response => {
-        this.fishing = response
+        this.fishing = response;
         console.log(this.fishing);
+        if(this.fishing.provisional_category != ""){
+          this.provisionalCategory = true;
+        }
       }, error => {
           console.log(error.json());
       });
@@ -101,6 +108,10 @@ export class ClassifiedFishingPage {
     }else if(provisionalCategory && (fishing.provisional_category == null || fishing.provisional_category == "")){
       this.presentToast("Preencha o campo de categoria provisória!");
     }else{
+      if (!this.provisionalCategory){
+        this.fishing.provisional_category = "";
+      }
+
       this.navCtrl.push(page, {'provisionalCategory': provisionalCategory, 'fishing': fishing, 'classified': this.classified, 'isEditing': this.isEditing});
     }
   }

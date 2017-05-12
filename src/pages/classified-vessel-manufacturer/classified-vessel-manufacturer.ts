@@ -22,6 +22,7 @@ export class ClassifiedVesselManufacturerPage {
   brands: any;
   molds: any;
   classifiedVesselAccessoriesPage: any = ClassifiedVesselAccessoriesPage;
+  isEditing: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -29,10 +30,12 @@ export class ClassifiedVesselManufacturerPage {
     private classifiedProvider: Classified,
     public toastCtrl: ToastController
   ) {
+      this.isEditing = navParams.data.isEditing;
+
       this.classified = new ClassifiedModel(navParams.data.classified);
       this.vessel = new VesselModel(navParams.data.vessel);
 
-      this.getBrands();
+      this.getBrands(true);
   }
 
   ionViewDidLoad() {
@@ -42,10 +45,12 @@ export class ClassifiedVesselManufacturerPage {
   openNextPage(page, vessel){
     if(this.vessel.brand_id == null){
       this.presentToast("Escolha um fabricante!");
+    }else if(this.vessel.mold_id == null){
+      this.presentToast("Escolha um modelo!")
     }else if(this.vessel.chassis_number == null || this.vessel.chassis_number == ""){
       this.presentToast("Preencha o número do chassi!");
     }else{
-      this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified});
+      this.navCtrl.push(page, {'vessel': vessel, 'classified': this.classified, 'isEditing': this.isEditing});
     }
   }
 
@@ -53,16 +58,18 @@ export class ClassifiedVesselManufacturerPage {
     this.navCtrl.pop();
   }
 
-  getBrands() {
+  getBrands(firstRun = false) {
     this.classifiedProvider.getBrands(this.vessel.vessel_type_id)
     .subscribe(response => {
       this.brands = response.brands;
+      if(firstRun) this.getMolds(true);
     }, error => {
         console.log(error.json());
     });
   }
 
-  getMolds() {
+  getMolds(firstRun = false) {
+    if(!firstRun) this.vessel.mold_id = null;
     this.classifiedProvider.getMolds(this.vessel.brand_id)
     .subscribe(response => {
       this.molds = response.molds;

@@ -17,7 +17,7 @@
 
   <ion-item>
     <ion-label floating>Tipo de Embarcação</ion-label>
-    <ion-select [(ngModel)]="vessel.vessel_type_id" name="vessel_type">
+    <ion-select [(ngModel)]="vessel.vessel_type_id" (ionChange)="resetBrandAndMold()" name="vessel_type">
       <ion-option *ngFor="let vesselType of vesselTypes" [value]="vesselType.id">{{vesselType.name}}</ion-option>
     </ion-select>
   </ion-item>
