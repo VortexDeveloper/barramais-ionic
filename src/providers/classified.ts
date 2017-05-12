@@ -46,6 +46,9 @@ export class Classified {
   private update_vessel_url: string;
   private update_fishing_url: string;
   private update_product_url: string;
+  private get_all_vessels_by_date_url: string;
+  private get_all_fishings_by_date_url: string;
+  private get_all_products_by_date_url: string;
 
   constructor(
     public http: Http,
@@ -85,10 +88,27 @@ export class Classified {
     this.get_vessel_by_classified_url = host + 'classifieds/get_vessel_by_classified/';
     this.get_fishing_by_classified_url = host + 'classifieds/get_fishing_by_classified/';
     this.get_product_by_classified_url = host + 'classifieds/get_product_by_classified/';
-    this.update_vessel_url = host + 'classifieds/update_vessel/'
-    this.update_fishing_url = host + 'classifieds/update_fishing/'
-    this.update_product_url = host + 'classifieds/update_product/'
+    this.update_vessel_url = host + 'classifieds/update_vessel/';
+    this.update_fishing_url = host + 'classifieds/update_fishing/';
+    this.update_product_url = host + 'classifieds/update_product/';
+    this.get_all_vessels_by_date_url = host + 'classifieds/get_all_vessels_by_date';
+    this.get_all_fishings_by_date_url = host + 'classifieds/get_all_fishings_by_date';
+    this.get_all_products_by_date_url = host + 'classifieds/get_all_products_by_date';
+  }
 
+  getAllVesselsByDate(){
+    return this.authHttp.get(this.get_all_vessels_by_date_url + ".json")
+      .map(res => res.json());
+  }
+
+  getAllFishingsByDate(){
+    return this.authHttp.get(this.get_all_fishings_by_date_url + ".json")
+      .map(res => res.json());
+  }
+
+  getAllProductsByDate(){
+    return this.authHttp.get(this.get_all_products_by_date_url + ".json")
+      .map(res => res.json());
   }
 
   getVesselByClassified(classified_id){
@@ -143,6 +163,11 @@ export class Classified {
 
   getClassifiedsByUser(user){
     return this.authHttp.get(this.classified_user_url + user + ".json")
+      .map(res => res.json());
+  }
+
+  getClassified(classified_id){
+    return this.authHttp.get(this.url + '/' + classified_id + ".json")
       .map(res => res.json());
   }
 

@@ -40,6 +40,9 @@ import { ClassifiedProductCategoryPage } from '../pages/classified-product-categ
 import { ClassifiedProductStatusPage } from '../pages/classified-product-status/classified-product-status';
 import { ClassifiedProductDescriptionPage } from '../pages/classified-product-description/classified-product-description';
 import { ClassifiedProductPreviewPage } from '../pages/classified-product-preview/classified-product-preview';
+import { ClassifiedShowFishingsPage } from '../pages/classified-show-fishings/classified-show-fishings';
+import { ClassifiedShowProductsPage } from '../pages/classified-show-products/classified-show-products';
+import { ClassifiedShowVesselsPage } from '../pages/classified-show-vessels/classified-show-vessels';
 import { AlertController } from 'ionic-angular';
 import { UserModel } from "../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
@@ -104,6 +107,9 @@ export class MyApp {
   classifiedProductStatusPage: any = ClassifiedProductStatusPage;
   classifiedProductDescriptionPage: any = ClassifiedProductDescriptionPage;
   classifiedProductPreviewPage: any = ClassifiedProductPreviewPage;
+  classifiedShowFishingsPage: any = ClassifiedShowFishingsPage;
+  classifiedShowProductsPage: any = ClassifiedShowProductsPage;
+  classifiedShowVesselsPage: any = ClassifiedShowVesselsPage;
   interestSelectionPage: any = InterestSelectionPage;
   loginPage: any = LoginPage;
   eventsPage: any = EventsPage;
