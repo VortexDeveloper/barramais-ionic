@@ -36,6 +36,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { BmPostComponent } from '../components/bm-post/bm-post';
+import { Mask } from '../components/mask/mask';
 import { AdvertiserPage } from '../pages/advertiser/advertiser';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { TermsPage } from '../pages/terms/terms';
@@ -163,7 +164,8 @@ export function getAuthHttp(http) {
     PhotoModalPage,
     NotificationViewPage,
     GroupUpdatePage,
-    BmPostLikesPage
+    BmPostLikesPage,
+    Mask
   ],
   imports: [
     IonicModule.forRoot(MyApp, {

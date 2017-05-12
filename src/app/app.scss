@@ -224,14 +224,6 @@ app-menu {
     overflow: hidden;
   }
 
-  .background-image {
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    overflow: hidden;
-    border-bottom: solid 2px #fff;
-  }
-
   .item-sub ion-label {
     font-size: .8em;
   }
@@ -418,10 +410,6 @@ app-menu {
   .fab-wp-danger.activated {
     color: #fff;
     background-color: #faa35f;
-  }
-
-  ion-fab[bottom] {
-    bottom: 45px;
   }
 
   .item-friends{

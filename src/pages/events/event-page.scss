@@ -1,9 +1,11 @@
 page-event-page {
 
   .background-image {
+    background: #4e6692 !important;
     background-size: cover;
     background-position: center;
-    height: 200px;
+    min-height: 200px;
+    max-height: 400px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -16,7 +18,7 @@ page-event-page {
 
   .background-image img{
     min-width: 100%;
-    max-width: 110%;
+    max-width: 100%;
     position: relative;
   }
 
@@ -151,10 +153,10 @@ page-event-page {
 
       .perfil-actions{
         position: absolute !important;
-        top: 146px !important;
+        top: -40px !important;
+        float: right;
         right: 6px !important;
         z-index: 999 !important;
-        width: 66px;
         font-size: .7em;
         height: 28px;
       }

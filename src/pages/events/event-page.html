@@ -6,7 +6,9 @@
 <ion-content>
   <div class="background-image">
     <img src="{{event.cover_photo_url}}" alt="Perfil Header"/>
-    <button icon-left class="perfil-actions" color="danger" style="right: 79px !important;" ion-button [hidden]="!showAdminActions" (click)="delete(event)">
+  </div>
+  <div class="main-content">
+    <button icon-left class="perfil-actions" color="danger" style="right: 79px !important;" ion-button [hidden]="!showAdminActions" (click)="presentConfirmDelete(event)">
       <ion-icon name="close"></ion-icon>
       Excluir
     </button>
@@ -14,8 +16,6 @@
       <ion-icon name="create"></ion-icon>
       Editar
     </button>
-  </div>
-  <div class="main-content">
     <ion-item no-lines>
       <ion-avatar item-left class="ion-avatar-event">
         <h2 class="h2-events-avatar">{{ event.event_date | date:'dd'}}</h2>
@@ -24,7 +24,7 @@
       <h2>{{event.name}}</h2>
       <p>{{event.created_at | date:'MMMM d, y'}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item text-wrap>
       <p>
         {{event.about}}
       </p>

@@ -16,7 +16,7 @@
   <ion-item-divider [hidden]="isAlbumEmpty" color="light">Fotos do álbum</ion-item-divider>
   <ion-item-divider [hidden]="!isAlbumEmpty" color="light">Não há fotos no álbum</ion-item-divider>
 
-  <div class="photos">
+  <div class="photos" >
       <div class="photo" *ngFor="let photo of album">
           <img src="{{photo.url}}" (click)="openPhoto(photo)" />
           <button ion-button icon-only (click)="presentConfirmDestroy(photo)" *ngIf="isMyAlbum">

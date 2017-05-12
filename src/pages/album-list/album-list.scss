@@ -61,6 +61,7 @@ page-album-list {
     background-color: #faa35f;
   }
 
+
   .photos{
     width: 100%;
     display: flex;
@@ -72,8 +73,7 @@ page-album-list {
   }
 
   .photo {
-      width: 24.2%;
-      height: 80px;
+      width: calc(25% - 2px);
       background: #ccc;
       overflow: hidden;
       display: flex;

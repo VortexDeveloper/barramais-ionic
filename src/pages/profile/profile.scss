@@ -2,7 +2,8 @@ page-profile {
     .background-image {
       background-size: cover;
       background-position: center;
-      height: 200px;
+      min-height: 200px;
+      max-height: 400px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -13,9 +14,19 @@ page-profile {
 
     }
 
+    .perfil-actions{
+      position: absolute !important;
+      top: 5px !important;
+      float: right;
+      right: 6px !important;
+      z-index: 999 !important;
+      font-size: .7em;
+      height: 28px;
+    }
+
     .background-image img{
+      max-width: 100%;
       min-width: 100%;
-      max-width: 110%;
       position: relative;
     }
 
@@ -193,16 +204,6 @@ page-profile {
         z-index: 999 !important;
         opacity: 0.7 !important;
         color: #faa35f !important;
-      }
-
-      .perfil-actions{
-        position: absolute !important;
-        top: 158px !important;
-        right: 6px !important;
-        z-index: 999 !important;
-        width: 66px;
-        font-size: .7em;
-        height: 28px;
       }
 
       .cover-camera-icon:hover{

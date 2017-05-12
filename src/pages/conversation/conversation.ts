@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Conversations } from '../../providers/conversations';
 import { MessagesPage } from '../messages/messages';
+import { ProfilePage } from "../../pages/profile/profile";
 
 /*
   Generated class for the Conversation page.
@@ -13,6 +14,8 @@ import { MessagesPage } from '../messages/messages';
   templateUrl: 'conversation.html'
 })
 export class ConversationPage {
+
+  profilePage: any = ProfilePage;
   public conversations: Array<any>;
 
   constructor(
@@ -33,6 +36,14 @@ export class ConversationPage {
       (error) => console.log(error),
       () => console.log("completed")
     );
+  }
+
+  openPage(page, params={}){
+    this.navCtrl.push(page, params);
+  }
+
+  openProfile(user_id) {
+    this.openPage(this.profilePage, {user: user_id});
   }
 
   openConversation(conversation) {

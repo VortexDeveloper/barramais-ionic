@@ -9,12 +9,12 @@
       <ion-icon name="more"></ion-icon>
     </button>
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
+  </div>
+  <div class="main-content">
     <button icon-left class="perfil-actions" color="danger" ion-button *ngIf="showAdminActions" (click)="presentConfirmDelete(group)">
       <ion-icon name="close"></ion-icon>
       Excluir
     </button>
-  </div>
-  <div class="main-content">
     <ion-item>
       <h2 class="group-name">{{group.name}}</h2>
       Criado em {{group.createdAt | date:'MMMM d, y'}}

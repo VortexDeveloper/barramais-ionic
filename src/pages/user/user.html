@@ -167,9 +167,10 @@
               <ion-radio value="viuvo"></ion-radio>
             </ion-item>
           </ion-list>
+          <div class="divider-items"></div>
           <ion-item>
-            <ion-label floating>Celular</ion-label>
-            <ion-input type="text" [(ngModel)]="user.cellphone" name="cellphone"></ion-input>
+            <ion-label floating>Contato</ion-label>
+            <ion-input mask="(**)*****-****" type="text" [(ngModel)]="user.cellphone" name="cellphone"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label floating>Operadora</ion-label>
@@ -218,7 +219,7 @@
           <ion-item id="nautical_profession_description" [hidden]="showNauticalWorkText == false">
             <ion-label>Selecione seu trabalho:</ion-label>
             <ion-select [(ngModel)]="user.nautical_profession_description" name="nautical_profession_description">
-              <ion-option [value]="empresario" ><img class="nautical_license" src="assets/images/almirante_esquadra.png"/> Empresário</ion-option>
+              <ion-option [value]="empresario" >Empresário</ion-option>
               <ion-option [value]="representante" >Representante</ion-option>
               <ion-option [value]="broker" >Broker</ion-option>
               <ion-option [value]="investidor" >Investidor</ion-option>

@@ -93,8 +93,8 @@ export class InterestSelectionPage {
   }
 
   updateUserInterests(){
-    if(this.userInterests.length < 3){
-      this.presentToast("Escolha o mínimo de três interesses")
+    if(this.userInterests.length < 3 || this.userInterests.length > 6){
+      this.presentToast("Escolha de 3(três) a 6(seis) interesses para prosseguir.")
     }else{
     this.userProvider.update_user_interests(this.user.id, this.userInterests)
       .subscribe(response =>{
@@ -110,7 +110,7 @@ export class InterestSelectionPage {
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Bem vindo à Barra Mais!',
-      message: 'Para continuar, escolha no mínimo três interesses.',
+      message: 'Para continuar, escolha de 3(três) a 6(seis) interesses.',
       buttons: [
         {
           text: 'Ok',

@@ -67,18 +67,10 @@ export class EventModalPage {
       this.presentToast("Selecione uma data para o evento!");
     }else if(event.about == null || event.about == ""){
       this.presentToast("Preencha uma descrição para o evento!");
-    }else if(address.zip_code == "" || !address.zip_code.match(cepRule)){
-      this.presentToast("Prencha o CEP!");
-    }else if(address.street == ""){
-      this.presentToast("Preencha o endereço!");
-    }else if(address.complement == ""){
-      this.presentToast("Preencha o complemento!");
     }else if(address.state_id == ""){
       this.presentToast("Selecione o estado!");
     }else if(address.city_id == ""){
       this.presentToast("Selecione a cidade!");
-    }else if(address.neighborhood == ""){
-      this.presentToast("Preencha o bairro!");
     }else{
       let loader = this.loadingCtrl.create({
         content: "Salvando evento..."
@@ -110,18 +102,10 @@ export class EventModalPage {
       this.presentToast("Selecione uma data para o evento!");
     }else if(event.about == null || event.about == ""){
       this.presentToast("Preencha uma descrição para o evento!");
-    }else if(address.zip_code == "" || !address.zip_code.match(cepRule)){
-      this.presentToast("Prencha o CEP!");
-    }else if(address.street == ""){
-      this.presentToast("Preencha o endereço!");
-    }else if(address.complement == ""){
-      this.presentToast("Preencha o complemento!");
     }else if(address.state_id == ""){
       this.presentToast("Selecione o estado!");
     }else if(address.city_id == ""){
       this.presentToast("Selecione a cidade!");
-    }else if(address.neighborhood == ""){
-      this.presentToast("Preencha o bairro!");
     }else{
       let loader = this.loadingCtrl.create({
         content: "Atualizando evento..."
@@ -136,6 +120,7 @@ export class EventModalPage {
           loader.dismiss();
           this.viewCtrl.dismiss(event_params);
       }, error => {
+          loader.dismiss();
           console.log(error.json());
           this.presentToast(error);
       });

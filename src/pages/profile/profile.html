@@ -16,6 +16,8 @@
     <div class="background-image">
       <img class="img-standard" src="{{user.cover_photo_url}}" id='user_cover_photo' />
       <ion-icon class="cover-camera-icon" name="camera" (click)="openMediaOptions()" [hidden]="visitorActions"></ion-icon>
+    </div>
+    <div class="main-content">
       <button
       icon-left
       class="perfil-actions"
@@ -25,22 +27,20 @@
       *ngIf="visitorActions && isFriend == false"
       (click)='request_friendship(user)'
       >
-        <ion-icon name="add"></ion-icon>
-        Amigo
-      </button>
-      <button (click)='presentConfirmUnfriend(user)' icon-left class="perfil-actions" ion-button color="danger" style="right: 79px !important;" *ngIf="visitorActions && isFriend == true">
-        <ion-icon name="remove"></ion-icon>
-        Amigo
-      </button>
-      <button icon-left class="perfil-actions" ion-button style="right: 79px !important;" *ngIf="visitorActions && isFriend == 'waiting'">
-        <ion-icon name="time"></ion-icon>
-      </button>
-      <button icon-left class="perfil-actions" ion-button *ngIf="visitorActions" (click)='createConversationWith(user)'>
-        <ion-icon name="chatbubbles"></ion-icon>
-        Chat
-      </button>
-    </div>
-    <div class="main-content">
+      <ion-icon name="add"></ion-icon>
+      Amigo
+    </button>
+    <button (click)='presentConfirmUnfriend(user)' icon-left class="perfil-actions" ion-button color="danger" style="right: 79px !important;" *ngIf="visitorActions && isFriend == true">
+      <ion-icon name="remove"></ion-icon>
+      Amigo
+    </button>
+    <button icon-left class="perfil-actions" ion-button style="right: 79px !important;" *ngIf="visitorActions && isFriend == 'waiting'">
+      <ion-icon name="time"></ion-icon>
+    </button>
+    <button icon-left class="perfil-actions" ion-button *ngIf="visitorActions" (click)='createConversationWith(user)'>
+      <ion-icon name="chatbubbles"></ion-icon>
+      Chat
+    </button>
       <ion-thumbnail class="thumb-user" item-left>
         <img src="{{user.avatar_url}}" id='user_avatar'>
       </ion-thumbnail>

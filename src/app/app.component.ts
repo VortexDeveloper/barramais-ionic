@@ -127,6 +127,7 @@ export class MyApp {
     };
 
   openLink(link){
+    this.closeSubItems();
     let browser = new InAppBrowser(link, '_system');
     browser
   }
@@ -149,8 +150,13 @@ export class MyApp {
       events.subscribe('onUpdateUser', (user) => { this.user = new UserModel(user) });
   }
 
+  menuClosed(){
+    this.closeSubItems();
+  }
+
   openFriends(){
     this.nav.push(this.friendsPage, {user: this.user});
+    this.closeSubItems();
   }
 
   loadFriends(user) {
@@ -189,6 +195,7 @@ export class MyApp {
 
   openPageWithClassifiedConditional(page, classifiedConditional){
     this.nav.push(page, {'classifiedConditional': classifiedConditional});
+    this.closeSubItems();
   }
 
   showSubMenuAnuncios() {
@@ -245,17 +252,29 @@ export class MyApp {
       ]
     });
     alert.present();
+    this.closeSubItems();
   }
 
 
   openPage(page) {
     this.nativePageTransitions.slide(this.options);
     this.nav.push(page);
+    this.closeSubItems();
+  }
+
+  closeSubItems(){
+    this.showAnuncios = false;
+    this.showPaginas = false;
+    this.showClassificados = false;
+    this.showAjudaESuporte = false;
+    this.showBlog = false;
+    this.showConvidarAmigos = false;
   }
 
   openRoot(page) {
     this.nativePageTransitions.slide(this.options);
     this.nav.setRoot(page);
+    this.closeSubItems();
   }
 
   inviteFacebookFriends() {
@@ -270,6 +289,7 @@ export class MyApp {
         console.log(error)
       }
     );
+    this.closeSubItems();
   }
 
   public presentActionSheet() {
