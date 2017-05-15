@@ -9,6 +9,8 @@ import { ToastController } from 'ionic-angular';
 import { PhotoModalPage } from '../photo-modal/photo-modal';
 import { AlbumPhotoModel } from "../../models/album_photo.model";
 import { AlbumPhotoCreatePage } from '../album-photo-create/album-photo-create';
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 /*
   Generated class for the AlbumList page.
@@ -32,7 +34,10 @@ export class AlbumListPage {
   albumPhoto: AlbumPhotoModel = new AlbumPhotoModel();
   isMyAlbum: boolean = false;
 
+  // @ViewChild('photos') photos: ElementRef;
+
   constructor(
+    public photos: ElementRef,
     public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
@@ -47,10 +52,22 @@ export class AlbumListPage {
       this.user = new UserModel(navParams.data.user);
       this.getUserAlbum();
       this.is_my_album();
+
+      // let elem = this.photos.nativeElement.value
+      //
+      // console.log(window.getComputedStyle(elem, null).getPropertyValue("width"));
   }
 
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AlbumListPage');
+    setTimeout(() => {
+      let elem = this.photos.nativeElement;
+      let photos = elem.getElementsByClassName("photo");
+      for (let item of photos) {
+          console.log(item.style);
+          item.style.heigth = window.getComputedStyle(item, null).getPropertyValue("width");
+      }
+    },1000);
   }
 
   is_my_album(){

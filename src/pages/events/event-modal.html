@@ -51,6 +51,10 @@
         <ion-input type="text" [(ngModel)]="address.complement" name="complement"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label floating>Bairro / Setor</ion-label>
+        <ion-input type="text" [(ngModel)]="address.neighborhood" name="neighborhood"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label>Selecione o Estado</ion-label>
         <ion-select [(ngModel)]="address.state_id" (ionChange)="getCities()">
           <ion-option *ngFor="let state of states" [value]="state.id" >{{state.name}}</ion-option>
@@ -61,10 +65,6 @@
         <ion-select [(ngModel)]="address.city_id">
           <ion-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</ion-option>
         </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Bairro</ion-label>
-        <ion-input type="text" [(ngModel)]="address.neighborhood" name="neighborhood"></ion-input>
       </ion-item>
     </ion-list>
     <button class="form-buttons" ion-button type="button" block name="button" (click)="create(event, address)" *ngIf="event.id == null">Salvar</button>

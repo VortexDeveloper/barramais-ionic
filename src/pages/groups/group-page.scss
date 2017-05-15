@@ -32,7 +32,7 @@ page-group-page {
 
   .perfil-actions{
     position: absolute !important;
-    top: 158px !important;
+    top: -40px !important;
     float: right;
     right: 6px !important;
     z-index: 999 !important;
@@ -74,7 +74,8 @@ page-group-page {
     .background-image {
       background-size: cover;
       background-position: center;
-      height: 200px;
+      min-height: 200px;
+      max-height: 400px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -85,8 +86,7 @@ page-group-page {
     }
 
     .background-image img{
-      min-width: 100%;
-      max-width: 110%;
+      width: 100%;
       position: relative;
     }
 

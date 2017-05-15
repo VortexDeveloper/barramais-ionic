@@ -4,7 +4,8 @@ page-group-modal {
     background: #4e6692 !important;
     background-size: cover;
     background-position: center;
-    height: 200px;
+    min-height: 200px;
+    max-height: 400px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -17,7 +18,7 @@ page-group-modal {
 
   .background-image img{
     min-width: 100%;
-    max-width: 110%;
+    max-width: 100%;
     position: relative;
   }
 

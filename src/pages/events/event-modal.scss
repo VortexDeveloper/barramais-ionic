@@ -110,19 +110,25 @@ page-event-modal {
   }
 
   .background-image {
-      background-size: cover;
-      background-position: center;
-      height: 200px;
-      overflow: hidden;
-      background: #4e6692 !important;
+    background: #4e6692 !important;
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    align-content: stretch;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
   }
 
   .background-image img{
     min-width: 100%;
-    max-width: 110%;
+    max-width: 100%;
     position: relative;
-    left: -5%;
-    top: -5%;
   }
 
   .cover-camera-icon{

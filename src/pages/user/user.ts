@@ -78,6 +78,9 @@ export class UserPage {
   }
 
   save(user) {
+    if(this.userInterests.length > 7 || this.userInterests.length < 4){
+      this.presentToast("Escolha de 3(três) a 6(seis) interesses para prosseguir.")
+    }else{
       let loader = this.loadingCtrl.create({
         content: "Salvando seus dados..."
       });
@@ -108,7 +111,8 @@ export class UserPage {
           this.presentToast(errorMessage);
       });
 
-    this.userPasswordConfirmation = "";
+      this.userPasswordConfirmation = "";
+    }
   }
 
   editPassword() {

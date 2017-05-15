@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
@@ -58,6 +58,7 @@ export class EventPagePage {
 
   constructor(
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
     params: NavParams,
     public eventProvider: EventProvider,
     private userProvider: User,
@@ -240,6 +241,29 @@ export class EventPagePage {
       }, error => {
         console.log("Não foi possível deletar o evento" + error.json());
       })
+  }
+
+  presentConfirmDelete(event) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir Evento',
+      message: 'Tem certeza que deseja excuir este Evento?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.delete(event);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   isOnEvent(event){
