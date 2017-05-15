@@ -49,6 +49,9 @@ export class Classified {
   private get_all_vessels_by_date_url: string;
   private get_all_fishings_by_date_url: string;
   private get_all_products_by_date_url: string;
+  private get_vessels_with_starting_id: string;
+  private get_fishings_with_starting_id: string;
+  private get_products_with_starting_id: string;
 
   constructor(
     public http: Http,
@@ -94,10 +97,18 @@ export class Classified {
     this.get_all_vessels_by_date_url = host + 'classifieds/get_all_vessels_by_date';
     this.get_all_fishings_by_date_url = host + 'classifieds/get_all_fishings_by_date';
     this.get_all_products_by_date_url = host + 'classifieds/get_all_products_by_date';
+    this.get_vessels_with_starting_id = host + 'classifieds/get_vessels_with_starting_id/';
+    this.get_fishings_with_starting_id = host + 'classifieds/get_fishings_with_starting_id/';
+    this.get_products_with_starting_id = host + 'classifieds/get_products_with_starting_id/';
   }
 
   getAllVesselsByDate(){
     return this.authHttp.get(this.get_all_vessels_by_date_url + ".json")
+      .map(res => res.json());
+  }
+
+  getVesselsWithStartingId(vessel_id){
+    return this.authHttp.get(this.get_vessels_with_starting_id + vessel_id + ".json")
       .map(res => res.json());
   }
 
@@ -106,8 +117,18 @@ export class Classified {
       .map(res => res.json());
   }
 
+  getFishingsWithStartingId(fishing_id){
+    return this.authHttp.get(this.get_fishings_with_starting_id + fishing_id + ".json")
+      .map(res => res.json());
+  }
+
   getAllProductsByDate(){
     return this.authHttp.get(this.get_all_products_by_date_url + ".json")
+      .map(res => res.json());
+  }
+
+  getProductsWithStartingId(product_id){
+    return this.authHttp.get(this.get_products_with_starting_id + product_id + ".json")
       .map(res => res.json());
   }
 

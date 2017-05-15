@@ -22,6 +22,7 @@ export class ClassifiedShowProductsPage {
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any = localStorage.getItem('user');
   products: any[] = [];
+  productLoader: any[] = [];
   classifieds: any[] = [];
   isClassifiedEmpty: boolean = true;
   mainPage: any = MainPage;
@@ -56,8 +57,34 @@ export class ClassifiedShowProductsPage {
       });
   }
 
+  loadMoreProducts(){
+    this.classifiedProvider.getFishingsWithStartingId(this.products[this.products.length - 1].id)
+      .subscribe(response => {
+        this.productLoader = [];
+        this.productLoader = response;
+        for(var i = 0; i < this.productLoader.length; i++){
+          this.products.push(this.productLoader[i]);
+        }
+        for(var i = 0; i < this.productLoader.length; i++){
+          this.getClassifiedForLoader(i);
+        }
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   getClassified(index){
     this.classifiedProvider.getClassified(this.products[index].classified_id)
+      .subscribe(response => {
+        this.classifieds.push(response);
+        console.log(this.classifieds);
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
+  getClassifiedForLoader(index){
+    this.classifiedProvider.getClassified(this.productLoader[index].classified_id)
       .subscribe(response => {
         this.classifieds.push(response);
         console.log(this.classifieds);

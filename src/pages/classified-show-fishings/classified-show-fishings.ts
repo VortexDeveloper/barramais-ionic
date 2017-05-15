@@ -22,6 +22,7 @@ export class ClassifiedShowFishingsPage {
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any = localStorage.getItem('user');
   fishings: any[] = [];
+  fishingLoader: any[] = [];
   classifieds: any[] = [];
   isClassifiedEmpty: boolean = true;
   mainPage: any = MainPage;
@@ -56,8 +57,34 @@ export class ClassifiedShowFishingsPage {
       });
   }
 
+  loadMoreFishings(){
+    this.classifiedProvider.getFishingsWithStartingId(this.fishings[this.fishings.length - 1].id)
+      .subscribe(response => {
+        this.fishingLoader = [];
+        this.fishingLoader = response;
+        for(var i = 0; i < this.fishingLoader.length; i++){
+          this.fishings.push(this.fishingLoader[i]);
+        }
+        for(var i = 0; i < this.fishingLoader.length; i++){
+          this.getClassifiedForLoader(i);
+        }
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   getClassified(index){
     this.classifiedProvider.getClassified(this.fishings[index].classified_id)
+      .subscribe(response => {
+        this.classifieds.push(response);
+        console.log(this.classifieds);
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
+  getClassifiedForLoader(index){
+    this.classifiedProvider.getClassified(this.fishingLoader[index].classified_id)
       .subscribe(response => {
         this.classifieds.push(response);
         console.log(this.classifieds);
