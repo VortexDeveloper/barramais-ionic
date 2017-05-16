@@ -123,10 +123,13 @@ export class GroupsPage {
     let modal = this.modalCtrl.create(GroupModalPage, { my_groups: this.my_groups, group: group });
     modal.onDidDismiss(group => {
       if(group){
+        console.log(group);
         let new_group: GroupModel = new GroupModel(group);
+        console.log(new_group);
         this.my_groups.push(new_group);
         this.all_groups.push(new_group);
         this.confirmed_groups.push(new_group);
+        this.loadGroups(this.current_user);
       }
     });
     modal.present();

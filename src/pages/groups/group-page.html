@@ -11,9 +11,13 @@
     <img src="{{group.cover_photo_url}}" alt="Perfil Header"/>
   </div>
   <div class="main-content">
-    <button icon-left class="perfil-actions" color="danger" ion-button *ngIf="showAdminActions" (click)="presentConfirmDelete(group)">
+    <button icon-left class="perfil-actions" color="danger" style="right: 84px !important;" ion-button *ngIf="showAdminActions" (click)="presentConfirmDelete(group)">
       <ion-icon name="close"></ion-icon>
       Excluir
+    </button>
+    <button icon-left class="perfil-actions" color="primary" ion-button (click)="openEditModal(groupUpdate, group)" *ngIf="showAdminActions">
+      <ion-icon name="create"></ion-icon>
+      Editar
     </button>
     <ion-item>
       <h2 class="group-name">{{group.name}}</h2>
