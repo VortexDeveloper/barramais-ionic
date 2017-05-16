@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ActionSheetController, Platform, LoadingController } from 'ionic-angular';
 import { Groups } from "../../providers/groups";
+import { Routes } from "../../providers/routes";
 import { GroupModel } from "../../models/group.model";
 import { ToastController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
@@ -27,6 +28,7 @@ export class GroupModalPage {
   jwtHelper: JwtHelper = new JwtHelper();
   erro: string = "";
   user: UserModel;
+  host: string = "";
 
   constructor(
     public platform: Platform,
@@ -36,11 +38,13 @@ export class GroupModalPage {
     public loadingCtrl: LoadingController,
     private camera: Camera,
     public groupProvider: Groups,
+    public routesProvider: Routes,
     public actionsheetCtrl: ActionSheetController,
     public toastCtrl: ToastController
   ) {
     this.user = new UserModel(this.jwtHelper.decodeToken(this.user_token));
     this.group = new GroupModel(navParams.data.group);
+    this.host = this.routesProvider.host();
   }
 
   ionViewDidLoad() {
