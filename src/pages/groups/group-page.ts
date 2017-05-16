@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, ViewController } from 'ionic-angular';
 import { PostModalPage } from "../post-modal/post-modal";
 import { UserPage } from '../user/user';
 import { FeedsPage } from '../feeds/feeds';
@@ -17,6 +17,7 @@ import { Posts } from '../../providers/posts';
 import { ToastController } from 'ionic-angular';
 import { Groups } from '../../providers/groups';
 import { PopoverController } from 'ionic-angular';
+import { GroupUpdatePage } from '../groups/group-update';
 import { PopoverPage } from '../groups/group-popover';
 
 /*
@@ -62,6 +63,7 @@ export class GroupPagePage {
   showGroupInformation: boolean = false;
   friends: any;
   posts: Array<any>;
+  groupUpdate: any = GroupUpdatePage;
 
   i_was_invited_to: boolean = false;
   send_request_to: boolean = false;
@@ -70,6 +72,7 @@ export class GroupPagePage {
 
   constructor(
     public navCtrl: NavController,
+    public viewCtrl: ViewController,
     params: NavParams,
     public groupProvider: Groups,
     public alertCtrl: AlertController,

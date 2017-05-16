@@ -8,7 +8,7 @@
     <img src="{{event.cover_photo_url}}" alt="Perfil Header"/>
   </div>
   <div class="main-content">
-    <button icon-left class="perfil-actions" color="danger" style="right: 79px !important;" ion-button [hidden]="!showAdminActions" (click)="presentConfirmDelete(event)">
+    <button icon-left class="perfil-actions" color="danger" style="right: 84px !important;" ion-button [hidden]="!showAdminActions" (click)="presentConfirmDelete(event)">
       <ion-icon name="close"></ion-icon>
       Excluir
     </button>
@@ -30,7 +30,7 @@
       </p>
     </ion-item>
     <p>
-      {{event.address.street + " " + event.address.complement + ", " + event.address.neighborhood + ", " + event.city.name + " - " + event.state.name}}
+      {{event.address.street}} {{event.address.complement}} {{event.address.neighborhood}} {{event.city.name + " - " + event.state.name}}
     </p>
     <ion-card *ngIf="showConfirmedGuestActions">
       <a ion-item (click)="openPostModal()">
