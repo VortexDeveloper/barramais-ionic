@@ -90,8 +90,19 @@ export class EventPagePage {
     this.navCtrl.push(page, {event: event});
   }
 
-  openEditPage(page, event, address){
-    this.navCtrl.push(page, {event: event, address: address});
+  // openEditPage(page, event, address){
+  //   this.navCtrl.push(page, {event: event, address: address});
+  //
+  // }
+
+  openEditPage(page, event, address) {
+    let modal = this.modalCtrl.create(page, {event: event, address: address});
+    modal.onDidDismiss(event => {
+      if(event){
+        this.event = new EventModel(event);
+      }
+    });
+    modal.present();
   }
 
   openPostModal() {

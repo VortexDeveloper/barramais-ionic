@@ -22,6 +22,7 @@ export class ClassifiedShowVesselsPage {
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any = localStorage.getItem('user');
   vessels: any[] = [];
+  vesselLoader: any[] = [];
   classifieds: any[] = [];
   isClassifiedEmpty: boolean = true;
   mainPage: any = MainPage;
@@ -56,8 +57,34 @@ export class ClassifiedShowVesselsPage {
       });
   }
 
+  loadMoreVessels(){
+    this.classifiedProvider.getFishingsWithStartingId(this.vessels[this.vessels.length - 1].id)
+      .subscribe(response => {
+        this.vesselLoader = [];
+        this.vesselLoader = response;
+        for(var i = 0; i < this.vesselLoader.length; i++){
+          this.vessels.push(this.vesselLoader[i]);
+        }
+        for(var i = 0; i < this.vesselLoader.length; i++){
+          this.getClassifiedForLoader(i);
+        }
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   getClassified(index){
     this.classifiedProvider.getClassified(this.vessels[index].classified_id)
+      .subscribe(response => {
+        this.classifieds.push(response);
+        console.log(this.classifieds);
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
+  getClassifiedForLoader(index){
+    this.classifiedProvider.getClassified(this.vesselLoader[index].classified_id)
       .subscribe(response => {
         this.classifieds.push(response);
         console.log(this.classifieds);

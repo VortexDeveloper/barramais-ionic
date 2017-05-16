@@ -129,6 +129,7 @@ export class GroupsPage {
         this.my_groups.push(new_group);
         this.all_groups.push(new_group);
         this.confirmed_groups.push(new_group);
+        this.loadGroups(this.current_user);
       }
     });
     modal.present();
