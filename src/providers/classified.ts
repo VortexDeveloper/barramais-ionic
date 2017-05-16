@@ -52,6 +52,7 @@ export class Classified {
   private get_vessels_with_starting_id: string;
   private get_fishings_with_starting_id: string;
   private get_products_with_starting_id: string;
+  private get_classified_with_starting_id: string;
 
   constructor(
     public http: Http,
@@ -100,6 +101,12 @@ export class Classified {
     this.get_vessels_with_starting_id = host + 'classifieds/get_vessels_with_starting_id/';
     this.get_fishings_with_starting_id = host + 'classifieds/get_fishings_with_starting_id/';
     this.get_products_with_starting_id = host + 'classifieds/get_products_with_starting_id/';
+    this.get_classified_with_starting_id = host + 'classifieds/get_classified_with_starting_id/';
+  }
+
+  getClassifiedWithStartingId(classified_id){
+    return this.authHttp.get(this.get_classified_with_starting_id + classified_id + ".json")
+      .map(res => res.json());
   }
 
   getAllVesselsByDate(){

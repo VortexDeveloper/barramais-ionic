@@ -57,6 +57,11 @@ export class ClassifiedShowFishingsPage {
       });
   }
 
+  // doInfinite(infiniteScroll) {
+  //   console.log('Begin async operation');
+  //   infiniteScroll.complete();
+  // }
+
   loadMoreFishings(){
     this.classifiedProvider.getFishingsWithStartingId(this.fishings[this.fishings.length - 1].id)
       .subscribe(response => {

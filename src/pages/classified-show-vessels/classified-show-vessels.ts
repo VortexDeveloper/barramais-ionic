@@ -58,7 +58,7 @@ export class ClassifiedShowVesselsPage {
   }
 
   loadMoreVessels(){
-    this.classifiedProvider.getFishingsWithStartingId(this.vessels[this.vessels.length - 1].id)
+    this.classifiedProvider.getVesselsWithStartingId(this.vessels[this.vessels.length - 1].id)
       .subscribe(response => {
         this.vesselLoader = [];
         this.vesselLoader = response;
