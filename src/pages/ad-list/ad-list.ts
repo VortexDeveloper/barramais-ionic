@@ -34,7 +34,10 @@ export class AdListPage {
   user_advertiser: any;
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
-  ads: any;
+  ads: any[] = [];
+  mainAds: any[] = [];
+  adLoader: any[] = [];
+  // adCounter: number = 0;
   isAdsEmpty: boolean = true;
   isAdvertiser: boolean = false;
   adsPage: any = AdsPage;
@@ -74,6 +77,11 @@ export class AdListPage {
         if(response.user_advertiser){
           this.advertiser = new AdvertiserModel(response.user_advertiser);
           this.ads = response.user_advertiser.ads;
+          for(var i = 0; i < 2; i++){
+            this.mainAds.push(this.ads[i]);
+            // this.adCounter = i;
+          }
+          // console.log(this.adCounter);
         }else{
           this.advertiser = new AdvertiserModel();
           this.ads = [];
@@ -82,6 +90,20 @@ export class AdListPage {
         this.checkAdsList();
       }, error => {
           console.log("Erro ao exibir o cadastro de anunciante" + error.json());
+      });
+  }
+
+  loadMoreAds(){
+    console.log(this.mainAds);
+    this.userProvider.getAdsWithStartingId(this.mainAds[this.mainAds.length - 1].id)
+      .subscribe(response => {
+        this.adLoader = [];
+        this.adLoader = response;
+        for(var i = 0; i < this.adLoader.length; i++){
+          this.mainAds.push(this.adLoader[i]);
+        }
+      }, error => {
+        console.log(error.json());
       });
   }
 

@@ -65,6 +65,7 @@ export class User {
   private omniauth_callback_url: string;
   private my_notifications_url: string;
   private open_my_notifications_url: string;
+  private get_ads_with_starting_id_url: string;
 
   constructor(
     public http: Http,
@@ -122,6 +123,12 @@ export class User {
     this.omniauth_callback_url = host + '/users/auth/facebook/callback.json';
     this.my_notifications_url = host + '/users/my_notifications';
     this.open_my_notifications_url = host + '/users/open_my_notifications';
+    this.get_ads_with_starting_id_url = host + 'users/get_ads_with_starting_id/'
+  }
+
+  getAdsWithStartingId(ad_id){
+    return this.authHttp.get(this.get_ads_with_starting_id_url + ad_id + ".json")
+      .map(res => res.json());
   }
 
   open_my_notifications(user_id){

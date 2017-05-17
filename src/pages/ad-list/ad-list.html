@@ -22,7 +22,7 @@
     <ion-list>
       <ion-item-divider [hidden]="!isAdsEmpty" color="light">Anúncios</ion-item-divider>
       <ion-item-divider [hidden]="isAdsEmpty" color="light">Não há anúncios cadastrados</ion-item-divider>
-      <ion-item *ngFor="let ad of ads">
+      <ion-item *ngFor="let ad of mainAds">
         <ion-thumbnail item-left>
           <img src="../../assets/images/1.jpg" alt="Sem foto">
         </ion-thumbnail>
@@ -44,6 +44,8 @@
       <button ion-fab mini color="danger" (click)="openPage(adsPage)"><ion-icon name="add"></ion-icon></button>
     </ion-fab> -->
   </div>
+
+  <button class="form-buttonsBack" ion-button type="button" (click)="loadMoreAds()" block>Carregar Mais</button>
 
   <button class="form-buttonsBack" ion-button type="button" (click)="goBack()" block>Voltar</button>
 </ion-content>

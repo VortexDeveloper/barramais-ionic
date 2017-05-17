@@ -58,19 +58,23 @@ export class ClassifiedShowProductsPage {
   }
 
   loadMoreProducts(){
-    this.classifiedProvider.getProductsWithStartingId(this.products[this.products.length - 1].id)
-      .subscribe(response => {
-        this.productLoader = [];
-        this.productLoader = response;
-        for(var i = 0; i < this.productLoader.length; i++){
-          this.products.push(this.productLoader[i]);
-        }
-        for(var i = 0; i < this.productLoader.length; i++){
-          this.getClassifiedForLoader(i);
-        }
-      }, error => {
-        console.log(error.json());
-      });
+    if(this.products.length <= 0){
+      this.getProducts();
+    }else{
+      this.classifiedProvider.getProductsWithStartingId(this.products[this.products.length - 1].id)
+        .subscribe(response => {
+          this.productLoader = [];
+          this.productLoader = response;
+          for(var i = 0; i < this.productLoader.length; i++){
+            this.products.push(this.productLoader[i]);
+          }
+          for(var i = 0; i < this.productLoader.length; i++){
+            this.getClassifiedForLoader(i);
+          }
+        }, error => {
+          console.log(error.json());
+        });
+    }
   }
 
   getClassified(index){
