@@ -264,7 +264,7 @@ export class MyApp {
 
   openPage(page) {
     this.nativePageTransitions.slide(this.options);
-    this.nav.push(page);
+    this.nav.push(page, { tabIndex: 4 });
     this.closeSubItems();
   }
 

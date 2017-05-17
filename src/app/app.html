@@ -7,7 +7,7 @@
             <ion-thumbnail item-left (click)="presentActionSheet()">
               <img src="{{user.avatar_url}}" id='user_avatar' *ngIf="user" >
             </ion-thumbnail>
-            <a (click)="openPage(profilePage)">
+            <a (click)="openPage(mainPage)">
               {{user.first_name}} {{user.last_name}}
             </a>
           </ion-item>
