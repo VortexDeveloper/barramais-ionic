@@ -69,6 +69,16 @@ export class ClassifiedUserListPage {
       });
   }
 
+  loadMoreClassifieds(){
+    this.classifiedProvider.getClassifiedWithStartingId(45)
+      .subscribe(response => {
+        console.log(this.classifieds);
+        console.log(response);
+      }, error => {
+        console.log(error.json());
+      });
+  }
+
   clearRemovedClassified(removedItem){
       this.classifieds.splice(this.classifieds.indexOf(removedItem), 1);
   }

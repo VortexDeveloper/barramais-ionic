@@ -58,7 +58,7 @@ export class ClassifiedShowProductsPage {
   }
 
   loadMoreProducts(){
-    this.classifiedProvider.getFishingsWithStartingId(this.products[this.products.length - 1].id)
+    this.classifiedProvider.getProductsWithStartingId(this.products[this.products.length - 1].id)
       .subscribe(response => {
         this.productLoader = [];
         this.productLoader = response;
