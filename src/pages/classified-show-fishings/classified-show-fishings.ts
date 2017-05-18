@@ -48,9 +48,12 @@ export class ClassifiedShowFishingsPage {
         for(var i = 0; i < this.fishings.length; i++){
           this.getClassified(i);
         }
-        if(this.classifieds.length > 0){
+        console.log(this.classifieds.length);
+        console.log(this.isClassifiedEmpty);
+        if(this.fishings.length > 0){
           this.isClassifiedEmpty = false;
         }
+        console.log(this.isClassifiedEmpty);
         console.log(this.classifieds);
       }, error => {
         console.log(error.json());

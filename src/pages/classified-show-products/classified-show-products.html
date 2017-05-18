@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item-divider [hidden]="isClassifiedsEmpty" color="light">Classificados</ion-item-divider>
-  <ion-item-divider [hidden]="!isClassifiedsEmpty" color="light">Não há classificados cadastrados</ion-item-divider>
+  <ion-item-divider [hidden]="isClassifiedEmpty" color="light">Classificados</ion-item-divider>
+  <ion-item-divider [hidden]="!isClassifiedEmpty" color="light">Não há classificados a mostra</ion-item-divider>
 
   <ion-list>
     <ion-item *ngFor="let classified of classifieds">

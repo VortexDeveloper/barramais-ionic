@@ -48,7 +48,7 @@ export class ClassifiedShowVesselsPage {
         for(var i = 0; i < this.vessels.length; i++){
           this.getClassified(i);
         }
-        if(this.classifieds.length > 0){
+        if(this.vessels.length > 0){
           this.isClassifiedEmpty = false;
         }
         console.log(this.classifieds);

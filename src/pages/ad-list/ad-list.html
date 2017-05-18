@@ -21,7 +21,7 @@
   <div class="container" [hidden]="!isAdvertiser">
     <ion-list>
       <ion-item-divider [hidden]="!isAdsEmpty" color="light">Anúncios</ion-item-divider>
-      <ion-item-divider [hidden]="isAdsEmpty" color="light">Não há anúncios cadastrados</ion-item-divider>
+      <ion-item-divider [hidden]="isAdsEmpty" color="light">Não há anúncios a mostra</ion-item-divider>
       <ion-item *ngFor="let ad of mainAds">
         <ion-thumbnail item-left>
           <img src="../../assets/images/1.jpg" alt="Sem foto">
