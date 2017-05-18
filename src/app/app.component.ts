@@ -262,9 +262,9 @@ export class MyApp {
   }
 
 
-  openPage(page) {
+  openPage(page, index) {
     this.nativePageTransitions.slide(this.options);
-    this.nav.push(page);
+    this.nav.push(page, { tabIndex: index });
     this.closeSubItems();
   }
 

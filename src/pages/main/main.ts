@@ -28,6 +28,7 @@ export class MainPage {
   profile: any = ProfilePage;
   conversation: any = ConversationPage;
   notifications: any = NotificationsPage;
+  mySelectedIndex: number;
 
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
@@ -44,7 +45,7 @@ export class MainPage {
     public menu: MenuController,
     private userProvider: User
   ) {
-
+      this.mySelectedIndex = navParams.data.tabIndex || 0;
     }
 
   ionViewDidLoad() {
