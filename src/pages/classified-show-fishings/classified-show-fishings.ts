@@ -48,9 +48,12 @@ export class ClassifiedShowFishingsPage {
         for(var i = 0; i < this.fishings.length; i++){
           this.getClassified(i);
         }
-        if(this.classifieds.length > 0){
+        console.log(this.classifieds.length);
+        console.log(this.isClassifiedEmpty);
+        if(this.fishings.length > 0){
           this.isClassifiedEmpty = false;
         }
+        console.log(this.isClassifiedEmpty);
         console.log(this.classifieds);
       }, error => {
         console.log(error.json());
@@ -63,19 +66,23 @@ export class ClassifiedShowFishingsPage {
   // }
 
   loadMoreFishings(){
-    this.classifiedProvider.getFishingsWithStartingId(this.fishings[this.fishings.length - 1].id)
-      .subscribe(response => {
-        this.fishingLoader = [];
-        this.fishingLoader = response;
-        for(var i = 0; i < this.fishingLoader.length; i++){
-          this.fishings.push(this.fishingLoader[i]);
-        }
-        for(var i = 0; i < this.fishingLoader.length; i++){
-          this.getClassifiedForLoader(i);
-        }
-      }, error => {
-        console.log(error.json());
-      });
+    if(this.fishings.length <= 0){
+      this.getFishings();
+    }else{
+      this.classifiedProvider.getFishingsWithStartingId(this.fishings[this.fishings.length - 1].id)
+        .subscribe(response => {
+          this.fishingLoader = [];
+          this.fishingLoader = response;
+          for(var i = 0; i < this.fishingLoader.length; i++){
+            this.fishings.push(this.fishingLoader[i]);
+          }
+          for(var i = 0; i < this.fishingLoader.length; i++){
+            this.getClassifiedForLoader(i);
+          }
+        }, error => {
+          console.log(error.json());
+        });
+    }
   }
 
   getClassified(index){

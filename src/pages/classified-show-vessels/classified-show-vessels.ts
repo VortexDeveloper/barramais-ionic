@@ -48,7 +48,7 @@ export class ClassifiedShowVesselsPage {
         for(var i = 0; i < this.vessels.length; i++){
           this.getClassified(i);
         }
-        if(this.classifieds.length > 0){
+        if(this.vessels.length > 0){
           this.isClassifiedEmpty = false;
         }
         console.log(this.classifieds);
@@ -58,19 +58,23 @@ export class ClassifiedShowVesselsPage {
   }
 
   loadMoreVessels(){
-    this.classifiedProvider.getVesselsWithStartingId(this.vessels[this.vessels.length - 1].id)
-      .subscribe(response => {
-        this.vesselLoader = [];
-        this.vesselLoader = response;
-        for(var i = 0; i < this.vesselLoader.length; i++){
-          this.vessels.push(this.vesselLoader[i]);
-        }
-        for(var i = 0; i < this.vesselLoader.length; i++){
-          this.getClassifiedForLoader(i);
-        }
-      }, error => {
-        console.log(error.json());
-      });
+    if(this.vessels.length <= 0){
+      this.getVessels();
+    }else{
+      this.classifiedProvider.getVesselsWithStartingId(this.vessels[this.vessels.length - 1].id)
+        .subscribe(response => {
+          this.vesselLoader = [];
+          this.vesselLoader = response;
+          for(var i = 0; i < this.vesselLoader.length; i++){
+            this.vessels.push(this.vesselLoader[i]);
+          }
+          for(var i = 0; i < this.vesselLoader.length; i++){
+            this.getClassifiedForLoader(i);
+          }
+        }, error => {
+          console.log(error.json());
+        });
+    }
   }
 
   getClassified(index){

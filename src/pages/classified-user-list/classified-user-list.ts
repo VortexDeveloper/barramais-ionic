@@ -22,6 +22,7 @@ export class ClassifiedUserListPage {
   jwtHelper: JwtHelper = new JwtHelper();
   user_token: any = localStorage.getItem('user');
   classifieds: any;
+  classifiedLoader: any[] = [];
   isClassifiedsEmpty: boolean = true;
   mainPage: any = MainPage;
   classifiedPage: any = ClassifiedPage;
@@ -69,14 +70,23 @@ export class ClassifiedUserListPage {
       });
   }
 
-  loadMoreClassifieds(){
-    this.classifiedProvider.getClassifiedWithStartingId(45)
-      .subscribe(response => {
-        console.log(this.classifieds);
-        console.log(response);
-      }, error => {
-        console.log(error.json());
-      });
+  loadMoreClassifieds(index){
+    if(this.classifieds.length <= 0){
+      this.loadClassifiedList();
+    }else{
+      this.classifiedProvider.getClassifiedWithStartingId(this.classifieds[this.classifieds.length - 1].id)
+        .subscribe(response => {
+          this.classifiedLoader = [];
+          this.classifiedLoader = response;
+          for(var i = 0; i < this.classifiedLoader.length; i++){
+            this.classifieds.push(this.classifiedLoader[i]);
+          }
+          console.log(this.classifieds);
+          console.log(response);
+        }, error => {
+          console.log(error.json());
+        });
+    }
   }
 
   clearRemovedClassified(removedItem){
