@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, AlertController, ModalController, LoadingController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';
 import { UserModel } from "../../models/user.model";
@@ -9,8 +10,7 @@ import { ToastController } from 'ionic-angular';
 import { PhotoModalPage } from '../photo-modal/photo-modal';
 import { AlbumPhotoModel } from "../../models/album_photo.model";
 import { AlbumPhotoCreatePage } from '../album-photo-create/album-photo-create';
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
+
 
 /*
   Generated class for the AlbumList page.

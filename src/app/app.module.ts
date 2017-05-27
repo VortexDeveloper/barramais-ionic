@@ -1,4 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { FeedsPage } from '../pages/feeds/feeds';
@@ -32,7 +34,7 @@ import { FriendsPage } from '../pages/friends/friends';
 import { FriendshipRequestPage } from '../pages/friendship-request/friendship-request';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/login/forgot-password';
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { BmHeaderComponent } from '../components/bm-header/bm-header';
 import { BmPostComponent } from '../components/bm-post/bm-post';
@@ -174,6 +176,8 @@ export function getAuthHttp(http) {
     Mask
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: ''
     })
@@ -268,6 +272,7 @@ export function getAuthHttp(http) {
     NativePageTransitions,
     Facebook,
     Search,
+    JwtHelper,
     {provide: AuthHttp, useFactory: getAuthHttp, deps: [Http]}
   ]
 })

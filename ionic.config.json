@@ -1,6 +1,5 @@
 {
   "name": "barramais-ionic",
   "app_id": "444bac9c",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }

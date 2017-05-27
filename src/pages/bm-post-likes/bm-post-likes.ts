@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ActionSheetController, Platform } from 'ionic-angular';
-import { Groups } from "../../providers/groups";
-import { User } from "../../providers/user";
+
 import { Posts } from "../../providers/posts";
 import { ToastController } from 'ionic-angular';
 import { JwtHelper } from 'angular2-jwt';

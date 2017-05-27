@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { UserModel } from "../../models/user.model";
 import { JwtHelper } from 'angular2-jwt';
 import { Classified } from '../../providers/classified';
-import { ClassifiedFishingPage } from '../classified-fishing/classified-fishing';
+
 import { MainPage } from '../main/main';
 import { ClassifiedPage } from '../classified/classified';
 

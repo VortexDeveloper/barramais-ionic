@@ -1,6 +1,33 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { 
+  Component, 
+  ViewChild 
+} from '@angular/core';
+
+import { 
+  ActionSheetController, 
+  AlertController,
+  Events, 
+  LoadingController,
+  MenuController,
+  Nav, 
+  Platform, 
+  ToastController 
+} from 'ionic-angular';
+
+import { 
+  Camera, 
+  InAppBrowser, 
+  Splashscreen, 
+  StatusBar, 
+} from 'ionic-native';
+import { Facebook } from '@ionic-native/facebook'; //removido do import, não usado FacebookLoginResponse
+import { 
+  NativePageTransitions, 
+  NativeTransitionOptions 
+} from '@ionic-native/native-page-transitions';
+
+import { JwtHelper } from 'angular2-jwt';
+
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { ProfilePage } from '../pages/profile/profile';
@@ -12,7 +39,6 @@ import { AdsPage } from '../pages/ads/ads';
 import { MidiaKitPage } from '../pages/midia-kit/midia-kit';
 import { TermsPage } from '../pages/terms/terms';
 import { PrivacyPage } from '../pages/privacy/privacy';
-import { InAppBrowser } from 'ionic-native';
 import { ConversationPage } from '../pages/conversation/conversation';
 import { AlbumListPage } from '../pages/album-list/album-list';
 import { AlbumPhotoCreatePage } from '../pages/album-photo-create/album-photo-create';
@@ -43,18 +69,15 @@ import { ClassifiedProductPreviewPage } from '../pages/classified-product-previe
 import { ClassifiedShowFishingsPage } from '../pages/classified-show-fishings/classified-show-fishings';
 import { ClassifiedShowProductsPage } from '../pages/classified-show-products/classified-show-products';
 import { ClassifiedShowVesselsPage } from '../pages/classified-show-vessels/classified-show-vessels';
-import { AlertController } from 'ionic-angular';
-import { UserModel } from "../models/user.model";
-import { JwtHelper } from 'angular2-jwt';
-import { User } from '../providers/user';
-import { MenuController, ActionSheetController, ToastController, LoadingController } from 'ionic-angular';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { InterestSelectionPage } from '../pages/interest-selection/interest-selection';
-import { Facebook } from '@ionic-native/facebook'; //removido do import, não usado FacebookLoginResponse
-// import { NotificationViewPage } from '../pages/notification-view/notification-view';
 import { HelpPage } from '../pages/help/help';
-import { Events } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+
+import { UserModel } from "../models/user.model";
+
+import { User } from '../providers/user';
+
+// import { NotificationViewPage } from '../pages/notification-view/notification-view';
+
 
 declare var cordova: any;
 
@@ -139,13 +162,13 @@ export class MyApp {
   }
 
   constructor(
+    public menuCtrl: MenuController,
     public platform: Platform,
     private alertCtrl: AlertController,
     private userProvider: User,
     public toastCtrl: ToastController,
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController,
-    private menuCtrl: MenuController,
     public events: Events,
     private nativePageTransitions: NativePageTransitions,
     public fb: Facebook

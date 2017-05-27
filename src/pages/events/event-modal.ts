@@ -59,7 +59,7 @@ export class EventModalPage {
 
   create(event, address){
     // var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
-    var cepRule = /^[0-9]{8}$/;
+    //var cepRule = /^[0-9]{8}$/;
 
     if(event.name == null || event.name == ""){
       this.presentToast("Preencha o nome do evento!");
@@ -94,7 +94,7 @@ export class EventModalPage {
 
   update(event, address){
     // var cepRule = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
-    var cepRule = /^[0-9]{8}$/;
+    //var cepRule = /^[0-9]{8}$/;
 
     if(event.name == null || event.name == ""){
       this.presentToast("Preencha o nome do evento!");
