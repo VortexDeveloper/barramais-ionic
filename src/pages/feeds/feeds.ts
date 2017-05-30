@@ -13,7 +13,6 @@ import { InterestSelectionPage } from '../interest-selection/interest-selection'
   templateUrl: 'feeds.html'
 })
 export class FeedsPage {
-
   posts: Array<any> = [];
   profilePage: any = ProfilePage;
   user_token: any = localStorage.getItem('user');
