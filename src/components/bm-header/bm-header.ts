@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProfilePage } from "../../pages/profile/profile";
 import { NavController, NavParams } from 'ionic-angular';
 import { MainPage } from '../../pages/main/main';
@@ -20,7 +20,7 @@ import { JwtHelper } from 'angular2-jwt';
   templateUrl: 'bm-header.html'
 })
 export class BmHeaderComponent {
-
+  @Input() title: string;
   user_token: any = localStorage.getItem('user');
   jwtHelper: JwtHelper = new JwtHelper();
   current_user: UserModel;

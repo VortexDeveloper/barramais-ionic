@@ -1,11 +1,15 @@
+   <ion-navbar>
+    <button ion-button icon-only menuToggle start>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        {{ title }}
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click) = "openUserPage(usersPage)">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+   </ion-navbar>
 
-    <div class="toolbar-ios-fix">
-      <button ion-button menuToggle class="menu-button">
-      </button>
-      <button class="bar-buttons" right ion-button (click)="openUserPage(usersPage)">
-        <ion-icon ios="ios-search" md="md-search"></ion-icon>
-      </button>
-      <button class="logo bar-buttons" left ion-button (click)="openPage(mainPage)">
-        <img src="assets/images/logo.png" alt="Barramais" />
-      </button>
-    </div>
+
