@@ -1,88 +1,20 @@
 page-login {
-  .toolbar-title-md {
-    color: #f5f5f5;
-  }
-  .toolbar-title-ios {
-    color: #f5f5f5;
-  }
 
-  .toolbar-title-wp {
-    color: #f5f5f5;
-  }
-  .content-md, .content-ios, .content-wp {
-      color: #000;
-      // background-image: url(../assets/images/bg_cadastro.jpg);
-      // background-position: center;
-      // background-size: cover;
-      // background: #f7a14b;
-      background: #3182d2 !important;
-  }
-
-  .item-md, .item-ios, .item-wp {
-     background-color: transparent;
-     padding-left: 0;
-     color: #f5f5f5;
-  }
-
-  .item-inner {
-      font-size: 1.5rem;
-      color: #f5f5f5 !important;
-      border-bottom: 0.55px solid #c8c7cc !important;
-  }
-
-  .form-buttons {
-      background-color: rgba(255, 255, 255, 0.3) !important;
-      border: solid 1px;
-      margin-top: 20px;
-  }
-
-  .header-md::after {
-      background-image: none;
-      background-color: transparent;
-  }
-
-  .toolbar-background-md, .toolbar-background-ios, .toolbar-background-wp {
-      background: transparent;
-      color: #f5f5f5;
-  }
-
-  .header-ios .toolbar-ios:last-child .toolbar-background-ios {
-      border: none;
-  }
-
-  .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
-      color: #f5f5f5;
-  }
-
-  p {
-    color: #f5f5f5;
-    font-size: 2em;
+  .forgot{
     text-align: center;
+    color: color($colors, barramais-primary);
+    margin-top: 5vh;
+    cursor: pointer;
+    font-size: 1.1rem;
   }
 
-  h2 {
-      color: #f5f5f5;
-      font-size: 0.875em;
-      text-align: center;
-  }
-
-  .container {
-    padding: 10px;
-    position: absolute;
-    width: 100%;
-  }
-
-  .input-has-focus .label-md[floating],
-  .input-has-focus .label-ios[floating],
-  .input-has-focus .label-wp[floating]{
-    color: #f5f5f5;
-  }
-
-  .logo {
-    width: 32px;
-    margin: 15px 50%;
-    left: -16px;
-    position: relative;
+  .or{
+    text-align: center;
+    margin-top: 12vh;
+    font-size: 1.1rem;
+    color: color($colors, barramais-primary);
+    font-weight: bold;
+    height: 12vh;
   }
 
 }
