@@ -194,4 +194,8 @@ export class UsersPage {
       default: { break; }
     }
   }
+  
+  closePage(): void{
+    this.navCtrl.pop();
+  }
 }

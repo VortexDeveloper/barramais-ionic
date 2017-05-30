@@ -1,16 +1,18 @@
 <ion-header>
-  <ion-navbar>
-    <bm-header></bm-header>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar
+      [showCancelButton]="shouldShowCancel"
+      [debounce]='1000'
+      placeholder="Pesquisar"
+      (ionInput)="getResults($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+    <ion-buttons end>
+      <button ion-button clear (click)="closePage()">Cancelar</button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-searchbar
-    [showCancelButton]="shouldShowCancel"
-    [debounce]='1000'
-    placeholder="Pesquisar"
-    (ionInput)="getResults($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
   <ion-list>
     <ion-item class="item-friends" *ngFor="let result of results">
       <ion-thumbnail item-left (click)='openSearchItem(result)'>
