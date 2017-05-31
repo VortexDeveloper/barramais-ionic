@@ -1,50 +1,33 @@
 <ion-header>
   <ion-navbar>
+    <ion-title>
+      Criar Conta
+    </ion-title>      
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <div class="container">
-    <div class="logo">
-      <img src="assets/images/logo300.png" alt="BarraMais" />
-    </div>
-    <p>
-      CONFIGURAÇÃO DA CONTA B+
-    </p>
-    <h2>Faça seu cadastro</h2>
+<ion-content padding>
     <form (ngSubmit)="save(user)">
       <ion-item>
         <ion-label floating>Nome</ion-label>
         <ion-input type="text" [(ngModel)]="user.first_name" name="first_name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Sobrenome</ion-label>
-        <ion-input type="text" [(ngModel)]="user.last_name" name="last_name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Data de nascimento</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birthday" name="birthday" max="1999"></ion-datetime>
-      </ion-item>
-      <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Confirmar Email</ion-label>
-        <ion-input type="text" [(ngModel)]="userEmailConfirmation" name="email_confirmation"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Senha</ion-label>
         <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label floating>Confirmar Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="user.password_confirmation" name="password_confirmation"></ion-input>
-      </ion-item>
-      <button class="form-buttons" ion-button type="submit" block>Finalizar cadastro</button>
+      <br/>
+      <button ion-button type="submit" block color="barramais-primary">Cadastrar</button>
     </form>
     <p>
       Ao inscrever-se, você concorda com nossos<br>
       <b><a (click)="openTermsAndPrivacy(termsPage)">Termos de Serviço</a></b> e <b><a (click)="openTermsAndPrivacy(privacyPage)">Política de Privacidade</a></b>
     </p>
-  </div>
+    <div class="or">
+      OU
+    </div>
+    <button ion-button type="submit" outline block color="barramais-primary">Já tenho uma conta</button>
 </ion-content>

@@ -1,74 +1,17 @@
 page-registration {
 
-  .content-md, .content-ios, .content-wp {
-      color: #000;
-      // background-image: url(../assets/images/bg_cadastro.jpg);
-      // background-position: center;
-      // background-size: cover;
-      background: #ef7a2b !important;
-  }
-
-  .item-md, .item-ios, .item-wp {
-     background-color: transparent;
-     padding-left: 0;
-     color: #f5f5f5;
-  }
-
   .item-inner {
-      font-size: 1.5rem;
-      color: #f5f5f5 !important;
-      border-bottom: 0.55px solid #c8c7cc !important;
-  }
-
-  .form-buttons {
-      background-color: rgba(255, 255, 255, 0.3) !important;
-      border: solid 1px;
-      margin-top: 20px;
-  }
-
-  .header-md::after {
-      background-image: none;
-      background-color: transparent;
-  }
-
-  .toolbar-background-md, .toolbar-background-ios, .toolbar-background-wp {
-      background: transparent;
-      color: #f5f5f5;
-  }
-
-  .header-ios .toolbar-ios:last-child .toolbar-background-ios {
-      border: none;
-  }
-
-  .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
-      color: #f5f5f5;
+      font-size: 1.4rem;
   }
 
   p {
-    color: #f5f5f5;
-    font-size: 0.875em;
-    text-align: center;
-  }
-
-  h2 {
-      color: #f5f5f5;
-      font-size: 1.5em;
-      text-align: center;
-  }
-
-  .container {
-    padding: 10px;
-  }
-
-  .logo {
-    width: 32px;
-    margin: 15px 50%;
-    left: -16px;
-    position: relative;
+     color: rgb(121, 121, 121);
+     font-size: 1.2rem;
+     text-align: center;
   }
 
   a {
-    color: #f5f5f5;
+    color: color($colors, barramais-primary);
   }
 
 }
@@ -83,9 +26,12 @@ page-registration {
   color: black !important;
 }
 
-// .toaster {
-//   padding: 1.5rem;
-//   font-size: 1.4rem;
-//   color: black;
-//   background: blue;
-// }
+.or{
+    text-align: center;
+    margin-top: 8vh;
+    font-size: 1.1rem;
+    color: color($colors, barramais-primary);
+    font-weight: bold;
+    height: 8vh;
+    text-transform: uppercase;
+  }
