@@ -5,7 +5,8 @@ page-home {
   }
 
   ion-content{
-    background-image: url('/assets/images/bgAll.png');
+    background: url('../assets/images/bgAll.png') no-repeat center;
+    background-size: 100%;
   }
 
   ion-navbar.toolbar {
