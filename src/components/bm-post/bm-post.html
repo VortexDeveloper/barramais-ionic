@@ -1,5 +1,61 @@
 <!-- <ion-item-divider color="light" *ngIf="!hasPosts">Não há posts no seu feed de notícias</ion-item-divider> -->
 <ion-card *ngFor="let post of posts">
+  <ion-item>
+     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
+      <img src="{{post.user.avatar_url}}"/>
+    </ion-avatar>
+    <button ion-button class="destroy-button" clear type="button" *ngIf="post.user.user_id == current_user.id" item-right small (click)="deletePost(post)">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <p (click)='openProfile(post.user.user_id)'> {{post.user.name}} </p>
+    <p (click)='openDomain(post.domain_type, post.domain)' *ngIf='notTheAuthor(post)'>
+      {{getDomainName(post)}}
+    </p>
+    <p>{{post.sent_date_format}}</p>
+  </ion-item>
+  <ion-card-content>
+    <p>{{post.description}}</p>
+    <div *ngIf="post.post_images">
+      <div class='post-images' (click)="openPhotos(post.post_images)">
+        <div *ngFor="let image of post.post_images | slice:0:4; let i = index" class="{{i == 3 ? 'post-image plus-sign-icon' : 'post-image'}}">
+          <img src="{{image.post_image}}" />
+        </div>
+      </div>
+    </div>
+    <div class="post-attach rich_url" *ngIf="post.rich_url" (click)="openLink(post.rich_url.url)">
+      <div class="rich_url-image">
+        <img src="{{post.rich_url.images[0].src}}" *ngIf="post.rich_url.images.length > 0" alt="" />
+      </div>
+      <h2>{{post.rich_url.title}}</h2>
+      <p>
+        {{post.rich_url.description}}
+      </p>
+    </div>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>12 Likes</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>4 Comments</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+        11h ago
+      </ion-note>
+    </ion-col>
+  </ion-row>
+</ion-card>
+
+<!--
+<ion-card *ngFor="let post of posts">
   <ion-item class='post-header'>
     <ion-avatar item-left (click)='openProfile(post.user.user_id)'>
       <img src="{{post.user.avatar_url}}"/>
@@ -47,7 +103,7 @@
         <ion-badge item-left small *ngIf='post.likes.size > 0'>{{post.likes.size}}</ion-badge>
       </div>
       <button class='like-action' ion-button icon-left clear small (click)='toogle_like(post)'>
-        <!-- <ion-icon name="star" [color]="like_color_for(post)"></ion-icon> -->
+        <ion-icon name="star" [color]="like_color_for(post)"></ion-icon> 
         <img [src]="like_image_for(post)" />
       </button>
     </ion-col>
@@ -65,7 +121,7 @@
       <button ion-button icon-left clear small>
         <ion-icon ios="ios-share" md="md-share" color="grayed"></ion-icon>
       </button>
-    </ion-col> -->
+    </ion-col> 
   </ion-row>
   <div *ngIf="post.showComments">
     <div class="post-comments" *ngFor='let comment of post.comments'>
@@ -99,4 +155,5 @@
     </button>
   </div>
 </ion-card>
-<div class="posts-end"></div>
+-->
+<br/>

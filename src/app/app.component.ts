@@ -87,7 +87,7 @@ declare var cordova: any;
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  pages: [{title: string, component:any, icon: string, isDisabled: boolean}];
   rootPage: any = HomePage;
   mainPage: any = MainPage;
   profilePage: any = ProfilePage;
@@ -173,6 +173,17 @@ export class MyApp {
     private nativePageTransitions: NativePageTransitions,
     public fb: Facebook
   ) {
+      this.pages = [
+        {title: 'Feed de Publicações', component: MainPage, icon: 'feed', isDisabled: false},
+        {title: 'Amigos', component: FriendsPage, icon: 'amigos', isDisabled: false},
+        {title: 'Mensagens', component: ConversationPage, icon: 'mensagens', isDisabled: false},
+        {title: 'Páginas', component:'', icon: 'paginas', isDisabled: true},
+        {title: 'Catálogo de Atividades', component: EventsPage, icon: 'atividades', isDisabled: false},
+        {title: 'Classificados', component:'', icon: 'classificados', isDisabled: true},
+        {title: 'Configurações', component:UserPage, icon: 'configuracoes', isDisabled: false},
+        {title: 'Ajuda e Suporte', component:HelpPage, icon: 'ajuda', isDisabled: false},
+        {title: 'Sobre a Barra Mais', component:'', icon: 'sobre', isDisabled: true},
+      ];
       this.checkMainPage();
       this.initializeApp();
       this.setUser();
@@ -287,7 +298,7 @@ export class MyApp {
 
   openPage(page, index) {
     this.nativePageTransitions.slide(this.options);
-    this.nav.push(page, { tabIndex: index });
+    this.nav.setRoot(page, { tabIndex: index, user: this.user });
     this.closeSubItems();
   }
 

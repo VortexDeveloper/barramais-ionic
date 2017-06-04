@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
 
 .comming {
     max-width: 54px !important;
@@ -29,7 +29,7 @@
 }
 
 a {
-  color: #192d52;
+  color: color($colors, barramais-primary);
 }
 
 ul {
@@ -61,9 +61,19 @@ ion-card img {
   background: #4e6692;
 }
 
+ion-card ion-avatar img,
+ion-card ion-avatar img,
+ion-card ion-avatar img {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+}
+
 ion-thumbnail img {
-  display: block;
-  border-radius: 4px;
+  //display: block;
+  border-radius: 50%;
+  height: 51px !important;
+  width: 51px !important;
 }
 
 
@@ -106,7 +116,7 @@ ion-thumbnail img {
 
 .item-inner {
   font-size: 1.4rem;
-  color: #192d52;
+  color: color($colors, barramais-primary);
 }
 
 .menu-item img{
@@ -189,10 +199,24 @@ a.item-ios:not([detail-none]) .item-inner{
 .item-md ion-avatar img,
 .item-ios ion-avatar img,
 .item-wp ion-avatar img {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
   overflow: hidden;
+}
+
+.item-md p,
+.item-ios p,
+.item-wp p {
+  color:color($colors, dark);
+  font-size: 1.4rem;
+}
+
+.item-md p a,
+.item-ios p a,
+.item-wp p a{
+  color:color($colors, barramais-primary);
+  font-size: 1.2rem;
 }
 
 .item-sub ion-label {
@@ -226,6 +250,9 @@ ion-badge {
   border-radius: 3px !important;
   font-size: 0.7em;
   background-color: #ffa051 !important;
+}
+.custom-ion-list{
+  margin-top: 14px;
 }
 
 .badges-container{
@@ -298,50 +325,64 @@ textarea{
 }
 
 .menu-item-icone{
-  width: 30px;
-  height: 30px;
+  width: 21px;
+  height: 20px;
   margin: 0 10px;
   border: 0;
 }
 
-.inicio{
-  background: url('../assets/images/icones.png') -124px -31px;
+.menu-inner {
+  top: 0;
+  width: 300px;
 }
 
-.conv-amigos{
-  background: url('../assets/images/icones.png') -465px 0;
+.footer-menu{
+  background-color: color($colors, barramais-primary)
+}
+
+.footer-menu  ion-icon{
+    color: #fff
+}
+
+.item-menu{
+  background-color: rgb(248, 248, 248);
+  color: color($colors, barramais-primary);
+}
+
+.feed{
+  background: url('../assets/images/icons/boat@.png') no-repeat center ;
 }
 
 .amigos{
-  background: url('../assets/images/icones.png') -310px -31px;
+  background: url('../assets/images/icons/contacts.png') no-repeat center;
 }
 
 .paginas{
-  background: url('../assets/images/icones.png') -62px 0;
+  background: url('../assets/images/icons/pages.png') no-repeat center;
 }
 
-.blog{
-  background: url('../assets/images/icones.png') -93px -31px;
-}
-
-.eventos{
-  background: url('../assets/images/icones.png') -341px 0;
-}
-
-.viagens{
-  background: url('../assets/images/icones.png') -434px -31px;
-}
-
-.pesca{
-  background: url('../assets/images/icones.png') -31px 0;
+.sobre{
+  background: url('../assets/images/icons/about.png') no-repeat center;
 }
 
 .classificados{
-  background: url('../assets/images/icones.png') 0 -31px;
+  background: url('../assets/images/icons/cash.png') no-repeat center;
 }
 
-.publicidade{
-  background: url('../assets/images/icones.png') -248px -31px;
+.configuracoes{
+  background: url('../assets/images/icons/config.png') no-repeat center;
+}
+
+.mensagens{
+  background: url('../assets/images/icons/msg.png') no-repeat center;
+}
+
+.atividades{
+  background: url('../assets/images/icons/group.png') no-repeat center;
+}
+
+.ajuda{
+  background: url('../assets/images/icons/help.png') no-repeat center;
 }
 
 .menu-item-container{
@@ -470,5 +511,9 @@ textarea{
   display: inline !important;
   margin: 0 !important;
   border-radius: 0 !important;
+}
+
+.no-scroll .scroll-content{
+     overflow: hidden;
 }
 

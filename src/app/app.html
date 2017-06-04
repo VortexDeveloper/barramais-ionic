@@ -1,6 +1,27 @@
 <ion-menu [content]="content" id="menu" persistent="true" (ionClose)="menuClosed()">
-  <ion-content>
-    <ion-list>
+  <ion-content class="no-scroll">
+    <ion-list class="custom-ion-list">
+      <ion-item no-lines>
+        <ion-avatar item-left>
+          <img src="{{user.avatar_url}}">
+        </ion-avatar>
+        <p>{{user.first_name}} {{user.last_name}}</p>
+        <p><a menuClose (click)="openPage(mainPage, 4)">
+              Visualizar Perfil
+            </a></p>
+        
+        <button ion-button icon-only clear item-right menuClose (click)="presentConfirm()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </ion-item>
+      <button menuClose ion-item  *ngFor="let p of pages" (click)="openPage(p.component)" class="item-menu" [disabled]="p.isDisabled">
+        
+        <div class="menu-item-container">
+          <i class="menu-item-icone {{p.icon}}"></i>
+          {{p.title}}
+        </div>
+      </button>
+     <!--
       <ul class="photo-menu">
         <li menuClose>
           <ion-item no-lines class="avatar">
@@ -13,6 +34,7 @@
           </ion-item>
         </li>
       </ul>
+     
       <ul class="menu-item">
         <li>
           <button menuClose ion-item (click)="openPage(mainPage, 0)">
@@ -40,7 +62,7 @@
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
                   Convidar Contatos
                 </button>
-              </li> -->
+              </li> 
             </ul>
           </ion-item>
         </li>
@@ -52,7 +74,7 @@
             </div>
           </button>
         </li>
-        <!-- <li>
+         <li>
           <ion-item>
             <a (click)="showSubMenuPaginas()">
               <div class="menu-item-container">
@@ -78,7 +100,7 @@
               </li>
             </ul>
           </ion-item>
-        </li> -->
+        </li> 
         <li>
           <ion-item>
             <a (click)="showSubMenuBlog()">
@@ -93,11 +115,11 @@
                   Acessar Blog
                 </button>
               </li>
-              <!-- <li>
+               <li>
                 <button class="item-sub" menuClose ion-item no-lines (click)="openPage()">
                   Enviar Matéria
                 </button>
-              </li> -->
+              </li> 
             </ul>
           </ion-item>
         </li>
@@ -109,22 +131,22 @@
             </div>
           </button>
         </li>
-        <!-- <li>
+         <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
             <div class="menu-item-container">
               <i class="menu-item-icone viagens"></i>
               Viagens
             </div>
           </button>
-        </li> -->
-        <!-- <li>
+        </li> 
+        <li>
           <button menuClose ion-item (click)="openPage(mainPage)">
             <div class="menu-item-container">
               <i class="menu-item-icone pesca"></i>
               Pesca
             </div>
           </button>
-        </li> -->
+        </li> 
         <li>
           <ion-item>
             <a (click)="showSubMenuClassificados()" style="color:#8e9093">
@@ -194,18 +216,18 @@
             Configurações
           </button>
         </li>
-        <!-- <li>
+         <li>
           <button menuClose ion-item (click)="openPage()">
             <ion-icon name="megaphone" class="icon-itens"></ion-icon>
             Denúncias
           </button>
-        </li> -->
-        <!-- <li>
+        </li> 
+        <li>
           <button menuClose ion-item (click)="openPage()">
             <ion-icon name="information-circle" class="icon-itens"></ion-icon>
             Enviar feedback
           </button>
-        </li> -->
+        </li> 
         <li>
           <ion-item>
             <a (click)="showSubMenuAjudaESuporte()">
@@ -237,21 +259,39 @@
             Sair
           </button>
         </li>
-        <li ion-item no-lines>
-          <a menuClose (click)="openLink('https://www.facebook.com/barramaisoficial/')" >
-            <img src="assets/images/facebook.png" alt="facebook" class="icon-itens social-media" />
-          </a>
-          <a menuClose (click)="openLink('https://www.instagram.com/barramaisoficial/')">
-            <img src="assets/images/instagram.png" alt="instagram" class="icon-itens social-media" />
-          </a>
-          <a menuClose (click)="openLink('https://plus.google.com/u/0/116777254689631886658')" >
-            <img src="assets/images/google.png" alt="google" class="icon-itens social-media" />
-          </a>
-          <a menuClose (click)="openLink('https://www.youtube.com/channel/UCQY10_M3S9eJt1YdPTxBkVg')">
-            <img src="assets/images/youtube.png" alt="youtube" class="icon-itens social-media" />
-          </a>
-        </li>
-      </ul>
+       -->
+       <ion-item class="footer-menu">
+          <ion-buttons>
+            <button menuClose ion-button icon-only clear (click)="openLink('https://www.facebook.com/barramaisoficial/')" >
+               <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+            <button ion-button icon-only clear menuClose (click)="openLink('https://www.instagram.com/barramaisoficial/')">
+               <ion-icon name="logo-instagram"></ion-icon>
+            </button>
+            <button ion-button icon-only clear menuClose (click)="openLink('https://plus.google.com/u/0/116777254689631886658')">
+               <ion-icon name="logo-googleplus"></ion-icon>
+            </button>
+            <button ion-button icon-only clear menuClose (click)="openLink('https://www.youtube.com/channel/UCQY10_M3S9eJt1YdPTxBkVg')">
+               <ion-icon name="logo-youtube"></ion-icon>
+            </button>
+          </ion-buttons>
+          <!--<ul class="menu-config">
+            <li ion-item no-lines>
+              <a menuClose (click)="openLink('https://www.facebook.com/barramaisoficial/')" >
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+              <a menuClose (click)="openLink('https://www.instagram.com/barramaisoficial/')">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+              <a menuClose (click)="openLink('https://plus.google.com/u/0/116777254689631886658')" >
+                <ion-icon name="logo-googleplus"></ion-icon>
+              </a>
+              <a menuClose (click)="openLink('https://www.youtube.com/channel/UCQY10_M3S9eJt1YdPTxBkVg')">
+              <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+          </ul>-->
+       </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>

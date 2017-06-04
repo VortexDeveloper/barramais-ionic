@@ -1,3 +1,4 @@
+import { RegistrationPage } from './../registration/registration';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, MenuController, LoadingController } from 'ionic-angular';
 import { User } from '../../providers/user';
@@ -13,13 +14,13 @@ import { ForgotPasswordPage } from './forgot-password';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-
 export class LoginPage {
 
   jwtHelper: JwtHelper = new JwtHelper();
   user: UserModel = new UserModel();
   feeds: any = FeedsPage;
   main: any = MainPage;
+  registrationPage: any = RegistrationPage;
 
   constructor(
     public navCtrl: NavController,

@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { UserModel } from "../../models/user.model";
@@ -27,6 +28,7 @@ export class RegistrationPage {
   privacyPage: any = PrivacyPage;
   termsPage: any = TermsPage;
   userEmailConfirmation: string = "";
+  loginPage:any =  LoginPage;
 
   constructor(
     public navCtrl: NavController,
@@ -94,6 +96,10 @@ export class RegistrationPage {
   }
 
   openPage(page){
+    this.navCtrl.push(page);
+  }
+
+  setRootPage(page){
     this.navCtrl.setRoot(page);
   }
 
@@ -108,7 +114,7 @@ export class RegistrationPage {
         localStorage.setItem("user", token_params.user);
         localStorage.setItem('vessels_type', JSON.stringify(token_params.vessels_type));
         this.events.publish("onUpdateUser", this.jwtHelper.decodeToken(token_params.user));
-        this.openPage(InterestSelectionPage);
+        this.setRootPage(InterestSelectionPage);
         this.presentToast("Usuário cadastrado com sucesso, complete o cadastro do seu perfil.");
     }, error => {
         console.log(error.json() || 'Server error');
